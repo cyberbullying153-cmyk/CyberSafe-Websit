@@ -154,6 +154,9 @@ signOut
 onAuthStateChanged(auth, (user)=>{
 
 
+const adminUID = "2Hcys70eIURXMoVVhdb9ONmKrE92";
+
+
 if(!user){
 
 window.location.href = "admin-login.html";
@@ -161,7 +164,20 @@ window.location.href = "admin-login.html";
 }
 
 
+else if(user.uid !==  adminUID){
+
+
+alert("❌ Access denied. Admin only.");
+
+
+window.location.href = "index.html";
+
+
+}
+
+
 });
+
 
 
 
