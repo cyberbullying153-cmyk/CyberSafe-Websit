@@ -123,7 +123,7 @@ Real-time CyberSafe Report Management
 <script type="module">
 
 
-import { db } from "./js/firebase.js";
+import { db, auth } from "./js/firebase.js";
 
 
 import {
@@ -137,6 +137,29 @@ doc,
 updateDoc
 
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+import {
+
+onAuthStateChanged
+
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+// Protect Admin Dashboard
+
+onAuthStateChanged(auth, (user)=>{
+
+
+if(!user){
+
+window.location.href = "admin-login.html";
+
+}
+
+
+});
 
 
 
