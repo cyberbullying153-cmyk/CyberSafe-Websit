@@ -320,6 +320,15 @@ alert("Report updated");
 
 
 
+window.logout = async function(){
+
+await signOut(auth);
+
+alert("✅ Logged out successfully");
+
+window.location.href="admin-login.html";
+
+}
 
 </script>
 
