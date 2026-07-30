@@ -222,12 +222,11 @@ let resolved=0;
 snapshot.forEach((report)=>{
 
 
-total++;
-
-
 let data = report.data();
 
 
+// Count reports
+total++;
 
 
 if(data.status==="Pending")
@@ -240,6 +239,13 @@ if(data.status==="Resolved")
 {
 resolved++;
 }
+
+
+// Hide resolved reports from the list
+if(data.status==="Resolved"){
+    return;
+}
+
 
 
 
