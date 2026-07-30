@@ -1,79 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Teacher Dashboard | CyberSafe</title>
 
 <link rel="stylesheet" href="css/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
+
 
 <body>
 
+
 <header>
+
 <nav>
-<div class="logo">🛡 CyberSafe</div>
+
+<div class="logo">
+🛡 CyberSafe
+</div>
+
 
 <ul class="nav-links">
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="report.html">Report</a></li>
-<li><a href="index.html">Logout</a></li>
+
+<li><a href="teacher.html">Dashboard</a></li>
+
+<li><a href="report.html">Reports</a></li>
+
+<li><a href="resources.html">Resources</a></li>
+
+<li><a href="index.html" class="login-btn">Logout</a></li>
+
 </ul>
 
+
 </nav>
+
 </header>
+
+
+
 
 <section class="report-page">
 
+
 <h1>👨‍🏫 Teacher Dashboard</h1>
 
+
 <p class="subtitle">
-Review cyberbullying reports submitted by students.
+Monitor student cyberbullying reports and provide support.
 </p>
+
+
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+<h2>25</h2>
+
+<p>Total Reports</p>
+
+</div>
+
+
+<div class="stat">
+
+<h2>8</h2>
+
+<p>Pending Cases</p>
+
+</div>
+
+
+<div class="stat">
+
+<h2>12</h2>
+
+<p>Under Review</p>
+
+</div>
+
+
+<div class="stat">
+
+<h2>5</h2>
+
+<p>Resolved</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<h2 style="margin-top:50px;">
+📋 Student Reports
+</h2>
+
+
+
 
 <table class="report-table">
 
+
 <thead>
+
 <tr>
+
 <th>Student</th>
+
 <th>Class</th>
-<th>Incident</th>
+
+<th>Issue</th>
+
+<th>Date</th>
+
 <th>Status</th>
+
 </tr>
+
 </thead>
+
+
 
 <tbody>
 
+
 <tr>
+
 <td>Anonymous</td>
+
 <td>10-A</td>
+
 <td>Harassment</td>
-<td><span class="pending">Pending</span></td>
+
+<td>30 July 2026</td>
+
+<td>
+<span class="pending">
+Pending
+</span>
+</td>
+
 </tr>
 
+
+
 <tr>
+
 <td>Anonymous</td>
+
 <td>9-B</td>
+
 <td>Fake Profile</td>
-<td><span class="review">Under Review</span></td>
+
+<td>29 July 2026</td>
+
+<td>
+<span class="review">
+Review
+</span>
+</td>
+
 </tr>
 
+
+
+
 <tr>
+
 <td>Anonymous</td>
+
 <td>11-C</td>
-<td>Threats</td>
-<td><span class="resolved">Resolved</span></td>
+
+<td>Threat Messages</td>
+
+<td>28 July 2026</td>
+
+<td>
+<span class="resolved">
+Resolved
+</span>
+</td>
+
 </tr>
+
+
 
 </tbody>
 
+
 </table>
+
+
+
+
+<div class="emergency-card" style="margin-top:40px;">
+
+
+<h2>⚙ Teacher Actions</h2>
+
+
+<p>
+Teachers can review reports, contact students, and update case status.
+</p>
+
+
+<a href="report.html" class="btn">
+View Reports
+</a>
+
+
+</div>
+
+
+
 
 </section>
 
+
+
+
+
 <footer>
-<p>© 2026 CyberSafe Student Security Portal</p>
+
+<p>
+© 2026 CyberSafe | Student Security Portal
+</p>
+
 </footer>
 
+
+
+
 </body>
+
 </html>
