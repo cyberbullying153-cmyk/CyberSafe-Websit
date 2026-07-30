@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login | CyberSafe</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<section class="login-container">
+
+<h1>🔐 Admin Login</h1>
+
+
+<form class="login-form" onsubmit="adminLogin(event)">
+
+
+<input 
+type="text" 
+id="adminUsername" 
+placeholder="Admin Username"
+required>
+
+
+<input 
+type="password" 
+id="adminPassword" 
+placeholder="Password"
+required>
+
+
+<button type="submit" class="btn">
+Login
+</button>
+
+
+</form>
+
+
+<p id="error" style="color:red;"></p>
+
+
+</section>
+
+
+
+
+<script>
+
+function adminLogin(event){
+
+event.preventDefault();
+
+
+let username = document.getElementById("adminUsername").value;
+
+let password = document.getElementById("adminPassword").value;
+
+
+
+// Change these later
+if(username === "admin" && password === "CyberSafe123"){
+
+window.location.href = "admin.html";
+
+}
+
+else{
+
+document.getElementById("error").innerHTML =
+"❌ Invalid admin credentials";
+
+}
+
+
+}
+
+</script>
+
+
+</body>
+
+</html>
