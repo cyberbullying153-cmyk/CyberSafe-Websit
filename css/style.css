@@ -265,3 +265,64 @@ nav ul li{
         width:200px;
     }
 }
+.report-page{
+    max-width:900px;
+    margin:60px auto;
+    padding:40px;
+    background:#ffffff;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.report-page h1{
+    text-align:center;
+    color:#1e3a8a;
+    margin-bottom:10px;
+}
+
+.report-page p{
+    text-align:center;
+    margin-bottom:30px;
+    color:#555;
+}
+
+.report-page form{
+    display:flex;
+    flex-direction:column;
+}
+
+.report-page label{
+    margin-top:20px;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.report-page input,
+.report-page select,
+.report-page textarea{
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.report-page textarea{
+    resize:vertical;
+}
+
+.report-page button{
+    margin-top:30px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.report-page button:hover{
+    background:#0f2c6d;
+}
