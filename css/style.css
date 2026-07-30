@@ -408,3 +408,45 @@ nav ul li{
 .login-form button{
     cursor:pointer;
 }
+.report-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:40px;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.report-table th,
+.report-table td{
+    padding:16px;
+    text-align:left;
+    border-bottom:1px solid #eee;
+}
+
+.report-table th{
+    background:#1e3a8a;
+    color:#fff;
+}
+
+.pending{
+    background:#fff3cd;
+    color:#856404;
+    padding:6px 12px;
+    border-radius:20px;
+}
+
+.review{
+    background:#cce5ff;
+    color:#004085;
+    padding:6px 12px;
+    border-radius:20px;
+}
+
+.resolved{
+    background:#d4edda;
+    color:#155724;
+    padding:6px 12px;
+    border-radius:20px;
+}
