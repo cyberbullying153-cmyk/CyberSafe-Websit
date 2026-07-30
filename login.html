@@ -28,15 +28,23 @@
 
 <h1>Student Login</h1>
 
-<form class="login-form">
+<form class="login-form" onsubmit="login(event)">
 
 <input type="email" placeholder="Email Address" required>
 
 <input type="password" placeholder="Password" required>
 
-<a href="dashboard.html" class="btn">Login</a>
+<button type="submit" class="btn">Login</button>
 
 </form>
+
+<script>
+function login(event) {
+    event.preventDefault(); // Stops the form from refreshing the page
+    window.location.href = "dashboard.html";
+}
+</script>
+
 
 <p>Don't have an account? <a href="#">Register</a></p>
 
