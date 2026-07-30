@@ -10,8 +10,6 @@
 
 <link rel="stylesheet" href="css/style.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
@@ -35,20 +33,13 @@
 
 <li><a href="teacher.html">Teachers</a></li>
 
-<li><a href="report.html">Reports</a></li>
-
-<li><a href="resources.html">Resources</a></li>
-
 <li><a href="index.html" class="login-btn">Logout</a></li>
 
 </ul>
 
-
 </nav>
 
 </header>
-
-
 
 
 
@@ -57,12 +48,9 @@
 
 <h1>👨‍💼 Admin Dashboard</h1>
 
-
 <p class="subtitle">
-Manage users, reports, and CyberSafe platform activity.
+Real-time CyberSafe Report Management
 </p>
-
-
 
 
 
@@ -71,166 +59,51 @@ Manage users, reports, and CyberSafe platform activity.
 
 <div class="stat">
 
-<h2>1200+</h2>
-
-<p>Total Students</p>
-
-</div>
-
-
-<div class="stat">
-
-<h2>50</h2>
+<h2 id="totalReports">0</h2>
 
 <p>Total Reports</p>
 
 </div>
 
 
-<div class="stat">
-
-<h2>25</h2>
-
-<p>Teachers</p>
-
-</div>
-
 
 <div class="stat">
 
-<h2>95%</h2>
+<h2 id="pendingReports">0</h2>
 
-<p>Resolved Cases</p>
+<p>Pending Reports</p>
+
+</div>
+
+
+
+<div class="stat">
+
+<h2 id="resolvedReports">0</h2>
+
+<p>Resolved Reports</p>
 
 </div>
 
 
 </div>
-
-
 
 
 
 
 <h2 style="margin-top:50px;">
-⚙ System Management
+📋 Student Reports
 </h2>
 
 
 
-
-
-<div class="emergency-grid">
-
-
-
-<div class="emergency-card">
-
-<h2>👨‍🎓 Manage Students</h2>
-
-<p>
-View student accounts and activity.
-</p>
-
-<a href="#" class="btn">
-Manage
-</a>
-
-</div>
-
-
-
-
-<div class="emergency-card">
-
-<h2>👨‍🏫 Manage Teachers</h2>
-
-<p>
-Add and manage teacher accounts.
-</p>
-
-<a href="teacher.html" class="btn">
-Open
-</a>
-
-</div>
-
-
-
-
-<div class="emergency-card">
-
-<h2>📋 Manage Reports</h2>
-
-<p>
-Review all cyberbullying complaints.
-</p>
-
-<a href="report.html" class="btn">
-View
-</a>
-
-</div>
-
-
-
-
-<div class="emergency-card">
-
-<h2>📚 Manage Resources</h2>
-
-<p>
-Update learning materials and safety content.
-</p>
-
-<a href="resources.html" class="btn">
-Edit
-</a>
-
-</div>
-
-
-
-
-<div class="emergency-card">
-
-<h2>📊 Analytics</h2>
-
-<p>
-View cyber safety statistics.
-</p>
-
-<a href="#" class="btn">
-View
-</a>
-
-</div>
-
-
-
-
-<div class="emergency-card">
-
-<h2>🔐 Security Settings</h2>
-
-<p>
-Manage system access and permissions.
-</p>
-
-<a href="#" class="btn">
-Settings
-</a>
-
-</div>
-
-
+<div id="reportsContainer" class="emergency-grid">
 
 </div>
 
 
 
 </section>
-
 
 
 
@@ -243,6 +116,189 @@ Settings
 
 </footer>
 
+
+
+
+
+<script type="module">
+
+
+import { db } from "./js/firebase.js";
+
+
+import {
+
+collection,
+
+onSnapshot,
+
+doc,
+
+updateDoc
+
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+
+const reportsContainer =
+document.getElementById("reportsContainer");
+
+
+
+const totalReports =
+document.getElementById("totalReports");
+
+
+const pendingReports =
+document.getElementById("pendingReports");
+
+
+const resolvedReports =
+document.getElementById("resolvedReports");
+
+
+
+
+
+
+onSnapshot(collection(db,"reports"),(snapshot)=>{
+
+
+reportsContainer.innerHTML="";
+
+
+let total=0;
+
+let pending=0;
+
+let resolved=0;
+
+
+
+
+snapshot.forEach((report)=>{
+
+
+total++;
+
+
+let data = report.data();
+
+
+
+
+if(data.status==="Pending")
+{
+pending++;
+}
+
+
+if(data.status==="Resolved")
+{
+resolved++;
+}
+
+
+
+
+
+reportsContainer.innerHTML += `
+
+
+
+<div class="emergency-card">
+
+
+<h2>🚨 ${data.type || data.platform}</h2>
+
+
+<p>
+<b>Name:</b> ${data.name || "Anonymous"}
+</p>
+
+
+<p>
+<b>Class:</b> ${data.class || ""}
+</p>
+
+
+<p>
+<b>Section:</b> ${data.section || ""}
+</p>
+
+
+<p>
+<b>Description:</b><br>
+${data.description}
+</p>
+
+
+
+<p>
+<b>Status:</b>
+${data.status}
+</p>
+
+
+
+<button 
+class="btn"
+onclick="resolveReport('${report.id}')">
+
+Mark Resolved
+
+</button>
+
+
+</div>
+
+
+
+`;
+
+
+
+});
+
+
+
+totalReports.innerHTML=total;
+
+pendingReports.innerHTML=pending;
+
+resolvedReports.innerHTML=resolved;
+
+
+
+});
+
+
+
+
+
+
+window.resolveReport = async function(id){
+
+
+await updateDoc(doc(db,"reports",id),{
+
+status:"Resolved"
+
+});
+
+
+alert("Report updated");
+
+
+}
+
+
+
+
+
+</script>
 
 
 
