@@ -322,7 +322,23 @@ alert("Report updated");
 
 
 
+window.resolveReport = async function(id){
+
+await updateDoc(doc(db,"reports",id),{
+
+status:"Resolved"
+
+});
+
+alert("Report updated");
+
+}
+
+
+
 window.logout = async function(){
+
+try{
 
 await signOut(auth);
 
@@ -332,7 +348,16 @@ window.location.href="admin-login.html";
 
 }
 
+catch(error){
+
+alert("Logout error: " + error.message);
+
+}
+
+}
+
 </script>
+
 
 
 
