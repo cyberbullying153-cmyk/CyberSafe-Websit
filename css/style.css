@@ -89,25 +89,34 @@ nav ul li a:hover{
     margin-top:35px;
 }
 
-.buttons button{
-    border:none;
+.buttons{
+    margin-top:35px;
+}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
     padding:15px 35px;
     margin:10px;
     border-radius:50px;
     font-size:18px;
-    cursor:pointer;
-    transition:.3s;
     font-weight:600;
+    transition:0.3s;
 }
 
-.buttons button:first-child{
+.report-btn{
     background:#22c55e;
     color:white;
 }
 
-.buttons button:last-child{
+.help-btn{
     background:white;
     color:#1e3a8a;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 .buttons button:hover{
