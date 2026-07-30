@@ -18,22 +18,23 @@
 
 <section class="login-container">
 
+
 <h1>🔐 Admin Login</h1>
 
 
-<form class="login-form" onsubmit="adminLogin(event)">
+<form id="adminLoginForm" class="login-form">
 
 
-<input 
-type="text" 
-id="adminUsername" 
-placeholder="Admin Username"
+<input
+type="email"
+id="email"
+placeholder="Admin Email"
 required>
 
 
-<input 
-type="password" 
-id="adminPassword" 
+<input
+type="password"
+id="password"
 placeholder="Password"
 required>
 
@@ -53,36 +54,76 @@ Login
 
 
 
-
-<script>
-
-function adminLogin(event){
-
-event.preventDefault();
+<script type="module">
 
 
-let username = document.getElementById("adminUsername").value;
-
-let password = document.getElementById("adminPassword").value;
+import { auth } from "./js/firebase.js";
 
 
+import {
 
-// Change these later
-if(username === "admin" && password === "CyberSafe123"){
+signInWithEmailAndPassword
+
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+
+const form = document.getElementById("adminLoginForm");
+
+
+
+form.addEventListener("submit", async function(e){
+
+
+e.preventDefault();
+
+
+
+const email =
+document.getElementById("email").value;
+
+
+
+const password =
+document.getElementById("password").value;
+
+
+
+
+try {
+
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+
+alert("✅ Admin Login Successful");
+
 
 window.location.href = "admin.html";
 
+
+
 }
 
-else{
+catch(error){
+
 
 document.getElementById("error").innerHTML =
-"❌ Invalid admin credentials";
-
-}
+"❌ Invalid email or password";
 
 
 }
+
+
+
+});
+
 
 </script>
 
