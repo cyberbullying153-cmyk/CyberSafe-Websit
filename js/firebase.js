@@ -1,40 +1,304 @@
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teacher Dashboard | CyberSafe</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+<img src="images/logo.png" alt="Logo">
+<span>CYBERSAFE</span>
+</div>
+
+<ul class="nav-links">
+
+<li><a href="teacher.html">Dashboard</a></li>
+
+<li><a href="report.html">Reports</a></li>
+
+<li><a href="resources.html">Resources</a></li>
+
+<li>
+<button onclick="logout()" class="login-btn">
+Logout
+</button>
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<section class="report-page">
+
+<h1>👨‍🏫 Teacher Dashboard</h1>
+
+<p class="subtitle">
+
+Manage student cyberbullying reports in real time.
+
+</p>
+
+<div class="stats">
+
+<div class="stat">
+
+<h2 id="totalReports">0</h2>
+
+<p>Total Reports</p>
+
+</div>
+
+<div class="stat">
+
+<h2 id="pendingReports">0</h2>
+
+<p>Pending Reports</p>
+
+</div>
+
+<div class="stat">
+
+<h2 id="resolvedReports">0</h2>
+
+<p>Resolved Reports</p>
+
+</div>
+
+<div class="stat">
+
+<h2 id="teacherCount">0</h2>
+
+<p>Teachers</p>
+
+</div>
+
+</div>
+
+<h2 style="margin-top:50px;">
+
+📋 Student Reports
+
+</h2>
+
+<table class="report-table">
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+
+<th>Class</th>
+
+<th>Platform</th>
+
+<th>Description</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="reportBody">
+
+</tbody>
+
+</table>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 CyberSafe | Student Security Portal
+
+</p>
+
+</footer>
+
+<script type="module">
+
+import { db, auth } from "./js/firebase.js";
+
+import {
+
+collection,
+onSnapshot,
+doc,
+updateDoc,
+query,
+where,
+getDocs
+
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+
+onAuthStateChanged,
+signOut
+
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const reportBody=document.getElementById("reportBody");
+
+const totalReports=document.getElementById("totalReports");
+
+const pendingReports=document.getElementById("pendingReports");
+
+const resolvedReports=document.getElementById("resolvedReports");
+
+const teacherCount=document.getElementById("teacherCount");
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+
+alert("Please login first");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+const q=query(
+
+collection(db,"teachers"),
+
+where("email","==",user.email)
+
+);
+
+const teacher=await getDocs(q);
+
+if(teacher.empty){
+
+alert("Access Denied");
+
+window.location.href="index.html";
+
+return;
+
+}
+
+});
 
 
-import { getFirestore } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+onSnapshot(collection(db,"teachers"),(snapshot)=>{
 
-import { getAuth } 
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+teacherCount.innerHTML=snapshot.size;
 
-
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyBQukwDZKUaeCheXpDhlgyxYfsr8E7SVhA",
-
-authDomain: "cybersafe-22ac4.firebaseapp.com",
-
-projectId: "cybersafe-22ac4",
-
-storageBucket: "cybersafe-22ac4.firebasestorage.app",
-
-messagingSenderId: "381504496598",
-
-appId: "1:381504496598:web:e3dbaa382c13127d4d3a77",
-
-measurementId: "G-CB1L3GCR2P"
-
-};
+});
 
 
 
-const app = initializeApp(firebaseConfig);
+onSnapshot(collection(db,"reports"),(snapshot)=>{
+
+reportBody.innerHTML="";
+
+let total=0;
+
+let pending=0;
+
+let resolved=0;
+
+snapshot.forEach((report)=>{
+
+const data=report.data();
+
+total++;
+
+if(data.status==="Pending") pending++;
+
+if(data.status==="Resolved") resolved++;
+
+reportBody.innerHTML+=`
+
+<tr>
+
+<td>${data.name || "Anonymous"}</td>
+
+<td>${data.class || ""} ${data.section || ""}</td>
+
+<td>${data.platform || ""}</td>
+
+<td>${data.description}</td>
+
+<td>${data.status}</td>
+
+<td>
+
+<button class="resolve-btn"
+
+onclick="resolveReport('${report.id}')">
+
+Resolve
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+totalReports.innerHTML=total;
+
+pendingReports.innerHTML=pending;
+
+resolvedReports.innerHTML=resolved;
+
+});
 
 
-export const db = getFirestore(app);
+
+window.resolveReport=async function(id){
+
+await updateDoc(doc(db,"reports",id),{
+
+status:"Resolved"
+
+});
+
+alert("Report Resolved");
+
+}
 
 
-export const auth = getAuth(app);
+
+window.logout=async function(){
+
+await signOut(auth);
+
+window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
