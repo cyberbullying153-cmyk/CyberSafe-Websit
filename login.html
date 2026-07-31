@@ -1,19 +1,30 @@
 <section class="login-container">
 
-<h1>Welcome to CyberSafe</h1>
+<h1>👨‍🏫 Staff Login</h1>
 
-<p>Select how you want to continue.</p>
+<p>
+Only registered teachers and administrators can log in.
+Students can submit reports without logging in.
+</p>
 
-<div class="buttons">
+<form id="loginForm" class="login-form">
 
-<a href="report.html" class="btn report-btn">
-👨‍🎓 Student
-</a>
+<input
+type="email"
+id="email"
+placeholder="Teacher Email"
+required>
 
-<a href="staff-login.html" class="btn help-btn">
-👨‍🏫 Teacher / Admin
-</a>
+<input
+type="password"
+id="password"
+placeholder="Password"
+required>
 
-</div>
+<button type="submit" class="btn report-btn">
+Login
+</button>
+
+</form>
 
 </section>
