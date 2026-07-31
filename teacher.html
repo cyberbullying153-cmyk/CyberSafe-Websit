@@ -169,25 +169,7 @@ const pendingReports=document.getElementById("pendingReports");
 const resolvedReports=document.getElementById("resolvedReports");
 
 const teacherCount=document.getElementById("teacherCount");
-onAuthStateChanged(auth, async(user)=>{
 
-if(!user){
-
-alert("Please login first");
-
-window.location.href="login.html";
-
-return;
-
-}
-
-const q=query(
-
-collection(db,"teachers"),
-
-where("email","==",user.email)
-
-);
 
 const teacher=await getDocs(q);
 
