@@ -92,37 +92,24 @@ const password=document.getElementById("password").value;
 
 try{
 
-const userCredential=await signInWithEmailAndPassword(auth,email,password);
+const userCredential = await signInWithEmailAndPassword(auth,email,password);
 
-const user=userCredential.user;
+alert("Firebase Login Success");
 
-// Check Admin
+const user = userCredential.user;
 
-const adminQuery=query(
-collection(db,"admins"),
-where("email","==",user.email)
-);
-
-const adminSnap=await getDocs(adminQuery);
-
-if(!adminSnap.empty){
-
-window.location.href="admin.html";
-
-return;
-
-}
-
-// Check Teacher
-
-const teacherQuery=query(
+const teacherQuery = query(
 collection(db,"teachers"),
 where("email","==",user.email)
 );
 
-const teacherSnap=await getDocs(teacherQuery);
+const teacherSnap = await getDocs(teacherQuery);
+
+alert("Teacher documents found: " + teacherSnap.size);
 
 if(!teacherSnap.empty){
+
+alert("Teacher Verified");
 
 window.location.href="teacher.html";
 
@@ -132,9 +119,9 @@ return;
 
 alert("Access Denied");
 
-}
-catch(error){
+}catch(error){
 
+alert(error.code);
 alert(error.message);
 
 }
