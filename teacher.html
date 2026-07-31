@@ -37,7 +37,23 @@
 
 <li><a href="resources.html">Resources</a></li>
 
-<li><a href="index.html" class="login-btn">Logout</a></li>
+<li>
+<button onclick="logout()" class="login-btn">
+Logout
+</button>
+</li>
+    import {
+signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+window.logout = async function(){
+
+    await signOut(auth);
+
+    window.location.href="login.html";
+
+}
 
 </ul>
 
