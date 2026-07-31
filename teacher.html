@@ -10,24 +10,20 @@
 
 <link rel="stylesheet" href="css/style.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
-
 <body>
-
 
 <header>
 
 <nav>
 
 <div class="logo">
-🛡 CyberSafe
+<img src="images/logo.png" alt="Logo">
+<span>CYBERSAFE</span>
 </div>
-
 
 <ul class="nav-links">
 
@@ -42,242 +38,266 @@
 Logout
 </button>
 </li>
-    import {
-signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-window.logout = async function(){
-
-    await signOut(auth);
-
-    window.location.href="login.html";
-
-}
 
 </ul>
-
 
 </nav>
 
 </header>
 
-
-
-
 <section class="report-page">
-
 
 <h1>👨‍🏫 Teacher Dashboard</h1>
 
-
 <p class="subtitle">
-Monitor student cyberbullying reports and provide support.
+
+Manage student cyberbullying reports in real time.
+
 </p>
+
 <div class="stats">
 
 <div class="stat">
+
 <h2 id="totalReports">0</h2>
+
 <p>Total Reports</p>
+
 </div>
 
 <div class="stat">
+
 <h2 id="pendingReports">0</h2>
+
 <p>Pending Reports</p>
+
 </div>
 
 <div class="stat">
+
 <h2 id="resolvedReports">0</h2>
+
 <p>Resolved Reports</p>
+
 </div>
 
 <div class="stat">
+
 <h2 id="teacherCount">0</h2>
+
 <p>Teachers</p>
+
 </div>
 
 </div>
 
 <h2 style="margin-top:50px;">
+
 📋 Student Reports
+
 </h2>
 
-
-
-
 <table class="report-table">
-
 
 <thead>
 
 <tr>
 
-<th>Student</th>
+<th>Name</th>
 
 <th>Class</th>
 
-<th>Issue</th>
+<th>Platform</th>
 
-<th>Date</th>
+<th>Description</th>
 
 <th>Status</th>
+
+<th>Action</th>
 
 </tr>
 
 </thead>
 
-
-
-<tbody>
-
-
-<tr>
-
-<td>Anonymous</td>
-
-<td>10-A</td>
-
-<td>Harassment</td>
-
-<td>30 July 2026</td>
-
-<td>
-<span class="pending">
-Pending
-</span>
-</td>
-
-</tr>
-
-
-
-<tr>
-
-<td>Anonymous</td>
-
-<td>9-B</td>
-
-<td>Fake Profile</td>
-
-<td>29 July 2026</td>
-
-<td>
-<span class="review">
-Review
-</span>
-</td>
-
-</tr>
-
-
-
-
-<tr>
-
-<td>Anonymous</td>
-
-<td>11-C</td>
-
-<td>Threat Messages</td>
-
-<td>28 July 2026</td>
-
-<td>
-<span class="resolved">
-Resolved
-</span>
-</td>
-
-</tr>
-
-
+<tbody id="reportBody">
 
 </tbody>
 
-
 </table>
 
-
-
-
-<div class="emergency-card" style="margin-top:40px;">
-
-
-<h2>⚙ Teacher Actions</h2>
-
-
-<p>
-Teachers can review reports, contact students, and update case status.
-</p>
-
-
-<a href="report.html" class="btn">
-View Reports
-</a>
-
-
-</div>
-
-
-
-
 </section>
-
-
-
-
 
 <footer>
 
 <p>
+
 © 2026 CyberSafe | Student Security Portal
+
 </p>
 
 </footer>
 
 <script type="module">
 
-import { auth, db } from "./js/firebase.js";
+import { db, auth } from "./js/firebase.js";
 
 import {
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
 collection,
+onSnapshot,
+doc,
+updateDoc,
 query,
 where,
 getDocs
+
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+import {
 
+onAuthStateChanged,
+signOut
+
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const reportBody=document.getElementById("reportBody");
+
+const totalReports=document.getElementById("totalReports");
+
+const pendingReports=document.getElementById("pendingReports");
+
+const resolvedReports=document.getElementById("resolvedReports");
+
+const teacherCount=document.getElementById("teacherCount");
 onAuthStateChanged(auth, async(user)=>{
 
-    if(!user){
-        alert("Please login first.");
-        window.location.href="login.html";
-        return;
-    }
+if(!user){
 
-    const q = query(
-        collection(db,"teachers"),
-        where("email","==",user.email)
-    );
+alert("Please login first");
 
-    const snapshot = await getDocs(q);
+window.location.href="login.html";
 
-    if(snapshot.empty){
+return;
 
-        alert("Access Denied! Teachers only.");
+}
 
-        window.location.href="index.html";
+const q=query(
 
-    }
+collection(db,"teachers"),
+
+where("email","==",user.email)
+
+);
+
+const teacher=await getDocs(q);
+
+if(teacher.empty){
+
+alert("Access Denied");
+
+window.location.href="index.html";
+
+return;
+
+}
 
 });
 
-</script>
 
+
+onSnapshot(collection(db,"teachers"),(snapshot)=>{
+
+teacherCount.innerHTML=snapshot.size;
+
+});
+
+
+
+onSnapshot(collection(db,"reports"),(snapshot)=>{
+
+reportBody.innerHTML="";
+
+let total=0;
+
+let pending=0;
+
+let resolved=0;
+
+snapshot.forEach((report)=>{
+
+const data=report.data();
+
+total++;
+
+if(data.status==="Pending") pending++;
+
+if(data.status==="Resolved") resolved++;
+
+reportBody.innerHTML+=`
+
+<tr>
+
+<td>${data.name || "Anonymous"}</td>
+
+<td>${data.class || ""} ${data.section || ""}</td>
+
+<td>${data.platform || ""}</td>
+
+<td>${data.description}</td>
+
+<td>${data.status}</td>
+
+<td>
+
+<button class="resolve-btn"
+
+onclick="resolveReport('${report.id}')">
+
+Resolve
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+totalReports.innerHTML=total;
+
+pendingReports.innerHTML=pending;
+
+resolvedReports.innerHTML=resolved;
+
+});
+
+
+
+window.resolveReport=async function(id){
+
+await updateDoc(doc(db,"reports",id),{
+
+status:"Resolved"
+
+});
+
+alert("Report Resolved");
+
+}
+
+
+
+window.logout=async function(){
+
+await signOut(auth);
+
+window.location.href="login.html";
+
+}
+
+</script>
 
 </body>
 
