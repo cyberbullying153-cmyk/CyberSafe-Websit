@@ -172,30 +172,37 @@ const teacherCount=document.getElementById("teacherCount");
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
+        alert("Please login first");
         window.location.href = "staff-login.html";
         return;
     }
 
-    const q = query(
-        collection(db, "teachers"),
-        where("email", "==", user.email)
-    );
+    try {
 
-    const teacher = await getDocs(q);
+        const q = query(
+            collection(db, "teachers"),
+            where("email", "==", user.email)
+        );
 
-    if (teacher.empty) {
+        const teacher = await getDocs(q);
 
-        alert("❌ Access Denied! Only registered teachers can access this dashboard.");
+        if (teacher.empty) {
+            alert("Access Denied! Teachers only.");
+            await signOut(auth);
+            window.location.href = "staff-login.html";
+            return;
+        }
 
-        await signOut(auth);
+        console.log("Teacher verified");
 
+    } catch (error) {
+        console.error(error);
+        alert("Verification failed.");
         window.location.href = "staff-login.html";
-
-        return;
     }
 
 });
-onSnapshot(collection(db,"teachers"),(snapshot)=>{
+    onSnapshot(collection(db,"teachers"),(snapshot)=>{
 
 teacherCount.innerHTML=snapshot.size;
 
