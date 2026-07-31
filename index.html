@@ -146,7 +146,51 @@ learn about digital safety, and connect with trusted teachers.
 <p>© 2026 CyberSafe | Student Security Portal</p>
 
 </footer>
+<script type="module">
 
+import { db } from "./js/firebase.js";
+
+import {
+collection,
+onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const totalReports = document.getElementById("totalReports");
+const pendingReports = document.getElementById("pendingReports");
+const resolvedReports = document.getElementById("resolvedReports");
+const teacherCount = document.getElementById("teacherCount");
+
+// Reports
+onSnapshot(collection(db, "reports"), (snapshot) => {
+
+    let total = 0;
+    let pending = 0;
+    let resolved = 0;
+
+    snapshot.forEach((doc) => {
+        total++;
+
+        const data = doc.data();
+
+        if (data.status === "Pending") pending++;
+
+        if (data.status === "Resolved") resolved++;
+    });
+
+    totalReports.innerHTML = total;
+    pendingReports.innerHTML = pending;
+    resolvedReports.innerHTML = resolved;
+
+});
+
+// Teachers
+onSnapshot(collection(db, "teachers"), (snapshot) => {
+
+    teacherCount.innerHTML = snapshot.size;
+
+});
+
+</script>
 </body>
 
 </html>
