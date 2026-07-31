@@ -248,61 +248,39 @@ if(data.status==="Resolved"){
 }
 
 
-
-
-
-
 reportsContainer.innerHTML += `
 
+<div class="report-card">
 
+    <div class="report-header">
 
-<div class="emergency-card">
+        <h3>🚨 ${data.type || data.platform}</h3>
 
+        <span class="status ${data.status.toLowerCase()}">
+            ${data.status}
+        </span>
 
-<h2>🚨 ${data.type || data.platform}</h2>
+    </div>
 
+    <p><strong>Student:</strong> ${data.name || "Anonymous"}</p>
 
-<p>
-<b>Name:</b> ${data.name || "Anonymous"}
-</p>
+    <p><strong>Class:</strong> ${data.class || ""}</p>
 
+    <p><strong>Section:</strong> ${data.section || ""}</p>
 
-<p>
-<b>Class:</b> ${data.class || ""}
-</p>
+    <p class="description">
+        ${data.description}
+    </p>
 
+    <button
+        class="resolve-btn"
+        onclick="resolveReport('${report.id}')">
 
-<p>
-<b>Section:</b> ${data.section || ""}
-</p>
+        ✔ Resolve
 
-
-<p>
-<b>Description:</b><br>
-${data.description}
-</p>
-
-
-
-<p>
-<b>Status:</b>
-${data.status}
-</p>
-
-
-
-<button 
-class="btn"
-onclick="resolveReport('${report.id}')">
-
-Mark Resolved
-
-</button>
-
+    </button>
 
 </div>
-
-
 
 `;
 
