@@ -288,14 +288,13 @@ alert("Report Resolved");
 }
 
 
+window.logout = async () => {
 
-window.logout=async function(){
+    await signOut(auth);
 
-await signOut(auth);
+    window.location.href = "staff-login.html";
 
-window.location.href="login.html";
-
-}
+};
 
 </script>
 
