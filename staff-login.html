@@ -1,10 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Staff Login | CyberSafe</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+🛡 CyberSafe
+</div>
+
+<ul class="nav-links">
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="report.html">Report</a></li>
+
+<li><a href="learn.html">Learn</a></li>
+
+<li><a href="resources.html">Resources</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
 <section class="login-container">
 
 <h1>👨‍🏫 Staff Login</h1>
 
 <p>
 Only registered teachers and administrators can log in.
-Students can submit reports without logging in.
 </p>
 
 <form id="loginForm" class="login-form">
@@ -12,7 +51,7 @@ Students can submit reports without logging in.
 <input
 type="email"
 id="email"
-placeholder="Teacher Email"
+placeholder="Email"
 required>
 
 <input
@@ -28,3 +67,82 @@ Login
 </form>
 
 </section>
+
+<script type="module">
+
+import { auth, db } from "./js/firebase.js";
+
+import {
+signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+collection,
+query,
+where,
+getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+document.getElementById("loginForm").addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+const email=document.getElementById("email").value;
+const password=document.getElementById("password").value;
+
+try{
+
+const userCredential=await signInWithEmailAndPassword(auth,email,password);
+
+const user=userCredential.user;
+
+// Check Admin
+
+const adminQuery=query(
+collection(db,"admins"),
+where("email","==",user.email)
+);
+
+const adminSnap=await getDocs(adminQuery);
+
+if(!adminSnap.empty){
+
+window.location.href="admin.html";
+
+return;
+
+}
+
+// Check Teacher
+
+const teacherQuery=query(
+collection(db,"teachers"),
+where("email","==",user.email)
+);
+
+const teacherSnap=await getDocs(teacherQuery);
+
+if(!teacherSnap.empty){
+
+window.location.href="teacher.html";
+
+return;
+
+}
+
+alert("Access Denied");
+
+}
+catch(error){
+
+alert(error.message);
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
