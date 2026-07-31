@@ -586,3 +586,21 @@ nav ul li{
     font-weight:500;
     color:#1e3a8a;
 }
+.features .icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+.card{
+    transition:0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(37,99,235,.15);
+}
+
+.card p{
+    line-height:1.7;
+    color:#555;
+}
