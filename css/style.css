@@ -575,3 +575,14 @@ nav ul li{
     color:#555;
     font-size:17px;
 }
+.about-list{
+    list-style:none;
+    margin-top:25px;
+}
+
+.about-list li{
+    margin:12px 0;
+    font-size:18px;
+    font-weight:500;
+    color:#1e3a8a;
+}
