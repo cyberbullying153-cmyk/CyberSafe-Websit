@@ -323,28 +323,6 @@ resolvedReports.innerHTML=resolved;
 });
 
 
-
-
-
-
-window.resolveReport = async function(id){
-
-
-await updateDoc(doc(db,"reports",id),{
-
-status:"Resolved"
-
-});
-
-
-alert("Report updated");
-
-
-}
-
-
-
-
 window.resolveReport = async function(id){
 
 await updateDoc(doc(db,"reports",id),{
