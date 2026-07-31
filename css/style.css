@@ -21,12 +21,12 @@ header{
 }
 
 nav{
-    max-width:1200px;
+    max-width:1400px;
     margin:auto;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:18px 40px;
+    padding:18px 50px;
 }
 
 .logo{
