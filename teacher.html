@@ -224,7 +224,22 @@ const reportQuery = query(
   orderBy("createdAt", "desc")
 );
 
+let allReports = [];
+
 onSnapshot(reportQuery, (snapshot) => {
+
+    allReports = [];
+
+    snapshot.forEach((report) => {
+        allReports.push({
+            id: report.id,
+            ...report.data()
+        });
+    });
+
+    displayReports();
+
+});
 
     pendingBody.innerHTML = "";
     resolvedBody.innerHTML = "";
