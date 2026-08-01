@@ -223,7 +223,7 @@ import {
 
 const reportQuery = query(
   collection(db, "reports"),
-  orderBy("timestamp", "desc")
+  orderBy("createdAt", "desc")
 );
 
 onSnapshot(reportQuery, (snapshot) => {
