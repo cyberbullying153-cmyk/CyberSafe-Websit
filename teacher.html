@@ -142,16 +142,15 @@ Manage student cyberbullying reports in real time.
 import { db, auth } from "./js/firebase.js";
 
 import {
-
 collection,
 onSnapshot,
 doc,
 updateDoc,
+deleteDoc,
 query,
 where,
 getDocs,
 orderBy
-
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
