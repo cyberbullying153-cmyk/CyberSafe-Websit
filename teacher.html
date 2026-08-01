@@ -226,86 +226,61 @@ const reportQuery = query(
 
 onSnapshot(reportQuery, (snapshot) => {
 
-reportBody.innerHTML="";
+    pendingBody.innerHTML = "";
+    resolvedBody.innerHTML = "";
 
-let total=0;
+    let total = 0;
+    let pending = 0;
+    let resolved = 0;
 
-let pending=0;
+    snapshot.forEach((report) => {
 
-let resolved=0;
+        const data = report.data();
 
-snapshot.forEach((report) => {
+        total++;
 
-const data = report.data();
+        if (data.status === "Pending") {
 
-total++;
+            pending++;
 
-if (data.status === "Pending") {
-    pending++;
+            pendingBody.innerHTML += `
+            <tr>
+                <td>${data.name || "Anonymous"}</td>
+                <td>${data.class || ""} ${data.section || ""}</td>
+                <td>${data.platform || ""}</td>
+                <td>${data.description}</td>
+                <td>
+                    <button class="resolve-btn"
+                    onclick="resolveReport('${report.id}')">
+                    Resolve
+                    </button>
+                </td>
+            </tr>
+            `;
+        }
 
-    reportBody.innerHTML += `
-    <tr>
-       
+        if (data.status === "Resolved") {
 
-<td>${data.name || "Anonymous"}</td>
+            resolved++;
 
-<td>${data.class || ""} ${data.section || ""}</td>
+            resolvedBody.innerHTML += `
+            <tr>
+                <td>${data.name || "Anonymous"}</td>
+                <td>${data.class || ""} ${data.section || ""}</td>
+                <td>${data.platform || ""}</td>
+                <td>${data.description}</td>
+                <td>✅ Resolved</td>
+            </tr>
+            `;
+        }
 
-<td>${data.platform || ""}</td>
+    });
 
-<td>${data.description}</td>
-
-<td>${data.status}</td>
-
-<td>
-
-<button class="resolve-btn"
-
-onclick="resolveReport('${report.id}')">
-
-Resolve
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-totalReports.innerHTML=total;
-
-pendingReports.innerHTML=pending;
-
-resolvedReports.innerHTML=resolved;
-
-});
-
-
-
-window.resolveReport=async function(id){
-
-await updateDoc(doc(db,"reports",id),{
-
-status:"Resolved"
+    totalReports.innerHTML = total;
+    pendingReports.innerHTML = pending;
+    resolvedReports.innerHTML = resolved;
 
 });
-
-alert("Report Resolved");
-
-}
-
-
-
-window.logout=async function(){
-
-await signOut(auth);
-
-window.location.href="staff-login.html";
-
-}
 
 </script>
 
