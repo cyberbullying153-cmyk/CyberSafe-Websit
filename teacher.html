@@ -314,6 +314,33 @@ function displayReports() {
     totalReports.innerHTML = total;
     pendingReports.innerHTML = pending;
     resolvedReports.innerHTML = resolved;
+    if (window.reportChart) {
+    window.reportChart.destroy();
+}
+
+const ctx = document.getElementById("reportChart");
+
+window.reportChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+        labels: ["Pending", "Resolved"],
+        datasets: [{
+            data: [pending, resolved],
+            backgroundColor: [
+                "#ffc107",
+                "#28a745"
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: "bottom"
+            }
+        }
+    }
+});
 }
 searchInput.addEventListener("input", displayReports);
 
