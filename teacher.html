@@ -227,18 +227,7 @@ let allReports = [];
 
 onSnapshot(reportQuery, (snapshot) => {
 
-    allReports = [];
-
-    snapshot.forEach((report) => {
-        allReports.push({
-            id: report.id,
-            ...report.data()
-        });
-    });
-
-    displayReports();
-
-});
+   
     function displayReports() {
 
     allReports = [];
