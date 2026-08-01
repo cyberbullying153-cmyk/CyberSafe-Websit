@@ -224,18 +224,36 @@ let pending=0;
 
 let resolved=0;
 
-snapshot.forEach((report)=>{
+snapshot.forEach((report) => {
 
-const data=report.data();
+const data = report.data();
 
 total++;
 
-if(data.status==="Pending") pending++;
+if (data.status === "Pending") {
+    pending++;
 
-if(data.status==="Resolved") resolved++;
+    reportBody.innerHTML += `
+    <tr>
+        <td>${data.name || "Anonymous"}</td>
+        <td>${data.class || ""} ${data.section || ""}</td>
+        <td>${data.platform || ""}</td>
+        <td>${data.description}</td>
+        <td>${data.status}</td>
+        <td>
+            <button class="resolve-btn"
+                onclick="resolveReport('${report.id}')">
+                Resolve
+            </button>
+        </td>
+    </tr>
+    `;
+}
 
-reportBody.innerHTML+=`
-
+if (data.status === "Resolved") {
+    resolved++;
+}
+});
 <tr>
 
 <td>${data.name || "Anonymous"}</td>
