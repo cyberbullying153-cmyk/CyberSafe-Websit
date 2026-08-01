@@ -259,7 +259,7 @@ function displayReports() {
     let resolved = 0;
 
     const search = searchInput.value.toLowerCase();
-
+    const filter = statusFilter.value;
     allReports.forEach((data) => {
 
         const name = (data.name || "").toLowerCase();
