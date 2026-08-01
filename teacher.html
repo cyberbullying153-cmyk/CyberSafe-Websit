@@ -181,7 +181,7 @@ signOut
 const pendingBody = document.getElementById("pendingBody");
 const resolvedBody = document.getElementById("resolvedBody");
 const searchInput = document.getElementById("searchInput");
-const totalReports = document.getElementById("totalReports");
+const statusFilter = document.getElementById("statusFilter");
 
 const pendingReports = document.getElementById("pendingReports");
 
@@ -260,6 +260,13 @@ function displayReports() {
 
     const search = searchInput.value.toLowerCase();
     const filter = statusFilter.value;
+    if (
+    !name.includes(search) &&
+    !studentClass.includes(search) &&
+    !platform.includes(search)
+) {
+    return;
+}
     allReports.forEach((data) => {
 
         const name = (data.name || "").toLowerCase();
