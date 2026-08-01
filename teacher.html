@@ -290,6 +290,18 @@ window.resolveReport = async function(id){
 
 }
 
+window.deleteReport = async function(id){
+
+    if(confirm("Delete this report permanently?")){
+
+        await deleteDoc(doc(db,"reports",id));
+
+        alert("Report deleted successfully");
+
+    }
+
+}
+
 window.logout = async function(){
 
     await signOut(auth);
@@ -297,7 +309,6 @@ window.logout = async function(){
     window.location.href="staff-login.html";
 
 }
-
 document.getElementById("logoutBtn").addEventListener("click", logout);
 </script>
 
