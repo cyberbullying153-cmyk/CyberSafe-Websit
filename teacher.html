@@ -209,19 +209,6 @@ teacherCount.innerHTML=snapshot.size;
 
 });
 
-
-
-import {
-  collection,
-  onSnapshot,
-  doc,
-  updateDoc,
-  query,
-  where,
-  getDocs,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 const reportQuery = query(
   collection(db, "reports"),
   orderBy("createdAt", "desc")
