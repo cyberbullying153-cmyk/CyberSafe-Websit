@@ -90,12 +90,18 @@ Manage student cyberbullying reports in real time.
 </div>
 
 </div>
-<div style="margin:30px 0;">
+<div style="display:flex;gap:15px;margin:25px 0;">
     <input
         type="text"
         id="searchInput"
         placeholder="🔍 Search by name, class or platform..."
-        style="width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px;">
+        style="flex:1;padding:12px;border-radius:8px;border:1px solid #ccc;">
+
+    <select id="statusFilter" style="padding:12px;border-radius:8px;">
+        <option value="All">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Resolved">Resolved</option>
+    </select>
 </div>
 <h2 style="margin-top:40px;">📊 Report Statistics</h2>
 
