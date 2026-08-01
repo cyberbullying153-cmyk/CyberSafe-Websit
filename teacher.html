@@ -279,7 +279,25 @@ onSnapshot(reportQuery, (snapshot) => {
     resolvedReports.innerHTML = resolved;
 
 });
+window.resolveReport = async function(id){
 
+    await updateDoc(doc(db,"reports",id),{
+        status:"Resolved"
+    });
+
+    alert("Report Resolved");
+
+}
+
+window.logout = async function(){
+
+    await signOut(auth);
+
+    window.location.href="staff-login.html";
+
+}
+
+document.getElementById("logoutBtn").addEventListener("click", logout);
 </script>
 
 </body>
