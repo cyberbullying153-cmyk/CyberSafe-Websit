@@ -235,25 +235,7 @@ if (data.status === "Pending") {
 
     reportBody.innerHTML += `
     <tr>
-        <td>${data.name || "Anonymous"}</td>
-        <td>${data.class || ""} ${data.section || ""}</td>
-        <td>${data.platform || ""}</td>
-        <td>${data.description}</td>
-        <td>${data.status}</td>
-        <td>
-            <button class="resolve-btn"
-                onclick="resolveReport('${report.id}')">
-                Resolve
-            </button>
-        </td>
-    </tr>
-    `;
-}
-
-if (data.status === "Resolved") {
-    resolved++;
-}
-});
+       
 
 <td>${data.name || "Anonymous"}</td>
 
