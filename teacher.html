@@ -236,7 +236,19 @@ onSnapshot(reportQuery, (snapshot) => {
     snapshot.forEach((report) => {
 
         const data = report.data();
+const search = searchInput.value.toLowerCase();
 
+const name = (data.name || "").toLowerCase();
+const studentClass = (data.class || "").toLowerCase();
+const platform = (data.platform || "").toLowerCase();
+
+if (
+    !name.includes(search) &&
+    !studentClass.includes(search) &&
+    !platform.includes(search)
+) {
+    return;
+}
         total++;
 
         if (data.status === "Pending") {
