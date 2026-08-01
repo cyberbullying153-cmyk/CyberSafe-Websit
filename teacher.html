@@ -383,7 +383,47 @@ window.deleteReport = async function(id){
     }
 
 };
+pdfBtn.addEventListener("click", () => {
 
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let y = 20;
+
+    doc.setFontSize(18);
+    doc.text("CyberSafe Student Reports", 20, y);
+
+    y += 15;
+
+    doc.setFontSize(12);
+
+    allReports.forEach((report, index) => {
+
+        doc.text(`${index + 1}. ${report.name || "Anonymous"}`, 20, y);
+        y += 8;
+
+        doc.text(`Class: ${report.class || "-"} ${report.section || ""}`, 25, y);
+        y += 8;
+
+        doc.text(`Platform: ${report.platform}`, 25, y);
+        y += 8;
+
+        doc.text(`Status: ${report.status}`, 25, y);
+        y += 8;
+
+        doc.text(`Description: ${report.description}`, 25, y);
+        y += 15;
+
+        if (y > 270) {
+            doc.addPage();
+            y = 20;
+        }
+
+    });
+
+    doc.save("CyberSafe_Reports.pdf");
+
+});
 window.logout = async function(){
 
     await signOut(auth);
