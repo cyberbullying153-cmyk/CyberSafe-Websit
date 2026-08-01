@@ -223,9 +223,6 @@ const reportQuery = query(
   collection(db, "reports"),
   orderBy("createdAt", "desc")
 );
-
-let allReports = [];
-
 let allReports = [];
 
 onSnapshot(reportQuery, (snapshot) => {
