@@ -262,6 +262,13 @@ onSnapshot(reportQuery, (snapshot) => {
                 <td>${data.platform || ""}</td>
                 <td>${data.description}</td>
                 <td>✅ Resolved</td>
+
+<td>
+<button class="delete-btn"
+onclick="deleteReport('${report.id}')">
+Delete
+</button>
+</td>
             </tr>
             `;
         }
