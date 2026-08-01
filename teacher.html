@@ -311,8 +311,9 @@ function displayReports() {
     pendingReports.innerHTML = pending;
     resolvedReports.innerHTML = resolved;
 }
-
 searchInput.addEventListener("input", displayReports);
+
+window.resolveReport = async function(id){
 
     await updateDoc(doc(db,"reports",id),{
         status:"Resolved"
@@ -321,7 +322,6 @@ searchInput.addEventListener("input", displayReports);
     alert("Report Resolved");
 
 }
-
 window.deleteReport = async function(id){
 
     if(confirm("Delete this report permanently?")){
