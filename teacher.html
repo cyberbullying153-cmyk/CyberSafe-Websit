@@ -314,7 +314,7 @@ function displayReports() {
     totalReports.innerHTML = total;
     pendingReports.innerHTML = pending;
     resolvedReports.innerHTML = resolved;
-    if (window.reportChart) {
+if (window.reportChart && typeof window.reportChart.destroy === "function") {
     window.reportChart.destroy();
 }
 
