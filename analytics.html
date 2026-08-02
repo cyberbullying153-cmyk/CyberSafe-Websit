@@ -17,3 +17,473 @@
 </head>
 
 <body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+<img src="images/logo.png" alt="Logo">
+<span>CYBERSAFE</span>
+</div>
+
+<ul class="nav-links">
+
+<li><a href="admin.html">Dashboard</a></li>
+
+<li><a href="teacher.html">Reports</a></li>
+
+<li><a href="analytics.html">Analytics</a></li>
+
+<li>
+<button id="logoutBtn" class="login-btn">
+Logout
+</button>
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<section class="report-page">
+
+<h1>📊 Analytics Dashboard</h1>
+
+<p class="subtitle">
+Cyberbullying statistics and report analysis.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<h2 id="totalReports">0</h2>
+<p>Total Reports</p>
+</div>
+
+<div class="stat">
+<h2 id="pendingReports">0</h2>
+<p>Pending Reports</p>
+</div>
+
+<div class="stat">
+<h2 id="resolvedReports">0</h2>
+<p>Resolved Reports</p>
+</div>
+
+<div class="stat">
+<h2 id="teacherCount">0</h2>
+<p>Teachers</p>
+</div>
+
+</div>
+
+<hr style="margin:40px 0;">
+
+<h2>📌 Report Status</h2>
+
+<div style="width:350px;height:350px;margin:30px auto;">
+<canvas id="statusChart"></canvas>
+</div>
+
+<hr style="margin:40px 0;">
+
+<h2>📱 Reports by Platform</h2>
+
+<div style="max-width:800px;margin:auto;">
+<canvas id="platformChart"></canvas>
+</div>
+
+<hr style="margin:40px 0;">
+
+<h2>🏫 Reports by Class</h2>
+
+<div style="max-width:800px;margin:auto;">
+<canvas id="classChart"></canvas>
+</div>
+
+<hr style="margin:40px 0;">
+
+<h2>📅 Reports Timeline</h2>
+
+<div style="max-width:900px;margin:auto;">
+<canvas id="timelineChart"></canvas>
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 CyberSafe | Student Security Portal
+</p>
+
+</footer>
+
+<script type="module">
+  import { db, auth } from "./js/firebase.js";
+
+import {
+collection,
+query,
+where,
+getDocs,
+onSnapshot,
+orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const totalReports = document.getElementById("totalReports");
+const pendingReports = document.getElementById("pendingReports");
+const resolvedReports = document.getElementById("resolvedReports");
+const teacherCount = document.getElementById("teacherCount");
+
+// ---------- Admin Verification ----------
+
+onAuthStateChanged(auth, async(user)=>{
+
+    if(!user){
+
+        alert("Please login first");
+        window.location.href="admin-login.html";
+        return;
+
+    }
+
+    try{
+
+        const q=query(
+            collection(db,"admins"),
+            where("email","==",user.email)
+        );
+
+        const admin=await getDocs(q);
+
+        if(admin.empty){
+
+            alert("Access Denied!");
+
+            await signOut(auth);
+
+            window.location.href="admin-login.html";
+
+            return;
+
+        }
+
+        console.log("Admin verified");
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        window.location.href="admin-login.html";
+
+    }
+
+});
+
+// ---------- Teacher Count ----------
+
+onSnapshot(collection(db,"teachers"),(snapshot)=>{
+
+    teacherCount.innerHTML=snapshot.size;
+
+});
+
+// ---------- Reports ----------
+
+let allReports=[];
+
+const reportQuery=query(
+
+    collection(db,"reports"),
+
+    orderBy("createdAt","desc")
+
+);
+
+onSnapshot(reportQuery,(snapshot)=>{
+
+    allReports=[];
+
+    snapshot.forEach((doc)=>{
+
+        allReports.push({
+
+            id:doc.id,
+
+            ...doc.data()
+
+        });
+
+    });
+
+    updateAnalytics();
+
+});
+  function updateAnalytics(){
+
+    let total = allReports.length;
+    let pending = 0;
+    let resolved = 0;
+
+    let instagram = 0;
+    let whatsapp = 0;
+    let facebook = 0;
+    let telegram = 0;
+    let snapchat = 0;
+    let other = 0;
+
+    let classData = {};
+
+    let monthly = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+    allReports.forEach((report)=>{
+
+        // Status
+
+        if(report.status==="Pending") pending++;
+        else resolved++;
+
+        // Platform
+
+        switch((report.platform || "").toLowerCase()){
+
+            case "instagram":
+                instagram++;
+                break;
+
+            case "whatsapp":
+                whatsapp++;
+                break;
+
+            case "facebook":
+                facebook++;
+                break;
+
+            case "telegram":
+                telegram++;
+                break;
+
+            case "snapchat":
+                snapchat++;
+                break;
+
+            default:
+                other++;
+        }
+
+        // Class
+
+        let cls=(report.class || "Unknown");
+
+        classData[cls]=(classData[cls] || 0)+1;
+
+        // Monthly
+
+        if(report.createdAt){
+
+            let month=report.createdAt.toDate().getMonth();
+
+            monthly[month]++;
+
+        }
+
+    });
+
+    totalReports.innerHTML=total;
+    pendingReports.innerHTML=pending;
+    resolvedReports.innerHTML=resolved;
+
+    // ---------- Doughnut Chart ----------
+
+    if(window.statusChart)
+        window.statusChart.destroy();
+
+    window.statusChart=new Chart(
+
+        document.getElementById("statusChart"),
+
+        {
+
+            type:"doughnut",
+
+            data:{
+
+                labels:["Pending","Resolved"],
+
+                datasets:[{
+
+                    data:[pending,resolved],
+
+                    backgroundColor:[
+
+                        "#ffc107",
+
+                        "#28a745"
+
+                    ]
+
+                }]
+
+            }
+
+        }
+
+    );
+
+    // ---------- Platform Chart ----------
+
+    if(window.platformChart)
+        window.platformChart.destroy();
+
+    window.platformChart=new Chart(
+
+        document.getElementById("platformChart"),
+
+        {
+
+            type:"bar",
+
+            data:{
+
+                labels:[
+                    "Instagram",
+                    "WhatsApp",
+                    "Facebook",
+                    "Telegram",
+                    "Snapchat",
+                    "Other"
+                ],
+
+                datasets:[{
+
+                    label:"Reports",
+
+                    data:[
+
+                        instagram,
+                        whatsapp,
+                        facebook,
+                        telegram,
+                        snapchat,
+                        other
+
+                    ]
+
+                }]
+
+            },
+
+            options:{
+                responsive:true
+            }
+
+        }
+
+    );
+
+    // ---------- Class Chart ----------
+
+    if(window.classChart)
+        window.classChart.destroy();
+
+    window.classChart=new Chart(
+
+        document.getElementById("classChart"),
+
+        {
+
+            type:"bar",
+
+            data:{
+
+                labels:Object.keys(classData),
+
+                datasets:[{
+
+                    label:"Reports",
+
+                    data:Object.values(classData)
+
+                }]
+
+            },
+
+            options:{
+                responsive:true
+            }
+
+        }
+
+    );
+
+    // ---------- Timeline Chart ----------
+
+    if(window.timelineChart)
+        window.timelineChart.destroy();
+
+    window.timelineChart=new Chart(
+
+        document.getElementById("timelineChart"),
+
+        {
+
+            type:"line",
+
+            data:{
+
+                labels:[
+                    "Jan","Feb","Mar","Apr",
+                    "May","Jun","Jul","Aug",
+                    "Sep","Oct","Nov","Dec"
+                ],
+
+                datasets:[{
+
+                    label:"Reports",
+
+                    data:monthly,
+
+                    fill:false,
+
+                    tension:0.3
+
+                }]
+
+            },
+
+            options:{
+                responsive:true
+            }
+
+        }
+
+    );
+
+}
+
+// ---------- Logout ----------
+
+window.logout = async function(){
+
+    await signOut(auth);
+
+    window.location.href="admin-login.html";
+
+}
+
+document.getElementById("logoutBtn").addEventListener("click",logout);
+
+</script>
+
+</body>
+</html>
