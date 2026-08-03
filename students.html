@@ -225,34 +225,62 @@ Cancel
 
 </footer>
 
-<script>
+<script type="module">
 
-const modal=document.getElementById("studentModal");
+import { db } from "./js/firebase.js";
 
-document.getElementById("addStudentBtn").onclick=()=>{
+import {
+collection,
+addDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-modal.style.display="flex";
+const modal = document.getElementById("studentModal");
 
-}
+document.getElementById("addStudentBtn").onclick = () => {
+    modal.style.display = "flex";
+};
 
-document.getElementById("closeModal").onclick=()=>{
+document.getElementById("closeModal").onclick = () => {
+    modal.style.display = "none";
+};
 
-modal.style.display="none";
+window.onclick = (e) => {
+    if (e.target == modal) {
+        modal.style.display = "none";
+    }
+};
 
-}
+document.getElementById("saveStudent").addEventListener("click", async () => {
 
-window.onclick=function(e){
+    const student = {
+        admissionNo: document.getElementById("admissionNo").value,
+        name: document.getElementById("studentName").value,
+        class: document.getElementById("studentClass").value,
+        section: document.getElementById("section").value,
+        studentMobile: document.getElementById("studentMobile").value,
+        parentMobile: document.getElementById("parentMobile").value,
+        email: document.getElementById("studentEmail").value,
+        status: "Active",
+        createdAt: new Date()
+    };
 
-if(e.target==modal){
+    try {
 
-modal.style.display="none";
+        await addDoc(collection(db, "students"), student);
 
-}
+        alert("Student Added Successfully!");
 
-}
+        location.reload();
+
+    } catch (error) {
+
+        alert(error.message);
+
+    }
+
+});
 
 </script>
-
 </body>
 
 </html>
