@@ -1,1 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Management | CyberSafe</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+.modal{
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.5);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-content{
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    width:450px;
+}
+
+.modal-content h2{
+    margin-bottom:20px;
+}
+
+.modal-content input,
+.modal-content select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.modal-buttons button{
+    flex:1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+<img src="images/logo.png">
+<span>CYBERSAFE</span>
+</div>
+
+<ul class="nav-links">
+
+<li><a href="admin.html">Dashboard</a></li>
+
+<li><a href="students.html">Students</a></li>
+
+<li><a href="teacher.html">Teachers</a></li>
+
+<li><a href="analytics.html">Analytics</a></li>
+
+<li>
+<button onclick="logout()" class="login-btn">
+Logout
+</button>
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<section class="report-page">
+
+<h1>👨‍🎓 Student Management</h1>
+
+<p class="subtitle">
+
+Register and manage students.
+
+</p>
+
+<div style="display:flex;justify-content:space-between;margin-bottom:25px;">
+
+<input
+type="text"
+id="searchStudent"
+placeholder="🔍 Search Student..."
+style="width:300px;padding:12px;border-radius:8px;border:1px solid #ccc;">
+
+<button
+id="addStudentBtn"
+class="login-btn">
+
+➕ Add Student
+
+</button>
+
+</div>
+
+<table class="report-table">
+
+<thead>
+
+<tr>
+
+<th>Admission No</th>
+
+<th>Name</th>
+
+<th>Class</th>
+
+<th>Section</th>
+
+<th>Student Mobile</th>
+
+<th>Parent Mobile</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="studentBody">
+
+</tbody>
+
+</table>
+
+</section>
+
+<!-- Add Student Modal -->
+
+<div id="studentModal" class="modal">
+
+<div class="modal-content">
+
+<h2>Add Student</h2>
+
+<input id="admissionNo" placeholder="Admission Number">
+
+<input id="studentName" placeholder="Student Name">
+
+<select id="studentClass">
+
+<option value="">Select Class</option>
+
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+<option>11</option>
+<option>12</option>
+
+</select>
+
+<input id="section" placeholder="Section">
+
+<input id="studentMobile" placeholder="Student Mobile">
+
+<input id="parentMobile" placeholder="Parent Mobile">
+
+<input id="studentEmail" placeholder="Email (Optional)">
+
+<div class="modal-buttons">
+
+<button id="saveStudent" class="login-btn">
+
+Save Student
+
+</button>
+
+<button id="closeModal">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<p>
+
+© 2026 CyberSafe
+
+</p>
+
+</footer>
+
+<script>
+
+const modal=document.getElementById("studentModal");
+
+document.getElementById("addStudentBtn").onclick=()=>{
+
+modal.style.display="flex";
+
+}
+
+document.getElementById("closeModal").onclick=()=>{
+
+modal.style.display="none";
+
+}
+
+window.onclick=function(e){
+
+if(e.target==modal){
+
+modal.style.display="none";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
