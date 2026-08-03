@@ -251,9 +251,9 @@ window.onclick = (e) => {
 };
 
 document.getElementById("saveStudent").addEventListener("click", async () => {
-    
+
     console.log("Save button clicked");
-    
+
     const student = {
         admissionNo: document.getElementById("admissionNo").value,
         name: document.getElementById("studentName").value,
@@ -265,6 +265,26 @@ document.getElementById("saveStudent").addEventListener("click", async () => {
         status: "Active",
         createdAt: new Date()
     };
+
+    console.log("DB =", db);
+    console.log("Student =", student);
+
+    try {
+
+        const docRef = await addDoc(collection(db, "students"), student);
+
+        console.log("Document ID:", docRef.id);
+
+        alert("Student Added Successfully!");
+
+    } catch (error) {
+
+        console.error("Firestore Error:", error);
+        alert(error.code + " : " + error.message);
+
+    }
+
+});
 
     try {
 
