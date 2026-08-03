@@ -230,9 +230,13 @@ Cancel
 import { db, auth } from "./js/firebase.js";
 
 import {
-collection,
-addDoc
+    collection,
+    addDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const modal = document.getElementById("studentModal");
 
