@@ -795,3 +795,33 @@ img{
     backdrop-filter:blur(12px);
     -webkit-backdrop-filter:blur(12px);
 }
+@media(max-width:900px){
+
+nav{
+    flex-direction:column;
+    gap:20px;
+}
+
+.nav-links{
+    justify-content:center;
+}
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero-image{
+    order:-1;
+}
+
+.report-table{
+    overflow-x:auto;
+    display:block;
+}
+
+.features{
+    grid-template-columns:1fr;
+}
+
+}
