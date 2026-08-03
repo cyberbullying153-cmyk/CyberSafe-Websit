@@ -279,7 +279,12 @@ document.getElementById("saveStudent").addEventListener("click", async () => {
     }
 
 });
+import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+window.logout = async function () {
+    await signOut(auth);
+    window.location.href = "admin-login.html";
+};
 </script>
 </body>
 
