@@ -269,22 +269,7 @@ document.getElementById("saveStudent").addEventListener("click", async () => {
     console.log("DB =", db);
     console.log("Student =", student);
 
-    try {
-
-        const docRef = await addDoc(collection(db, "students"), student);
-
-        console.log("Document ID:", docRef.id);
-
-        alert("Student Added Successfully!");
-
-    } catch (error) {
-
-        console.error("Firestore Error:", error);
-        alert(error.code + " : " + error.message);
-
-    }
-
-});
+    
 
     try {
 
@@ -299,7 +284,9 @@ document.getElementById("saveStudent").addEventListener("click", async () => {
         alert(error.message);
 
 });
-import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 window.logout = async function () {
     await signOut(auth);
