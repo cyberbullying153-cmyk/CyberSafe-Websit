@@ -251,7 +251,9 @@ window.onclick = (e) => {
 };
 
 document.getElementById("saveStudent").addEventListener("click", async () => {
-
+    
+    console.log("Save button clicked");
+    
     const student = {
         admissionNo: document.getElementById("admissionNo").value,
         name: document.getElementById("studentName").value,
