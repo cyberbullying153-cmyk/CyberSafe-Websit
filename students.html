@@ -266,14 +266,11 @@ document.getElementById("saveStudent").addEventListener("click", async () => {
         createdAt: new Date()
     };
 
-    console.log("DB =", db);
-    console.log("Student =", student);
-
-    
-
     try {
 
-        await addDoc(collection(db, "students"), student);
+        const docRef = await addDoc(collection(db, "students"), student);
+
+        console.log("Document ID:", docRef.id);
 
         alert("Student Added Successfully!");
 
@@ -281,18 +278,18 @@ document.getElementById("saveStudent").addEventListener("click", async () => {
 
     } catch (error) {
 
-        alert(error.message);
+        console.error(error);
+
+        alert(error.code + " : " + error.message);
+
+    }
 
 });
-import {
-    signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 window.logout = async function () {
     await signOut(auth);
     window.location.href = "admin-login.html";
 };
-</script>
 </body>
 
 </html>
