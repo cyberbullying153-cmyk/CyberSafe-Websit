@@ -179,17 +179,17 @@ Login Here
 </div>
 
 <script type="module">
-
 import { auth, db } from "./js/firebase.js";
 
 import {
-createUserWithEmailAndPassword,
-sendEmailVerification
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-doc,
-setDoc
+    doc,
+    setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const form = document.getElementById("registerForm");
@@ -207,136 +207,53 @@ form.addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value;
     const confirm = document.getElementById("confirmPassword").value;
 
-    if(password !== confirm){
-
+    if (password !== confirm) {
         alert("Passwords do not match.");
-
         return;
-
     }
 
-    try{
+    try {
 
-       const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-);
-
-const user = userCredential.user;
-
-// Send verification email
-await sendEmailVerification(user);
-
-// Save student data in Firestore
-await setDoc(doc(db, "students", user.uid), {
-    uid: user.uid,
-    name,
-    admissionNo: admission,
-    class: studentClass,
-    section,
-    mobile,
-    email,
-    role: "student",
-    status: "Active",
-    createdAt: new Date()
-});
-
-// Tell the user
-alert("Registration Successful!\n\nA verification email has been sent to your email address. Please verify your email before logging in.");
-
-// Log out until email is verified
-await auth.signOut();
-
-// Redirect to login page
-window.location.href = "student-login.html";
-        console.log("User created:", userCredential.user);
-const user = userCredential.user;
-
-// Send verification email
-await sendEmailVerification(user);
-
-// Save student data
-await setDoc(doc(db,"students",user.uid),{
-console.log("Firestore data saved");
-    uid:user.uid,
-
-    name,
-
-    admissionNo:admission,
-
-    class:studentClass,
-
-    section,
-
-    mobile,
-
-    email,
-
-    role:"student",
-
-    status:"Active",
-
-    createdAt:new Date()
-
-});
-
-// Success message
-alert("🎉 Registration Successful!\n\nA verification email has been sent to your email.\nPlease verify your email before logging in.");
-
-// Go to login page
-window.location.href = "student-login.html";
-        }
-
-catch(error){
-
-    console.log(error);
-
-    alert(error.code + "\n" + error.message);
-
-}
-});
-        const user = userCredential.user;
-        await sendEmailVerification(user);
-    console.log("Verification email sent");
-        await setDoc(doc(db,"students",user.uid),{
-
-            uid:user.uid,
-
-            name,
-
-            admissionNo:admission,
-
-            class:studentClass,
-
-            section,
-
-            mobile,
-
+        const userCredential = await createUserWithEmailAndPassword(
+            auth,
             email,
+            password
+        );
 
-            role:"student",
+        const user = userCredential.user;
 
-            status:"Active",
+        await sendEmailVerification(user);
 
-            createdAt:new Date()
-
+        await setDoc(doc(db, "students", user.uid), {
+            uid: user.uid,
+            name,
+            admissionNo: admission,
+            class: studentClass,
+            section,
+            mobile,
+            email,
+            role: "student",
+            status: "Active",
+            createdAt: new Date()
         });
 
-        alert("Registration Successful!\n\nA verification email has been sent.\nPlease verify your email before logging in.");
-alert("Registration Successful");
-window.location.href = "student-login.html";
+        alert(
+            "Registration Successful!\n\nA verification email has been sent.\nPlease verify your email before logging in."
+        );
 
-    }
+        await signOut(auth);
 
-    catch(error){
+        window.location.href = "student-login.html";
 
-        alert(error.message);
+    } catch (error) {
+
+        console.log(error);
+
+        alert(error.code + "\n" + error.message);
 
     }
 
 });
-
 </script>
 
 </body>
