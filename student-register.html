@@ -222,7 +222,50 @@ form.addEventListener("submit", async (e) => {
             email,
             password
         );
+const user = userCredential.user;
 
+// Send verification email
+await sendEmailVerification(user);
+
+// Save student data
+await setDoc(doc(db,"students",user.uid),{
+
+    uid:user.uid,
+
+    name,
+
+    admissionNo:admission,
+
+    class:studentClass,
+
+    section,
+
+    mobile,
+
+    email,
+
+    role:"student",
+
+    status:"Active",
+
+    createdAt:new Date()
+
+});
+
+// Success message
+alert("🎉 Registration Successful!\n\nA verification email has been sent to your email.\nPlease verify your email before logging in.");
+
+// Go to login page
+window.location.href = "student-login.html";
+        }
+
+catch(error){
+
+    alert(error.message);
+
+}
+
+});
         const user = userCredential.user;
         await sendEmailVerification(user);
         await setDoc(doc(db,"students",user.uid),{
