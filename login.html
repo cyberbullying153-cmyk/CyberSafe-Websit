@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | CyberSafe</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f8fc;
+}
+
+header{
+background:#111827;
+padding:18px 60px;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+color:#fff;
+font-size:34px;
+font-weight:700;
+}
+
+.logo img{
+width:55px;
+height:55px;
+}
+
+.back-btn{
+color:#fff;
+text-decoration:none;
+background:#22c55e;
+padding:12px 28px;
+border-radius:10px;
+font-weight:600;
+transition:.3s;
+}
+
+.back-btn:hover{
+background:#16a34a;
+}
+
+.hero{
+
+text-align:center;
+padding:60px 20px 20px;
+
+}
+
+.hero h1{
+
+font-size:46px;
+color:#1e3a8a;
+margin-bottom:10px;
+
+}
+
+.hero p{
+
+font-size:18px;
+color:#555;
+
+}
+
+.login-container{
+
+max-width:1200px;
+margin:40px auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:35px;
+padding:20px;
+
+}
+
+.card{
+
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.icon{
+
+font-size:70px;
+margin-bottom:20px;
+
+}
+
+.card h2{
+
+color:#1d4ed8;
+margin-bottom:15px;
+
+}
+
+.card p{
+
+color:#666;
+line-height:1.7;
+margin-bottom:30px;
+
+}
+
+.btn{
+
+display:block;
+width:100%;
+padding:14px;
+margin-top:15px;
+border-radius:10px;
+text-decoration:none;
+font-size:17px;
+font-weight:600;
+transition:.3s;
+
+}
+
+.student{
+
+background:#2563eb;
+color:white;
+
+}
+
+.student:hover{
+
+background:#1d4ed8;
+
+}
+
+.register{
+
+background:#22c55e;
+color:white;
+
+}
+
+.register:hover{
+
+background:#16a34a;
+
+}
+
+.teacher{
+
+background:#f59e0b;
+color:white;
+
+}
+
+.teacher:hover{
+
+background:#d97706;
+
+}
+
+.admin{
+
+background:#dc2626;
+color:white;
+
+}
+
+.admin:hover{
+
+background:#b91c1c;
+
+}
+
+footer{
+
+margin-top:70px;
+padding:20px;
+text-align:center;
+background:#111827;
+color:white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+
+<img src="images/logo.png">
+
+<span>CYBERSAFE</span>
+
+</div>
+
+<a href="index.html" class="back-btn">← Home</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Welcome to CyberSafe</h1>
+
+<p>Select your portal to continue.</p>
+
+</section>
+
+<div class="login-container">
+
+<!-- Student -->
+
+<div class="card">
+
+<div class="icon">🎓</div>
+
+<h2>Student Portal</h2>
+
+<p>
+
+Register yourself before reporting cyberbullying.
+Login to submit reports, track your reports and stay safe online.
+
+</p>
+
+<a href="student-login.html" class="btn student">
+
+Student Login
+
+</a>
+
+<a href="student-register.html" class="btn register">
+
+New Student? Register
+
+</a>
+
+</div>
+
+<!-- Teacher -->
+
+<div class="card">
+
+<div class="icon">👨‍🏫</div>
+
+<h2>Teacher Portal</h2>
+
+<p>
+
+Teachers can manage reports, verify complaints and help students.
+
+</p>
+
+<a href="staff-login.html" class="btn teacher">
+
+Teacher Login
+
+</a>
+
+</div>
+
+<!-- Admin -->
+
+<div class="card">
+
+<div class="icon">🛡️</div>
+
+<h2>Administrator</h2>
+
+<p>
+
+Administrator dashboard for managing teachers, students and the entire CyberSafe system.
+
+</p>
+
+<a href="admin-login.html" class="btn admin">
+
+Admin Login
+
+</a>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 CyberSafe | Student Security Portal
+
+</footer>
+
+</body>
+
+</html>
