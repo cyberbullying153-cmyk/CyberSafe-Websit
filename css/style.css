@@ -194,14 +194,21 @@ nav ul li a:hover{
 }
 
 .card{
-    background:white;
-    padding:30px;
-    border-radius:18px;
-    text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-    transition:.3s;
+background:#fff;
+padding:30px;
+border-radius:20px;
+text-align:center;
+text-decoration:none;
+color:#222;
+border:1px solid #e5e7eb;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.3s ease;
 }
 
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(37,99,235,.15);
+}
 .card:hover{
     transform:translateY(-10px);
 }
