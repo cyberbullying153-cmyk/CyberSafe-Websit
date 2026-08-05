@@ -164,14 +164,29 @@ nav ul li a:hover{
 
 .report-btn{
     background:#22c55e;
-    color:white;
+    color:#fff;
+    border:2px solid #22c55e;
+    transition:.3s;
+}
+
+.report-btn:hover{
+    background:#16a34a;
+    border-color:#16a34a;
+    transform:translateY(-3px);
 }
 
 .help-btn{
-    background:white;
-    color:#1e3a8a;
+    background:transparent;
+    color:#fff;
+    border:2px solid #fff;
+    transition:.3s;
 }
 
+.help-btn:hover{
+    background:#fff;
+    color:#1e3a8a;
+    transform:translateY(-3px);
+}
 .btn:hover{
     transform:translateY(-4px);
     box-shadow:0 10px 25px rgba(0,0,0,.2);
