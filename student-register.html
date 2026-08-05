@@ -217,11 +217,39 @@ form.addEventListener("submit", async (e) => {
 
     try{
 
-        const userCredential = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
+       const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+);
+
+const user = userCredential.user;
+
+// Send verification email
+await sendEmailVerification(user);
+
+// Save student data in Firestore
+await setDoc(doc(db, "students", user.uid), {
+    uid: user.uid,
+    name,
+    admissionNo: admission,
+    class: studentClass,
+    section,
+    mobile,
+    email,
+    role: "student",
+    status: "Active",
+    createdAt: new Date()
+});
+
+// Tell the user
+alert("Registration Successful!\n\nA verification email has been sent to your email address. Please verify your email before logging in.");
+
+// Log out until email is verified
+await auth.signOut();
+
+// Redirect to login page
+window.location.href = "student-login.html";
         console.log("User created:", userCredential.user);
 const user = userCredential.user;
 
