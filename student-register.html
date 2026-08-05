@@ -222,6 +222,7 @@ form.addEventListener("submit", async (e) => {
             email,
             password
         );
+        console.log("User created:", userCredential.user);
 const user = userCredential.user;
 
 // Send verification email
@@ -229,7 +230,7 @@ await sendEmailVerification(user);
 
 // Save student data
 await setDoc(doc(db,"students",user.uid),{
-
+console.log("Firestore data saved");
     uid:user.uid,
 
     name,
@@ -269,6 +270,7 @@ catch(error){
 });
         const user = userCredential.user;
         await sendEmailVerification(user);
+    console.log("Verification email sent");
         await setDoc(doc(db,"students",user.uid),{
 
             uid:user.uid,
@@ -294,7 +296,7 @@ catch(error){
         });
 
         alert("Registration Successful!\n\nA verification email has been sent.\nPlease verify your email before logging in.");
-
+alert("Registration Successful");
 window.location.href = "student-login.html";
 
     }
