@@ -241,9 +241,10 @@ document
 
 
 e.preventDefault();
-
-
-
+if (!currentUser || !currentStudent) {
+    alert("Please wait while your account loads.");
+    return;
+}
 
 try{
 
