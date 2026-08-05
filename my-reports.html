@@ -165,3 +165,87 @@ Logout
 © 2026 CyberSafe
 
 </footer>
+<script type="module">
+
+import { auth, db } from "./js/firebase.js";
+
+import {
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+collection,
+query,
+where,
+getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const tbody = document.getElementById("reportBody");
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+
+window.location.href="student-login.html";
+
+return;
+
+}
+
+const q = query(
+collection(db,"reports"),
+where("studentUID","==",user.uid)
+);
+
+const snapshot = await getDocs(q);
+
+tbody.innerHTML = "";
+
+snapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+let badge = "pending";
+
+if(data.status=="Resolved") badge="resolved";
+if(data.status=="Under Review") badge="review";
+
+tbody.innerHTML += `
+
+<tr>
+
+<td>${data.date || "-"}</td>
+
+<td>${data.platform || "-"}</td>
+
+<td>
+<span class="status ${badge}">
+${data.status}
+</span>
+</td>
+
+<td>${data.assignedTeacher || "Not Assigned"}</td>
+
+<td>${data.description}</td>
+
+</tr>
+
+`;
+
+});
+
+});
+
+document.getElementById("logoutBtn").onclick = async()=>{
+
+await signOut(auth);
+
+window.location.href="student-login.html";
+
+};
+
+</script>
+
+</body>
+</html>
