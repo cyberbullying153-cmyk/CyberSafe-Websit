@@ -193,49 +193,7 @@ setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const form = document.getElementById("registerForm");
-let confirmationResult;
-let otpVerified = false;
 
-window.recaptchaVerifier = new RecaptchaVerifier(
-auth,
-"recaptcha-container",
-{
-size: "normal"
-}
-);
-    document.getElementById("sendOtpBtn").onclick = async () => {
-
-try{
-
-    
-alert("OTP Sent Successfully");
-
-}catch(error){
-
-alert(error.message);
-
-}
-
-};
-    document.getElementById("verifyOtpBtn").onclick = async () => {
-
-try{
-
-const code = document.getElementById("otp").value;
-
-await confirmationResult.confirm(code);
-
-otpVerified = true;
-
-alert("✅ Mobile Number Verified");
-
-}catch(error){
-
-alert("Invalid OTP");
-
-}
-
-};
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
@@ -256,13 +214,7 @@ form.addEventListener("submit", async (e) => {
         return;
 
     }
-if (!otpVerified) {
 
-    alert("Please verify your mobile number first.");
-
-    return;
-
-}
     try{
 
         const userCredential = await createUserWithEmailAndPassword(
@@ -272,7 +224,7 @@ if (!otpVerified) {
         );
 
         const user = userCredential.user;
-
+        await sendEmailVerification(user);
         await setDoc(doc(db,"students",user.uid),{
 
             uid:user.uid,
@@ -297,9 +249,9 @@ if (!otpVerified) {
 
         });
 
-        alert("Registration Successful!");
+        alert("Registration Successful!\n\nA verification email has been sent.\nPlease verify your email before logging in.");
 
-        window.location.href="student-login.html";
+window.location.href = "student-login.html";
 
     }
 
