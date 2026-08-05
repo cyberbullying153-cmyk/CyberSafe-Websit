@@ -1,1 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile | CyberSafe</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:#eef4ff;
+}
+
+header{
+background:#111827;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:28px;
+font-weight:700;
+}
+
+.logo img{
+width:50px;
+}
+
+.logout-btn{
+background:#ef4444;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+.logout-btn:hover{
+background:#dc2626;
+}
+
+.container{
+max-width:850px;
+margin:40px auto;
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.profile-top{
+text-align:center;
+margin-bottom:30px;
+}
+
+.profile-pic{
+width:120px;
+height:120px;
+border-radius:50%;
+background:#2563eb;
+color:white;
+font-size:50px;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:auto;
+margin-bottom:15px;
+}
+
+.profile-top h2{
+margin:10px 0;
+color:#1e3a8a;
+}
+
+.profile-top p{
+color:#666;
+}
+
+.profile-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+margin-top:30px;
+}
+
+.info-box{
+background:#f8fafc;
+padding:18px;
+border-radius:12px;
+border-left:5px solid #2563eb;
+}
+
+.info-box h4{
+margin:0;
+color:#2563eb;
+font-size:15px;
+}
+
+.info-box p{
+margin-top:8px;
+font-size:18px;
+font-weight:600;
+color:#222;
+}
+
+.status{
+display:inline-block;
+padding:8px 15px;
+background:#22c55e;
+color:white;
+border-radius:20px;
+font-weight:600;
+}
+
+footer{
+margin-top:50px;
+padding:20px;
+text-align:center;
+background:#111827;
+color:white;
+}
+
+@media(max-width:768px){
+
+.profile-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<img src="images/logo.png">
+
+<span>CYBERSAFE</span>
+
+</div>
+
+<button id="logoutBtn" class="logout-btn">
+
+Logout
+
+</button>
+
+</header>
+
+<div class="container">
+
+<div class="profile-top">
+
+<div class="profile-pic">
+
+👤
+
+</div>
+
+<h2 id="studentName">
+
+Loading...
+
+</h2>
+
+<p>
+
+Student Profile
+
+</p>
+
+</div>
+
+<div class="profile-grid">
+
+<div class="info-box">
+<h4>Admission Number</h4>
+<p id="admissionNo"></p>
+</div>
+
+<div class="info-box">
+<h4>Class</h4>
+<p id="studentClass"></p>
+</div>
+
+<div class="info-box">
+<h4>Section</h4>
+<p id="studentSection"></p>
+</div>
+
+<div class="info-box">
+<h4>Mobile Number</h4>
+<p id="studentMobile"></p>
+</div>
+
+<div class="info-box">
+<h4>Email Address</h4>
+<p id="studentEmail"></p>
+</div>
+
+<div class="info-box">
+<h4>Account Status</h4>
+<p>
+<span class="status" id="studentStatus">
+Active
+</span>
+</p>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 CyberSafe Student Security Portal
+
+</footer>
+
+<script type="module">
+
+import { auth, db } from "./js/firebase.js";
+
+import {
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+
+window.location.href="student-login.html";
+
+return;
+
+}
+
+const snap = await getDoc(doc(db,"students",user.uid));
+
+if(snap.exists()){
+
+const data = snap.data();
+
+document.getElementById("studentName").innerHTML = data.name || "-";
+
+document.getElementById("admissionNo").innerHTML = data.admissionNo || "-";
+
+document.getElementById("studentClass").innerHTML = data.class || "-";
+
+document.getElementById("studentSection").innerHTML = data.section || "-";
+
+document.getElementById("studentMobile").innerHTML = data.mobile || "-";
+
+document.getElementById("studentEmail").innerHTML = data.email || "-";
+
+document.getElementById("studentStatus").innerHTML = data.status || "Active";
+
+}
+
+});
+
+document.getElementById("logoutBtn").onclick = async()=>{
+
+await signOut(auth);
+
+window.location.href="student-login.html";
+
+};
+
+</script>
+
+</body>
+
+</html>
