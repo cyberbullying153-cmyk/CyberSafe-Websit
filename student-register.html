@@ -277,7 +277,13 @@ form.addEventListener("submit", async (e) => {
         return;
 
     }
+if (!otpVerified) {
 
+    alert("Please verify your mobile number first.");
+
+    return;
+
+}
     try{
 
         const userCredential = await createUserWithEmailAndPassword(
