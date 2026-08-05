@@ -261,10 +261,11 @@ window.location.href = "student-login.html";
 
 catch(error){
 
-    alert(error.message);
+    console.log(error);
+
+    alert(error.code + "\n" + error.message);
 
 }
-
 });
         const user = userCredential.user;
         await sendEmailVerification(user);
