@@ -187,7 +187,6 @@ Submit Report
 
 import { db, auth } from "./js/firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { doc, getDoc, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   import {
 collection,
@@ -196,6 +195,7 @@ doc,
 getDoc,
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  
   let currentUser = null;
 let currentStudent = null;
 
