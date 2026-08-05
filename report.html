@@ -272,16 +272,11 @@ description: document.getElementById("description").value,
 
 status: "Pending",
 
-const classKey = currentStudent.class + "-" + currentStudent.section;
+assignedTeacher: teacherData.teacherName || "",
 
-const teacherSnap = await getDoc(doc(db, "classTeachers", classKey));
+teacherEmail: teacherData.teacherEmail || "",
 
-let teacherData = {};
-
-if (teacherSnap.exists()) {
-    teacherData = teacherSnap.data();
-}
-
+teacherUID: teacherData.teacherUID || "",
 createdAt: serverTimestamp()
 
 });
