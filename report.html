@@ -196,6 +196,45 @@ doc,
 getDoc,
 serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  let currentUser = null;
+let currentStudent = null;
+
+onAuthStateChanged(auth, async (user) => {
+
+    if (!user) {
+
+        alert("Please login first.");
+
+        window.location.href = "student-login.html";
+
+        return;
+
+    }
+
+    currentUser = user;
+
+    const studentRef = doc(db, "students", user.uid);
+    const studentSnap = await getDoc(studentRef);
+
+    if (!studentSnap.exists()) {
+
+        alert("Student record not found.");
+
+        return;
+
+    }
+
+    currentStudent = studentSnap.data();
+
+    document.getElementById("name").value = currentStudent.name;
+    document.getElementById("class").value = currentStudent.class;
+    document.getElementById("section").value = currentStudent.section;
+
+    document.getElementById("name").readOnly = true;
+    document.getElementById("class").readOnly = true;
+    document.getElementById("section").readOnly = true;
+
+});
 document
 .getElementById("reportForm")
 .addEventListener("submit", async function(e){
