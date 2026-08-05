@@ -248,14 +248,21 @@ e.preventDefault();
 try{
 
 
-await addDoc(collection(db,"reports"),{
+await addDoc(collection(db, "reports"), {
 
+studentUID: currentUser.uid,
 
-name: document.getElementById("name").value,
+studentName: currentStudent.name,
 
-class: document.getElementById("class").value,
+admissionNo: currentStudent.admissionNo,
 
-section: document.getElementById("section").value,
+class: currentStudent.class,
+
+section: currentStudent.section,
+
+mobile: currentStudent.mobile,
+
+email: currentStudent.email,
 
 platform: document.getElementById("platform").value,
 
@@ -263,10 +270,11 @@ date: document.getElementById("date").value,
 
 description: document.getElementById("description").value,
 
-status:"Pending",
+status: "Pending",
 
-createdAt:serverTimestamp()
+assignedTeacher: "",
 
+createdAt: serverTimestamp()
 
 });
 
