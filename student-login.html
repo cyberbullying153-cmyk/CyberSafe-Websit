@@ -168,37 +168,50 @@ const password = document.getElementById("password").value;
 try{
 
 const userCredential = await signInWithEmailAndPassword(
-auth,
-email,
-password
+    auth,
+    email,
+    password
 );
 
 const user = userCredential.user;
 
-if(!user.emailVerified){
+// Check if email is verified
+if (!user.emailVerified) {
 
-await sendEmailVerification(user);
+    await sendEmailVerification(user);
 
-alert("❌ Your email is not verified.\n\nA new verification email has been sent.\nPlease verify your email and then login again.");
+    alert(
+        "Your email is not verified.\n\n" +
+        "A new verification email has been sent to your email address.\n" +
+        "Please verify your email first."
+    );
 
-await signOut(auth);
+    await signOut(auth);
 
-return;
-
+    return;
 }
 
+// Login successful
 alert("✅ Login Successful!");
 
-window.location.href="student-dashboard.html";
+window.location.href = "student-dashboard.html";
 
 }
-
 catch(error){
-    console.log(error);
-    console.log(error.code);
-    console.log(error.message);
 
-    alert(error.code);
+    if(error.code === "auth/invalid-credential"){
+        alert("Invalid email or password.");
+    }
+    else if(error.code === "auth/user-not-found"){
+        alert("No account found with this email.");
+    }
+    else if(error.code === "auth/wrong-password"){
+        alert("Incorrect password.");
+    }
+    else{
+        alert(error.message);
+    }
+
 }
 });
 
