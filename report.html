@@ -247,7 +247,15 @@ e.preventDefault();
 
 try{
 
+const classKey = currentStudent.class + "-" + currentStudent.section;
 
+const teacherSnap = await getDoc(doc(db, "classTeachers", classKey));
+
+let teacherData = {};
+
+if (teacherSnap.exists()) {
+    teacherData = teacherSnap.data();
+}
 await addDoc(collection(db, "reports"), {
 
 studentUID: currentUser.uid,
