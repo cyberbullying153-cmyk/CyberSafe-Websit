@@ -1,1 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Reports | CyberSafe</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:#eef4ff;
+}
+
+header{
+background:#111827;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:28px;
+font-weight:700;
+}
+
+.logo img{
+width:48px;
+}
+
+.logout-btn{
+background:#ef4444;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.container{
+max-width:1200px;
+margin:40px auto;
+padding:20px;
+}
+
+h1{
+color:#1e3a8a;
+margin-bottom:25px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+th{
+background:#1e3a8a;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.status{
+padding:6px 12px;
+border-radius:20px;
+color:white;
+font-size:14px;
+font-weight:600;
+}
+
+.pending{
+background:#f59e0b;
+}
+
+.review{
+background:#3b82f6;
+}
+
+.resolved{
+background:#22c55e;
+}
+
+footer{
+margin-top:40px;
+padding:20px;
+background:#111827;
+color:white;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<img src="images/logo.png">
+<span>CYBERSAFE</span>
+</div>
+
+<button id="logoutBtn" class="logout-btn">
+Logout
+</button>
+
+</header>
+
+<div class="container">
+
+<h1>📄 My Reports</h1>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Platform</th>
+
+<th>Status</th>
+
+<th>Assigned Teacher</th>
+
+<th>Description</th>
+
+</tr>
+
+</thead>
+
+<tbody id="reportBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<footer>
+
+© 2026 CyberSafe
+
+</footer>
