@@ -245,15 +245,16 @@ form.addEventListener("submit", async (e) => {
 
         window.location.href = "student-login.html";
 
-    } catch (error) {
+    catch (error) {
 
-        console.log(error);
+    console.error("Registration Error:", error);
 
-        alert(error.code + "\n" + error.message);
+    alert(
+        "Code: " + error.code +
+        "\n\nMessage: " + error.message
+    );
 
-    }
-
-});
+}
 </script>
 
 </body>
