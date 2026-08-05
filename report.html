@@ -272,7 +272,15 @@ description: document.getElementById("description").value,
 
 status: "Pending",
 
-assignedTeacher: "",
+const classKey = currentStudent.class + "-" + currentStudent.section;
+
+const teacherSnap = await getDoc(doc(db, "classTeachers", classKey));
+
+let teacherData = {};
+
+if (teacherSnap.exists()) {
+    teacherData = teacherSnap.data();
+}
 
 createdAt: serverTimestamp()
 
