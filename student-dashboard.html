@@ -8,107 +8,527 @@
 
 <title>Student Dashboard | CyberSafe</title>
 
-<link rel="stylesheet" href="css/style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
 
-body{
-margin:0;
-font-family:Poppins,sans-serif;
-background:#eef4ff;
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-header{
-background:#111827;
-padding:18px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-color:white;
+body{
+    font-family:"Poppins",sans-serif;
+    background:#f4f7fc;
+    color:#172554;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    height:82px;
+    background:#0f172a;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    box-shadow:0 4px 20px rgba(15,23,42,.18);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:14px;
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:12px;
-font-size:30px;
-font-weight:700;
+    width:52px;
+    height:52px;
+    object-fit:contain;
+    border-radius:10px;
 }
 
-.logo img{
-width:50px;
+.logo-text{
+    color:white;
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.logo-text span{
+    color:#38bdf8;
 }
 
 .logout-btn{
-background:#ef4444;
-color:white;
-padding:10px 22px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
+    border:none;
+    background:#ef4444;
+    color:white;
+    padding:12px 25px;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
 }
 
 .logout-btn:hover{
-background:#dc2626;
+    background:#dc2626;
+    transform:translateY(-2px);
 }
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-text-align:center;
-padding:40px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#0f1f4b,#1e3a8a,#2563eb);
+    color:white;
+    padding:70px 5% 75px;
 }
 
-.hero h1{
-color:#1e3a8a;
-margin-bottom:10px;
+.hero::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    background:rgba(56,189,248,.12);
+    border-radius:50%;
+    right:-120px;
+    top:-180px;
 }
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    background:rgba(255,255,255,.06);
+    border-radius:50%;
+    left:-100px;
+    bottom:-160px;
+}
+
+.hero-content{
+    max-width:1200px;
+    margin:auto;
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    align-items:center;
+    gap:50px;
+}
+
+.hero-text h1{
+    font-size:clamp(34px,5vw,58px);
+    line-height:1.15;
+    margin-bottom:18px;
+    font-weight:800;
+}
+
+.hero-text h1 span{
+    color:#7dd3fc;
+}
+
+.hero-text p{
+    font-size:18px;
+    line-height:1.8;
+    max-width:650px;
+    color:#dbeafe;
+}
+
+.student-badge{
+    margin-top:25px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+    padding:10px 18px;
+    border-radius:50px;
+    backdrop-filter:blur(10px);
+}
+
+.student-badge strong{
+    color:white;
+}
+
+.hero-card{
+    background:rgba(255,255,255,.11);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+    backdrop-filter:blur(15px);
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.shield{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.hero-card h2{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.hero-card p{
+    color:#dbeafe;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    max-width:1200px;
+    margin:auto;
+    padding:55px 5%;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-title h2{
+    font-size:32px;
+    color:#172554;
+    margin-bottom:8px;
+}
+
+.section-title p{
+    color:#64748b;
+}
+
+/* =========================
+   ACTION CARDS
+========================= */
 
 .cards{
-max-width:1100px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-padding:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
 }
 
 .card{
-background:white;
-padding:30px;
-border-radius:18px;
-text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,.1);
-transition:.3s;
-text-decoration:none;
-color:#222;
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    border:1px solid #e2e8f0;
+    box-shadow:0 8px 25px rgba(15,23,42,.06);
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:#2563eb;
 }
 
 .card:hover{
-transform:translateY(-8px);
+    transform:translateY(-7px);
+    box-shadow:0 18px 40px rgba(37,99,235,.13);
 }
 
-.card .icon{
-font-size:55px;
-margin-bottom:15px;
+.card-icon{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    background:#eff6ff;
+    margin-bottom:20px;
 }
 
-.card h2{
-color:#2563eb;
-margin-bottom:10px;
+.card h3{
+    font-size:20px;
+    margin-bottom:10px;
+    color:#172554;
 }
 
 .card p{
-color:#666;
+    color:#64748b;
+    line-height:1.7;
+    font-size:14px;
+    margin-bottom:20px;
 }
 
-footer{
-margin-top:50px;
-padding:20px;
-text-align:center;
-background:#111827;
-color:white;
+.card-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#2563eb;
+    color:white;
+    padding:10px 18px;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.card-btn:hover{
+    background:#1d4ed8;
+}
+
+/* =========================
+   SAFETY SECTION
+========================= */
+
+.safety-section{
+    margin-top:60px;
+}
+
+.safety-box{
+    background:linear-gradient(135deg,#ecfeff,#eff6ff);
+    border:1px solid #bae6fd;
+    border-radius:25px;
+    padding:35px;
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:35px;
+    align-items:center;
+}
+
+.safety-heading{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.safety-heading .icon{
+    font-size:45px;
+}
+
+.safety-heading h2{
+    font-size:27px;
+    color:#0f172a;
+}
+
+.safety-box p{
+    color:#475569;
+    line-height:1.7;
+    margin-top:12px;
+}
+
+.tips{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+}
+
+.tip{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    border:1px solid #e0f2fe;
+    color:#334155;
+    font-size:14px;
+}
+
+.tip span{
+    font-size:18px;
+}
+
+/* =========================
+   EMERGENCY BANNER
+========================= */
+
+.help-banner{
+    margin-top:45px;
+    background:linear-gradient(135deg,#172554,#1e40af);
+    color:white;
+    border-radius:25px;
+    padding:35px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
+
+.help-banner h2{
+    font-size:26px;
+    margin-bottom:8px;
+}
+
+.help-banner p{
+    color:#dbeafe;
+    line-height:1.6;
+}
+
+.help-btn{
+    flex-shrink:0;
+    background:white;
+    color:#1e3a8a;
+    text-decoration:none;
+    padding:13px 25px;
+    border-radius:10px;
+    font-weight:700;
+    transition:.25s;
+}
+
+.help-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    margin-top:30px;
+    background:#0f172a;
+    color:#94a3b8;
+    text-align:center;
+    padding:25px;
+    font-size:13px;
+}
+
+.footer strong{
+    color:#38bdf8;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+    position:fixed;
+    inset:0;
+    background:#f4f7fc;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+
+.loading-box{
+    text-align:center;
+}
+
+.spinner{
+    width:45px;
+    height:45px;
+    border:4px solid #dbeafe;
+    border-top-color:#2563eb;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:auto auto 15px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .hero-content{
+        grid-template-columns:1fr;
+    }
+
+    .hero-card{
+        max-width:450px;
+        margin:auto;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .safety-box{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header{
+        padding:0 20px;
+    }
+
+    .logo-text{
+        font-size:20px;
+    }
+
+    .logo{
+        width:45px;
+        height:45px;
+    }
+
+    .logout-btn{
+        padding:10px 15px;
+    }
+
+    .hero{
+        padding:50px 20px;
+    }
+
+    .hero-text h1{
+        font-size:38px;
+    }
+
+    .hero-text p{
+        font-size:15px;
+    }
+
+    .main{
+        padding:40px 20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .tips{
+        grid-template-columns:1fr;
+    }
+
+    .help-banner{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:30px;
+    }
+
 }
 
 </style>
@@ -117,185 +537,574 @@ color:white;
 
 <body>
 
-<header>
+<!-- LOADING SCREEN -->
 
-<div class="logo">
+<div class="loading" id="loading">
 
-<img src="images/logo.png">
+    <div class="loading-box">
 
-<span>CYBERSAFE</span>
+        <div class="spinner"></div>
+
+        <p>Loading your dashboard...</p>
+
+    </div>
 
 </div>
 
-<button class="logout-btn" id="logoutBtn">
 
-Logout
+<!-- HEADER -->
 
-</button>
+<header class="header">
+
+    <div class="logo-area">
+
+        <img
+        src="images/logo.png"
+        class="logo"
+        alt="CyberSafe Logo">
+
+        <div class="logo-text">
+            CYBER<span>SAFE</span>
+        </div>
+
+    </div>
+
+    <button class="logout-btn" id="logoutBtn">
+        Logout
+    </button>
 
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero">
 
-<h1 id="welcome">
+    <div class="hero-content">
 
-Welcome Student
+        <div class="hero-text">
 
-</h1>
+            <h1>
+                Welcome,
+                <span id="studentName">Student</span> 👋
+            </h1>
 
-<p>
+            <p>
+                Your safe space for learning, reporting,
+                and staying protected online.
+                Together, we can make the internet safer
+                and kinder for everyone.
+            </p>
 
-Stay safe online and report cyberbullying securely.
+            <div class="student-badge">
 
-</p>
+                🎓
+
+                <span>
+                    Class:
+                    <strong id="studentClass">--</strong>
+                </span>
+
+                <span>•</span>
+
+                <span>
+                    Section:
+                    <strong id="studentSection">--</strong>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="shield">
+                🛡️
+            </div>
+
+            <h2>Stay Safe Online</h2>
+
+            <p>
+                Think before you click.
+                Respect before you type.
+                Speak up when something feels wrong.
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
-<div class="cards">
 
-<a href="report.html" class="card">
+<!-- MAIN CONTENT -->
 
-<div class="icon">🚨</div>
+<main class="main">
 
-<h2>Report Incident</h2>
+    <div class="section-title">
 
-<p>
+        <h2>What would you like to do?</h2>
 
-Submit a cyberbullying complaint securely.
+        <p>
+            Quick access to the most important CyberSafe resources.
+        </p>
 
-</p>
+    </div>
 
-</a>
 
-<a href="my-reports.html" class="card">
+    <!-- ACTION CARDS -->
 
-<div class="icon">📄</div>
+    <div class="cards">
 
-<h2>My Reports</h2>
 
-<p>
+        <!-- REPORT -->
 
-View all reports submitted by you.
+        <div class="card">
 
-</p>
+            <div class="card-icon">
+                🚨
+            </div>
 
-</a>
+            <h3>Report Cyberbullying</h3>
 
-<a href="learn.html" class="card">
+            <p>
+                Something online is making you uncomfortable?
+                Report it safely and securely.
+            </p>
 
-<div class="icon">📚</div>
+            <a href="report.html" class="card-btn">
+                Report Now →
+            </a>
 
-<h2>Learn</h2>
+        </div>
 
-<p>
 
-Learn about cyber safety and cyberbullying.
+        <!-- SAFETY -->
 
-</p>
+        <div class="card">
 
-</a>
+            <div class="card-icon">
+                🔐
+            </div>
 
-<a href="resources.html" class="card">
+            <h3>Safety Tips</h3>
 
-<div class="icon">🛡️</div>
+            <p>
+                Learn simple ways to protect your account,
+                information, and digital identity.
+            </p>
 
-<h2>Resources</h2>
+            <a href="safety.html" class="card-btn">
+                Stay Safe →
+            </a>
 
-<p>
+        </div>
 
-Access safety guides and helpful resources.
 
-</p>
+        <!-- LEARN -->
 
-</a>
+        <div class="card">
 
-<a href="emergency.html" class="card">
+            <div class="card-icon">
+                📚
+            </div>
 
-<div class="icon">📞</div>
+            <h3>Learn About Cyberbullying</h3>
 
-<h2>Emergency Help</h2>
+            <p>
+                Understand cyberbullying, warning signs,
+                effects, and how to respond safely.
+            </p>
 
-<p>
+            <a href="learn.html" class="card-btn">
+                Learn More →
+            </a>
 
-Find emergency contacts and support.
+        </div>
 
-</p>
 
-</a>
+        <!-- RESOURCES -->
 
-<a href="profile.html" class="card">
+        <div class="card">
 
-<div class="icon">👤</div>
+            <div class="card-icon">
+                🎯
+            </div>
 
-<h2>My Profile</h2>
+            <h3>Student Resources</h3>
 
-<p>
+            <p>
+                Explore useful resources, FAQs,
+                videos, quizzes, and cyber safety material.
+            </p>
 
-View your personal details.
+            <a href="resources.html" class="card-btn">
+                Explore →
+            </a>
 
-</p>
+        </div>
 
-</a>
 
-</div>
+        <!-- HELP -->
 
-<footer>
+        <div class="card">
 
-© 2026 CyberSafe | Student Security Portal
+            <div class="card-icon">
+                🆘
+            </div>
+
+            <h3>Get Help</h3>
+
+            <p>
+                Find trusted contacts and important
+                emergency information when you need help.
+            </p>
+
+            <a href="emergency.html" class="card-btn">
+                Get Help →
+            </a>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                👤
+            </div>
+
+            <h3>My Account</h3>
+
+            <p>
+                Your student account is securely connected
+                to CyberSafe.
+            </p>
+
+            <a href="#" class="card-btn" id="accountBtn">
+                Account Info →
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- SAFETY -->
+
+    <section class="safety-section">
+
+        <div class="safety-box">
+
+            <div>
+
+                <div class="safety-heading">
+
+                    <div class="icon">
+                        💡
+                    </div>
+
+                    <h2>Quick Safety Check</h2>
+
+                </div>
+
+                <p>
+                    Small actions can make a big difference.
+                    Keep these simple rules in mind whenever
+                    you are online.
+                </p>
+
+            </div>
+
+
+            <div class="tips">
+
+                <div class="tip">
+                    <span>🔑</span>
+                    <div>
+                        Use strong and unique passwords.
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <span>🚫</span>
+                    <div>
+                        Never share your OTP or password.
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <span>📸</span>
+                    <div>
+                        Save screenshots of harmful messages.
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <span>🧑‍🏫</span>
+                    <div>
+                        Tell a trusted adult if you need help.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HELP BANNER -->
+
+    <div class="help-banner">
+
+        <div>
+
+            <h2>Need help right now?</h2>
+
+            <p>
+                You don't have to deal with cyberbullying alone.
+                Reach out to someone you trust.
+            </p>
+
+        </div>
+
+        <a href="emergency.html" class="help-btn">
+            Get Help →
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <p>
+        🛡️ <strong>CyberSafe</strong> —
+        Stay Safe Online. Respect Before You Type.
+    </p>
 
 </footer>
+
+
+<!-- FIREBASE -->
 
 <script type="module">
 
 import { auth, db } from "./js/firebase.js";
 
 import {
-
-onAuthStateChanged,
-
-signOut
-
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-
-doc,
-
-getDoc
-
+    doc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-onAuthStateChanged(auth, async(user)=>{
 
-if(!user){
+const loading = document.getElementById("loading");
 
-window.location.href="student-login.html";
+const studentName =
+    document.getElementById("studentName");
 
-return;
+const studentClass =
+    document.getElementById("studentClass");
 
-}
+const studentSection =
+    document.getElementById("studentSection");
 
-const snap=await getDoc(doc(db,"students",user.uid));
+const logoutBtn =
+    document.getElementById("logoutBtn");
 
-if(snap.exists()){
 
-const data=snap.data();
+/* =========================
+   CHECK LOGIN
+========================= */
 
-document.getElementById("welcome").innerHTML=
+onAuthStateChanged(auth, async (user) => {
 
-"Welcome, "+data.name+" ("+data.class+"-"+data.section+")";
+    if(!user){
 
-}
+        window.location.href = "student-login.html";
+
+        return;
+
+    }
+
+
+    /* =========================
+       CHECK EMAIL VERIFICATION
+    ========================= */
+
+    if(!user.emailVerified){
+
+        await signOut(auth);
+
+        alert(
+            "Please verify your email before accessing the dashboard."
+        );
+
+        window.location.href = "student-login.html";
+
+        return;
+
+    }
+
+
+    /* =========================
+       GET STUDENT DATA
+    ========================= */
+
+    try{
+
+        const studentRef =
+            doc(db, "students", user.uid);
+
+        const studentSnap =
+            await getDoc(studentRef);
+
+
+        if(studentSnap.exists()){
+
+            const data =
+                studentSnap.data();
+
+
+            studentName.textContent =
+                data.name || "Student";
+
+
+            studentClass.textContent =
+                data.class || "--";
+
+
+            studentSection.textContent =
+                data.section || "--";
+
+        }
+        else{
+
+            studentName.textContent =
+                user.email.split("@")[0];
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Error loading student data:",
+            error
+        );
+
+        studentName.textContent =
+            user.email.split("@")[0];
+
+    }
+
+
+    /* =========================
+       SHOW DASHBOARD
+    ========================= */
+
+    loading.style.display = "none";
 
 });
 
-document.getElementById("logoutBtn").onclick=async()=>{
 
-await signOut(auth);
+/* =========================
+   LOGOUT
+========================= */
 
-window.location.href="student-login.html";
+logoutBtn.addEventListener("click", async () => {
 
-};
+    try{
+
+        await signOut(auth);
+
+        window.location.href =
+            "student-login.html";
+
+    }
+    catch(error){
+
+        console.error(
+            "Logout error:",
+            error
+        );
+
+        alert(
+            "Unable to logout. Please try again."
+        );
+
+    }
+
+});
+
+
+/* =========================
+   ACCOUNT BUTTON
+========================= */
+
+document
+.getElementById("accountBtn")
+.addEventListener("click", async (e) => {
+
+    e.preventDefault();
+
+    const user = auth.currentUser;
+
+    if(!user) return;
+
+    try{
+
+        const studentRef =
+            doc(db, "students", user.uid);
+
+        const studentSnap =
+            await getDoc(studentRef);
+
+        if(studentSnap.exists()){
+
+            const data =
+                studentSnap.data();
+
+            alert(
+                "👤 MY ACCOUNT\n\n" +
+
+                "Name: " +
+                (data.name || "--") +
+
+                "\nAdmission No: " +
+                (data.admissionNo || "--") +
+
+                "\nClass: " +
+                (data.class || "--") +
+
+                "\nSection: " +
+                (data.section || "--") +
+
+                "\nEmail: " +
+                (data.email || user.email)
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
+
+});
 
 </script>
 
