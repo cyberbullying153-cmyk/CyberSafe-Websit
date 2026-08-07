@@ -245,9 +245,42 @@ if (!currentUser || !currentStudent) {
 
 try{
 
-const classKey = currentStudent.class + "-" + currentStudent.section;
+let classKey;
 
-const teacherSnap = await getDoc(doc(db, "classTeachers", classKey));
+if (
+    currentStudent.class === "11" ||
+    currentStudent.class === "12"
+) {
+
+    if (!currentStudent.stream) {
+
+        alert(
+            "Your stream is not set in your student profile. " +
+            "Please contact your administrator."
+        );
+
+        return;
+    }
+
+    classKey =
+        currentStudent.class +
+        "-" +
+        currentStudent.stream.toLowerCase();
+
+} else {
+
+    classKey =
+        currentStudent.class +
+        "-" +
+        currentStudent.section;
+
+}
+
+console.log("Teacher assignment key:", classKey);
+
+const teacherSnap = await getDoc(
+    doc(db, "classTeachers", classKey)
+);
 
 let teacherData = {};
 
