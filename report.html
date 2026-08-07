@@ -398,45 +398,51 @@ document
         // Classes 11 & 12
         // use stream
 
-        if (
-            currentStudent.class === "11" ||
-            currentStudent.class === "12"
-        ) {
+       if (
+    currentStudent.class === "11" ||
+    currentStudent.class === "12"
+) {
 
+    if (!currentStudent.stream) {
 
-            if (!currentStudent.stream) {
+        alert(
+            "Your stream is missing from your student profile.\n\n" +
+            "Please contact your administrator."
+        );
 
-                alert(
-                    "Your stream is missing from your student profile.\n\n" +
-                    "Please contact your administrator."
-                );
+        return;
+    }
 
-                return;
+    const stream =
+        currentStudent.stream.trim().toLowerCase();
 
-            }
+    if (stream === "science") {
+        classKey = "Class" + currentStudent.class + "Science";
+    }
+    else if (stream === "commerce") {
+        classKey = "Class" + currentStudent.class + "Commerce";
+    }
+    else if (
+        stream === "humanities" ||
+        stream === "humanity"
+    ) {
+        classKey = "Class" + currentStudent.class + "Humanities";
+    }
+    else {
+        alert("Invalid stream in your student profile.");
+        return;
+    }
 
+}
 
-            classKey =
-                currentStudent.class +
-                "-" +
-                currentStudent.stream
-                .toLowerCase();
+// Classes 1–10
+else {
 
+    classKey = "Class" + currentStudent.class;
 
-        }
+}
 
-        // Classes 1–10
-        // use class only
-
-        else {
-
-            classKey =
-                "class" +
-                currentStudent.class;
-
-        }
-
-
+console.log("Teacher assignment document:", classKey);
         console.log(
             "Teacher assignment key:",
             classKey
