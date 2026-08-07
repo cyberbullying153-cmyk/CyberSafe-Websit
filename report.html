@@ -14,6 +14,102 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+<style>
+
+.report-page{
+    max-width:800px;
+    margin:50px auto;
+    padding:40px;
+    background:#ffffff;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.10);
+}
+
+.report-page h1{
+    text-align:center;
+    color:#1e3a8a;
+    margin-bottom:10px;
+}
+
+.report-page > p{
+    text-align:center;
+    color:#64748b;
+    margin-bottom:30px;
+}
+
+#reportForm label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:7px;
+    font-weight:600;
+    color:#334155;
+}
+
+#reportForm input,
+#reportForm select,
+#reportForm textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:13px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-family:Poppins,sans-serif;
+    font-size:15px;
+}
+
+#reportForm input:focus,
+#reportForm select:focus,
+#reportForm textarea:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.10);
+}
+
+#reportForm textarea{
+    resize:vertical;
+}
+
+.student-info{
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    padding:18px;
+    border-radius:14px;
+    margin-bottom:25px;
+}
+
+.student-info h3{
+    margin:0 0 8px;
+    color:#1e3a8a;
+}
+
+.student-info p{
+    margin:5px 0;
+    color:#475569;
+}
+
+.stream-box{
+    display:none;
+}
+
+.btn{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#1d4ed8;
+}
+
+</style>
+
 </head>
 
 
@@ -27,7 +123,6 @@
 <div class="logo">
 🛡 CyberSafe
 </div>
-
 
 <ul class="nav-links">
 
@@ -45,127 +140,103 @@
 
 </ul>
 
-
 </nav>
 
 </header>
 
 
-
-
-
 <section class="report-page">
-
 
 <h1>🚨 Report Cyberbullying</h1>
 
-
 <p>
-Your report can be submitted anonymously. All reports are kept confidential.
+Your report is confidential and will be shared only with authorized staff.
 </p>
 
 
+<div class="student-info">
+
+<h3>🎓 Student Information</h3>
+
+<p>
+<strong>Name:</strong>
+<span id="displayName">Loading...</span>
+</p>
+
+<p>
+<strong>Class:</strong>
+<span id="displayClass">Loading...</span>
+</p>
+
+<p id="streamDisplay" style="display:none;">
+<strong>Stream:</strong>
+<span id="displayStream"></span>
+</p>
+
+</div>
 
 
 <form id="reportForm">
 
 
-<label>Student Name</label>
-
-<input 
-type="text" 
-id="name"
-placeholder="Enter your name">
-
-
-
-
-
-<label>Class</label>
-
-<input 
-type="text"
-id="class"
-placeholder="Example: 11">
-
-
-
-
-
-<label>Section</label>
-
-<input 
-type="text"
-id="section"
-placeholder="Example: A">
-
-
-
-
-
 <label>Platform</label>
 
+<select id="platform" required>
 
-<select id="platform">
+<option value="">Select Platform</option>
 
-<option>Instagram</option>
+<option value="Instagram">Instagram</option>
 
-<option>WhatsApp</option>
+<option value="WhatsApp">WhatsApp</option>
 
-<option>Facebook</option>
+<option value="Facebook">Facebook</option>
 
-<option>Snapchat</option>
+<option value="Snapchat">Snapchat</option>
 
-<option>Discord</option>
+<option value="Discord">Discord</option>
 
-<option>Other</option>
+<option value="YouTube">YouTube</option>
+
+<option value="Other">Other</option>
 
 </select>
 
 
-
-
-
 <label>Date of Incident</label>
 
-<input 
+<input
 type="date"
-id="date">
-
-
-
+id="date"
+required>
 
 
 <label>Describe the Incident</label>
 
-
-<textarea 
+<textarea
 id="description"
 rows="7"
-placeholder="Describe what happened..."></textarea>
-
-
-
+placeholder="Describe what happened..."
+required></textarea>
 
 
 <label>Upload Screenshot</label>
 
-<input type="file" id="screenshot" accept="image/*">
+<input
+type="file"
+id="screenshot"
+accept="image/*">
 
 
 <button type="submit" class="btn">
-Submit Report
-</button>
 
+🚨 Submit Report
+
+</button>
 
 
 </form>
 
-
 </section>
-
-
-
 
 
 <footer>
@@ -177,24 +248,30 @@ Submit Report
 </footer>
 
 
-
-
-
 <script type="module">
 
 import { db, auth } from "./js/firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-  import {
-collection,
-addDoc,
-doc,
-getDoc,
-serverTimestamp
+import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    collection,
+    addDoc,
+    doc,
+    getDoc,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-  
-  let currentUser = null;
+
+
+let currentUser = null;
 let currentStudent = null;
+
+
+// ==========================================
+// LOAD STUDENT
+// ==========================================
 
 onAuthStateChanged(auth, async (user) => {
 
@@ -208,142 +285,287 @@ onAuthStateChanged(auth, async (user) => {
 
     }
 
-    currentUser = user;
 
-    const studentRef = doc(db, "students", user.uid);
-    const studentSnap = await getDoc(studentRef);
+    try {
 
-    if (!studentSnap.exists()) {
+        currentUser = user;
 
-        alert("Student record not found.");
 
-        return;
+        const studentRef =
+            doc(db, "students", user.uid);
+
+
+        const studentSnap =
+            await getDoc(studentRef);
+
+
+        if (!studentSnap.exists()) {
+
+            alert("Student record not found.");
+
+            return;
+
+        }
+
+
+        currentStudent =
+            studentSnap.data();
+
+
+        // ==============================
+        // DISPLAY NAME
+        // ==============================
+
+        document.getElementById("displayName").textContent =
+            currentStudent.name || "Student";
+
+
+        // ==============================
+        // DISPLAY CLASS
+        // ==============================
+
+        document.getElementById("displayClass").textContent =
+            currentStudent.class || "-";
+
+
+        // ==============================
+        // DISPLAY STREAM
+        // ==============================
+
+        if (
+            currentStudent.class === "11" ||
+            currentStudent.class === "12"
+        ) {
+
+            document.getElementById("streamDisplay").style.display =
+                "block";
+
+            document.getElementById("displayStream").textContent =
+                currentStudent.stream || "Not selected";
+
+        }
 
     }
 
-    currentStudent = studentSnap.data();
+    catch(error) {
 
-    document.getElementById("name").value = currentStudent.name;
-    document.getElementById("class").value = currentStudent.class;
-    document.getElementById("section").value = currentStudent.section;
-
-    document.getElementById("name").readOnly = true;
-    document.getElementById("class").readOnly = true;
-    document.getElementById("section").readOnly = true;
-
-});
-document
-.getElementById("reportForm")
-.addEventListener("submit", async function(e){
-
-
-e.preventDefault();
-if (!currentUser || !currentStudent) {
-    alert("Please wait while your account loads.");
-    return;
-}
-
-try{
-
-let classKey;
-
-if (
-    currentStudent.class === "11" ||
-    currentStudent.class === "12"
-) {
-
-    if (!currentStudent.stream) {
+        console.error(
+            "Student loading error:",
+            error
+        );
 
         alert(
-            "Your stream is not set in your student profile. " +
-            "Please contact your administrator."
+            "Unable to load student information."
+        );
+
+    }
+
+});
+
+
+// ==========================================
+// SUBMIT REPORT
+// ==========================================
+
+document
+.getElementById("reportForm")
+.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+
+    if (!currentUser || !currentStudent) {
+
+        alert(
+            "Please wait while your account loads."
         );
 
         return;
+
     }
 
-    classKey =
-        currentStudent.class +
-        "-" +
-        currentStudent.stream.toLowerCase();
 
-} else {
+    try {
 
-    classKey =
-        currentStudent.class +
-        "-" +
-        currentStudent.section;
 
-}
+        // ==================================
+        // CREATE TEACHER ASSIGNMENT KEY
+        // ==================================
 
-console.log("Teacher assignment key:", classKey);
+        let classKey;
 
-const teacherSnap = await getDoc(
-    doc(db, "classTeachers", classKey)
-);
 
-let teacherData = {};
+        // Classes 11 & 12
+        // use stream
 
-if (teacherSnap.exists()) {
-    teacherData = teacherSnap.data();
-}
-await addDoc(collection(db, "reports"), {
+        if (
+            currentStudent.class === "11" ||
+            currentStudent.class === "12"
+        ) {
 
-studentUID: currentUser.uid,
 
-studentName: currentStudent.name,
+            if (!currentStudent.stream) {
 
-admissionNo: currentStudent.admissionNo,
+                alert(
+                    "Your stream is missing from your student profile.\n\n" +
+                    "Please contact your administrator."
+                );
 
-class: currentStudent.class,
+                return;
 
-section: currentStudent.section,
+            }
 
-mobile: currentStudent.mobile,
 
-email: currentStudent.email,
+            classKey =
+                currentStudent.class +
+                "-" +
+                currentStudent.stream
+                .toLowerCase();
 
-platform: document.getElementById("platform").value,
 
-date: document.getElementById("date").value,
+        }
 
-description: document.getElementById("description").value,
+        // Classes 1–10
+        // use class only
 
-status: "Pending",
+        else {
 
-assignedTeacher: teacherData.teacherName || "",
+            classKey =
+                "class" +
+                currentStudent.class;
 
-teacherEmail: teacherData.teacherEmail || "",
+        }
 
-teacherUID: teacherData.teacherUID || "",
-createdAt: serverTimestamp()
+
+        console.log(
+            "Teacher assignment key:",
+            classKey
+        );
+
+
+        // ==================================
+        // FIND CLASS TEACHER
+        // ==================================
+
+        const teacherSnap =
+            await getDoc(
+                doc(
+                    db,
+                    "classTeachers",
+                    classKey
+                )
+            );
+
+
+        let teacherData = {};
+
+
+        if (teacherSnap.exists()) {
+
+            teacherData =
+                teacherSnap.data();
+
+        }
+
+
+        // ==================================
+        // SUBMIT REPORT
+        // ==================================
+
+        await addDoc(
+            collection(db, "reports"),
+            {
+
+                studentUID:
+                    currentUser.uid,
+
+                studentName:
+                    currentStudent.name || "",
+
+                admissionNo:
+                    currentStudent.admissionNo || "",
+
+                class:
+                    currentStudent.class || "",
+
+                stream:
+                    currentStudent.stream || "",
+
+                mobile:
+                    currentStudent.mobile || "",
+
+                email:
+                    currentStudent.email || "",
+
+                platform:
+                    document
+                    .getElementById("platform")
+                    .value,
+
+                date:
+                    document
+                    .getElementById("date")
+                    .value,
+
+                description:
+                    document
+                    .getElementById("description")
+                    .value.trim(),
+
+                status:
+                    "Pending",
+
+                assignedTeacher:
+                    teacherData.teacherName || "",
+
+                teacherEmail:
+                    teacherData.teacherEmail || "",
+
+                teacherUID:
+                    teacherData.teacherUID || "",
+
+                classKey:
+                    classKey,
+
+                createdAt:
+                    serverTimestamp()
+
+            }
+        );
+
+
+        alert(
+            "✅ Report submitted successfully!"
+        );
+
+
+        // Reset form
+
+        document
+        .getElementById("reportForm")
+        .reset();
+
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Report submission error:",
+            error
+        );
+
+
+        alert(
+            "❌ Error submitting report:\n\n" +
+            error.message
+        );
+
+    }
 
 });
-
-
-
-alert("✅ Report submitted successfully!");
-
-
-
-document.getElementById("reportForm").reset();
-
-
-
-}
-
-catch(error){
-
-alert("❌ Error submitting report: " + error.message);
-
-}
-
-
-});
-
 
 </script>
-
 
 
 </body>
