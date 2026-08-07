@@ -158,63 +158,69 @@ import {
   
 const form = document.getElementById("loginForm");
 
-form.addEventListener("submit", async (e)=>{
+form.addEventListener("submit", async (e) => {
 
-e.preventDefault();
+    e.preventDefault();
 
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-try{
+    try {
 
-const userCredential = await signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-);
+        const userCredential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
-const user = userCredential.user;
+        const user = userCredential.user;
 
-// Check if email is verified
-if (!user.emailVerified) {
+        // Check if email is verified
+        if (!user.emailVerified) {
 
-    await sendEmailVerification(user);
+            await sendEmailVerification(user);
 
-    alert(
-        "Your email is not verified.\n\n" +
-        "A new verification email has been sent to your email address.\n" +
-        "Please verify your email first."
-    );
+            alert(
+                "Your email is not verified.\n\n" +
+                "A new verification email has been sent to your email address.\n" +
+                "Please verify your email first."
+            );
 
-    await signOut(auth);
+            await signOut(auth);
 
-    return;
-}
+            return;
+        }
 
-// Login successful
-alert("✅ Login Successful!");
+        // Login successful
+        alert("✅ Login Successful!");
 
-window.location.href = "student-dashboard.html";
+        window.location.href = "student-dashboard.html";
 
-}
-catch(error){
+    } catch (error) {
 
-    if(error.code === "auth/invalid-credential"){
-        alert("Invalid email or password.");
+        console.error("Login Error:", error);
+
+        if (error.code === "auth/invalid-credential") {
+
+            alert("Invalid email or password.");
+
+        } else if (error.code === "auth/user-not-found") {
+
+            alert("No account found with this email.");
+
+        } else if (error.code === "auth/wrong-password") {
+
+            alert("Incorrect password.");
+
+        } else {
+
+            alert(error.message);
+
+        }
+
     }
-    else if(error.code === "auth/user-not-found"){
-        alert("No account found with this email.");
-    }
-    else if(error.code === "auth/wrong-password"){
-        alert("Incorrect password.");
-    }
-    else{
-        alert(error.message);
-    }
 
-}
 });
-
 </script>
 document.getElementById("forgotPassword").onclick = async () => {
 
