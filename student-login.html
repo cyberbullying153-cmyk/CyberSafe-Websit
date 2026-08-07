@@ -155,151 +155,218 @@ import {
     sendEmailVerification,
     sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  
+
+
 const form = document.getElementById("loginForm");
 
-const forgotPassword = document.getElementById("forgotPassword");
+const forgotPassword =
+    document.getElementById("forgotPassword");
+
+
+// ========================================
+// FORGOT PASSWORD
+// ========================================
 
 forgotPassword.addEventListener("click", async (e) => {
 
     e.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
+    const email =
+        document.getElementById("email").value.trim();
+
 
     if (!email) {
 
-        alert("Please enter your email address first.");
+        alert(
+            "Please enter your email address first."
+        );
 
         document.getElementById("email").focus();
 
         return;
     }
 
+
     try {
 
-        await sendPasswordResetEmail(auth, email);
+        await sendPasswordResetEmail(
+            auth,
+            email
+        );
 
         alert(
             "📧 Password reset email sent!\n\n" +
             "Please check your Inbox or Spam folder."
         );
 
-    } catch (error) {
+    }
 
-        console.error("Password Reset Error:", error);
+    catch (error) {
 
-        if (error.code === "auth/user-not-found") {
+        console.error(
+            "Password Reset Error:",
+            error
+        );
 
-            alert("❌ No account exists with this email address.");
 
-        } else if (error.code === "auth/invalid-email") {
+        if (
+            error.code ===
+            "auth/user-not-found"
+        ) {
 
-            alert("❌ Please enter a valid email address.");
+            alert(
+                "❌ No account exists with this email address."
+            );
 
-        } else {
+        }
+
+        else if (
+            error.code ===
+            "auth/invalid-email"
+        ) {
+
+            alert(
+                "❌ Please enter a valid email address."
+            );
+
+        }
+
+        else {
 
             alert(
                 "❌ Unable to send password reset email.\n\n" +
                 error.message
             );
+
         }
+
     }
 
 });
 
 
+// ========================================
+// STUDENT LOGIN
+// ========================================
+
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
-form.addEventListener("submit", async (e) => {
 
-    e.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
 
     try {
 
-        const userCredential = await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
+        const userCredential =
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
 
-        const user = userCredential.user;
 
-        // Check if email is verified
+        const user =
+            userCredential.user;
+
+
+        // ========================================
+        // CHECK EMAIL VERIFICATION
+        // ========================================
+
         if (!user.emailVerified) {
 
             await sendEmailVerification(user);
 
+
             alert(
-                "Your email is not verified.\n\n" +
-                "A new verification email has been sent to your email address.\n" +
+                "❌ Your email is not verified.\n\n" +
+                "A new verification email has been sent " +
+                "to your email address.\n\n" +
                 "Please verify your email first."
             );
 
+
             await signOut(auth);
+
 
             return;
         }
 
-        // Login successful
+
+        // ========================================
+        // LOGIN SUCCESS
+        // ========================================
+
         alert("✅ Login Successful!");
 
-        window.location.href = "student-dashboard.html";
 
-    } catch (error) {
+        window.location.href =
+            "student-dashboard.html";
 
-        console.error("Login Error:", error);
+    }
 
-        if (error.code === "auth/invalid-credential") {
 
-            alert("Invalid email or password.");
+    catch (error) {
 
-        } else if (error.code === "auth/user-not-found") {
+        console.error(
+            "Login Error:",
+            error
+        );
 
-            alert("No account found with this email.");
 
-        } else if (error.code === "auth/wrong-password") {
+        if (
+            error.code ===
+            "auth/invalid-credential"
+        ) {
 
-            alert("Incorrect password.");
+            alert(
+                "❌ Invalid email or password."
+            );
 
-        } else {
+        }
 
-            alert(error.message);
+        else if (
+            error.code ===
+            "auth/user-not-found"
+        ) {
+
+            alert(
+                "❌ No account found with this email."
+            );
+
+        }
+
+        else if (
+            error.code ===
+            "auth/wrong-password"
+        ) {
+
+            alert(
+                "❌ Incorrect password."
+            );
+
+        }
+
+        else {
+
+            alert(
+                "❌ " + error.message
+            );
 
         }
 
     }
 
 });
+
 </script>
-document.getElementById("forgotPassword").onclick = async () => {
 
-const email = document.getElementById("email").value;
-
-if(email === ""){
-
-alert("Please enter your email address.");
-
-return;
-
-}
-
-try{
-
-await sendPasswordResetEmail(auth,email);
-
-alert("Password reset link has been sent to your email.");
-
-}catch(error){
-
-alert(error.message);
-
-}
-
-};
 </body>
 
 </html>
