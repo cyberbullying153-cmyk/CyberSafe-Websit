@@ -148,20 +148,29 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         // 4. CHECK EMAIL
         // =====================================
 
-        if (
-            teacherData.email.toLowerCase() !==
-            user.email.toLowerCase()
-        ) {
+       // =====================================
+// CHECK TEACHER EMAIL SAFELY
+// =====================================
 
-            await signOut(auth);
+const teacherEmail =
+    (teacherData.email || "").trim().toLowerCase();
 
-            alert(
-                "❌ Access Denied.\n\n" +
-                "The teacher email does not match the Firebase account."
-            );
+const authEmail =
+    (user.email || "").trim().toLowerCase();
 
-            return;
-        }
+
+if (teacherEmail && teacherEmail !== authEmail) {
+
+    await signOut(auth);
+
+    alert(
+        "❌ Access Denied.\n\n" +
+        "The teacher email in Firestore does not match " +
+        "the Firebase Authentication email."
+    );
+
+    return;
+}
 
 
         // =====================================
