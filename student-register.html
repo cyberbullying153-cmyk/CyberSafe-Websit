@@ -179,6 +179,7 @@ Login Here
 </div>
 
 <script type="module">
+
 import { auth, db } from "./js/firebase.js";
 
 import {
@@ -192,69 +193,183 @@ import {
     setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
 const form = document.getElementById("registerForm");
+
 
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const admission = document.getElementById("admission").value.trim();
-    const studentClass = document.getElementById("studentClass").value;
-    const section = document.getElementById("section").value;
-    const mobile = document.getElementById("mobile").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const confirm = document.getElementById("confirmPassword").value;
 
+    const name =
+        document.getElementById("name").value.trim();
+
+    const admission =
+        document.getElementById("admission").value.trim();
+
+    const studentClass =
+        document.getElementById("studentClass").value;
+
+    const section =
+        document.getElementById("section").value;
+
+    const mobile =
+        document.getElementById("mobile").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirm =
+        document.getElementById("confirmPassword").value;
+
+
+    // Check password
     if (password !== confirm) {
-        alert("Passwords do not match.");
+
+        alert("❌ Passwords do not match.");
+
         return;
     }
 
+
+    // Check password length
+    if (password.length < 6) {
+
+        alert("❌ Password must contain at least 6 characters.");
+
+        return;
+    }
+
+
     try {
 
-        const userCredential = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
+        // Create Firebase Authentication account
+        const userCredential =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
 
         const user = userCredential.user;
 
+
+        // Send email verification
         await sendEmailVerification(user);
 
-        await setDoc(doc(db, "students", user.uid), {
-            uid: user.uid,
-            name,
-            admissionNo: admission,
-            class: studentClass,
-            section,
-            mobile,
-            email,
-            role: "student",
-            status: "Active",
-            createdAt: new Date()
-        });
 
-        alert(
-            "Registration Successful!\n\nA verification email has been sent.\nPlease verify your email before logging in."
+        // Save student information in Firestore
+        await setDoc(
+            doc(db, "students", user.uid),
+            {
+
+                uid: user.uid,
+
+                name: name,
+
+                admissionNo: admission,
+
+                class: studentClass,
+
+                section: section,
+
+                mobile: mobile,
+
+                email: email,
+
+                role: "student",
+
+                status: "Active",
+
+                createdAt: new Date()
+
+            }
         );
 
+
+        // Registration successful
+        alert(
+            "🎉 Registration Successful!\n\n" +
+            "A verification email has been sent to:\n" +
+            email +
+            "\n\n" +
+            "Please check your Inbox or Spam folder, " +
+            "verify your email, and then login."
+        );
+
+
+        // Sign out until email is verified
         await signOut(auth);
 
-        window.location.href = "student-login.html";
 
-    catch (error) {
+        // Go to student login
+        window.location.href =
+            "student-login.html";
 
-    console.error("Registration Error:", error);
 
-    alert(
-        "Code: " + error.code +
-        "\n\nMessage: " + error.message
-    );
+    } catch (error) {
 
-}
+        console.error(
+            "Registration Error:",
+            error
+        );
+
+
+        if (
+            error.code ===
+            "auth/email-already-in-use"
+        ) {
+
+            alert(
+                "❌ This email is already registered.\n\n" +
+                "Please use another email or use Forgot Password."
+            );
+
+        }
+
+        else if (
+            error.code ===
+            "auth/invalid-email"
+        ) {
+
+            alert(
+                "❌ Please enter a valid email address."
+            );
+
+        }
+
+        else if (
+            error.code ===
+            "auth/weak-password"
+        ) {
+
+            alert(
+                "❌ Password is too weak.\n\n" +
+                "Use at least 6 characters."
+            );
+
+        }
+
+        else {
+
+            alert(
+                "❌ Registration failed.\n\n" +
+                error.code +
+                "\n\n" +
+                error.message
+            );
+
+        }
+
+    }
+
+});
+
 </script>
 
 </body>
