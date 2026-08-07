@@ -2,531 +2,226 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Student Dashboard | CyberSafe</title>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* =========================
-   RESET
-========================= */
-
 *{
-    margin:0;
-    padding:0;
     box-sizing:border-box;
 }
 
 body{
-    font-family:"Poppins",sans-serif;
-    background:#f4f7fc;
+    margin:0;
+    font-family:Poppins,sans-serif;
+    background:#eef4ff;
     color:#172554;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
-.header{
-    height:82px;
+header{
+    height:80px;
     background:#0f172a;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 5%;
-    box-shadow:0 4px 20px rgba(15,23,42,.18);
-    position:sticky;
-    top:0;
-    z-index:100;
+    padding:0 40px;
+    color:white;
 }
 
-.logo-area{
+.logo{
     display:flex;
     align-items:center;
     gap:14px;
 }
 
-.logo{
-    width:52px;
-    height:52px;
+.logo img{
+    width:50px;
+    height:50px;
     object-fit:contain;
-    border-radius:10px;
 }
 
-.logo-text{
-    color:white;
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:.5px;
-}
-
-.logo-text span{
-    color:#38bdf8;
+.logo span{
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:1px;
 }
 
 .logout-btn{
-    border:none;
     background:#ef4444;
     color:white;
+    border:none;
     padding:12px 25px;
-    border-radius:10px;
-    font-family:inherit;
-    font-size:15px;
+    border-radius:9px;
+    font-size:16px;
     font-weight:600;
     cursor:pointer;
-    transition:.25s;
 }
 
 .logout-btn:hover{
     background:#dc2626;
-    transform:translateY(-2px);
 }
 
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
 .hero{
-    position:relative;
-    overflow:hidden;
-    background:linear-gradient(135deg,#0f1f4b,#1e3a8a,#2563eb);
+    background:linear-gradient(135deg,#172554,#2563eb);
     color:white;
-    padding:70px 5% 75px;
+    padding:55px 7%;
 }
 
-.hero::before{
-    content:"";
-    position:absolute;
-    width:420px;
-    height:420px;
-    background:rgba(56,189,248,.12);
-    border-radius:50%;
-    right:-120px;
-    top:-180px;
+.hero h1{
+    margin:0;
+    font-size:42px;
 }
 
-.hero::after{
-    content:"";
-    position:absolute;
-    width:280px;
-    height:280px;
-    background:rgba(255,255,255,.06);
-    border-radius:50%;
-    left:-100px;
-    bottom:-160px;
-}
-
-.hero-content{
-    max-width:1200px;
-    margin:auto;
-    position:relative;
-    z-index:2;
-    display:grid;
-    grid-template-columns:1.3fr .7fr;
-    align-items:center;
-    gap:50px;
-}
-
-.hero-text h1{
-    font-size:clamp(34px,5vw,58px);
-    line-height:1.15;
-    margin-bottom:18px;
-    font-weight:800;
-}
-
-.hero-text h1 span{
-    color:#7dd3fc;
-}
-
-.hero-text p{
+.hero p{
+    margin-top:10px;
     font-size:18px;
-    line-height:1.8;
-    max-width:650px;
-    color:#dbeafe;
+    opacity:.9;
 }
 
-.student-badge{
-    margin-top:25px;
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.2);
-    padding:10px 18px;
-    border-radius:50px;
-    backdrop-filter:blur(10px);
-}
+/* MAIN */
 
-.student-badge strong{
-    color:white;
-}
-
-.hero-card{
-    background:rgba(255,255,255,.11);
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:25px;
-    padding:35px;
-    text-align:center;
-    backdrop-filter:blur(15px);
-    box-shadow:0 20px 50px rgba(0,0,0,.15);
-}
-
-.shield{
-    font-size:70px;
-    margin-bottom:15px;
-}
-
-.hero-card h2{
-    font-size:24px;
-    margin-bottom:10px;
-}
-
-.hero-card p{
-    color:#dbeafe;
-    font-size:14px;
-    line-height:1.7;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main{
+.dashboard{
     max-width:1200px;
-    margin:auto;
-    padding:55px 5%;
+    margin:40px auto;
+    padding:0 20px;
 }
 
-/* =========================
-   SECTION TITLE
-========================= */
+/* PROFILE */
 
-.section-title{
-    text-align:center;
-    margin-bottom:35px;
+.profile-card{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    margin-bottom:30px;
 }
 
-.section-title h2{
-    font-size:32px;
-    color:#172554;
-    margin-bottom:8px;
+.profile-card h2{
+    margin-top:0;
+    color:#1e3a8a;
 }
 
-.section-title p{
-    color:#64748b;
-}
-
-/* =========================
-   ACTION CARDS
-========================= */
-
-.cards{
+.profile-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:24px;
+    gap:20px;
 }
 
-.card{
-    background:white;
-    border-radius:20px;
-    padding:30px;
-    border:1px solid #e2e8f0;
-    box-shadow:0 8px 25px rgba(15,23,42,.06);
-    transition:.3s;
-    position:relative;
-    overflow:hidden;
+.profile-item{
+    background:#f8fafc;
+    padding:18px;
+    border-radius:12px;
 }
 
-.card::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:4px;
-    background:#2563eb;
+.profile-item small{
+    display:block;
+    color:#64748b;
+    margin-bottom:5px;
 }
 
-.card:hover{
-    transform:translateY(-7px);
-    box-shadow:0 18px 40px rgba(37,99,235,.13);
-}
-
-.card-icon{
-    width:58px;
-    height:58px;
-    border-radius:16px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:29px;
-    background:#eff6ff;
-    margin-bottom:20px;
-}
-
-.card h3{
-    font-size:20px;
-    margin-bottom:10px;
+.profile-item strong{
+    font-size:16px;
     color:#172554;
 }
 
-.card p{
-    color:#64748b;
-    line-height:1.7;
-    font-size:14px;
-    margin-bottom:20px;
-}
+/* ACTION CARDS */
 
-.card-btn{
-    display:inline-block;
-    text-decoration:none;
-    background:#2563eb;
-    color:white;
-    padding:10px 18px;
-    border-radius:9px;
-    font-size:14px;
-    font-weight:600;
-    transition:.25s;
-}
-
-.card-btn:hover{
-    background:#1d4ed8;
-}
-
-/* =========================
-   SAFETY SECTION
-========================= */
-
-.safety-section{
-    margin-top:60px;
-}
-
-.safety-box{
-    background:linear-gradient(135deg,#ecfeff,#eff6ff);
-    border:1px solid #bae6fd;
-    border-radius:25px;
-    padding:35px;
+.actions{
     display:grid;
-    grid-template-columns:.8fr 1.2fr;
-    gap:35px;
-    align-items:center;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
 }
 
-.safety-heading{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.safety-heading .icon{
-    font-size:45px;
-}
-
-.safety-heading h2{
-    font-size:27px;
-    color:#0f172a;
-}
-
-.safety-box p{
-    color:#475569;
-    line-height:1.7;
-    margin-top:12px;
-}
-
-.tips{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:13px;
-}
-
-.tip{
+.action-card{
     background:white;
-    padding:15px;
-    border-radius:12px;
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-    border:1px solid #e0f2fe;
-    color:#334155;
-    font-size:14px;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.2s;
 }
 
-.tip span{
-    font-size:18px;
+.action-card:hover{
+    transform:translateY(-4px);
 }
 
-/* =========================
-   EMERGENCY BANNER
-========================= */
-
-.help-banner{
-    margin-top:45px;
-    background:linear-gradient(135deg,#172554,#1e40af);
-    color:white;
-    border-radius:25px;
-    padding:35px 40px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
+.icon{
+    font-size:40px;
 }
 
-.help-banner h2{
-    font-size:26px;
+.action-card h3{
     margin-bottom:8px;
+    color:#1e3a8a;
 }
 
-.help-banner p{
-    color:#dbeafe;
+.action-card p{
+    color:#64748b;
     line-height:1.6;
 }
 
-.help-btn{
-    flex-shrink:0;
-    background:white;
-    color:#1e3a8a;
+.action-btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:11px 18px;
+    background:#2563eb;
+    color:white;
     text-decoration:none;
-    padding:13px 25px;
-    border-radius:10px;
-    font-weight:700;
-    transition:.25s;
+    border-radius:9px;
+    font-weight:600;
 }
 
-.help-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(0,0,0,.2);
+.action-btn:hover{
+    background:#1d4ed8;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* LOADING */
 
-.footer{
-    margin-top:30px;
-    background:#0f172a;
-    color:#94a3b8;
+#loading{
     text-align:center;
-    padding:25px;
-    font-size:13px;
+    padding:50px;
+    font-size:18px;
+    color:#64748b;
 }
 
-.footer strong{
-    color:#38bdf8;
+/* ERROR */
+
+#errorMessage{
+    display:none;
+    background:#fee2e2;
+    color:#991b1b;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
 }
 
-/* =========================
-   LOADING
-========================= */
+/* MOBILE */
 
-.loading{
-    position:fixed;
-    inset:0;
-    background:#f4f7fc;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:999;
-}
+@media(max-width:800px){
 
-.loading-box{
-    text-align:center;
-}
-
-.spinner{
-    width:45px;
-    height:45px;
-    border:4px solid #dbeafe;
-    border-top-color:#2563eb;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
-    margin:auto auto 15px;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:900px){
-
-    .hero-content{
-        grid-template-columns:1fr;
-    }
-
-    .hero-card{
-        max-width:450px;
-        margin:auto;
-    }
-
-    .cards{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .safety-box{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .header{
+    header{
         padding:0 20px;
     }
 
-    .logo-text{
-        font-size:20px;
+    .logo span{
+        font-size:22px;
     }
 
-    .logo{
-        width:45px;
-        height:45px;
+    .hero h1{
+        font-size:32px;
     }
 
-    .logout-btn{
-        padding:10px 15px;
-    }
-
-    .hero{
-        padding:50px 20px;
-    }
-
-    .hero-text h1{
-        font-size:38px;
-    }
-
-    .hero-text p{
-        font-size:15px;
-    }
-
-    .main{
-        padding:40px 20px;
-    }
-
-    .cards{
+    .profile-grid,
+    .actions{
         grid-template-columns:1fr;
-    }
-
-    .tips{
-        grid-template-columns:1fr;
-    }
-
-    .help-banner{
-        flex-direction:column;
-        align-items:flex-start;
-        padding:30px;
     }
 
 }
@@ -537,35 +232,13 @@ body{
 
 <body>
 
-<!-- LOADING SCREEN -->
+<header>
 
-<div class="loading" id="loading">
+    <div class="logo">
 
-    <div class="loading-box">
+        <img src="images/logo.png" alt="CyberSafe Logo">
 
-        <div class="spinner"></div>
-
-        <p>Loading your dashboard...</p>
-
-    </div>
-
-</div>
-
-
-<!-- HEADER -->
-
-<header class="header">
-
-    <div class="logo-area">
-
-        <img
-        src="images/logo.png"
-        class="logo"
-        alt="CyberSafe Logo">
-
-        <div class="logo-text">
-            CYBER<span>SAFE</span>
-        </div>
+        <span>CYBERSAFE</span>
 
     </div>
 
@@ -576,279 +249,64 @@ body{
 </header>
 
 
-<!-- HERO -->
-
 <section class="hero">
 
-    <div class="hero-content">
+    <h1 id="welcomeMessage">
+        Welcome, Student 👋
+    </h1>
 
-        <div class="hero-text">
-
-            <h1>
-                Welcome,
-                <span id="studentName">Student</span> 👋
-            </h1>
-
-            <p>
-                Your safe space for learning, reporting,
-                and staying protected online.
-                Together, we can make the internet safer
-                and kinder for everyone.
-            </p>
-
-            <div class="student-badge">
-
-                🎓
-
-                <span>
-                    Class:
-                    <strong id="studentClass">--</strong>
-                </span>
-
-                <span>•</span>
-
-                <span>
-                    Section:
-                    <strong id="studentSection">--</strong>
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="hero-card">
-
-            <div class="shield">
-                🛡️
-            </div>
-
-            <h2>Stay Safe Online</h2>
-
-            <p>
-                Think before you click.
-                Respect before you type.
-                Speak up when something feels wrong.
-            </p>
-
-        </div>
-
-    </div>
+    <p>
+        Stay safe online and report cyberbullying securely.
+    </p>
 
 </section>
 
 
-<!-- MAIN CONTENT -->
+<main class="dashboard">
 
-<main class="main">
-
-    <div class="section-title">
-
-        <h2>What would you like to do?</h2>
-
-        <p>
-            Quick access to the most important CyberSafe resources.
-        </p>
-
+    <div id="loading">
+        Loading your profile...
     </div>
 
-
-    <!-- ACTION CARDS -->
-
-    <div class="cards">
+    <div id="errorMessage"></div>
 
 
-        <!-- REPORT -->
+    <!-- PROFILE -->
 
-        <div class="card">
+    <section class="profile-card">
 
-            <div class="card-icon">
-                🚨
+        <h2>👤 My Profile</h2>
+
+        <div class="profile-grid">
+
+            <div class="profile-item">
+                <small>Full Name</small>
+                <strong id="studentName">Loading...</strong>
             </div>
 
-            <h3>Report Cyberbullying</h3>
-
-            <p>
-                Something online is making you uncomfortable?
-                Report it safely and securely.
-            </p>
-
-            <a href="report.html" class="card-btn">
-                Report Now →
-            </a>
-
-        </div>
-
-
-        <!-- SAFETY -->
-
-        <div class="card">
-
-            <div class="card-icon">
-                🔐
+            <div class="profile-item">
+                <small>Admission Number</small>
+                <strong id="admissionNo">Loading...</strong>
             </div>
 
-            <h3>Safety Tips</h3>
-
-            <p>
-                Learn simple ways to protect your account,
-                information, and digital identity.
-            </p>
-
-            <a href="safety.html" class="card-btn">
-                Stay Safe →
-            </a>
-
-        </div>
-
-
-        <!-- LEARN -->
-
-        <div class="card">
-
-            <div class="card-icon">
-                📚
+            <div class="profile-item">
+                <small>Class</small>
+                <strong id="studentClass">Loading...</strong>
             </div>
 
-            <h3>Learn About Cyberbullying</h3>
-
-            <p>
-                Understand cyberbullying, warning signs,
-                effects, and how to respond safely.
-            </p>
-
-            <a href="learn.html" class="card-btn">
-                Learn More →
-            </a>
-
-        </div>
-
-
-        <!-- RESOURCES -->
-
-        <div class="card">
-
-            <div class="card-icon">
-                🎯
+            <div class="profile-item">
+                <small>Section</small>
+                <strong id="section">Loading...</strong>
             </div>
 
-            <h3>Student Resources</h3>
-
-            <p>
-                Explore useful resources, FAQs,
-                videos, quizzes, and cyber safety material.
-            </p>
-
-            <a href="resources.html" class="card-btn">
-                Explore →
-            </a>
-
-        </div>
-
-
-        <!-- HELP -->
-
-        <div class="card">
-
-            <div class="card-icon">
-                🆘
+            <div class="profile-item">
+                <small>Mobile Number</small>
+                <strong id="mobile">Loading...</strong>
             </div>
 
-            <h3>Get Help</h3>
-
-            <p>
-                Find trusted contacts and important
-                emergency information when you need help.
-            </p>
-
-            <a href="emergency.html" class="card-btn">
-                Get Help →
-            </a>
-
-        </div>
-
-
-        <!-- PROFILE -->
-
-        <div class="card">
-
-            <div class="card-icon">
-                👤
-            </div>
-
-            <h3>My Account</h3>
-
-            <p>
-                Your student account is securely connected
-                to CyberSafe.
-            </p>
-
-            <a href="#" class="card-btn" id="accountBtn">
-                Account Info →
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <!-- SAFETY -->
-
-    <section class="safety-section">
-
-        <div class="safety-box">
-
-            <div>
-
-                <div class="safety-heading">
-
-                    <div class="icon">
-                        💡
-                    </div>
-
-                    <h2>Quick Safety Check</h2>
-
-                </div>
-
-                <p>
-                    Small actions can make a big difference.
-                    Keep these simple rules in mind whenever
-                    you are online.
-                </p>
-
-            </div>
-
-
-            <div class="tips">
-
-                <div class="tip">
-                    <span>🔑</span>
-                    <div>
-                        Use strong and unique passwords.
-                    </div>
-                </div>
-
-                <div class="tip">
-                    <span>🚫</span>
-                    <div>
-                        Never share your OTP or password.
-                    </div>
-                </div>
-
-                <div class="tip">
-                    <span>📸</span>
-                    <div>
-                        Save screenshots of harmful messages.
-                    </div>
-                </div>
-
-                <div class="tip">
-                    <span>🧑‍🏫</span>
-                    <div>
-                        Tell a trusted adult if you need help.
-                    </div>
-                </div>
-
+            <div class="profile-item">
+                <small>Email Address</small>
+                <strong id="email">Loading...</strong>
             </div>
 
         </div>
@@ -856,43 +314,67 @@ body{
     </section>
 
 
-    <!-- HELP BANNER -->
+    <!-- ACTIONS -->
 
-    <div class="help-banner">
+    <section class="actions">
 
-        <div>
+        <div class="action-card">
 
-            <h2>Need help right now?</h2>
+            <div class="icon">🚨</div>
+
+            <h3>Report Cyberbullying</h3>
 
             <p>
-                You don't have to deal with cyberbullying alone.
-                Reach out to someone you trust.
+                Report cyberbullying or an unsafe online incident
+                securely to your school.
             </p>
+
+            <a href="report.html" class="action-btn">
+                Report Incident
+            </a>
 
         </div>
 
-        <a href="emergency.html" class="help-btn">
-            Get Help →
-        </a>
 
-    </div>
+        <div class="action-card">
+
+            <div class="icon">📋</div>
+
+            <h3>My Reports</h3>
+
+            <p>
+                View the reports you have submitted and check
+                their current status.
+            </p>
+
+            <a href="#" class="action-btn" id="myReportsBtn">
+                View My Reports
+            </a>
+
+        </div>
+
+
+        <div class="action-card">
+
+            <div class="icon">🛡️</div>
+
+            <h3>Safety Tips</h3>
+
+            <p>
+                Learn practical ways to stay safe while using
+                social media and the internet.
+            </p>
+
+            <a href="safety.html" class="action-btn">
+                View Safety Tips
+            </a>
+
+        </div>
+
+    </section>
 
 </main>
 
-
-<!-- FOOTER -->
-
-<footer class="footer">
-
-    <p>
-        🛡️ <strong>CyberSafe</strong> —
-        Stay Safe Online. Respect Before You Type.
-    </p>
-
-</footer>
-
-
-<!-- FIREBASE -->
 
 <script type="module">
 
@@ -910,201 +392,162 @@ import {
 
 
 const loading = document.getElementById("loading");
-
-const studentName =
-    document.getElementById("studentName");
-
-const studentClass =
-    document.getElementById("studentClass");
-
-const studentSection =
-    document.getElementById("studentSection");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
+const errorMessage = document.getElementById("errorMessage");
 
 
-/* =========================
+/* =========================================
    CHECK LOGIN
-========================= */
+========================================= */
 
 onAuthStateChanged(auth, async (user) => {
 
-    if(!user){
+    if (!user) {
 
         window.location.href = "student-login.html";
 
         return;
-
     }
 
 
-    /* =========================
+    /* =========================================
        CHECK EMAIL VERIFICATION
-    ========================= */
+    ========================================= */
 
-    if(!user.emailVerified){
+    if (!user.emailVerified) {
 
         await signOut(auth);
 
         alert(
-            "Please verify your email before accessing the dashboard."
+            "Please verify your email before accessing your dashboard."
         );
 
         window.location.href = "student-login.html";
 
         return;
-
     }
 
 
-    /* =========================
-       GET STUDENT DATA
-    ========================= */
+    try {
 
-    try{
+        /* =========================================
+           GET STUDENT PROFILE FROM FIRESTORE
+        ========================================= */
 
-        const studentRef =
-            doc(db, "students", user.uid);
+        const studentRef = doc(
+            db,
+            "students",
+            user.uid
+        );
 
-        const studentSnap =
-            await getDoc(studentRef);
-
-
-        if(studentSnap.exists()){
-
-            const data =
-                studentSnap.data();
+        const studentSnap = await getDoc(studentRef);
 
 
-            studentName.textContent =
-                data.name || "Student";
+        if (!studentSnap.exists()) {
 
-
-            studentClass.textContent =
-                data.class || "--";
-
-
-            studentSection.textContent =
-                data.section || "--";
-
-        }
-        else{
-
-            studentName.textContent =
-                user.email.split("@")[0];
-
+            throw new Error(
+                "Student profile was not found."
+            );
         }
 
-    }
-    catch(error){
+
+        const student = studentSnap.data();
+
+
+        /* =========================================
+           DISPLAY DATA
+        ========================================= */
+
+        document.getElementById("studentName").textContent =
+            student.name || "Not available";
+
+        document.getElementById("admissionNo").textContent =
+            student.admissionNo || "Not available";
+
+        document.getElementById("studentClass").textContent =
+            student.class || "Not available";
+
+        document.getElementById("section").textContent =
+            student.section || "Not available";
+
+        document.getElementById("mobile").textContent =
+            student.mobile || "Not available";
+
+        document.getElementById("email").textContent =
+            student.email || user.email;
+
+
+        document.getElementById("welcomeMessage").textContent =
+            `Welcome, ${student.name || "Student"} 👋`;
+
+
+        loading.style.display = "none";
+
+
+    } catch (error) {
 
         console.error(
-            "Error loading student data:",
+            "Dashboard Error:",
             error
         );
 
-        studentName.textContent =
-            user.email.split("@")[0];
+        loading.style.display = "none";
+
+        errorMessage.style.display = "block";
+
+        errorMessage.textContent =
+            "Unable to load your student profile. Please try again.";
 
     }
-
-
-    /* =========================
-       SHOW DASHBOARD
-    ========================= */
-
-    loading.style.display = "none";
 
 });
 
 
-/* =========================
+/* =========================================
    LOGOUT
-========================= */
+========================================= */
 
-logoutBtn.addEventListener("click", async () => {
+document.getElementById("logoutBtn").addEventListener(
+    "click",
+    async () => {
 
-    try{
+        try {
 
-        await signOut(auth);
+            await signOut(auth);
 
-        window.location.href =
-            "student-login.html";
+            window.location.href =
+                "student-login.html";
 
-    }
-    catch(error){
+        } catch (error) {
 
-        console.error(
-            "Logout error:",
-            error
-        );
-
-        alert(
-            "Unable to logout. Please try again."
-        );
-
-    }
-
-});
-
-
-/* =========================
-   ACCOUNT BUTTON
-========================= */
-
-document
-.getElementById("accountBtn")
-.addEventListener("click", async (e) => {
-
-    e.preventDefault();
-
-    const user = auth.currentUser;
-
-    if(!user) return;
-
-    try{
-
-        const studentRef =
-            doc(db, "students", user.uid);
-
-        const studentSnap =
-            await getDoc(studentRef);
-
-        if(studentSnap.exists()){
-
-            const data =
-                studentSnap.data();
+            console.error(
+                "Logout Error:",
+                error
+            );
 
             alert(
-                "👤 MY ACCOUNT\n\n" +
-
-                "Name: " +
-                (data.name || "--") +
-
-                "\nAdmission No: " +
-                (data.admissionNo || "--") +
-
-                "\nClass: " +
-                (data.class || "--") +
-
-                "\nSection: " +
-                (data.section || "--") +
-
-                "\nEmail: " +
-                (data.email || user.email)
+                "Unable to logout. Please try again."
             );
 
         }
 
     }
-    catch(error){
+);
 
-        console.error(error);
+
+/* =========================================
+   MY REPORTS
+========================================= */
+
+document.getElementById("myReportsBtn").addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "My Reports section is the next feature we will connect to Firestore."
+        );
 
     }
-
-});
+);
 
 </script>
 
