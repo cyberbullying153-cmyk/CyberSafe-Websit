@@ -178,59 +178,42 @@ import {
     collection,
     query,
     where,
-    getDocs,
-    orderBy
+    getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 const tbody = document.getElementById("reportBody");
+const logoutBtn = document.getElementById("logoutBtn");
 
-
-/* ================================
-   CHECK STUDENT LOGIN
-================================ */
 
 onAuthStateChanged(auth, async (user) => {
 
+    // Student is not logged in
     if (!user) {
-
         window.location.href = "student-login.html";
-
         return;
-
     }
-
 
     try {
 
-        /* ================================
-           GET ONLY THIS STUDENT'S REPORTS
-        ================================= */
-
+        // Get only this student's reports
         const q = query(
             collection(db, "reports"),
-            where("studentUID", "==", user.uid),
-            orderBy("createdAt", "desc")
+            where("studentUID", "==", user.uid)
         );
-
 
         const snapshot = await getDocs(q);
 
-
         tbody.innerHTML = "";
 
-
-        /* ================================
-           NO REPORTS
-        ================================= */
-
+        // No reports
         if (snapshot.empty) {
 
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="6" style="
+                    <td colspan="5" style="
                         text-align:center;
-                        padding:30px;
+                        padding:40px;
                         color:#64748b;
                     ">
                         📭 You have not submitted any reports yet.
@@ -239,134 +222,90 @@ onAuthStateChanged(auth, async (user) => {
             `;
 
             return;
-
         }
 
 
-        /* ================================
-           DISPLAY REPORTS
-        ================================= */
+        // Convert Firestore documents into an array
+        const reports = [];
 
-        snapshot.forEach((reportDoc) => {
+        snapshot.forEach((docSnap) => {
 
-            const data = reportDoc.data();
+            const data = docSnap.data();
 
+            reports.push({
+                id: docSnap.id,
+                ...data
+            });
 
-            /* REPORT ID */
-
-            const reportId =
-                data.reportId ||
-                reportDoc.id;
-
-
-            /* STATUS */
-
-            let statusClass = "pending";
-
-            let statusText =
-                data.status || "Pending";
+        });
 
 
-            if (statusText === "Resolved") {
+        // Sort newest reports first
+        reports.sort((a, b) => {
 
-                statusClass = "resolved";
+            const dateA = a.createdAt?.toMillis
+                ? a.createdAt.toMillis()
+                : 0;
 
+            const dateB = b.createdAt?.toMillis
+                ? b.createdAt.toMillis()
+                : 0;
+
+            return dateB - dateA;
+
+        });
+
+
+        // Display reports
+        reports.forEach((data) => {
+
+            let badgeClass = "pending";
+            let statusText = data.status || "Pending";
+
+            if (data.status === "Resolved") {
+                badgeClass = "resolved";
             }
-            else if (statusText === "Under Review") {
 
-                statusClass = "review";
-
-            }
-
-
-            /* DATE */
-
-            let reportDate = "N/A";
-
-
-            if (data.createdAt) {
-
-                if (
-                    typeof data.createdAt.toDate === "function"
-                ) {
-
-                    reportDate =
-                        data.createdAt
-                            .toDate()
-                            .toLocaleDateString("en-IN");
-
-                }
-                else {
-
-                    reportDate =
-                        new Date(data.createdAt)
-                            .toLocaleDateString("en-IN");
-
-                }
-
+            else if (data.status === "Under Review") {
+                badgeClass = "review";
             }
 
 
-            /* PLATFORM */
+            let reportDate = "—";
 
-            const platform =
-                data.platform || "Not specified";
+            if (data.date) {
+                reportDate = data.date;
+            }
 
+            else if (data.createdAt?.toDate) {
 
-            /* INCIDENT */
+                reportDate = data.createdAt
+                    .toDate()
+                    .toLocaleDateString();
 
-            const incident =
-                data.description ||
-                data.incident ||
-                "No description";
+            }
 
-
-            /* ADD ROW */
 
             tbody.innerHTML += `
 
                 <tr>
 
-                    <td>
-                        <strong>
-                            ${reportId}
-                        </strong>
-                    </td>
+                    <td>${reportDate}</td>
 
+                    <td>${data.platform || "—"}</td>
 
                     <td>
-                        ${platform}
-                    </td>
-
-
-                    <td>
-                        ${incident}
-                    </td>
-
-
-                    <td>
-                        ${reportDate}
-                    </td>
-
-
-                    <td>
-
-                        <span class="status ${statusClass}">
+                        <span class="status ${badgeClass}">
                             ${statusText}
                         </span>
-
                     </td>
 
+                    <td>
+                        ${data.assignedTeacher || "Not assigned"}
+                    </td>
 
                     <td>
-
-                        <button
-                            class="view-btn"
-                            onclick="viewReport('${reportDoc.id}')"
-                        >
-                            View
-                        </button>
-
+                        ${data.description || "—"}
                     </td>
 
                 </tr>
@@ -377,27 +316,19 @@ onAuthStateChanged(auth, async (user) => {
 
 
     }
+
     catch (error) {
 
-        console.error(
-            "Error loading reports:",
-            error
-        );
-
-
-        /*
-           If Firestore asks for an index,
-           the console will show the required link.
-        */
+        console.error("Error loading reports:", error);
 
         tbody.innerHTML = `
 
             <tr>
 
-                <td colspan="6" style="
+                <td colspan="5" style="
                     text-align:center;
-                    padding:30px;
-                    color:#dc2626;
+                    padding:40px;
+                    color:#ef4444;
                 ">
 
                     ❌ Unable to load your reports.
@@ -417,116 +348,28 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 
-/* ================================
-   VIEW REPORT
-================================ */
+// Logout
+if (logoutBtn) {
 
-window.viewReport = async function(reportId) {
+    logoutBtn.addEventListener("click", async () => {
 
-    try {
+        try {
 
-        const q = query(
-            collection(db, "reports"),
-            where("studentUID", "==", auth.currentUser.uid)
-        );
+            await signOut(auth);
 
-
-        const snapshot =
-            await getDocs(q);
-
-
-        let report = null;
-
-
-        snapshot.forEach((doc) => {
-
-            if (doc.id === reportId) {
-
-                report = doc.data();
-
-            }
-
-        });
-
-
-        if (!report) {
-
-            alert(
-                "Report could not be found."
-            );
-
-            return;
+            window.location.href = "student-login.html";
 
         }
 
+        catch (error) {
 
-        alert(
+            console.error("Logout error:", error);
 
-            "📋 REPORT DETAILS\n\n" +
+        }
 
-            "Report ID: " +
-            (report.reportId || reportId) +
+    });
 
-            "\n\nPlatform: " +
-            (report.platform || "N/A") +
-
-            "\n\nDate: " +
-            (report.date || "N/A") +
-
-            "\n\nStatus: " +
-            (report.status || "Pending") +
-
-            "\n\nDescription:\n" +
-            (report.description ||
-             report.incident ||
-             "N/A")
-
-        );
-
-    }
-    catch(error) {
-
-        console.error(error);
-
-        alert(
-            "Unable to open this report."
-        );
-
-    }
-
-};
-
-
-/* ================================
-   LOGOUT
-================================ */
-
-document
-.getElementById("logoutBtn")
-.onclick = async () => {
-
-    try {
-
-        await signOut(auth);
-
-        window.location.href =
-            "student-login.html";
-
-    }
-    catch(error) {
-
-        console.error(
-            "Logout error:",
-            error
-        );
-
-        alert(
-            "Unable to logout. Please try again."
-        );
-
-    }
-
-};
+}
 
 </script>
 
