@@ -764,32 +764,31 @@ function loadReports(){
     This prevents unnecessary Firestore index errors.
     */
 
-    const reportsQuery =
-        collection(db, "reports");
+   const reportsQuery = query(
+    collection(db, "reports"),
+    where("teacherEmail", "==", user.email)
+);
 
+onSnapshot(
+    reportsQuery,
 
-    onSnapshot(
+    (snapshot) => {
 
-        reportsQuery,
+        allReports = [];
 
-        (snapshot) => {
+        snapshot.forEach((reportDoc) => {
 
-            allReports = [];
+            allReports.push({
 
+                id: reportDoc.id,
 
-            snapshot.forEach((reportDoc) => {
-
-                allReports.push({
-
-                    id: reportDoc.id,
-
-                    ...reportDoc.data()
-
-                });
+                ...reportDoc.data()
 
             });
 
+        });
 
+        // Keep the rest of your existing code here
             /*
             Sort in JavaScript instead of Firestore.
             */
