@@ -170,78 +170,361 @@ Logout
 import { auth, db } from "./js/firebase.js";
 
 import {
-onAuthStateChanged,
-signOut
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-collection,
-query,
-where,
-getDocs
+    collection,
+    query,
+    where,
+    getDocs,
+    orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 const tbody = document.getElementById("reportBody");
 
-onAuthStateChanged(auth, async(user)=>{
 
-if(!user){
+/* ================================
+   CHECK STUDENT LOGIN
+================================ */
 
-window.location.href="student-login.html";
+onAuthStateChanged(auth, async (user) => {
 
-return;
+    if (!user) {
 
-}
+        window.location.href = "student-login.html";
 
-const q = query(
-collection(db,"reports"),
-where("studentUID","==",user.uid)
-);
+        return;
 
-const snapshot = await getDocs(q);
+    }
 
-tbody.innerHTML = "";
 
-snapshot.forEach((doc)=>{
+    try {
 
-const data = doc.data();
+        /* ================================
+           GET ONLY THIS STUDENT'S REPORTS
+        ================================= */
 
-let badge = "pending";
+        const q = query(
+            collection(db, "reports"),
+            where("studentUID", "==", user.uid),
+            orderBy("createdAt", "desc")
+        );
 
-if(data.status=="Resolved") badge="resolved";
-if(data.status=="Under Review") badge="review";
 
-tbody.innerHTML += `
+        const snapshot = await getDocs(q);
 
-<tr>
 
-<td>${data.date || "-"}</td>
+        tbody.innerHTML = "";
 
-<td>${data.platform || "-"}</td>
 
-<td>
-<span class="status ${badge}">
-${data.status}
-</span>
-</td>
+        /* ================================
+           NO REPORTS
+        ================================= */
 
-<td>${data.assignedTeacher || "Not Assigned"}</td>
+        if (snapshot.empty) {
 
-<td>${data.description}</td>
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" style="
+                        text-align:center;
+                        padding:30px;
+                        color:#64748b;
+                    ">
+                        📭 You have not submitted any reports yet.
+                    </td>
+                </tr>
+            `;
 
-</tr>
+            return;
 
-`;
+        }
+
+
+        /* ================================
+           DISPLAY REPORTS
+        ================================= */
+
+        snapshot.forEach((reportDoc) => {
+
+            const data = reportDoc.data();
+
+
+            /* REPORT ID */
+
+            const reportId =
+                data.reportId ||
+                reportDoc.id;
+
+
+            /* STATUS */
+
+            let statusClass = "pending";
+
+            let statusText =
+                data.status || "Pending";
+
+
+            if (statusText === "Resolved") {
+
+                statusClass = "resolved";
+
+            }
+            else if (statusText === "Under Review") {
+
+                statusClass = "review";
+
+            }
+
+
+            /* DATE */
+
+            let reportDate = "N/A";
+
+
+            if (data.createdAt) {
+
+                if (
+                    typeof data.createdAt.toDate === "function"
+                ) {
+
+                    reportDate =
+                        data.createdAt
+                            .toDate()
+                            .toLocaleDateString("en-IN");
+
+                }
+                else {
+
+                    reportDate =
+                        new Date(data.createdAt)
+                            .toLocaleDateString("en-IN");
+
+                }
+
+            }
+
+
+            /* PLATFORM */
+
+            const platform =
+                data.platform || "Not specified";
+
+
+            /* INCIDENT */
+
+            const incident =
+                data.description ||
+                data.incident ||
+                "No description";
+
+
+            /* ADD ROW */
+
+            tbody.innerHTML += `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${reportId}
+                        </strong>
+                    </td>
+
+
+                    <td>
+                        ${platform}
+                    </td>
+
+
+                    <td>
+                        ${incident}
+                    </td>
+
+
+                    <td>
+                        ${reportDate}
+                    </td>
+
+
+                    <td>
+
+                        <span class="status ${statusClass}">
+                            ${statusText}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="view-btn"
+                            onclick="viewReport('${reportDoc.id}')"
+                        >
+                            View
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error loading reports:",
+            error
+        );
+
+
+        /*
+           If Firestore asks for an index,
+           the console will show the required link.
+        */
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="6" style="
+                    text-align:center;
+                    padding:30px;
+                    color:#dc2626;
+                ">
+
+                    ❌ Unable to load your reports.
+
+                    <br><br>
+
+                    Please try again later.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
 
 });
 
-});
 
-document.getElementById("logoutBtn").onclick = async()=>{
+/* ================================
+   VIEW REPORT
+================================ */
 
-await signOut(auth);
+window.viewReport = async function(reportId) {
 
-window.location.href="student-login.html";
+    try {
+
+        const q = query(
+            collection(db, "reports"),
+            where("studentUID", "==", auth.currentUser.uid)
+        );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        let report = null;
+
+
+        snapshot.forEach((doc) => {
+
+            if (doc.id === reportId) {
+
+                report = doc.data();
+
+            }
+
+        });
+
+
+        if (!report) {
+
+            alert(
+                "Report could not be found."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+
+            "📋 REPORT DETAILS\n\n" +
+
+            "Report ID: " +
+            (report.reportId || reportId) +
+
+            "\n\nPlatform: " +
+            (report.platform || "N/A") +
+
+            "\n\nDate: " +
+            (report.date || "N/A") +
+
+            "\n\nStatus: " +
+            (report.status || "Pending") +
+
+            "\n\nDescription:\n" +
+            (report.description ||
+             report.incident ||
+             "N/A")
+
+        );
+
+    }
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to open this report."
+        );
+
+    }
+
+};
+
+
+/* ================================
+   LOGOUT
+================================ */
+
+document
+.getElementById("logoutBtn")
+.onclick = async () => {
+
+    try {
+
+        await signOut(auth);
+
+        window.location.href =
+            "student-login.html";
+
+    }
+    catch(error) {
+
+        console.error(
+            "Logout error:",
+            error
+        );
+
+        alert(
+            "Unable to logout. Please try again."
+        );
+
+    }
 
 };
 
