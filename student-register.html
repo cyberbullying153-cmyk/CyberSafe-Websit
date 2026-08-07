@@ -216,7 +216,29 @@ import {
 
 
 const form = document.getElementById("registerForm");
+const studentClass = document.getElementById("studentClass");
+const streamGroup = document.getElementById("streamGroup");
+const stream = document.getElementById("stream");
 
+studentClass.addEventListener("change", () => {
+
+    if (
+        studentClass.value === "11" ||
+        studentClass.value === "12"
+    ) {
+
+        streamGroup.style.display = "block";
+        stream.required = true;
+
+    } else {
+
+        streamGroup.style.display = "none";
+        stream.required = false;
+        stream.value = "";
+
+    }
+
+});
 
 form.addEventListener("submit", async (e) => {
 
