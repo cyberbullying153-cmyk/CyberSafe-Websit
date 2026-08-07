@@ -158,6 +158,59 @@ import {
   
 const form = document.getElementById("loginForm");
 
+const forgotPassword = document.getElementById("forgotPassword");
+
+forgotPassword.addEventListener("click", async (e) => {
+
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+
+    if (!email) {
+
+        alert("Please enter your email address first.");
+
+        document.getElementById("email").focus();
+
+        return;
+    }
+
+    try {
+
+        await sendPasswordResetEmail(auth, email);
+
+        alert(
+            "📧 Password reset email sent!\n\n" +
+            "Please check your Inbox or Spam folder."
+        );
+
+    } catch (error) {
+
+        console.error("Password Reset Error:", error);
+
+        if (error.code === "auth/user-not-found") {
+
+            alert("❌ No account exists with this email address.");
+
+        } else if (error.code === "auth/invalid-email") {
+
+            alert("❌ Please enter a valid email address.");
+
+        } else {
+
+            alert(
+                "❌ Unable to send password reset email.\n\n" +
+                error.message
+            );
+        }
+    }
+
+});
+
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
