@@ -73,58 +73,175 @@ Login
 import { auth, db } from "./js/firebase.js";
 
 import {
-signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-collection,
-query,
-where,
-getDocs
+    collection,
+    query,
+    where,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-document.getElementById("loginForm").addEventListener("submit", async (e)=>{
 
-e.preventDefault();
+const loginForm = document.getElementById("loginForm");
 
-const email=document.getElementById("email").value;
-const password=document.getElementById("password").value;
 
-try{
+loginForm.addEventListener("submit", async (e) => {
 
-const userCredential = await signInWithEmailAndPassword(auth,email,password);
+    e.preventDefault();
 
-alert("Firebase Login Success");
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-const user = userCredential.user;
 
-const teacherQuery = query(
-collection(db,"teachers"),
-where("email","==",user.email)
-);
+    if (!email || !password) {
 
-const teacherSnap = await getDocs(teacherQuery);
+        alert("Please enter your email and password.");
 
-alert("Teacher documents found: " + teacherSnap.size);
+        return;
+    }
 
-if(!teacherSnap.empty){
 
-alert("Teacher Verified");
+    try {
 
-window.location.href="teacher.html";
+        // ==============================
+        // FIREBASE LOGIN
+        // ==============================
 
-return;
+        const userCredential =
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
 
-}
 
-alert("Access Denied");
+        const user = userCredential.user;
 
-}catch(error){
 
-alert(error.code);
-alert(error.message);
+        // ==============================
+        // CHECK TEACHER RECORD
+        // ==============================
 
-}
+        const teacherQuery = query(
+            collection(db, "teachers"),
+            where("email", "==", user.email)
+        );
+
+
+        const teacherSnapshot =
+            await getDocs(teacherQuery);
+
+
+        // ==============================
+        // NO TEACHER FOUND
+        // ==============================
+
+        if (teacherSnapshot.empty) {
+
+            await signOut(auth);
+
+            alert(
+                "❌ Access Denied.\n\n" +
+                "This account is not registered as a teacher or administrator."
+            );
+
+            return;
+        }
+
+
+        // ==============================
+        // TEACHER FOUND
+        // ==============================
+
+        const teacherDoc =
+            teacherSnapshot.docs[0];
+
+        const teacherData =
+            teacherDoc.data();
+
+
+        // ==============================
+        // CHECK ROLE
+        // ==============================
+
+        const role =
+            String(teacherData.role || "teacher")
+            .toLowerCase();
+
+
+        if (role === "admin") {
+
+            alert("✅ Admin Login Successful!");
+
+            window.location.href = "admin.html";
+
+            return;
+        }
+
+
+        if (role === "teacher") {
+
+            alert("✅ Teacher Login Successful!");
+
+            window.location.href = "teacher.html";
+
+            return;
+        }
+
+
+        // ==============================
+        // UNKNOWN ROLE
+        // ==============================
+
+        await signOut(auth);
+
+        alert(
+            "❌ Access Denied.\n\n" +
+            "Your staff account does not have a valid role."
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error("Staff Login Error:", error);
+
+
+        if (
+            error.code === "auth/invalid-credential" ||
+            error.code === "auth/user-not-found" ||
+            error.code === "auth/wrong-password"
+        ) {
+
+            alert("❌ Invalid email or password.");
+
+        }
+
+        else if (
+            error.code === "permission-denied"
+        ) {
+
+            alert(
+                "❌ Firestore permission denied.\n\n" +
+                "Please check your Firestore Rules."
+            );
+
+        }
+
+        else {
+
+            alert(
+                "❌ Login failed.\n\n" +
+                error.message
+            );
+
+        }
+
+    }
 
 });
 
