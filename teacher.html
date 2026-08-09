@@ -1182,15 +1182,29 @@ function displayReports(){
 
                 <td>
 
-                    <button
-                        class="action-btn view-btn"
-                        data-id="${data.id}"
-                        data-action="view"
-                    >
+                   <button
+    class="action-btn view-btn"
+    data-id="${data.id}"
+    data-action="view"
+>
+    👁 View
+</button>
 
-                        👁 View
-
-                    </button>
+${
+    data.screenshotData
+    ?
+    `
+    <button
+        class="action-btn view-btn"
+        data-id="${data.id}"
+        data-action="screenshot"
+    >
+        📷 Screenshot
+    </button>
+    `
+    :
+    ""
+}
 
                     ${actions}
 
