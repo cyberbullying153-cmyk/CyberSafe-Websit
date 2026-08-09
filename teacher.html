@@ -713,10 +713,16 @@ onAuthStateChanged(auth, async (user) => {
         }
 
 
-        currentTeacher =
-            teacherSnapshot.docs[0].data();
+       currentTeacher =
+    teacherSnapshot.docs[0].data();
 
+currentTeacher.teacherUID =
+    teacherSnapshot.docs[0].id;
 
+console.log(
+    "Teacher UID:",
+    currentTeacher.teacherUID
+);
         console.log(
             "Teacher authenticated:",
             currentTeacher
