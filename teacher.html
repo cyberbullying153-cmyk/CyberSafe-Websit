@@ -1281,7 +1281,83 @@ ${
 /* =====================================================
    VIEW REPORT
 ===================================================== */
+function viewScreenshot(id){
 
+    const report =
+        allReports.find(
+            item => item.id === id
+        );
+
+    if(
+        !report ||
+        !report.screenshotData
+    ){
+
+        alert(
+            "📷 No screenshot was attached to this report."
+        );
+
+        return;
+
+    }
+
+    const popup =
+        window.open(
+            "",
+            "_blank"
+        );
+
+    popup.document.write(`
+        <!DOCTYPE html>
+
+        <html>
+
+        <head>
+
+            <title>CyberSafe Evidence</title>
+
+            <style>
+
+                body{
+                    margin:0;
+                    padding:30px;
+                    background:#eef4ff;
+                    font-family:Poppins,Arial,sans-serif;
+                    text-align:center;
+                }
+
+                h2{
+                    color:#1e3a8a;
+                }
+
+                img{
+                    max-width:95%;
+                    max-height:85vh;
+                    border-radius:12px;
+                    box-shadow:0 8px 30px rgba(0,0,0,.15);
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            <h2>📷 CyberSafe Report Evidence</h2>
+
+            <img
+                src="${report.screenshotData}"
+                alt="Cyberbullying report screenshot"
+            >
+
+        </body>
+
+        </html>
+    `);
+
+    popup.document.close();
+
+}
 function viewReport(id){
 
     const report =
