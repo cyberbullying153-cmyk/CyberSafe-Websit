@@ -770,9 +770,13 @@ function loadReports(){
     This prevents unnecessary Firestore index errors.
     */
 
- const reportsQuery = query(
+const reportsQuery = query(
     collection(db, "reports"),
-    where("teacherEmail", "==", auth.currentUser.email)
+    where(
+        "teacherUID",
+        "==",
+        currentTeacher.teacherUID
+    )
 );
 
 onSnapshot(
