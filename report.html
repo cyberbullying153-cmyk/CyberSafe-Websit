@@ -466,12 +466,17 @@ console.log("Teacher assignment document:", classKey);
         let teacherData = {};
 
 
-        if (teacherSnap.exists()) {
+       if (teacherSnap.exists()) {
 
-            teacherData =
-                teacherSnap.data();
+    teacherData = teacherSnap.data();
 
-        }
+    console.log("✅ TEACHER FOUND:", teacherData);
+
+} else {
+
+    console.log("❌ TEACHER NOT FOUND:", classKey);
+
+}
 
 
         // ==================================
