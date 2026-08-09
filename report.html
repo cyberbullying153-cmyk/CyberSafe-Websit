@@ -520,18 +520,10 @@ console.log("Teacher assignment document:", classKey);
 
                 status:
                     "Pending",
-
-                assignedTeacher:
-                    teacherData.teacherName || "",
-
-                teacherEmail:
-                    teacherData.teacherEmail || "",
-
-                teacherUID:
-                    teacherData.teacherUID || "",
-
-                classKey:
-                    classKey,
+                assignedTeacher: teacherData.TeacherName || "",
+teacherEmail: teacherData.TeacherEmail || "",
+teacherUID: teacherData.TeacherUid || "",
+classTeacherKey: classKey,
 
                 createdAt:
                     serverTimestamp()
