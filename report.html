@@ -387,6 +387,22 @@ document
 
     try {
 
+          // ==================================
+    // GET SCREENSHOT
+    // ==================================
+
+    const screenshotFile =
+        document.getElementById("screenshot").files[0];
+
+    let screenshotData = "";
+
+    if (screenshotFile) {
+
+        screenshotData =
+            await compressScreenshot(screenshotFile);
+
+    }
+
 
         // ==================================
         // CREATE TEACHER ASSIGNMENT KEY
