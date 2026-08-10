@@ -260,31 +260,111 @@ reportsContainer.innerHTML += `
 
     <div class="report-header">
 
-        <h3>🚨 ${data.type || data.platform}</h3>
+        <h3>🚨 ${data.platform || data.type || "Report"}</h3>
 
-        <span class="status ${data.status.toLowerCase()}">
-            ${data.status}
+        <span class="status ${String(data.status || "Pending").toLowerCase().replace(" ", "-")}">
+            ${data.status || "Pending"}
         </span>
 
     </div>
 
-    <p><strong>Student:</strong> ${data.name || "Anonymous"}</p>
-
-    <p><strong>Class:</strong> ${data.class || ""}</p>
-
-    <p><strong>Section:</strong> ${data.section || ""}</p>
-
-    <p class="description">
-        ${data.description}
+    <p>
+        <strong>👤 Student Name:</strong>
+        ${data.studentName || data.name || "Anonymous"}
     </p>
 
-    <button
-        class="resolve-btn"
-        onclick="resolveReport('${report.id}')">
+    <p>
+        <strong>🆔 Admission No:</strong>
+        ${data.admissionNo || "Not provided"}
+    </p>
 
-        ✔ Resolve
+    <p>
+        <strong>🏫 Class:</strong>
+        ${data.class || "Not provided"}
+    </p>
 
-    </button>
+    <p>
+        <strong>📚 Stream:</strong>
+        ${data.stream || "—"}
+    </p>
+
+    <p>
+        <strong>🔤 Section:</strong>
+        ${data.section || "—"}
+    </p>
+
+    <p>
+        <strong>📱 Mobile:</strong>
+        ${data.mobile || "Not provided"}
+    </p>
+
+    <p>
+        <strong>📧 Student Email:</strong>
+        ${data.email || "Not provided"}
+    </p>
+
+    <p>
+        <strong>🌐 Platform:</strong>
+        ${data.platform || "Not provided"}
+    </p>
+
+    <p>
+        <strong>📅 Incident Date:</strong>
+        ${data.date || "Not provided"}
+    </p>
+
+    <p>
+        <strong>👨‍🏫 Assigned Teacher:</strong>
+        ${data.assignedTeacher || "Not assigned"}
+    </p>
+
+    <p>
+        <strong>📧 Teacher Email:</strong>
+        ${data.teacherEmail || "Not assigned"}
+    </p>
+
+    <p>
+        <strong>📝 Description:</strong>
+    </p>
+
+    <p class="description">
+        ${data.description || "No description provided"}
+    </p>
+
+    ${
+        data.screenshotData
+        ?
+        `
+        <button
+            class="resolve-btn"
+            onclick="viewScreenshot('${report.id}')"
+        >
+            📷 View Screenshot
+        </button>
+        `
+        :
+        `
+        <p>
+            <strong>📷 Screenshot:</strong>
+            No screenshot attached
+        </p>
+        `
+    }
+
+    ${
+        data.status !== "Resolved"
+        ?
+        `
+        <button
+            class="resolve-btn"
+            onclick="resolveReport('${report.id}')"
+        >
+            ✔ Resolve
+        </button>
+        `
+        :
+        ""
+    }
 
 </div>
 
