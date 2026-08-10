@@ -367,7 +367,54 @@ function displayStudents(students) {
 
 }
 const modal = document.getElementById("studentModal");
+// =========================================
+// SEARCH STUDENTS
+// =========================================
 
+searchStudent.addEventListener("input", () => {
+
+    const search = searchStudent.value
+        .toLowerCase()
+        .trim();
+
+    const filtered = allStudents.filter((student) => {
+
+        return (
+            String(student.admissionNo || "")
+                .toLowerCase()
+                .includes(search)
+
+            ||
+
+            String(student.name || "")
+                .toLowerCase()
+                .includes(search)
+
+            ||
+
+            String(student.class || "")
+                .toLowerCase()
+                .includes(search)
+
+            ||
+
+            String(student.section || "")
+                .toLowerCase()
+                .includes(search)
+
+            ||
+
+            String(student.studentMobile || "")
+                .toLowerCase()
+                .includes(search)
+
+        );
+
+    });
+
+    displayStudents(filtered);
+
+});
 document.getElementById("addStudentBtn").onclick = () => {
     modal.style.display = "flex";
 };
