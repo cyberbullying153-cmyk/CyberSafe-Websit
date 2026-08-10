@@ -847,3 +847,20 @@ nav{
 }
 
 }
+/* BIG CYBERSAFE SECTION */
+.cybersafe-big {
+    width: 100%;
+    min-height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cybersafe-big h1 {
+    font-size: 100px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    color: #0f172a;
+    margin: 0;
+}
