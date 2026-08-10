@@ -240,7 +240,132 @@ import {
 import {
     signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const studentBody = document.getElementById("studentBody");
+const searchStudent = document.getElementById("searchStudent");
 
+let allStudents = [];
+
+
+// =========================================
+// LOAD ALL STUDENTS
+// =========================================
+
+onSnapshot(
+    collection(db, "students"),
+    (snapshot) => {
+
+        allStudents = [];
+
+        snapshot.forEach((studentDoc) => {
+
+            allStudents.push({
+                id: studentDoc.id,
+                ...studentDoc.data()
+            });
+
+        });
+
+        displayStudents(allStudents);
+    },
+
+    (error) => {
+
+        console.error("Students loading error:", error);
+
+        studentBody.innerHTML = `
+            <tr>
+                <td colspan="8">
+                    ❌ Unable to load students
+                </td>
+            </tr>
+        `;
+    }
+);
+
+
+// =========================================
+// DISPLAY STUDENTS
+// =========================================
+
+function displayStudents(students) {
+
+    studentBody.innerHTML = "";
+
+    if (students.length === 0) {
+
+        studentBody.innerHTML = `
+            <tr>
+                <td colspan="8">
+                    No students found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    students.forEach((student) => {
+
+        studentBody.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${student.admissionNo || "Not provided"}
+                </td>
+
+                <td>
+                    ${student.name || "Not provided"}
+                </td>
+
+                <td>
+                    ${student.class || "Not provided"}
+                </td>
+
+                <td>
+                    ${student.section || "Not provided"}
+                </td>
+
+                <td>
+                    ${student.studentMobile || "Not provided"}
+                </td>
+
+                <td>
+                    ${student.parentMobile || "Not provided"}
+                </td>
+
+                <td>
+                    <span class="status active">
+                        ${student.status || "Active"}
+                    </span>
+                </td>
+
+                <td>
+
+                    <button
+                        onclick="deleteStudent('${student.id}')"
+                        style="
+                            background:#ef4444;
+                            color:white;
+                            border:none;
+                            padding:8px 12px;
+                            border-radius:6px;
+                            cursor:pointer;
+                        "
+                    >
+                        🗑 Delete
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
 const modal = document.getElementById("studentModal");
 
 document.getElementById("addStudentBtn").onclick = () => {
