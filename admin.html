@@ -385,7 +385,67 @@ resolvedReports.innerHTML=resolved;
 
 
 });
+window.viewScreenshot = function(id){
 
+    const report =
+        allReports.find(
+            item => item.id === id
+        );
+
+    if(
+        !report ||
+        !report.screenshotData
+    ){
+
+        alert("📷 No screenshot attached.");
+        return;
+
+    }
+
+    const win =
+        window.open("", "_blank");
+
+    win.document.write(`
+        <html>
+
+        <head>
+            <title>CyberSafe Evidence</title>
+
+            <style>
+                body{
+                    margin:0;
+                    padding:30px;
+                    text-align:center;
+                    font-family:Arial,sans-serif;
+                    background:#f4f8fc;
+                }
+
+                img{
+                    max-width:95%;
+                    max-height:85vh;
+                    border-radius:12px;
+                }
+            </style>
+
+        </head>
+
+        <body>
+
+            <h2>📷 CyberSafe Report Evidence</h2>
+
+            <img
+                src="${report.screenshotData}"
+                alt="Report screenshot"
+            >
+
+        </body>
+
+        </html>
+    `);
+
+    win.document.close();
+
+};
 
 window.resolveReport = async function(id){
 
