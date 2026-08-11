@@ -465,61 +465,58 @@ console.log("Teacher assignment document:", classKey);
         );
 
 
-       // ==================================
+  // ==================================
 // FIND CLASS TEACHER
 // ==================================
 
-const teacherSnap = await getDoc(
-    doc(db, "classTeachers", classKey)
+console.log("Student class:", currentStudent.class);
+console.log("Student stream:", currentStudent.stream);
+console.log("Teacher assignment key:", classKey);
+
+const teacherRef = doc(
+    db,
+    "classTeachers",
+    classKey
 );
 
-        console.log("Searching exact path:");
-console.log("Collection: classTeachers");
-console.log("Document ID:", classKey);
-console.log("Full path:", "classTeachers/" + classKey);
-console.log("Exists:", teacherSnap.exists());
-let teacherData = {};
+const teacherSnap = await getDoc(teacherRef);
 
-if (teacherSnap.exists()) {
-
-    teacherData = teacherSnap.data();
-
-    console.log("✅ TEACHER FOUND:", teacherData);
-
-    console.log(
-        "👨‍🏫 Teacher Name:",
-        teacherData.TeacherName || "Not provided"
-    );
-
-    console.log(
-        "📧 Teacher Email:",
-        teacherData.TeacherEmail || "Not provided"
-    );
-
-    console.log(
-        "🆔 Teacher UID:",
-        teacherData.TeacherUid || "Not provided"
-    );
-
-} else {
+if (!teacherSnap.exists()) {
 
     console.error(
-        "❌ TEACHER NOT FOUND:",
-        classKey
+        "❌ Teacher assignment not found:",
+        "classTeachers/" + classKey
     );
 
     alert(
         "No teacher is assigned for " +
         currentStudent.class +
-        (currentStudent.stream
-            ? " " + currentStudent.stream
-            : "") +
+        " " +
+        (currentStudent.stream || "") +
         ".\n\nPlease contact your administrator."
     );
 
     return;
 }
 
+const teacherData = teacherSnap.data();
+
+console.log("✅ TEACHER FOUND:", teacherData);
+
+console.log(
+    "Teacher:",
+    teacherData.TeacherName || "Not provided"
+);
+
+console.log(
+    "Teacher Email:",
+    teacherData.TeacherEmail || "Not provided"
+);
+
+console.log(
+    "Teacher UID:",
+    teacherData.TeacherUid || "Not provided"
+);
         // ==========================================
 // COMPRESS SCREENSHOT FOR FREE FIRESTORE STORAGE
 // ==========================================
