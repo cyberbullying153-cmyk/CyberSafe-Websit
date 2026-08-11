@@ -291,61 +291,83 @@ onAuthStateChanged(auth, async (user) => {
         currentUser = user;
 
 
-        const studentRef =
-            doc(db, "students", user.uid);
+  const studentRef = doc(db, "students", user.uid);
+
+const studentSnap = await getDoc(studentRef);
+
+if (!studentSnap.exists()) {
+
+    alert("Student record not found.");
+
+    await signOut(auth);
+
+    window.location.href = "student-login.html";
+
+    return;
+}
+
+currentStudent = studentSnap.data();
+
+console.log("✅ Student loaded:", currentStudent);
 
 
-        const studentSnap =
-            await getDoc(studentRef);
+// ==============================
+// DISPLAY NAME
+// ==============================
+
+const displayName =
+    document.getElementById("displayName");
+
+if (displayName) {
+    displayName.textContent =
+        currentStudent.name || "Student";
+}
 
 
-        if (!studentSnap.exists()) {
+// ==============================
+// DISPLAY CLASS
+// ==============================
 
-            alert("Student record not found.");
+const displayClass =
+    document.getElementById("displayClass");
 
-            return;
-
-        }
-
-
-        currentStudent =
-            studentSnap.data();
-
-
-        // ==============================
-        // DISPLAY NAME
-        // ==============================
-
-        document.getElementById("displayName").textContent =
-            currentStudent.name || "Student";
+if (displayClass) {
+    displayClass.textContent =
+        currentStudent.class || "-";
+}
 
 
-        // ==============================
-        // DISPLAY CLASS
-        // ==============================
+// ==============================
+// DISPLAY STREAM
+// ==============================
 
-        document.getElementById("displayClass").textContent =
-            currentStudent.class || "-";
+const streamDisplay =
+    document.getElementById("streamDisplay");
 
+const displayStream =
+    document.getElementById("displayStream");
 
-        // ==============================
-        // DISPLAY STREAM
-        // ==============================
+if (
+    currentStudent.class === "11" ||
+    currentStudent.class === "12"
+) {
 
-        if (
-            currentStudent.class === "11" ||
-            currentStudent.class === "12"
-        ) {
-
-            document.getElementById("streamDisplay").style.display =
-                "block";
-
-            document.getElementById("displayStream").textContent =
-                currentStudent.stream || "Not selected";
-
-        }
-
+    if (streamDisplay) {
+        streamDisplay.style.display = "block";
     }
+
+    if (displayStream) {
+        displayStream.textContent =
+            currentStudent.stream || "Not selected";
+    }
+
+} else {
+
+    if (streamDisplay) {
+        streamDisplay.style.display = "none";
+    }
+}
+
 
     catch(error) {
 
