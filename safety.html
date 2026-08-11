@@ -1,55 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Safety Tips | CyberSafe</title>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CyberSafe online safety tips for students"
+    >
+
+    <title>Safety Tips | CyberSafe</title>
+
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 </head>
 
 <body>
 
-<header>
-<nav>
-<div class="logo">🛡 CyberSafe</div>
+    <!-- =========================================
+         HEADER
+    ========================================== -->
 
-<ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="report.html">Report</a></li>
-<li><a href="learn.html">Learn</a></li>
-<li><a href="safety.html">Safety Tips</a></li>
-<li><a href="resources.html">Resources</a></li>
-<li><a href="emergency.html">Emergency</a></li>
-</ul>
+    <header class="site-header">
 
-</nav>
-</header>
+        <div class="nav-container">
 
-<section class="report-page">
+            <a
+                href="index.html"
+                class="brand"
+            >
 
-<h1>🛡 Online Safety Tips</h1>
+                <img
+                    src="images/logo.png"
+                    alt="CyberSafe Logo"
+                    class="brand-logo"
+                >
 
-<div class="steps">
+                <span class="brand-name">
+                    CYBERSAFE
+                </span>
 
-<div class="step">🔒 Use strong passwords.</div>
+            </a>
 
-<div class="step">📱 Never share OTPs or passwords.</div>
 
-<div class="step">📸 Save screenshots as evidence.</div>
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
 
-<div class="step">🚫 Block and report abusive users.</div>
 
-<div class="step">👨‍👩‍👧 Tell a trusted adult immediately.</div>
+            <nav
+                class="main-nav"
+                id="mainNav"
+            >
 
-<div class="step">🌐 Think before posting online.</div>
+                <a href="index.html">
+                    Home
+                </a>
 
-</div>
+                <a href="report.html">
+                    Report
+                </a>
 
-</section>
+                <a href="learn.html">
+                    Learn
+                </a>
 
-<footer>
-<p>© 2026 CyberSafe Student Security Portal</p>
-</footer>
+                <a
+                    href="safety.html"
+                    class="active"
+                >
+                    Safety Tips
+                </a>
+
+                <a href="resources.html">
+                    Resources
+                </a>
+
+                <a href="emergency.html">
+                    Emergency
+                </a>
+
+                <a
+                    href="login.html"
+                    class="login-nav-btn"
+                >
+                    Login
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         SAFETY PAGE
+    ========================================== -->
+
+    <main class="safety-page">
+
+        <!-- Hero -->
+
+        <section class="safety-hero">
+
+            <div class="safety-hero-content">
+
+                <span class="section-label">
+                    🛡️ CYBERSAFE PROTECTION
+                </span>
+
+                <h1>
+                    Online Safety Tips
+                </h1>
+
+                <p>
+                    Simple steps to protect yourself,
+                    your accounts and your personal
+                    information online.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Safety Cards -->
+
+        <section class="safety-section">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    🔐 STAY PROTECTED
+                </span>
+
+                <h2>
+                    Smart Habits for a Safer Internet
+                </h2>
+
+                <p>
+                    Follow these practical tips whenever
+                    you use social media, messaging apps,
+                    games or other online services.
+                </p>
+
+            </div>
+
+
+            <div class="safety-grid">
+
+
+                <!-- Card 1 -->
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        🔐
+                    </div>
+
+                    <div class="safety-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Use Strong Passwords
+                    </h3>
+
+                    <p>
+                        Create strong and unique passwords
+                        for your accounts. Avoid using your
+                        name, birthday or easy-to-guess
+                        information.
+                    </p>
+
+                </article>
+
+
+                <!-- Card 2 -->
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        🔢
+                    </div>
+
+                    <div class="safety-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Never Share OTPs or Passwords
+                    </h3>
+
+                    <p>
+                        Never share your password, OTP,
+                        PIN or verification code with
+                        anyone, even if they claim to be
+                        a friend, teacher or company.
+                    </p>
+
+                </article>
+
+
+                <!-- Card 3 -->
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        📸
+                    </div>
+
+                    <div class="safety-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Save Screenshots as Evidence
+                    </h3>
+
+                    <p>
+                        If someone sends abusive, threatening
+                        or inappropriate messages, save
+                        screenshots and keep the evidence
+                        safe.
+                    </p>
+
+                </article>
+
+
+                <!-- Card 4 -->
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        🚫
+                    </div>
+
+                    <div class="safety-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Block and Report Abusive Users
+                    </h3>
+
+                    <p>
+                        Do not continue arguing with someone
+                        who is harassing you. Block the
+                        account and report it through the
+                        platform.
+                    </p>
+
+                </article>
+
+
+                <!-- Card 5 -->
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        👨‍👩‍👧
+                    </div>
+
+                    <div class="safety-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Tell a Trusted Adult
+                    </h3>
+
+                    <p>
+                        If something online makes you feel
+                        unsafe, uncomfortable or threatened,
+                        tell a parent, teacher, counsellor
+                        or another trusted adult immediately.
+                    </p>
+
+                </article>
+
+
+                <!-- Card 6 -->
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        🌐
+                    </div>
+
+                    <div class="safety-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Think Before Posting
+                    </h3>
+
+                    <p>
+                        Remember that things posted online
+                        can be copied and shared. Think
+                        carefully before posting photos,
+                        comments or personal information.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- What To Do If Something Happens -->
+
+        <section class="safety-action-section">
+
+            <div class="action-box">
+
+                <div class="action-icon">
+                    🛡️
+                </div>
+
+                <div class="action-content">
+
+                    <span class="section-label">
+                        🚨 IF SOMETHING GOES WRONG
+                    </span>
+
+                    <h2>
+                        You Are Not Alone
+                    </h2>
+
+                    <p>
+                        If you experience cyberbullying,
+                        threats, harassment or anything
+                        that makes you feel unsafe, don't
+                        deal with it alone.
+                    </p>
+
+                    <div class="action-buttons">
+
+                        <a
+                            href="report.html"
+                            class="primary-btn"
+                        >
+                            🚨 Report Cyberbullying
+                        </a>
+
+                        <a
+                            href="emergency.html"
+                            class="secondary-btn"
+                        >
+                            📞 Get Help
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <img
+                    src="images/logo.png"
+                    alt="CyberSafe Logo"
+                >
+
+                <div>
+
+                    <strong>
+                        CYBERSAFE
+                    </strong>
+
+                    <p>
+                        Student Security Portal
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="report.html">
+                    Report
+                </a>
+
+                <a href="learn.html">
+                    Learn
+                </a>
+
+                <a href="safety.html">
+                    Safety Tips
+                </a>
+
+                <a href="resources.html">
+                    Resources
+                </a>
+
+                <a href="emergency.html">
+                    Emergency
+                </a>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                © 2026 CyberSafe | Student Security Portal
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================
+         MOBILE MENU
+    ========================================== -->
+
+    <script>
+
+        const mobileMenuBtn =
+            document.getElementById("mobileMenuBtn");
+
+        const mainNav =
+            document.getElementById("mainNav");
+
+
+        mobileMenuBtn.addEventListener(
+            "click",
+            function () {
+
+                mainNav.classList.toggle("mobile-open");
+
+                const isOpen =
+                    mainNav.classList.contains(
+                        "mobile-open"
+                    );
+
+                mobileMenuBtn.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                );
+
+            }
+        );
+
+
+        /* Close menu after clicking a link */
+
+        document
+            .querySelectorAll(".main-nav a")
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        mainNav.classList.remove(
+                            "mobile-open"
+                        );
+
+                        mobileMenuBtn.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+                );
+
+            });
+
+    </script>
 
 </body>
 </html>
