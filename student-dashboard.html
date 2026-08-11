@@ -848,6 +848,9 @@ onAuthStateChanged(auth, async (user) => {
 
         studentClass.textContent =
             student.class || "Not available";
+        
+        studentStream.textContent =
+    currentStudent.stream || "Not available";
 
         studentSection.textContent =
             student.section || "Not available";
