@@ -628,74 +628,84 @@ function compressScreenshot(file) {
         // SUBMIT REPORT
         // ==================================
 
-        await addDoc(
-            collection(db, "reports"),
-            {
+       await addDoc(
+    collection(db, "reports"),
+    {
+        studentUID:
+            currentUser.uid,
 
-                studentUID:
-                    currentUser.uid,
+        studentName:
+            currentStudent.name || "",
 
-                studentName:
-                    currentStudent.name || "",
+        admissionNo:
+            currentStudent.admissionNo || "",
 
-                admissionNo:
-                    currentStudent.admissionNo || "",
+        class:
+            currentStudent.class || "",
 
-                class:
-                    currentStudent.class || "",
+        stream:
+            currentStudent.stream || "",
 
-                stream:
-                    currentStudent.stream || "",
+        mobile:
+            currentStudent.mobile || "",
 
-                mobile:
-                    currentStudent.mobile || "",
+        email:
+            currentStudent.email || "",
 
-                email:
-                    currentStudent.email || "",
+        platform:
+            document
+                .getElementById("platform")
+                .value,
 
-                platform:
-                    document
-                    .getElementById("platform")
-                    .value,
+        date:
+            document
+                .getElementById("date")
+                .value,
 
-                date:
-                    document
-                    .getElementById("date")
-                    .value,
+        description:
+            document
+                .getElementById("description")
+                .value
+                .trim(),
 
-               description:
-    document
-    .getElementById("description")
-    .value.trim(),
+        screenshotData:
+            screenshotData,
 
-screenshotData:
-    screenshotData,
+        status:
+            "Pending",
 
-status:
-    "Pending",
-                assignedTeacher: teacherData.TeacherName || "",
-teacherEmail: teacherData.TeacherEmail || "",
-teacherUID: teacherData.TeacherUid || "",
-classTeacherKey: classKey,
+        // ==================================
+        // ASSIGNED CLASS TEACHER
+        // ==================================
 
-                createdAt:
-                    serverTimestamp()
+        assignedTeacher:
+            teacherData.TeacherName || "",
 
-            }
-        );
+        teacherEmail:
+            teacherData.TeacherEmail || "",
 
+        teacherUID:
+            teacherData.TeacherUid || "",
 
-        alert(
-            "✅ Report submitted successfully!"
-        );
+        classTeacherKey:
+            classKey,
 
+        // ==================================
+        // TIMESTAMP
+        // ==================================
 
-        // Reset form
+        createdAt:
+            serverTimestamp()
+    }
+);
 
-        document
-        .getElementById("reportForm")
-        .reset();
+alert(
+    "✅ Report submitted successfully!"
+);
 
+document
+    .getElementById("reportForm")
+    .reset();
 
     }
 
