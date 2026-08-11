@@ -1456,3 +1456,942 @@ select {
     }
 
 }
+/* =========================================================
+   CYBERSAFE RESOURCES PAGE
+   ========================================================= */
+
+.resources-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(37, 99, 235, 0.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(124, 58, 237, 0.08),
+            transparent 30%
+        ),
+        #f4f8ff;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: #0b142b;
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.18);
+}
+
+
+.nav-container {
+    width: min(1400px, 94%);
+
+    margin: auto;
+
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+
+.brand-logo {
+    width: 52px;
+    height: 52px;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+}
+
+
+.main-nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+
+.main-nav a {
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    font-size: 16px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.main-nav a:hover {
+    color: #60a5fa;
+
+    transform: translateY(-1px);
+}
+
+
+.main-nav a.active {
+    color: #60a5fa;
+}
+
+
+.login-btn {
+    background: #22c55e !important;
+
+    padding: 11px 22px;
+
+    border-radius: 999px;
+
+    color: #07101f !important;
+
+    font-weight: 700 !important;
+}
+
+
+.login-btn:hover {
+    background: #34d399 !important;
+
+    color: #07101f !important;
+}
+
+
+/* MOBILE BUTTON */
+
+.menu-toggle {
+    display: none;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.resources-hero {
+    width: min(1100px, 92%);
+
+    margin: 0 auto;
+
+    padding: 85px 20px 65px;
+
+    text-align: center;
+}
+
+
+.section-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 9px 18px;
+
+    border-radius: 999px;
+
+    background: rgba(37, 99, 235, 0.1);
+
+    color: #1d4ed8;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 22px;
+}
+
+
+.resources-hero h1 {
+    margin: 0;
+
+    color: #102b68;
+
+    font-size: clamp(38px, 5vw, 64px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+}
+
+
+.resources-hero h1 span {
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #2563eb,
+            #7c3aed
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.resources-hero p {
+    max-width: 720px;
+
+    margin: 25px auto 0;
+
+    color: #64748b;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   RESOURCE SECTION
+   ========================================================= */
+
+.resources-section {
+    width: min(1200px, 92%);
+
+    margin: 0 auto;
+
+    padding: 20px 0 70px;
+}
+
+
+.section-heading {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    margin-bottom: 35px;
+}
+
+
+.section-heading > span {
+    font-size: 38px;
+}
+
+
+.section-heading h2 {
+    margin: 0 0 7px;
+
+    color: #102b68;
+
+    font-size: 32px;
+}
+
+
+.section-heading p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   RESOURCE GRID
+   ========================================================= */
+
+.resources-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 25px;
+}
+
+
+.resource-card {
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 22px;
+
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    border: 1px solid #dbe5f2;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 40px rgba(15, 23, 42, 0.07);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+
+    overflow: hidden;
+}
+
+
+.resource-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 5px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #06b6d4,
+            #2563eb,
+            #7c3aed
+        );
+}
+
+
+.resource-card:hover {
+    transform: translateY(-7px);
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 22px 55px rgba(37, 99, 235, 0.13);
+}
+
+
+.resource-icon {
+    min-width: 70px;
+
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    font-size: 34px;
+
+    background: #eff6ff;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(37, 99, 235, 0.08);
+}
+
+
+.video-icon {
+    background: #ecfeff;
+}
+
+
+.quiz-icon {
+    background: #eff6ff;
+}
+
+
+.poster-icon {
+    background: #f5f3ff;
+}
+
+
+.pledge-icon {
+    background: #ecfdf5;
+}
+
+
+.resource-content {
+    flex: 1;
+}
+
+
+.resource-label {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: #2563eb;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.resource-card h3 {
+    margin: 0 0 10px;
+
+    color: #102b68;
+
+    font-size: 23px;
+}
+
+
+.resource-card p {
+    margin: 0 0 20px;
+
+    color: #64748b;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+}
+
+
+.resource-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: gap 0.2s ease;
+}
+
+
+.resource-btn:hover {
+    gap: 14px;
+}
+
+
+/* =========================================================
+   INFORMATION SECTIONS
+   ========================================================= */
+
+.resource-info-section {
+    width: min(1200px, 92%);
+
+    margin: 0 auto 28px;
+}
+
+
+.info-box {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 22px;
+
+    padding: 32px;
+
+    background: white;
+
+    border: 1px solid #dbe5f2;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.06);
+}
+
+
+.info-icon {
+    min-width: 65px;
+
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #eff6ff;
+
+    font-size: 30px;
+}
+
+
+.info-box h2 {
+    margin: 0 0 10px;
+
+    color: #102b68;
+
+    font-size: 26px;
+}
+
+
+.info-box p {
+    margin: 0 0 10px;
+
+    color: #64748b;
+
+    line-height: 1.7;
+}
+
+
+.coming-soon {
+    display: inline-block;
+
+    margin-top: 8px !important;
+
+    padding: 7px 13px;
+
+    border-radius: 999px;
+
+    background: #eff6ff;
+
+    color: #2563eb !important;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PLEDGE
+   ========================================================= */
+
+.pledge-box {
+    padding: 45px;
+
+    margin-bottom: 80px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0b142b,
+            #172554
+        );
+
+    border-radius: 26px;
+
+    box-shadow:
+        0 25px 60px rgba(15, 23, 42, 0.2);
+
+    color: white;
+}
+
+
+.pledge-box .pledge-icon {
+    font-size: 45px;
+
+    margin-bottom: 10px;
+}
+
+
+.pledge-box h2 {
+    margin: 0 0 15px;
+
+    font-size: 30px;
+}
+
+
+.pledge-box > p {
+    max-width: 800px;
+
+    margin: 0 auto 25px;
+
+    color: #cbd5e1;
+
+    line-height: 1.8;
+}
+
+
+.pledge-points {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    max-width: 700px;
+
+    margin: auto;
+
+    text-align: left;
+}
+
+
+.pledge-points div {
+    padding: 13px 16px;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.08);
+
+    color: #e2e8f0;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+    background: #0b142b;
+
+    color: white;
+
+    margin-top: 40px;
+}
+
+
+.footer-container {
+    width: min(1200px, 92%);
+
+    margin: auto;
+
+    padding: 45px 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 35px;
+}
+
+
+.footer-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.footer-brand img {
+    width: 48px;
+
+    height: 48px;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+}
+
+
+.footer-brand strong {
+    font-size: 20px;
+}
+
+
+.footer-brand p {
+    margin: 4px 0 0;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+}
+
+
+.footer-links {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+
+    gap: 20px;
+}
+
+
+.footer-links a {
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: color 0.2s ease;
+}
+
+
+.footer-links a:hover {
+    color: white;
+}
+
+
+.footer-bottom {
+    padding: 18px;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .main-nav {
+        gap: 18px;
+    }
+
+    .main-nav a {
+        font-size: 14px;
+    }
+
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   Works on Android + iPhone/Safari
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .nav-container {
+        min-height: 72px;
+    }
+
+
+    .brand {
+        font-size: 20px;
+
+        gap: 9px;
+    }
+
+
+    .brand-logo {
+        width: 43px;
+
+        height: 43px;
+    }
+
+
+    .menu-toggle {
+        display: block;
+    }
+
+
+    .main-nav {
+        position: absolute;
+
+        top: 72px;
+
+        left: 0;
+
+        right: 0;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 0;
+
+        padding: 10px 20px 20px;
+
+        background: #0b142b;
+
+        box-shadow:
+            0 15px 30px rgba(0,0,0,0.2);
+    }
+
+
+    .main-nav.open {
+        display: flex;
+    }
+
+
+    .main-nav a {
+        padding: 15px 10px;
+
+        font-size: 16px;
+
+        border-bottom:
+            1px solid rgba(255,255,255,0.08);
+    }
+
+
+    .main-nav .login-btn {
+        margin-top: 12px;
+
+        text-align: center;
+
+        border-bottom: none;
+    }
+
+
+    .resources-hero {
+        padding:
+            55px 10px
+            45px;
+    }
+
+
+    .resources-hero h1 {
+        font-size: 39px;
+    }
+
+
+    .resources-hero p {
+        font-size: 16px;
+    }
+
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+
+    .resource-card {
+        padding: 24px;
+
+        flex-direction: column;
+
+        gap: 16px;
+    }
+
+
+    .resource-icon {
+        width: 60px;
+
+        height: 60px;
+
+        min-width: 60px;
+
+        font-size: 28px;
+    }
+
+
+    .resource-card h3 {
+        font-size: 21px;
+    }
+
+
+    .info-box {
+        flex-direction: column;
+
+        padding: 25px;
+    }
+
+
+    .pledge-box {
+        padding: 30px 22px;
+    }
+
+
+    .pledge-box h2 {
+        font-size: 25px;
+    }
+
+
+    .pledge-points {
+        grid-template-columns: 1fr;
+    }
+
+
+    .footer-container {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .footer-links {
+        justify-content: flex-start;
+
+        gap: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .resources-hero h1 {
+        font-size: 33px;
+    }
+
+
+    .section-badge {
+        font-size: 10px;
+
+        padding: 8px 12px;
+    }
+
+
+    .resource-card {
+        padding: 20px;
+    }
+
+}
