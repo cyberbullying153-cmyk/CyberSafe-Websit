@@ -630,11 +630,10 @@ function compressScreenshot(file) {
         // SUBMIT REPORT
         // ==================================
 
-     await addDoc(
+    await addDoc(
     collection(db, "reports"),
     {
-        studentUID:
-            currentUser.uid,
+        studentUID: currentUser.uid,
 
         studentName:
             currentStudent.name || "",
@@ -655,14 +654,10 @@ function compressScreenshot(file) {
             currentStudent.email || "",
 
         platform:
-            document
-                .getElementById("platform")
-                .value,
+            document.getElementById("platform").value,
 
         date:
-            document
-                .getElementById("date")
-                .value,
+            document.getElementById("date").value,
 
         description:
             document
@@ -676,18 +671,9 @@ function compressScreenshot(file) {
         status:
             "Pending",
 
-        // ==============================
+        // =====================================
         // TEACHER ASSIGNMENT
-        // ==============================
-
-        assignedTeacher:
-            teacherData.TeacherName || "",
-
-        teacherEmail:
-            teacherData.TeacherEmail || "",
-
-        teacherUID:
-            teacherData.TeacherUid || "",
+        // =====================================
 
         assignedTeacherName:
             teacherData.TeacherName || "",
@@ -700,6 +686,20 @@ function compressScreenshot(file) {
 
         assignedClass:
             classKey,
+
+        // =====================================
+        // IMPORTANT:
+        // THIS IS THE FIELD TEACHER DASHBOARD USES
+        // =====================================
+
+        teacherUID:
+            teacherData.TeacherUid || "",
+
+        teacherEmail:
+            teacherData.TeacherEmail || "",
+
+        teacherName:
+            teacherData.TeacherName || "",
 
         classTeacherKey:
             classKey,
