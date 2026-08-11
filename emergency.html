@@ -1,170 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <meta
-        name="description"
-        content="CyberSafe Emergency Help and Support"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b142b">
 
     <title>Emergency Help | CyberSafe</title>
 
-    <!-- Google Font -->
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- Your main CSS -->
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header class="site-header">
 
-    <div class="nav-container">
+    <nav class="navbar">
 
-        <!-- LOGO -->
-        <a href="index.html" class="brand">
-
-            <img
-                src="images/logo.png"
-                alt="CyberSafe Logo"
-                class="brand-logo"
-            >
-
-            <span class="brand-name">
-                CYBERSAFE
-            </span>
-
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" class="logo-img" alt="CyberSafe Logo">
+            <span class="logo-text">CYBERSAFE</span>
         </a>
 
-
-        <!-- MOBILE MENU BUTTON -->
-        <button
-            class="menu-toggle"
-            id="menuToggle"
-            type="button"
-            aria-label="Open navigation menu"
-            aria-expanded="false"
-        >
+        <button class="menu-toggle" id="menuToggle">
             ☰
         </button>
 
+        <ul class="nav-menu" id="navMenu">
 
-        <!-- NAVIGATION -->
-        <nav
-            class="main-nav"
-            id="mainNav"
-        >
+            <li><a href="index.html">Home</a></li>
+            <li><a href="report.html">Report</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="safety.html">Safety Tips</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="emergency.html" class="active">Emergency</a></li>
+            <li><a href="login.html" class="login-link">Login</a></li>
 
-            <a href="index.html">
-                Home
-            </a>
+        </ul>
 
-            <a href="report.html">
-                Report
-            </a>
-
-            <a href="learn.html">
-                Learn
-            </a>
-
-            <a href="safety.html">
-                Safety Tips
-            </a>
-
-            <a href="resources.html">
-                Resources
-            </a>
-
-            <a
-                href="emergency.html"
-                class="active"
-            >
-                Emergency
-            </a>
-
-            <a
-                href="login.html"
-                class="nav-login"
-            >
-                Login
-            </a>
-
-        </nav>
-
-    </div>
+    </nav>
 
 </header>
 
 
-<!-- =====================================================
-     MAIN CONTENT
-===================================================== -->
-
 <main>
 
+<section class="section">
 
-    <!-- =================================================
-         EMERGENCY HERO
-    ================================================== -->
+    <div class="container">
 
-    <section class="emergency-hero">
 
-        <div class="emergency-hero-content">
+        <div class="emergency-intro">
 
-            <div class="emergency-badge">
+            <div class="eyebrow">
                 🛡️ CYBERSAFE EMERGENCY SUPPORT
             </div>
 
             <h1>
-                Need Help?
-                <span>You Are Not Alone.</span>
+                Need Help?<br>
+                You Are Not Alone.
             </h1>
 
             <p>
                 If you are experiencing cyberbullying, online harassment,
-                threats, blackmail, fake accounts, or another online safety
+                threats, blackmail, fake accounts or another online safety
                 problem, please contact a trusted person immediately.
             </p>
 
+            <div class="hero-buttons">
 
-            <div class="hero-actions">
-
-                <a
-                    href="report.html"
-                    class="btn btn-primary"
-                >
+                <a href="report.html" class="btn btn-primary">
                     🚨 Report an Incident
                 </a>
 
-                <a
-                    href="#emergency-contacts"
-                    class="btn btn-secondary"
-                >
+                <a href="#contacts" class="btn btn-light">
                     📞 Get Help
                 </a>
 
@@ -172,40 +83,20 @@
 
         </div>
 
-    </section>
 
+        <div class="section-heading" id="contacts">
 
-
-    <!-- =================================================
-         EMERGENCY CONTACTS
-    ================================================== -->
-
-    <section
-        class="emergency-section"
-        id="emergency-contacts"
-    >
-
-        <div class="section-heading">
-
-            <span class="section-icon">
-                🆘
-            </span>
-
-            <div>
-
-                <p class="section-label">
-                    IMPORTANT CONTACTS
-                </p>
-
-                <h2>
-                    Emergency Help & Support
-                </h2>
-
-                <p>
-                    Contact the appropriate person depending on your situation.
-                </p>
-
+            <div class="eyebrow">
+                IMPORTANT CONTACTS
             </div>
+
+            <h2>
+                Emergency Help & Support
+            </h2>
+
+            <p>
+                Contact the appropriate person depending on your situation.
+            </p>
 
         </div>
 
@@ -213,464 +104,375 @@
         <div class="contact-grid">
 
 
-            <!-- =========================================
-                 COUNSELLOR
-            ========================================== -->
+            <!-- COUNSELLOR -->
 
-            <article class="contact-card counsellor-card">
+            <article class="contact-card">
 
-                <div class="contact-icon">
-                    👩‍🏫
+                <div class="contact-icon">👩‍🏫</div>
+
+                <div class="contact-label">
+                    School Counsellor
                 </div>
 
-                <div class="contact-content">
+                <h3>
+                    Navneet Kaur
+                </h3>
 
-                    <span class="contact-tag">
-                        SCHOOL COUNSELLOR
-                    </span>
+                <p>
+                    Talk to the school counsellor for emotional support,
+                    guidance and help with difficult situations.
+                </p>
 
-                    <h3>
-                        Navneet Kaur
-                    </h3>
+                <a
+                    href="tel:7988217153"
+                    class="contact-phone"
+                >
+                    📞 7988217153
+                </a>
 
-                    <p>
-                        Talk to the school counsellor for emotional support,
-                        guidance and help with difficult situations.
-                    </p>
+                <br>
 
-                    <div class="contact-number">
-                        📞
-                        <strong>
-                            7988217153
-                        </strong>
-                    </div>
-
-                    <a
-                        href="tel:7988217153"
-                        class="contact-button"
-                    >
-                        Call Counsellor
-                    </a>
-
-                </div>
+                <a
+                    href="tel:7988217153"
+                    class="btn btn-primary"
+                >
+                    Call Counsellor
+                </a>
 
             </article>
 
 
+            <!-- PRINCIPAL -->
 
-            <!-- =========================================
-                 PRINCIPAL
-            ========================================== -->
+            <article class="contact-card">
 
-            <article class="contact-card principal-card">
+                <div class="contact-icon">👩‍💼</div>
 
-                <div class="contact-icon">
-                    👨‍💼
+                <div class="contact-label">
+                    School Principal
                 </div>
 
-                <div class="contact-content">
+                <h3>
+                    Ila
+                </h3>
 
-                    <span class="contact-tag">
-                        SCHOOL PRINCIPAL
-                    </span>
+                <p>
+                    Contact the school principal for serious incidents,
+                    threats or situations requiring school administration.
+                </p>
 
-                    <h3>
-                        Ila
-                    </h3>
+                <a
+                    href="tel:9153473998"
+                    class="contact-phone"
+                >
+                    📞 9153473998
+                </a>
 
-                    <p>
-                        Contact the principal for serious incidents,
-                        repeated cyberbullying or situations requiring
-                        school administration.
-                    </p>
+                <br>
 
-                    <div class="contact-number">
-                        📞
-                        <strong>
-                            9153473998
-                        </strong>
-                    </div>
-
-                    <a
-                        href="tel:9153473998"
-                        class="contact-button"
-                    >
-                        Call Principal
-                    </a>
-
-                </div>
+                <a
+                    href="tel:9153473998"
+                    class="btn btn-primary"
+                >
+                    Call Principal
+                </a>
 
             </article>
 
 
+            <!-- GOVERNMENT CYBERCRIME -->
 
-            <!-- =========================================
-                 GOVERNMENT CYBER CRIME
-            ========================================== -->
-
-            <article class="contact-card government-card">
+            <article class="contact-card gov-card">
 
                 <div class="contact-icon">
-                    🛡️
+                    🏛️
                 </div>
 
-                <div class="contact-content">
-
-                    <span class="contact-tag">
-                        GOVERNMENT CYBER SECURITY
-                    </span>
-
-                    <h3>
-                        National Cyber Crime Portal
-                    </h3>
-
-                    <p>
-                        Use the official Government of India cyber crime
-                        reporting system for serious cybercrime complaints.
-                    </p>
-
-                    <div class="contact-number">
-                        📞
-                        <strong>
-                            1930
-                        </strong>
-                    </div>
-
-                    <a
-                        href="tel:1930"
-                        class="contact-button"
-                    >
-                        Call 1930
-                    </a>
-
-                    <a
-                        href="https://www.cybercrime.gov.in/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="website-button"
-                    >
-                        🌐 Open Official Website
-                    </a>
-
+                <div class="contact-label">
+                    Government Cyber Security Support
                 </div>
+
+                <h3>
+                    National Cyber Crime Reporting Portal
+                </h3>
+
+                <p>
+                    Use the Government of India's cybercrime reporting
+                    system for cybercrime complaints, online financial
+                    fraud, hacking, identity theft and other serious
+                    cyber offences.
+                </p>
+
+                <a
+                    href="https://www.cybercrime.gov.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="gov-link"
+                >
+                    🌐 Visit Official Government Website →
+                </a>
+
+                <div class="gov-number">
+                    📞 Cyber Crime Helpline: 1930
+                </div>
+
+                <br>
+
+                <a
+                    href="tel:1930"
+                    class="btn btn-success"
+                >
+                    Call 1930
+                </a>
 
             </article>
 
+
+            <!-- GENERAL EMERGENCY -->
+
+            <article class="contact-card">
+
+                <div class="contact-icon">🚨</div>
+
+                <div class="contact-label">
+                    Immediate Danger
+                </div>
+
+                <h3>
+                    Emergency Services
+                </h3>
+
+                <p>
+                    If you are in immediate physical danger or need
+                    urgent emergency assistance, contact emergency
+                    services.
+                </p>
+
+                <a
+                    href="tel:112"
+                    class="contact-phone"
+                >
+                    📞 112
+                </a>
+
+                <br>
+
+                <a
+                    href="tel:112"
+                    class="btn btn-primary"
+                >
+                    Call 112
+                </a>
+
+            </article>
+
+
+            <!-- TRUSTED ADULT -->
+
+            <article class="contact-card">
+
+                <div class="contact-icon">💙</div>
+
+                <div class="contact-label">
+                    Trusted Support
+                </div>
+
+                <h3>
+                    Tell Someone You Trust
+                </h3>
+
+                <p>
+                    Talk to your parent, guardian, teacher, counsellor
+                    or another trusted adult. You do not have to deal
+                    with cyberbullying alone.
+                </p>
+
+                <a
+                    href="report.html"
+                    class="btn btn-light"
+                >
+                    Report Through CyberSafe
+                </a>
+
+            </article>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
+<section class="section">
 
-    <!-- =================================================
-         QUICK SAFETY MESSAGE
-    ================================================== -->
+    <div class="container">
 
-    <section class="safety-alert">
+        <div class="section-heading">
 
-        <div class="safety-alert-icon">
-            🔐
-        </div>
-
-        <div>
+            <div class="eyebrow">
+                STAY CALM & ACT SAFELY
+            </div>
 
             <h2>
-                If You Are In Immediate Danger
+                What Should You Do?
             </h2>
 
             <p>
-                Move to a safe place and tell a trusted adult, parent,
-                teacher or school staff member immediately. Do not meet
-                an online stranger alone and do not send money or
-                personal information to someone threatening you.
+                Follow these steps if something happens online.
             </p>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         WHAT SHOULD YOU DO
-    ================================================== -->
-
-    <section class="steps-section">
-
-        <div class="section-heading centered">
-
-            <span class="section-icon">
-                🧭
-            </span>
-
-            <div>
-
-                <p class="section-label">
-                    STAY SAFE
-                </p>
-
-                <h2>
-                    What Should You Do?
-                </h2>
-
-                <p>
-                    Follow these simple steps if something happens online.
-                </p>
-
-            </div>
 
         </div>
 
 
         <div class="steps-grid">
 
+            <article class="step">
 
-            <div class="step-card">
+                <span class="step-number">STEP 1</span>
 
-                <div class="step-number">
-                    1
-                </div>
+                <h3>Stay Calm</h3>
 
-                <div>
-                    <h3>
-                        Stay Calm
-                    </h3>
+                <p>
+                    Do not panic or respond aggressively.
+                </p>
 
-                    <p>
-                        Do not panic or respond aggressively to the person.
-                    </p>
-                </div>
-
-            </div>
+            </article>
 
 
-            <div class="step-card">
+            <article class="step">
 
-                <div class="step-number">
-                    2
-                </div>
+                <span class="step-number">STEP 2</span>
 
-                <div>
-                    <h3>
-                        Save Evidence
-                    </h3>
+                <h3>Save Evidence</h3>
 
-                    <p>
-                        Take screenshots and keep messages, usernames,
-                        links and other evidence.
-                    </p>
-                </div>
+                <p>
+                    Take screenshots and keep messages,
+                    usernames and links.
+                </p>
 
-            </div>
+            </article>
 
 
-            <div class="step-card">
+            <article class="step">
 
-                <div class="step-number">
-                    3
-                </div>
+                <span class="step-number">STEP 3</span>
 
-                <div>
-                    <h3>
-                        Block & Report
-                    </h3>
+                <h3>Block & Report</h3>
 
-                    <p>
-                        Block the person and report the account on
-                        the platform.
-                    </p>
-                </div>
+                <p>
+                    Block the account and report it
+                    through the platform.
+                </p>
 
-            </div>
+            </article>
 
 
-            <div class="step-card">
+            <article class="step">
 
-                <div class="step-number">
-                    4
-                </div>
+                <span class="step-number">STEP 4</span>
 
-                <div>
-                    <h3>
-                        Tell a Trusted Adult
-                    </h3>
+                <h3>Tell a Trusted Adult</h3>
 
-                    <p>
-                        Speak with your counsellor, principal, teacher
-                        or parent.
-                    </p>
-                </div>
+                <p>
+                    Speak with your counsellor, principal,
+                    teacher or parent.
+                </p>
 
-            </div>
+            </article>
 
 
-            <div class="step-card">
+            <article class="step">
 
-                <div class="step-number">
-                    5
-                </div>
+                <span class="step-number">STEP 5</span>
 
-                <div>
-                    <h3>
-                        Use CyberSafe
-                    </h3>
+                <h3>Use CyberSafe</h3>
 
-                    <p>
-                        Submit a confidential cyberbullying report
-                        through CyberSafe.
-                    </p>
-                </div>
+                <p>
+                    Submit a confidential cyberbullying
+                    report through CyberSafe.
+                </p>
 
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         GOVERNMENT NOTICE
-    ================================================== -->
-
-    <section class="government-notice">
-
-        <div class="notice-icon">
-            🇮🇳
-        </div>
-
-        <div>
-
-            <h2>
-                Official Government Cyber Crime Support
-            </h2>
-
-            <p>
-                The National Cyber Crime Reporting Portal is an official
-                Government of India platform for reporting cybercrime.
-                For immediate cyber financial fraud reporting, the
-                national helpline is <strong>1930</strong>.
-            </p>
-
-            <a
-                href="https://www.cybercrime.gov.in/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="official-link"
-            >
-                Visit cybercrime.gov.in →
-            </a>
-
-        </div>
-
-    </section>
-
-
-</main>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="site-footer">
-
-    <div class="footer-inner">
-
-        <div class="footer-brand">
-
-            <img
-                src="images/logo.png"
-                alt="CyberSafe"
-            >
-
-            <div>
-
-                <strong>
-                    CYBERSAFE
-                </strong>
-
-                <span>
-                    Student Security Portal
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-text">
-
-            © 2026 CyberSafe
-            <span>•</span>
-            Stay Safe Online
+            </article>
 
         </div>
 
     </div>
 
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <div>
+
+            <div class="footer-brand">
+
+                <img src="images/logo.png" alt="CyberSafe Logo">
+
+                <strong>CYBERSAFE</strong>
+
+            </div>
+
+            <p class="footer-description">
+                Student Security Portal helping students stay
+                safe, speak up and get support.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Quick Links</h3>
+
+            <a href="index.html">Home</a>
+            <a href="report.html">Report</a>
+            <a href="learn.html">Learn</a>
+            <a href="safety.html">Safety Tips</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Support</h3>
+
+            <a href="resources.html">Resources</a>
+            <a href="emergency.html">Emergency</a>
+            <a href="login.html">Login</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+        © 2026 CyberSafe | Student Security Portal
+    </div>
+
 </footer>
 
 
-
-<!-- =====================================================
-     MOBILE MENU SCRIPT
-===================================================== -->
-
 <script>
 
-const menuToggle =
-    document.getElementById("menuToggle");
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
 
-const mainNav =
-    document.getElementById("mainNav");
+menuToggle.addEventListener("click", function () {
+    navMenu.classList.toggle("open");
+});
 
+document.querySelectorAll(".nav-menu a").forEach(function(link) {
 
-menuToggle.addEventListener(
-    "click",
-    function () {
-
-        const isOpen =
-            mainNav.classList.toggle("open");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            isOpen ? "true" : "false"
-        );
-
-        menuToggle.textContent =
-            isOpen ? "✕" : "☰";
-
-    }
-);
-
-
-/* Close menu after clicking a link */
-
-document
-    .querySelectorAll("#mainNav a")
-    .forEach(function (link) {
-
-        link.addEventListener(
-            "click",
-            function () {
-
-                mainNav.classList.remove("open");
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-                menuToggle.textContent = "☰";
-
-            }
-        );
-
+    link.addEventListener("click", function() {
+        navMenu.classList.remove("open");
     });
+
+});
 
 </script>
 
