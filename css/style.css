@@ -905,3 +905,50 @@ button,
 .nav-menu a {
     touch-action: manipulation;
 }
+/* =====================================================
+   FIX: CYBERSAFE HERO IMAGE SIZE
+   ===================================================== */
+
+.hero-image {
+    width: 100%;
+    max-width: 850px;
+    height: 420px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+/* Desktop */
+@media (min-width: 901px) {
+    .hero-image {
+        max-width: 850px;
+        height: 420px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .hero-image {
+        max-width: 700px;
+        height: 350px;
+    }
+}
+
+/* Android / small screens */
+@media (max-width: 600px) {
+    .hero-image {
+        width: 100%;
+        max-width: 100%;
+        height: 260px;
+        object-fit: contain;
+        border-radius: 14px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+    .hero-image {
+        height: 210px;
+    }
+}
