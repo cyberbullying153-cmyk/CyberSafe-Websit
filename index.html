@@ -1,59 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
-    <!-- IMPORTANT FOR ANDROID + SAFARI -->
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0"
     >
 
     <meta
-        name="theme-color"
-        content="#0f172a"
-    >
-
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
-
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent"
+        name="description"
+        content="CyberSafe - Student Cyberbullying and Online Safety Portal"
     >
 
     <title>CyberSafe | Student Security Portal</title>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      HEADER
@@ -63,12 +36,7 @@
 
     <div class="nav-container">
 
-        <!-- LOGO -->
-
-        <a
-            href="index.html"
-            class="brand"
-        >
+        <a href="index.html" class="brand">
 
             <img
                 src="images/logo.png"
@@ -76,38 +44,31 @@
                 class="brand-logo"
             >
 
-            <span class="brand-name">
-                CYBERSAFE
-            </span>
+            <span>CYBERSAFE</span>
 
         </a>
 
 
-        <!-- MOBILE MENU BUTTON -->
+        <!-- Mobile menu button -->
 
-        <button
+        <input
+            type="checkbox"
+            id="menu-toggle"
             class="menu-toggle"
-            id="menuToggle"
-            type="button"
-            aria-label="Open navigation"
-            aria-expanded="false"
         >
 
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </button>
-
-
-        <!-- NAVIGATION -->
-
-        <nav
-            class="main-nav"
-            id="mainNav"
+        <label
+            for="menu-toggle"
+            class="menu-button"
+            aria-label="Open navigation menu"
         >
+            ☰
+        </label>
 
-            <a href="index.html">
+
+        <nav class="main-nav">
+
+            <a href="index.html" class="active">
                 Home
             </a>
 
@@ -131,10 +92,7 @@
                 Emergency
             </a>
 
-            <a
-                href="login.html"
-                class="login-button"
-            >
+            <a href="login.html" class="login-link">
                 Login
             </a>
 
@@ -154,24 +112,26 @@
 
 <section class="hero">
 
-    <div class="hero-content">
+    <div class="hero-container">
 
-        <div class="hero-text">
+        <div class="hero-content">
 
-            <span class="hero-badge">
+            <div class="hero-badge">
                 🛡️ Student Safety Portal
-            </span>
+            </div>
 
             <h1>
-                Stay Safe.<br>
-                Speak Up.<br>
+                Stay Safe.
+                <br>
+                Speak Up.
+                <br>
                 <span>Be CyberSafe.</span>
             </h1>
 
             <p>
-                A safe and confidential place for students
-                to report cyberbullying, learn about online
-                safety, and get help from trusted adults.
+                A safe and confidential place for students to
+                report cyberbullying, learn about online safety,
+                and get help from trusted adults.
             </p>
 
 
@@ -179,29 +139,44 @@
 
                 <a
                     href="report.html"
-                    class="primary-button"
+                    class="btn btn-primary"
                 >
                     🚨 Report Cyberbullying
                 </a>
 
                 <a
                     href="emergency.html"
-                    class="secondary-button"
+                    class="btn btn-secondary"
                 >
                     🆘 Get Help
                 </a>
 
             </div>
 
+
+            <div class="hero-note">
+                🔒 Your safety and privacy matter.
+            </div>
+
         </div>
 
 
-        <div class="hero-image-box">
+        <!-- CyberSafe visual -->
 
-            <img
-                src="images/logo.png"
-                alt="CyberSafe"
-            >
+        <div class="hero-visual">
+
+            <div class="security-circle">
+
+                <div class="shield">
+                    🛡️
+                </div>
+
+                <div class="security-text">
+                    <strong>CYBERSAFE</strong>
+                    <span>PROTECT • REPORT • LEARN</span>
+                </div>
+
+            </div>
 
         </div>
 
@@ -213,7 +188,6 @@
 
 <!-- =====================================================
      WHAT IS CYBERSAFE
-     MOVED TO TOP
 ===================================================== -->
 
 <section class="about-section">
@@ -222,39 +196,87 @@
 
         <div class="section-heading">
 
-            <span class="section-icon">
-                🛡️
+            <span class="section-label">
+                🛡️ ABOUT CYBERSAFE
             </span>
 
             <h2>
                 What is CyberSafe?
             </h2>
 
+            <p>
+                CyberSafe is a student-focused safety portal
+                designed to help students stay protected online,
+                report cyberbullying safely, and find trusted
+                support when they need it.
+            </p>
+
         </div>
 
 
-        <p class="about-text">
+        <div class="about-grid">
 
-            <strong>CyberSafe</strong> is a student security
-            portal designed to help students stay safe online.
+            <div class="about-item">
 
-            Students can report cyberbullying confidentially,
-            learn about digital safety, access helpful resources,
-            and connect with trusted teachers and adults.
+                <div class="about-icon">
+                    🔐
+                </div>
 
-        </p>
+                <div>
+                    <h3>
+                        Safe & Confidential
+                    </h3>
+
+                    <p>
+                        Students can report online problems
+                        securely and confidentially.
+                    </p>
+                </div>
+
+            </div>
 
 
-        <p class="about-text">
+            <div class="about-item">
 
-            Our goal is simple:
+                <div class="about-icon">
+                    🚨
+                </div>
 
-            <strong>
-                No student should feel unsafe, alone, or afraid
-                because of something happening online.
-            </strong>
+                <div>
+                    <h3>
+                        Report Cyberbullying
+                    </h3>
 
-        </p>
+                    <p>
+                        Submit an incident report and provide
+                        important evidence when needed.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="about-item">
+
+                <div class="about-icon">
+                    👩‍🏫
+                </div>
+
+                <div>
+                    <h3>
+                        Trusted Support
+                    </h3>
+
+                    <p>
+                        Connect with teachers, counsellors and
+                        school authorities.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -263,21 +285,25 @@
 
 
 <!-- =====================================================
-     QUICK ACTIONS
+     HOW CYBERSAFE HELPS
 ===================================================== -->
 
-<section class="quick-section">
+<section class="services-section">
 
     <div class="section-container">
 
-        <div class="section-title">
+        <div class="section-heading center">
+
+            <span class="section-label">
+                💙 SUPPORT
+            </span>
 
             <h2>
                 How CyberSafe Helps
             </h2>
 
             <p>
-                Choose the support you need.
+                Choose the support or information you need.
             </p>
 
         </div>
@@ -286,14 +312,11 @@
         <div class="cards-grid">
 
 
-            <!-- REPORT -->
+            <!-- Report -->
 
-            <a
-                href="report.html"
-                class="info-card"
-            >
+            <article class="support-card">
 
-                <div class="card-icon">
+                <div class="card-icon red">
                     🚨
                 </div>
 
@@ -306,22 +329,19 @@
                     confidentially.
                 </p>
 
-                <span class="card-link">
+                <a href="report.html">
                     Report Now →
-                </span>
+                </a>
 
-            </a>
+            </article>
 
 
 
-            <!-- LEARN -->
+            <!-- Learn -->
 
-            <a
-                href="learn.html"
-                class="info-card"
-            >
+            <article class="support-card">
 
-                <div class="card-icon">
+                <div class="card-icon blue">
                     📚
                 </div>
 
@@ -331,25 +351,22 @@
 
                 <p>
                     Understand cyberbullying and learn
-                    how to stay safe online.
+                    practical ways to stay safe online.
                 </p>
 
-                <span class="card-link">
+                <a href="learn.html">
                     Learn More →
-                </span>
+                </a>
 
-            </a>
+            </article>
 
 
 
-            <!-- PARENT -->
+            <!-- Parents -->
 
-            <a
-                href="resources.html"
-                class="info-card"
-            >
+            <article class="support-card">
 
-                <div class="card-icon">
+                <div class="card-icon purple">
                     👨‍👩‍👧
                 </div>
 
@@ -358,26 +375,23 @@
                 </h3>
 
                 <p>
-                    Tips and resources for keeping
-                    children safe online.
+                    Helpful information for parents supporting
+                    children online.
                 </p>
 
-                <span class="card-link">
+                <a href="resources.html">
                     View Resources →
-                </span>
+                </a>
 
-            </a>
+            </article>
 
 
 
-            <!-- TEACHER -->
+            <!-- Teachers -->
 
-            <a
-                href="resources.html"
-                class="info-card"
-            >
+            <article class="support-card">
 
-                <div class="card-icon">
+                <div class="card-icon green">
                     👩‍🏫
                 </div>
 
@@ -386,26 +400,23 @@
                 </h3>
 
                 <p>
-                    Resources for teachers to identify
-                    and respond to cyberbullying.
+                    Resources for teachers to identify and
+                    respond to cyberbullying.
                 </p>
 
-                <span class="card-link">
+                <a href="resources.html">
                     Teacher Resources →
-                </span>
+                </a>
 
-            </a>
+            </article>
 
 
 
-            <!-- SAFETY -->
+            <!-- Safety -->
 
-            <a
-                href="safety.html"
-                class="info-card"
-            >
+            <article class="support-card">
 
-                <div class="card-icon">
+                <div class="card-icon cyan">
                     🔐
                 </div>
 
@@ -414,26 +425,23 @@
                 </h3>
 
                 <p>
-                    Learn practical ways to protect
-                    your accounts and personal information.
+                    Learn practical ways to protect your
+                    accounts and personal information.
                 </p>
 
-                <span class="card-link">
+                <a href="safety.html">
                     Stay Safe →
-                </span>
+                </a>
 
-            </a>
+            </article>
 
 
 
-            <!-- EMERGENCY -->
+            <!-- Emergency -->
 
-            <a
-                href="emergency.html"
-                class="info-card emergency-card"
-            >
+            <article class="support-card emergency-card">
 
-                <div class="card-icon">
+                <div class="card-icon orange">
                     🆘
                 </div>
 
@@ -442,51 +450,15 @@
                 </h3>
 
                 <p>
-                    Find important contacts and get
-                    immediate support when needed.
+                    Find important contacts and get immediate
+                    support when needed.
                 </p>
 
-                <span class="card-link">
+                <a href="emergency.html">
                     Get Help →
-                </span>
+                </a>
 
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     SAFETY MESSAGE
-===================================================== -->
-
-<section class="safety-message">
-
-    <div class="section-container">
-
-        <div class="safety-box">
-
-            <div class="safety-icon">
-                💙
-            </div>
-
-            <div>
-
-                <h2>
-                    You Are Not Alone
-                </h2>
-
-                <p>
-                    If something online makes you feel
-                    uncomfortable, threatened, or unsafe,
-                    talk to someone you trust and report it.
-                </p>
-
-            </div>
+            </article>
 
         </div>
 
@@ -497,41 +469,40 @@
 
 
 <!-- =====================================================
-     EMERGENCY CTA
+     YOU ARE NOT ALONE
 ===================================================== -->
 
-<section class="emergency-section">
+<section class="support-banner">
 
-    <div class="section-container">
+    <div class="support-banner-inner">
 
-        <div class="emergency-box">
+        <div class="support-banner-icon">
+            💙
+        </div>
 
-            <div>
+        <div>
 
-                <span class="emergency-label">
-                    🆘 NEED HELP?
-                </span>
+            <span>
+                YOU ARE NOT ALONE
+            </span>
 
-                <h2>
-                    Get Support When You Need It
-                </h2>
+            <h2>
+                Speak Up. Get Support.
+            </h2>
 
-                <p>
-                    Find school contacts and emergency
-                    support information.
-                </p>
-
-            </div>
-
-
-            <a
-                href="emergency.html"
-                class="emergency-button"
-            >
-                View Emergency Contacts
-            </a>
+            <p>
+                If something online makes you feel uncomfortable,
+                threatened or unsafe, talk to someone you trust.
+            </p>
 
         </div>
+
+        <a
+            href="emergency.html"
+            class="banner-button"
+        >
+            Get Help →
+        </a>
 
     </div>
 
@@ -549,36 +520,46 @@
 
     <div class="footer-container">
 
+
         <div class="footer-brand">
 
-            <img
-                src="images/logo.png"
-                alt="CyberSafe Logo"
-            >
+            <a href="index.html" class="footer-logo">
 
-            <div>
+                <img
+                    src="images/logo.png"
+                    alt="CyberSafe Logo"
+                >
 
-                <h3>
+                <span>
                     CYBERSAFE
-                </h3>
+                </span>
 
-                <p>
-                    Student Security Portal
-                </p>
+            </a>
 
-            </div>
+            <p>
+                Student Security Portal
+            </p>
+
+            <small>
+                Stay safe. Speak up. Be CyberSafe.
+            </small>
 
         </div>
 
 
+
         <div class="footer-links">
+
+            <h3>
+                Quick Links
+            </h3>
 
             <a href="index.html">
                 Home
             </a>
 
             <a href="report.html">
-                Report
+                Report Cyberbullying
             </a>
 
             <a href="learn.html">
@@ -589,143 +570,41 @@
                 Safety Tips
             </a>
 
+        </div>
+
+
+
+        <div class="footer-links">
+
+            <h3>
+                Support
+            </h3>
+
+            <a href="resources.html">
+                Resources
+            </a>
+
             <a href="emergency.html">
-                Emergency
+                Emergency Help
+            </a>
+
+            <a href="login.html">
+                Student / Staff Login
             </a>
 
         </div>
 
+    </div>
 
-        <div class="footer-bottom">
 
-            © 2026 CyberSafe |
-            Student Security Portal
+    <div class="footer-bottom">
 
-        </div>
+        © 2026 CyberSafe | Student Security Portal
 
     </div>
 
 </footer>
 
 
-
-<!-- =====================================================
-     MOBILE NAVIGATION JAVASCRIPT
-===================================================== -->
-
-<script>
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const menuToggle =
-            document.getElementById("menuToggle");
-
-        const mainNav =
-            document.getElementById("mainNav");
-
-
-        if (!menuToggle || !mainNav) {
-            return;
-        }
-
-
-        menuToggle.addEventListener(
-            "click",
-            function () {
-
-                const isOpen =
-                    mainNav.classList.toggle("active");
-
-                menuToggle.classList.toggle(
-                    "active",
-                    isOpen
-                );
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    String(isOpen)
-                );
-
-            }
-        );
-
-
-        /*
-        Close menu when a navigation link
-        is selected.
-        */
-
-        const navLinks =
-            mainNav.querySelectorAll("a");
-
-
-        navLinks.forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        mainNav.classList.remove(
-                            "active"
-                        );
-
-                        menuToggle.classList.remove(
-                            "active"
-                        );
-
-                        menuToggle.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /*
-        Close mobile menu if user clicks
-        outside navigation.
-        */
-
-        document.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    !mainNav.contains(event.target) &&
-                    !menuToggle.contains(event.target)
-                ) {
-
-                    mainNav.classList.remove(
-                        "active"
-                    );
-
-                    menuToggle.classList.remove(
-                        "active"
-                    );
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-);
-
-</script>
-
-
 </body>
-
 </html>
