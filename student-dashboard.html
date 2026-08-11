@@ -823,7 +823,19 @@ onAuthStateChanged(auth, async (user) => {
         const student =
             studentSnap.data();
 
+// ==================================
+// DISPLAY STUDENT INFORMATION
+// ==================================
 
+document.getElementById("studentClass").textContent =
+    student.class || "Not available";
+
+document.getElementById("studentStream").textContent =
+    student.stream || "Not available";
+
+document.getElementById("studentSection").textContent =
+    student.section || "Not available";
+        
         /* Check student role */
 
         if (student.role !== "student") {
