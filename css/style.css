@@ -1,12 +1,9 @@
-/* =====================================================
-   CYBERSAFE EMERGENCY PAGE
-   Responsive for Desktop + Android + Safari
-===================================================== */
+/* =========================================================
+   CYBERSAFE - COMPLETE RESPONSIVE CSS
+   Works on Desktop, Android Chrome and iPhone Safari
+   ========================================================= */
 
-
-/* =====================================================
-   RESET
-===================================================== */
+/* ---------- RESET ---------- */
 
 * {
     margin: 0;
@@ -14,249 +11,710 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
-}
-
-
-body {
-    font-family:
-        "Poppins",
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    background: #f4f8fc;
-
-    color: #172033;
-
-    line-height: 1.6;
-
-    min-height: 100vh;
-
+    width: 100%;
     overflow-x: hidden;
 }
 
-
-img {
-    max-width: 100%;
-    display: block;
+body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f4f8ff;
+    color: #172554;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
 }
 
 
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
 a {
     -webkit-tap-highlight-color: transparent;
 }
 
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-
 .container {
-    width: min(
-        1180px,
-        calc(100% - 40px)
-    );
-
+    width: min(1200px, calc(100% - 40px));
     margin: 0 auto;
 }
 
 
-/* =====================================================
+/* =========================================================
    HEADER
-===================================================== */
+   ========================================================= */
 
-.site-header {
+header {
     width: 100%;
-
     background: #0f172a;
-
+    color: white;
     position: sticky;
-
     top: 0;
-
     z-index: 1000;
-
-    box-shadow:
-        0 4px 20px rgba(
-            15,
-            23,
-            42,
-            0.15
-        );
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.18);
 }
 
-
-.header-container {
-    width: min(
-        1400px,
-        calc(100% - 40px)
-    );
-
+.navbar,
+nav {
+    width: min(1400px, calc(100% - 40px));
     min-height: 82px;
-
     margin: 0 auto;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    gap: 30px;
+    gap: 25px;
 }
 
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* ---------- LOGO ---------- */
 
-.brand {
+.logo,
+.logo-container {
     display: flex;
-
     align-items: center;
-
-    gap: 14px;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    font-size: 27px;
-
-    font-weight: 800;
-
-    letter-spacing: 0.5px;
-
+    gap: 12px;
     flex-shrink: 0;
 }
 
-
-.brand-logo {
-    width: 58px;
-
-    height: 58px;
-
+.logo img,
+.logo-container img {
+    width: 55px;
+    height: 55px;
     object-fit: contain;
+}
 
-    border-radius: 6px;
+.logo span,
+.logo-text {
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: white;
 }
 
 
-/* =====================================================
-   DESKTOP NAVIGATION
-===================================================== */
+/* ---------- NAV LINKS ---------- */
 
-.main-nav {
+nav ul,
+.nav-links {
+    list-style: none;
     display: flex;
-
     align-items: center;
-
     justify-content: flex-end;
-
-    gap: 7px;
+    gap: 28px;
+    flex-wrap: wrap;
 }
 
+nav ul li,
+.nav-links li {
+    list-style: none;
+}
 
-.main-nav a {
-    color: #ffffff;
-
-    text-decoration: none;
-
-    padding: 11px 13px;
-
-    border-radius: 8px;
-
-    font-size: 15px;
-
+nav a,
+.nav-links a {
+    color: white;
+    font-size: 16px;
     font-weight: 600;
+    transition: 0.25s ease;
+}
 
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+nav a:hover,
+.nav-links a:hover {
+    color: #60a5fa;
 }
 
 
-.main-nav a:hover {
-    background: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
+/* ---------- LOGIN BUTTON ---------- */
 
+.login-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #22c55e;
+    color: white !important;
+
+    padding: 10px 22px;
+    border-radius: 999px;
+
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.login-btn:hover {
+    background: #16a34a;
     transform: translateY(-1px);
 }
 
 
-.main-nav a.active {
-    background: #2563eb;
-
-    color: #ffffff;
-}
-
-
-.main-nav .login-button {
-    background: #22c55e;
-
-    padding-left: 20px;
-
-    padding-right: 20px;
-
-    margin-left: 5px;
-}
-
-
-.main-nav .login-button:hover {
-    background: #16a34a;
-}
-
-
-/* =====================================================
-   MOBILE MENU BUTTON
-===================================================== */
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
 
 .menu-toggle {
     display: none;
 
-    border: none;
-
+    border: 0;
     background: transparent;
+    color: white;
 
-    color: #ffffff;
+    font-size: 30px;
+    cursor: pointer;
+}
 
-    font-size: 29px;
+.mobile-menu {
+    display: none;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    width: 100%;
+    padding: 85px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f2b72 0%,
+            #174ea6 50%,
+            #2563eb 100%
+        );
+
+    color: white;
+}
+
+.hero-container {
+    width: min(1200px, 100%);
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 68px);
+    line-height: 1.08;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 19px;
+    max-width: 650px;
+    opacity: 0.95;
+}
+
+.hero-image {
+    width: min(500px, 100%);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.hero-image img {
+    width: 100%;
+    border-radius: 22px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+    padding: 12px 24px;
+
+    border: none;
+    border-radius: 10px;
 
     cursor: pointer;
+    font-weight: 700;
 
-    width: 45px;
+    transition: 0.25s ease;
+}
 
-    height: 45px;
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
 
-    border-radius: 8px;
+.btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: #22c55e;
+    color: white;
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
 }
 
 
-.menu-toggle:hover {
-    background: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
+/* =========================================================
+   GENERAL SECTIONS
+   ========================================================= */
+
+section {
+    width: 100%;
+}
+
+.section {
+    padding: 75px 20px;
+}
+
+.section-title {
+    text-align: center;
+    color: #1e3a8a;
+
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    max-width: 750px;
+    margin: 0 auto 45px;
+
+    text-align: center;
+    color: #64748b;
+    font-size: 17px;
 }
 
 
-/* =====================================================
-   PAGE HERO
-===================================================== */
+/* =========================================================
+   WHAT IS CYBERBULLYING
+   ========================================================= */
 
-.page-hero {
+.about-section {
+    width: min(1200px, calc(100% - 40px));
+    margin: 0 auto;
+
+    padding: 55px 0 35px;
+}
+
+.about-section h2 {
+    color: #1e3a8a;
+    font-size: 34px;
+    margin-bottom: 18px;
+}
+
+.about-section p {
+    color: #475569;
+    font-size: 17px;
+    margin-bottom: 15px;
+    max-width: 900px;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.cards-container,
+.card-grid {
+    width: min(1200px, calc(100% - 40px));
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.card {
+    background: white;
+
+    border-radius: 22px;
+    padding: 38px 30px;
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.08);
+
+    border: 1px solid #e2e8f0;
+
+    text-align: center;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.13);
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #eff6ff;
+
+    font-size: 38px;
+}
+
+.card h3 {
+    color: #1e3a8a;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   EMERGENCY PAGE
+   ========================================================= */
+
+.emergency-page {
+    min-height: calc(100vh - 82px);
+    padding: 55px 20px 80px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #eef5ff 0%,
+            #f8fbff 100%
+        );
+}
+
+.emergency-container {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+}
+
+.emergency-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.emergency-header h1 {
+    color: #1e3a8a;
+
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+
+    margin-bottom: 12px;
+}
+
+.emergency-header p {
+    max-width: 750px;
+    margin: auto;
+
+    color: #64748b;
+    font-size: 17px;
+}
+
+
+/* ---------- EMERGENCY GRID ---------- */
+
+.emergency-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 25px;
+}
+
+
+/* ---------- EMERGENCY CARD ---------- */
+
+.emergency-card {
+    position: relative;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    border: 1px solid #dbeafe;
+
+    box-shadow:
+        0 10px 35px rgba(30, 64, 175, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.emergency-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 45px rgba(30, 64, 175, 0.14);
+}
+
+.emergency-card-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    background: #eff6ff;
+
+    border-radius: 16px;
+
+    font-size: 30px;
+}
+
+.emergency-card h2 {
+    color: #172554;
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.emergency-card p {
+    color: #64748b;
+    margin-bottom: 18px;
+}
+
+.contact-name {
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 5px;
+}
+
+.contact-number {
+    display: inline-flex;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    background: #eff6ff;
+    color: #1d4ed8;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.contact-number:hover {
+    background: #dbeafe;
+}
+
+
+/* ---------- GOVERNMENT CARD ---------- */
+
+.emergency-card.government {
+    grid-column: 1 / -1;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #ffffff
+        );
+
+    border: 2px solid #bfdbfe;
+}
+
+.emergency-card.government h2 {
+    color: #1e3a8a;
+}
+
+.gov-website {
+    display: inline-flex;
+
+    margin-top: 12px;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-weight: 700;
+}
+
+.gov-website:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   REPORT PAGE
+   ========================================================= */
+
+.report-page {
+    min-height: calc(100vh - 82px);
+    padding: 50px 20px 80px;
+}
+
+.report-container {
+    width: min(850px, 100%);
+    margin: auto;
+
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 42px;
+
+    box-shadow:
+        0 15px 45px rgba(15, 23, 42, 0.08);
+
+    border: 1px solid #e2e8f0;
+}
+
+.report-container h1 {
+    text-align: center;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+}
+
+.report-description {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 35px;
+}
+
+
+/* ---------- STUDENT INFO ---------- */
+
+.student-info {
+    background: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    margin-bottom: 30px;
+}
+
+.student-info h2 {
+    color: #1e3a8a;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+
+/* ---------- FORM ---------- */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #172554;
+
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #172554;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard-page {
+    min-height: 100vh;
+    background: #eff6ff;
+}
+
+.dashboard-hero {
+    padding: 60px 30px;
+
     background:
         linear-gradient(
             135deg,
@@ -264,1156 +722,495 @@ a {
             #2563eb
         );
 
-    color: #ffffff;
+    color: white;
+}
+
+.dashboard-container {
+    width: min(1200px, calc(100% - 40px));
+    margin: auto;
+}
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 22px;
+
+    margin-top: 35px;
+}
+
+.stat-card {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
 
     text-align: center;
-
-    padding: 70px 0 75px;
-}
-
-
-.hero-icon {
-    font-size: 48px;
-
-    margin-bottom: 10px;
-}
-
-
-.page-hero h1 {
-    font-size: clamp(
-        34px,
-        5vw,
-        58px
-    );
-
-    line-height: 1.15;
-
-    font-weight: 800;
-
-    margin-bottom: 18px;
-}
-
-
-.page-hero p {
-    max-width: 800px;
-
-    margin: 0 auto;
-
-    font-size: 18px;
-
-    color: rgba(
-        255,
-        255,
-        255,
-        0.90
-    );
-}
-
-
-/* =====================================================
-   ABOUT / WHAT IS CYBERSAFE
-===================================================== */
-
-.about-section {
-    padding: 60px 0 30px;
-}
-
-
-.about-card {
-    background: #ffffff;
-
-    border-radius: 22px;
-
-    padding: 42px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 35px;
 
     box-shadow:
-        0 12px 40px rgba(
-            15,
-            23,
-            42,
-            0.08
-        );
-
-    border: 1px solid #e5edf7;
+        0 8px 25px rgba(15, 23, 42, 0.08);
 }
 
-
-.about-icon {
-    width: 100px;
-
-    height: 100px;
-
-    flex-shrink: 0;
-
-    border-radius: 22px;
-
-    background: #eff6ff;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 54px;
-}
-
-
-.about-content h2 {
-    color: #1e3a8a;
-
-    font-size: 32px;
-
-    margin-bottom: 14px;
-
-    font-weight: 800;
-}
-
-
-.about-content p {
-    color: #52627a;
-
-    font-size: 16px;
-
-    margin-bottom: 10px;
-}
-
-
-.about-content p:last-child {
-    margin-bottom: 0;
-}
-
-
-/* =====================================================
-   CONTACT SECTION
-===================================================== */
-
-.contacts-section {
-    padding: 55px 0 70px;
-}
-
-
-.section-heading {
-    text-align: center;
-
-    margin-bottom: 40px;
-}
-
-
-.section-heading > span {
+.stat-card strong {
     display: block;
 
-    font-size: 42px;
+    font-size: 38px;
+    color: #1e3a8a;
 
     margin-bottom: 5px;
 }
 
-
-.section-heading h2 {
-    color: #1e3a8a;
-
-    font-size: 34px;
-
-    font-weight: 800;
-
-    margin-bottom: 8px;
-}
-
-
-.section-heading p {
+.stat-card span {
     color: #64748b;
-
-    font-size: 16px;
+    font-weight: 600;
 }
 
 
-/* =====================================================
-   EMERGENCY GRID
-===================================================== */
+/* =========================================================
+   TABLES
+   ========================================================= */
 
-.emergency-grid {
-    display: grid;
+.table-container {
+    width: min(1200px, calc(100% - 40px));
+    margin: 30px auto;
 
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0, 1fr)
-        );
+    overflow-x: auto;
 
-    gap: 25px;
-}
-
-
-/* =====================================================
-   EMERGENCY CARD
-===================================================== */
-
-.emergency-card {
-    background: #ffffff;
-
-    border-radius: 20px;
-
-    padding: 35px;
-
-    text-align: center;
-
-    border: 1px solid #e2e8f0;
-
-    box-shadow:
-        0 10px 35px rgba(
-            15,
-            23,
-            42,
-            0.07
-        );
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-}
-
-
-.emergency-card:hover {
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 18px 45px rgba(
-            15,
-            23,
-            42,
-            0.12
-        );
-}
-
-
-.card-icon {
-    width: 76px;
-
-    height: 76px;
+    background: white;
 
     border-radius: 18px;
 
-    background: #eff6ff;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 38px;
-
-    margin-bottom: 18px;
-}
-
-
-.emergency-card h3 {
-    color: #1e3a8a;
-
-    font-size: 24px;
-
-    font-weight: 800;
-
-    margin-bottom: 12px;
-}
-
-
-.emergency-card > p {
-    color: #64748b;
-
-    font-size: 15px;
-
-    line-height: 1.7;
-
-    max-width: 470px;
-
-    margin-bottom: 20px;
-}
-
-
-/* =====================================================
-   PERSON NAME
-===================================================== */
-
-.person-name {
-    color: #172033;
-
-    font-size: 18px;
-
-    font-weight: 700;
-
-    margin-bottom: 8px;
-}
-
-
-.phone-number {
-    color: #1d4ed8;
-
-    font-size: 20px;
-
-    font-weight: 800;
-
-    margin-bottom: 20px;
-}
-
-
-/* =====================================================
-   CALL BUTTON
-===================================================== */
-
-.call-button {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 46px;
-
-    padding:
-        11px
-        20px;
-
-    border-radius: 10px;
-
-    background: #22c55e;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    font-weight: 700;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-
-    -webkit-user-select: none;
-
-    user-select: none;
-}
-
-
-.call-button:hover {
-    background: #16a34a;
-
-    transform: translateY(-2px);
-}
-
-
-.call-button:active {
-    transform: scale(0.97);
-}
-
-
-/* =====================================================
-   GOVERNMENT CARD
-===================================================== */
-
-.government-card {
-    border: 2px solid #2563eb;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #eff6ff
-        );
-}
-
-
-.government-card .card-icon {
-    background: #dbeafe;
-}
-
-
-.government-card h3 {
-    color: #1e3a8a;
-}
-
-
-.official-badge {
-    display: inline-block;
-
-    background: #dbeafe;
-
-    color: #1e40af;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: 0.6px;
-
-    padding:
-        6px
-        10px;
-
-    border-radius: 999px;
-
-    margin-bottom: 12px;
-}
-
-
-.government-call {
-    background: #dc2626;
-
-    margin-bottom: 10px;
-}
-
-
-.government-call:hover {
-    background: #b91c1c;
-}
-
-
-.website-button {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 100%;
-
-    max-width: 270px;
-
-    min-height: 46px;
-
-    padding:
-        11px
-        18px;
-
-    background: #2563eb;
-
-    color: #ffffff;
-
-    border-radius: 10px;
-
-    text-decoration: none;
-
-    font-weight: 700;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.website-button:hover {
-    background: #1d4ed8;
-
-    transform: translateY(-2px);
-}
-
-
-.official-label {
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding-top: 16px;
-
-    border-top:
-        1px solid
-        #bfdbfe;
-
-    color: #475569;
-
-    font-size: 13px;
-
-    line-height: 1.7;
-}
-
-
-/* =====================================================
-   STEPS SECTION
-===================================================== */
-
-.steps-section {
-    padding: 0 0 80px;
-}
-
-
-.steps-card {
-    background: #ffffff;
-
-    border-radius: 22px;
-
-    padding: 45px;
-
-    text-align: center;
-
     box-shadow:
-        0 12px 40px rgba(
-            15,
-            23,
-            42,
-            0.08
-        );
+        0 8px 30px rgba(15, 23, 42, 0.08);
 }
 
-
-.steps-icon {
-    font-size: 42px;
-
-    margin-bottom: 8px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
 }
 
-
-.steps-card h2 {
-    color: #1e3a8a;
-
-    font-size: 32px;
-
-    font-weight: 800;
-
-    margin-bottom: 30px;
-}
-
-
-.steps-list {
-    max-width: 800px;
-
-    margin: 0 auto 35px;
-
+th,
+td {
+    padding: 14px 16px;
     text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background: #eff6ff;
+    color: #1e3a8a;
+    font-weight: 700;
 }
 
 
-.step {
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 15px;
-
-    padding: 14px 0;
-
-    border-bottom:
-        1px solid
-        #eef2f7;
-}
-
-
-.step:last-child {
-    border-bottom: none;
-}
-
-
-.step > span {
-    width: 34px;
-
-    height: 34px;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    background: #2563eb;
-
-    color: #ffffff;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: 800;
-}
-
-
-.step p {
-    color: #475569;
-
-    padding-top: 4px;
-}
-
-
-/* =====================================================
-   REPORT BUTTON
-===================================================== */
-
-.report-button {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #ef4444;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    padding:
-        14px
-        26px;
-
-    border-radius: 11px;
-
-    font-weight: 800;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.report-button:hover {
-    background: #dc2626;
-
-    transform: translateY(-2px);
-}
-
-
-/* =====================================================
+/* =========================================================
    FOOTER
-===================================================== */
+   ========================================================= */
 
-.site-footer {
+footer {
+    width: 100%;
+
+    margin-top: 80px;
+
+    padding: 30px 20px;
+
     background: #0f172a;
 
-    color: #ffffff;
-
-    padding: 45px 0;
+    color: white;
 
     text-align: center;
 }
 
-
-.footer-brand {
-    font-size: 25px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 8px;
-}
-
-
-.site-footer p {
-    color: #cbd5e1;
-
-    margin-bottom: 8px;
-}
-
-
-.site-footer .copyright {
-    color: #94a3b8;
-
+footer p {
     font-size: 14px;
-
-    margin-top: 20px;
+    opacity: 0.9;
 }
 
 
-/* =====================================================
-   TABLET
-===================================================== */
+/* =========================================================
+   MOBILE - TABLET
+   ========================================================= */
 
-@media (max-width: 950px) {
+@media (max-width: 900px) {
 
-    .main-nav {
-        gap: 2px;
+    .navbar,
+    nav {
+        width: calc(100% - 30px);
     }
 
-
-    .main-nav a {
-        padding:
-            9px
-            8px;
-
-        font-size: 14px;
+    nav ul,
+    .nav-links {
+        gap: 17px;
     }
 
-
-    .brand {
-        font-size: 23px;
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
     }
 
-
-    .brand-logo {
-        width: 52px;
-
-        height: 52px;
+    .hero-content {
+        width: 100%;
     }
 
+    .hero p {
+        margin: auto;
+    }
+
+    .hero-image {
+        width: min(600px, 100%);
+    }
+
+    .cards-container,
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 
-/* =====================================================
+/* =========================================================
    MOBILE
-===================================================== */
+   ========================================================= */
 
-@media (max-width: 760px) {
+@media (max-width: 700px) {
 
-    .container {
-        width:
-            calc(100% - 28px);
+    body {
+        width: 100%;
+        overflow-x: hidden;
     }
 
 
-    .header-container {
-        min-height: 72px;
+    /* ---------- HEADER ---------- */
 
-        width:
-            calc(100% - 24px);
+    header {
+        position: sticky;
+        top: 0;
     }
 
+    .navbar,
+    nav {
+        min-height: 70px;
 
-    .brand {
+        width: 100%;
+
+        padding:
+            8px 16px;
+
+        gap: 10px;
+    }
+
+    .logo img,
+    .logo-container img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo span,
+    .logo-text {
         font-size: 21px;
-
-        gap: 9px;
     }
 
 
-    .brand-logo {
-        width: 46px;
+    /* ---------- MOBILE NAV ---------- */
 
-        height: 46px;
-    }
+    nav ul,
+    .nav-links {
+        position: fixed;
 
-
-    .menu-toggle {
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-    }
-
-
-    /* Mobile navigation */
-
-    .main-nav {
-        position: absolute;
-
-        top: 72px;
-
+        top: 70px;
         left: 0;
 
         width: 100%;
 
+        padding: 22px 20px;
+
         background: #0f172a;
-
-        padding: 18px;
-
-        display: none;
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 5px;
-
-        box-shadow:
-            0 12px 25px rgba(
-                0,
-                0,
-                0,
-                0.20
-            );
-    }
-
-
-    .main-nav.open {
-        display: flex;
-    }
-
-
-    .main-nav a {
-        width: 100%;
-
-        text-align: center;
-
-        padding: 13px;
-
-        font-size: 16px;
-    }
-
-
-    .main-nav .login-button {
-        margin-left: 0;
-
-        margin-top: 5px;
-    }
-
-
-    /* Hero */
-
-    .page-hero {
-        padding:
-            48px
-            0
-            52px;
-    }
-
-
-    .hero-icon {
-        font-size: 42px;
-    }
-
-
-    .page-hero h1 {
-        font-size: 38px;
-    }
-
-
-    .page-hero p {
-        font-size: 15px;
-
-        line-height: 1.7;
-    }
-
-
-    /* About */
-
-    .about-section {
-        padding:
-            35px
-            0
-            20px;
-    }
-
-
-    .about-card {
-        padding: 27px;
-
-        flex-direction: column;
-
-        text-align: center;
-
-        gap: 20px;
-    }
-
-
-    .about-icon {
-        width: 75px;
-
-        height: 75px;
-
-        font-size: 40px;
-    }
-
-
-    .about-content h2 {
-        font-size: 27px;
-    }
-
-
-    .about-content p {
-        font-size: 15px;
-    }
-
-
-    /* Contacts */
-
-    .contacts-section {
-        padding:
-            40px
-            0
-            55px;
-    }
-
-
-    .section-heading h2 {
-        font-size: 28px;
-    }
-
-
-    .section-heading p {
-        font-size: 14px;
-    }
-
-
-    .emergency-grid {
-        grid-template-columns: 1fr;
-
-        gap: 18px;
-    }
-
-
-    .emergency-card {
-        padding: 28px 22px;
-
-        width: 100%;
-    }
-
-
-    .emergency-card h3 {
-        font-size: 22px;
-    }
-
-
-    .emergency-card > p {
-        font-size: 14px;
-    }
-
-
-    .call-button,
-    .website-button {
-        width: 100%;
-
-        max-width: 100%;
-    }
-
-
-    /* Steps */
-
-    .steps-section {
-        padding-bottom: 55px;
-    }
-
-
-    .steps-card {
-        padding:
-            30px
-            20px;
-    }
-
-
-    .steps-card h2 {
-        font-size: 27px;
-    }
-
-
-    .step {
-        gap: 11px;
-    }
-
-
-    .step p {
-        font-size: 14px;
-    }
-
-
-    /* Footer */
-
-    .site-footer {
-        padding:
-            35px
-            15px;
-    }
-
-}
-
-
-/* =====================================================
-   SMALL PHONES
-===================================================== */
-
-@media (max-width: 420px) {
-
-    .brand {
-        font-size: 19px;
-    }
-
-
-    .brand-logo {
-        width: 42px;
-
-        height: 42px;
-    }
-
-
-    .page-hero h1 {
-        font-size: 32px;
-    }
-
-
-    .hero-icon {
-        font-size: 36px;
-    }
-
-
-    .about-content h2 {
-        font-size: 24px;
-    }
-
-
-    .emergency-card {
-        border-radius: 16px;
-    }
-
-
-    .phone-number {
-        font-size: 18px;
-    }
-
-}
-
-
-/* =====================================================
-   SAFARI / IOS FIXES
-===================================================== */
-
-button,
-a {
-    touch-action: manipulation;
-}
-
-
-input,
-button,
-textarea,
-select {
-    font-family: inherit;
-}
-
-
-@supports (-webkit-touch-callout: none) {
-
-    body {
-        -webkit-text-size-adjust: 100%;
-    }
-
-}
-
-
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        transition: none !important;
-        animation: none !important;
-    }
-
-}
-/* =========================================
-   MOBILE HEADER FIX
-========================================= */
-
-@media (max-width: 768px) {
-
-    .site-header {
-        width: 100%;
-        position: relative;
-        z-index: 1000;
-    }
-
-    .header-inner {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-
-        padding: 14px 18px;
-
-        display: flex;
-        flex-direction: column;
-
-        align-items: center;
-        gap: 18px;
-    }
-
-    .logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        text-decoration: none;
-    }
-
-    .logo img {
-        width: 52px;
-        height: 52px;
-
-        object-fit: contain;
-    }
-
-    .logo span {
-        font-size: 1.55rem;
-        margin-left: 10px;
-        white-space: nowrap;
-    }
-
-    .main-nav {
-        width: 100%;
 
         display: grid;
 
         grid-template-columns:
-            repeat(3, 1fr);
+            repeat(2, 1fr);
 
         gap: 8px;
 
-        justify-content: center;
+        box-shadow:
+            0 12px 25px rgba(0, 0, 0, 0.22);
+
+        z-index: 999;
     }
 
-    .main-nav a {
+    nav ul li,
+    .nav-links li {
+        width: 100%;
+    }
+
+    nav a,
+    .nav-links a {
         display: flex;
 
         align-items: center;
         justify-content: center;
 
-        min-height: 42px;
+        min-height: 48px;
 
-        padding: 8px 5px;
+        padding: 8px;
 
-        font-size: 0.88rem;
+        border-radius: 10px;
 
-        text-align: center;
-
-        border-radius: 8px;
+        font-size: 15px;
     }
 
-    .main-nav .login-btn {
-        width: auto;
-        margin: 0;
+    nav a:hover,
+    .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+        padding: 55px 18px;
+    }
+
+    .hero-container {
+        gap: 35px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+
+    /* ---------- SECTIONS ---------- */
+
+    .section {
+        padding: 50px 18px;
+    }
+
+    .section-title {
+        font-size: 30px;
+    }
+
+
+    /* ---------- ABOUT ---------- */
+
+    .about-section {
+        width: calc(100% - 36px);
+        padding: 45px 0 25px;
+    }
+
+    .about-section h2 {
+        font-size: 28px;
+    }
+
+    .about-section p {
+        font-size: 16px;
+    }
+
+
+    /* ---------- CARDS ---------- */
+
+    .cards-container,
+    .card-grid {
+        width: calc(100% - 36px);
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .card {
+        padding: 30px 22px;
+        border-radius: 20px;
+    }
+
+
+    /* ---------- EMERGENCY ---------- */
+
+    .emergency-page {
+        padding:
+            40px 18px
+            65px;
+    }
+
+    .emergency-header {
+        margin-bottom: 30px;
+    }
+
+    .emergency-header h1 {
+        font-size: 34px;
+    }
+
+    .emergency-header p {
+        font-size: 15px;
+    }
+
+    .emergency-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .emergency-card {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .emergency-card.government {
+        grid-column: auto;
+    }
+
+    .emergency-card h2 {
+        font-size: 21px;
+    }
+
+
+    /* ---------- REPORT ---------- */
+
+    .report-page {
+        padding:
+            30px 15px
+            60px;
+    }
+
+    .report-container {
+        padding: 25px 18px;
+        border-radius: 18px;
+    }
+
+
+    /* ---------- DASHBOARD ---------- */
+
+    .dashboard-hero {
+        padding:
+            40px 18px;
+    }
+
+    .dashboard-container {
+        width: calc(100% - 30px);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 25px;
+    }
+
+
+    /* ---------- FOOTER ---------- */
+
+    footer {
+        margin-top: 55px;
+        padding: 25px 15px;
+    }
+
+    footer p {
+        font-size: 13px;
     }
 }
 
 
-/* =========================================
-   SMALL MOBILE
-========================================= */
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
 
-    .header-inner {
-        padding: 12px 12px;
+    .logo img,
+    .logo-container img {
+        width: 40px;
+        height: 40px;
     }
 
-    .logo img {
-        width: 46px;
-        height: 46px;
+    .logo span,
+    .logo-text {
+        font-size: 18px;
     }
 
-    .logo span {
-        font-size: 1.3rem;
+    nav ul,
+    .nav-links {
+        grid-template-columns: 1fr;
+        top: 66px;
     }
 
-    .main-nav {
-        grid-template-columns:
-            repeat(2, 1fr);
+    nav a,
+    .nav-links a {
+        min-height: 44px;
     }
 
-    .main-nav a {
-        font-size: 0.82rem;
+    .hero h1 {
+        font-size: 34px;
     }
+
+    .emergency-header h1 {
+        font-size: 29px;
+    }
+}
+
+
+/* =========================================================
+   SAFARI FIXES
+   ========================================================= */
+
+button,
+input,
+select,
+textarea {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input,
+select,
+textarea {
+    font-size: 16px;
+}
+
+img {
+    -webkit-user-drag: none;
+}
+
+.hero,
+.emergency-page,
+.report-page,
+.dashboard-page {
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* =========================================================
+   PREVENT HORIZONTAL SCROLLING
+   ========================================================= */
+
+body,
+header,
+main,
+section,
+footer {
+    max-width: 100%;
+}
+
+.container,
+.navbar,
+nav,
+.hero-container,
+.cards-container,
+.card-grid,
+.emergency-container,
+.report-container,
+.dashboard-container {
+    max-width: 100%;
 }
