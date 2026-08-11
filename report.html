@@ -654,10 +654,14 @@ function compressScreenshot(file) {
             currentStudent.email || "",
 
         platform:
-            document.getElementById("platform").value,
+            document
+                .getElementById("platform")
+                .value,
 
         date:
-            document.getElementById("date").value,
+            document
+                .getElementById("date")
+                .value,
 
         description:
             document
@@ -688,33 +692,21 @@ function compressScreenshot(file) {
             classKey,
 
         // =====================================
-        // IMPORTANT:
-        // THIS IS THE FIELD TEACHER DASHBOARD USES
+        // TEACHER DASHBOARD FILTER
         // =====================================
 
-    assignedTeacherName:
-    teacherData.TeacherName || "",
+        teacherEmail:
+            teacherData.TeacherEmail || "",
 
-assignedTeacherEmail:
-    teacherData.TeacherEmail || "",
+        teacherUID:
+            teacherData.TeacherUid || "",
 
-assignedTeacherUid:
-    teacherData.TeacherUid || "",
+        classTeacherKey:
+            classKey,
 
-assignedClass:
-    classKey,
-
-teacherEmail:
-    teacherData.TeacherEmail || "",
-
-teacherUID:
-    teacherData.TeacherUid || "",
-
-classTeacherKey:
-    classKey,
-        // ==================================
+        // =====================================
         // TIMESTAMP
-        // ==================================
+        // =====================================
 
         createdAt:
             serverTimestamp()
@@ -728,25 +720,6 @@ alert(
 document
     .getElementById("reportForm")
     .reset();
-
-    }
-
-    catch(error) {
-
-        console.error(
-            "Report submission error:",
-            error
-        );
-
-
-        alert(
-            "❌ Error submitting report:\n\n" +
-            error.message
-        );
-
-    }
-
-});
 
 </script>
 
