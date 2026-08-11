@@ -630,7 +630,7 @@ function compressScreenshot(file) {
         // SUBMIT REPORT
         // ==================================
 
-       await addDoc(
+     await addDoc(
     collection(db, "reports"),
     {
         studentUID:
@@ -673,22 +673,35 @@ function compressScreenshot(file) {
         screenshotData:
             screenshotData,
 
-       status: "Pending",
+        status:
+            "Pending",
 
-// ==================================
-// ASSIGNED CLASS TEACHER
-// ==================================
-        
-assignedTeacherName:
-    teacherData.TeacherName || "",
+        // ==============================
+        // TEACHER ASSIGNMENT
+        // ==============================
 
-assignedTeacherEmail:
-    teacherData.TeacherEmail || "",
+        assignedTeacher:
+            teacherData.TeacherName || "",
 
-assignedTeacherUid:
-    teacherData.TeacherUid || "",
+        teacherEmail:
+            teacherData.TeacherEmail || "",
 
- assignedClass:
+        teacherUID:
+            teacherData.TeacherUid || "",
+
+        assignedTeacherName:
+            teacherData.TeacherName || "",
+
+        assignedTeacherEmail:
+            teacherData.TeacherEmail || "",
+
+        assignedTeacherUid:
+            teacherData.TeacherUid || "",
+
+        assignedClass:
+            classKey,
+
+        classTeacherKey:
             classKey,
 
         createdAt:
