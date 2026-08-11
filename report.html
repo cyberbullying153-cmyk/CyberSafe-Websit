@@ -473,6 +473,11 @@ const teacherSnap = await getDoc(
     doc(db, "classTeachers", classKey)
 );
 
+        console.log("Searching exact path:");
+console.log("Collection: classTeachers");
+console.log("Document ID:", classKey);
+console.log("Full path:", "classTeachers/" + classKey);
+console.log("Exists:", teacherSnap.exists());
 let teacherData = {};
 
 if (teacherSnap.exists()) {
