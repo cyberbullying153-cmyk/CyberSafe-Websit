@@ -692,22 +692,26 @@ function compressScreenshot(file) {
         // THIS IS THE FIELD TEACHER DASHBOARD USES
         // =====================================
 
-        teacherUID:
-            teacherData.TeacherUid || "",
+    assignedTeacherName:
+    teacherData.TeacherName || "",
 
-        teacherEmail:
-            teacherData.TeacherEmail || "",
+assignedTeacherEmail:
+    teacherData.TeacherEmail || "",
 
-        teacherName:
-            teacherData.TeacherName || "",
+assignedTeacherUid:
+    teacherData.TeacherUid || "",
 
-        classTeacherKey:
-            classKey,
+assignedClass:
+    classKey,
 
-        createdAt:
-            serverTimestamp()
-    }
-);
+teacherEmail:
+    teacherData.TeacherEmail || "",
+
+teacherUID:
+    teacherData.TeacherUid || "",
+
+classTeacherKey:
+    classKey,
         // ==================================
         // TIMESTAMP
         // ==================================
