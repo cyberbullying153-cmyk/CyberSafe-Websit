@@ -465,33 +465,54 @@ console.log("Teacher assignment document:", classKey);
         );
 
 
-        // ==================================
-        // FIND CLASS TEACHER
-        // ==================================
+       // ==================================
+// FIND CLASS TEACHER
+// ==================================
 
-        const teacherSnap =
-            await getDoc(
-                doc(
-                    db,
-                    "classTeachers",
-                    classKey
-                )
-            );
+const teacherSnap = await getDoc(
+    doc(db, "classTeachers", classKey)
+);
 
+let teacherData = {};
 
-        let teacherData = {};
-
-
-       if (teacherSnap.exists()) {
+if (teacherSnap.exists()) {
 
     teacherData = teacherSnap.data();
 
     console.log("✅ TEACHER FOUND:", teacherData);
 
+    console.log(
+        "👨‍🏫 Teacher Name:",
+        teacherData.TeacherName || "Not provided"
+    );
+
+    console.log(
+        "📧 Teacher Email:",
+        teacherData.TeacherEmail || "Not provided"
+    );
+
+    console.log(
+        "🆔 Teacher UID:",
+        teacherData.TeacherUid || "Not provided"
+    );
+
 } else {
 
-    console.log("❌ TEACHER NOT FOUND:", classKey);
+    console.error(
+        "❌ TEACHER NOT FOUND:",
+        classKey
+    );
 
+    alert(
+        "No teacher is assigned for " +
+        currentStudent.class +
+        (currentStudent.stream
+            ? " " + currentStudent.stream
+            : "") +
+        ".\n\nPlease contact your administrator."
+    );
+
+    return;
 }
 
         // ==========================================
