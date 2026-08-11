@@ -678,10 +678,23 @@ function compressScreenshot(file) {
 // ==================================
 // ASSIGNED CLASS TEACHER
 // ==================================
+        
+assignedTeacherName:
+    teacherData.TeacherName || "",
 
-assignedClass:
-    classKey,
+assignedTeacherEmail:
+    teacherData.TeacherEmail || "",
 
+assignedTeacherUid:
+    teacherData.TeacherUid || "",
+
+ assignedClass:
+            classKey,
+
+        createdAt:
+            serverTimestamp()
+    }
+);
         // ==================================
         // TIMESTAMP
         // ==================================
