@@ -1,751 +1,1716 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Report Cyberbullying | CyberSafe</title>
+    <title>Report Cyberbullying | CyberSafe</title>
 
-<link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
 
-<style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.report-page{
-    max-width:800px;
-    margin:50px auto;
-    padding:40px;
-    background:#ffffff;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.10);
-}
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #f4f8fc;
+            color: #0f172a;
+        }
 
-.report-page h1{
-    text-align:center;
-    color:#1e3a8a;
-    margin-bottom:10px;
-}
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 4%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-.report-page > p{
-    text-align:center;
-    color:#64748b;
-    margin-bottom:30px;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 700;
+        }
 
-#reportForm label{
-    display:block;
-    margin-top:18px;
-    margin-bottom:7px;
-    font-weight:600;
-    color:#334155;
-}
+        .logo span {
+            font-size: 30px;
+        }
 
-#reportForm input,
-#reportForm select,
-#reportForm textarea{
-    width:100%;
-    box-sizing:border-box;
-    padding:13px;
-    border:1px solid #cbd5e1;
-    border-radius:10px;
-    font-family:Poppins,sans-serif;
-    font-size:15px;
-}
+        nav {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
 
-#reportForm input:focus,
-#reportForm select:focus,
-#reportForm textarea:focus{
-    outline:none;
-    border-color:#2563eb;
-    box-shadow:0 0 0 3px rgba(37,99,235,.10);
-}
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-#reportForm textarea{
-    resize:vertical;
-}
+        nav a:hover {
+            opacity: 0.8;
+        }
 
-.student-info{
-    background:#eff6ff;
-    border:1px solid #bfdbfe;
-    padding:18px;
-    border-radius:14px;
-    margin-bottom:25px;
-}
+        .container {
+            width: min(800px, 94%);
+            margin: 50px auto;
+        }
 
-.student-info h3{
-    margin:0 0 8px;
-    color:#1e3a8a;
-}
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.10);
+        }
 
-.student-info p{
-    margin:5px 0;
-    color:#475569;
-}
+        .title {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #21449a;
+            font-size: 34px;
+        }
 
-.stream-box{
-    display:none;
-}
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 35px;
+        }
 
-.btn{
-    width:100%;
-    margin-top:25px;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    background:#2563eb;
-    color:white;
-    font-size:17px;
-    font-weight:600;
-    cursor:pointer;
-}
+        .student-box {
+            background: #eef6ff;
+            border: 1px solid #bfd8ff;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 30px;
+        }
 
-.btn:hover{
-    background:#1d4ed8;
-}
+        .student-box h2 {
+            color: #21449a;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
 
-</style>
+        .student-row {
+            margin: 7px 0;
+            font-size: 15px;
+        }
+
+        .student-row strong {
+            display: inline-block;
+            min-width: 120px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 14px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #315bdc;
+            box-shadow: 0 0 0 3px rgba(49, 91, 220, 0.10);
+        }
+
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            background: #21449a;
+            color: white;
+            font-family: inherit;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #18377e;
+        }
+
+        .submit-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .status-box {
+            margin-bottom: 20px;
+            padding: 14px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .status-success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .assignment {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .assignment strong {
+            color: #21449a;
+        }
+
+        .loading {
+            opacity: 0.65;
+        }
+
+        @media (max-width: 800px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .title {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
-<nav>
+    <div class="logo">
+        <span>🛡️</span>
+        CyberSafe
+    </div>
 
-<div class="logo">
-🛡 CyberSafe
-</div>
+    <nav>
 
-<ul class="nav-links">
+        <a href="index.html">Home</a>
 
-<li><a href="index.html">Home</a></li>
+        <a href="report.html">Report</a>
 
-<li><a href="report.html">Report</a></li>
+        <a href="learn.html">Learn</a>
 
-<li><a href="learn.html">Learn</a></li>
+        <a href="safety.html">Safety Tips</a>
 
-<li><a href="safety.html">Safety Tips</a></li>
+        <a href="resources.html">Resources</a>
 
-<li><a href="resources.html">Resources</a></li>
+        <a href="emergency.html">Emergency</a>
 
-<li><a href="emergency.html">Emergency</a></li>
-
-</ul>
-
-</nav>
+    </nav>
 
 </header>
 
 
-<section class="report-page">
+<div class="container">
 
-<h1>🚨 Report Cyberbullying</h1>
+    <div class="card">
 
-<p>
-Your report is confidential and will be shared only with authorized staff.
-</p>
+        <h1 class="title">
+            🚨 Report Cyberbullying
+        </h1>
+
+        <p class="subtitle">
+            Your report is confidential and will be shared only with authorized staff.
+        </p>
 
 
-<div class="student-info">
+        <!-- ========================================= -->
+        <!-- STATUS -->
+        <!-- ========================================= -->
 
-<h3>🎓 Student Information</h3>
+        <div id="statusBox" class="status-box"></div>
 
-<p>
-<strong>Name:</strong>
-<span id="displayName">Loading...</span>
-</p>
 
-<p>
-<strong>Class:</strong>
-<span id="displayClass">Loading...</span>
-</p>
+        <!-- ========================================= -->
+        <!-- STUDENT INFORMATION -->
+        <!-- ========================================= -->
 
-<p id="streamDisplay" style="display:none;">
-<strong>Stream:</strong>
-<span id="displayStream"></span>
-</p>
+        <div class="student-box loading" id="studentBox">
+
+            <h2>
+                🎓 Student Information
+            </h2>
+
+            <div class="student-row">
+
+                <strong>Name:</strong>
+
+                <span id="displayName">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div class="student-row">
+
+                <strong>Admission No:</strong>
+
+                <span id="displayAdmissionNo">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div class="student-row">
+
+                <strong>Class:</strong>
+
+                <span id="displayClass">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div class="student-row">
+
+                <strong>Stream:</strong>
+
+                <span id="displayStream">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div class="student-row">
+
+                <strong>Section:</strong>
+
+                <span id="displaySection">
+                    Loading...
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- TEACHER ASSIGNMENT -->
+        <!-- ========================================= -->
+
+        <div
+            class="assignment loading"
+            id="assignmentBox"
+        >
+
+            <strong>
+                Assigned Teacher:
+            </strong>
+
+            <span id="assignedTeacher">
+                Loading...
+            </span>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- REPORT FORM -->
+        <!-- ========================================= -->
+
+        <form id="reportForm">
+
+
+            <!-- PLATFORM -->
+
+            <div class="form-group">
+
+                <label for="platform">
+                    Platform
+                </label>
+
+                <select id="platform" required>
+
+                    <option value="">
+                        Select Platform
+                    </option>
+
+                    <option value="WhatsApp">
+                        WhatsApp
+                    </option>
+
+                    <option value="Instagram">
+                        Instagram
+                    </option>
+
+                    <option value="Facebook">
+                        Facebook
+                    </option>
+
+                    <option value="Snapchat">
+                        Snapchat
+                    </option>
+
+                    <option value="YouTube">
+                        YouTube
+                    </option>
+
+                    <option value="Discord">
+                        Discord
+                    </option>
+
+                    <option value="Telegram">
+                        Telegram
+                    </option>
+
+                    <option value="Online Game">
+                        Online Game
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div class="form-group">
+
+                <label for="date">
+                    Date of Incident
+                </label>
+
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+                <label for="description">
+                    Describe what happened
+                </label>
+
+                <textarea
+                    id="description"
+                    placeholder="Please explain what happened..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- SCREENSHOT -->
+
+            <div class="form-group">
+
+                <label for="screenshot">
+                    Upload Screenshot
+                </label>
+
+                <input
+                    type="file"
+                    id="screenshot"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn"
+                disabled
+            >
+
+                🔔 Submit Report
+
+            </button>
+
+
+        </form>
+
+    </div>
 
 </div>
 
 
-<form id="reportForm">
-
-
-<label>Platform</label>
-
-<select id="platform" required>
-
-<option value="">Select Platform</option>
-
-<option value="Instagram">Instagram</option>
-
-<option value="WhatsApp">WhatsApp</option>
-
-<option value="Facebook">Facebook</option>
-
-<option value="Snapchat">Snapchat</option>
-
-<option value="Discord">Discord</option>
-
-<option value="YouTube">YouTube</option>
-
-<option value="Other">Other</option>
-
-</select>
-
-
-<label>Date of Incident</label>
-
-<input
-type="date"
-id="date"
-required>
-
-
-<label>Describe the Incident</label>
-
-<textarea
-id="description"
-rows="7"
-placeholder="Describe what happened..."
-required></textarea>
-
-
-<label>Upload Screenshot</label>
-
-<input
-type="file"
-id="screenshot"
-accept="image/*">
-
-
-<button type="submit" class="btn">
-
-🚨 Submit Report
-
-</button>
-
-
-</form>
-
-</section>
-
-
-<footer>
-
-<p>
-© 2026 CyberSafe Student Security Portal
-</p>
-
-</footer>
-
+<!-- ============================================= -->
+<!-- FIREBASE -->
+<!-- ============================================= -->
 
 <script type="module">
 
-import { db, auth } from "./js/firebase.js";
-
-import {
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-    collection,
-    addDoc,
-    doc,
-    getDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import {
+        initializeApp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-let currentUser = null;
-let currentStudent = null;
+    import {
+        getAuth,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
-// ==========================================
-// LOAD STUDENT
-// ==========================================
-
-onAuthStateChanged(auth, async (user) => {
-
-    if (!user) {
-
-        alert("Please login first.");
-
-        window.location.href = "student-login.html";
-
-        return;
-
-    }
+    import {
+        getFirestore,
+        doc,
+        getDoc,
+        addDoc,
+        collection,
+        serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-    try {
+    // =====================================================
+    // FIREBASE CONFIG
+    // =====================================================
 
-        currentUser = user;
+    const firebaseConfig = {
 
+        apiKey: "AIzaSyBQukwDZKUaeCheXpDhlgyxYfsr8E7SVhA",
 
-  const studentRef = doc(db, "students", user.uid);
+        authDomain:
+            "cybersafe-22ac4.firebaseapp.com",
 
-const studentSnap = await getDoc(studentRef);
+        databaseURL:
+            "https://cybersafe-22ac4-default-rtdb.firebaseio.com",
 
-if (!studentSnap.exists()) {
+        projectId:
+            "cybersafe-22ac4",
 
-    alert("Student record not found.");
+        storageBucket:
+            "cybersafe-22ac4.firebasestorage.app",
 
-    await signOut(auth);
+        messagingSenderId:
+            "381504496598",
 
-    window.location.href = "student-login.html";
+        appId:
+            "1:381504496598:web:e3dbaa382c13127d4d3a77",
 
-    return;
-}
+        measurementId:
+            "G-CB1L3GCR2P"
 
-currentStudent = studentSnap.data();
-
-console.log("✅ Student loaded:", currentStudent);
-
-
-// ==============================
-// DISPLAY NAME
-// ==============================
-
-const displayName =
-    document.getElementById("displayName");
-
-if (displayName) {
-    displayName.textContent =
-        currentStudent.name || "Student";
-}
+    };
 
 
-// ==============================
-// DISPLAY CLASS
-// ==============================
+    // =====================================================
+    // INITIALIZE FIREBASE
+    // =====================================================
 
-const displayClass =
-    document.getElementById("displayClass");
-
-if (displayClass) {
-    displayClass.textContent =
-        currentStudent.class || "-";
-}
+    const app =
+        initializeApp(firebaseConfig);
 
 
-// ==============================
-// DISPLAY STREAM
-// ==============================
-
-const streamDisplay =
-    document.getElementById("streamDisplay");
-
-const displayStream =
-    document.getElementById("displayStream");
-
-if (
-    currentStudent.class === "11" ||
-    currentStudent.class === "12"
-) {
-
-    if (streamDisplay) {
-        streamDisplay.style.display = "block";
-    }
-
-    if (displayStream) {
-        displayStream.textContent =
-            currentStudent.stream || "Not selected";
-    }
-
-} else {
-
-    if (streamDisplay) {
-        streamDisplay.style.display = "none";
-    }
-}
+    const auth =
+        getAuth(app);
 
 
-    catch(error) {
-
-        console.error(
-            "Student loading error:",
-            error
-        );
-
-        alert(
-            "Unable to load student information."
-        );
-
-    }
-
-});
+    const db =
+        getFirestore(app);
 
 
-// ==========================================
-// SUBMIT REPORT
-// ==========================================
+    // =====================================================
+    // GLOBAL VARIABLES
+    // =====================================================
 
-document
-.getElementById("reportForm")
-.addEventListener("submit", async function(e) {
+    let currentUser = null;
 
-    e.preventDefault();
+    let currentStudent = null;
 
+    let teacherData = null;
 
-    if (!currentUser || !currentStudent) {
-
-        alert(
-            "Please wait while your account loads."
-        );
-
-        return;
-
-    }
-
-
-    try {
-
-          // ==================================
-    // GET SCREENSHOT
-    // ==================================
-
-    const screenshotFile =
-        document.getElementById("screenshot").files[0];
+    let classKey = null;
 
     let screenshotData = "";
 
-    if (screenshotFile) {
+    let pageReady = false;
 
-        screenshotData =
-            await compressScreenshot(screenshotFile);
+
+    // =====================================================
+    // ELEMENTS
+    // =====================================================
+
+    const displayName =
+        document.getElementById("displayName");
+
+
+    const displayAdmissionNo =
+        document.getElementById("displayAdmissionNo");
+
+
+    const displayClass =
+        document.getElementById("displayClass");
+
+
+    const displayStream =
+        document.getElementById("displayStream");
+
+
+    const displaySection =
+        document.getElementById("displaySection");
+
+
+    const studentBox =
+        document.getElementById("studentBox");
+
+
+    const assignmentBox =
+        document.getElementById("assignmentBox");
+
+
+    const assignedTeacher =
+        document.getElementById("assignedTeacher");
+
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+
+    const statusBox =
+        document.getElementById("statusBox");
+
+
+    const reportForm =
+        document.getElementById("reportForm");
+
+
+    // =====================================================
+    // STATUS MESSAGE
+    // =====================================================
+
+    function showStatus(message, type) {
+
+        statusBox.textContent =
+            message;
+
+        statusBox.className =
+            "status-box " +
+            (type === "success"
+                ? "status-success"
+                : "status-error");
 
     }
 
 
-        // ==================================
-        // CREATE TEACHER ASSIGNMENT KEY
-        // ==================================
+    function clearStatus() {
 
-        let classKey;
+        statusBox.textContent = "";
+
+        statusBox.className =
+            "status-box";
+
+    }
 
 
-        // Classes 11 & 12
-        // use stream
+    // =====================================================
+    // CREATE CLASS TEACHER DOCUMENT KEY
+    // =====================================================
 
-       if (
-    currentStudent.class === "11" ||
-    currentStudent.class === "12"
-) {
+    function createClassTeacherKey(studentClass, stream) {
 
-    if (!currentStudent.stream) {
+        const cleanClass =
+            String(studentClass || "")
+                .trim()
+                .replace(/\s+/g, "");
 
-        alert(
-            "Your stream is missing from your student profile.\n\n" +
-            "Please contact your administrator."
+
+        const cleanStream =
+            String(stream || "")
+                .trim()
+                .replace(/\s+/g, "");
+
+
+        if (!cleanClass) {
+
+            return "";
+
+        }
+
+
+        // Example:
+        // Class = 11
+        // Stream = Science
+        //
+        // Result:
+        // Class11Science
+
+        if (
+            (cleanClass === "11" ||
+             cleanClass === "12") &&
+            cleanStream
+        ) {
+
+            return (
+                "Class" +
+                cleanClass +
+                cleanStream
+            );
+
+        }
+
+
+        return "Class" + cleanClass;
+
+    }
+
+
+    // =====================================================
+    // LOAD STUDENT
+    // =====================================================
+
+    async function loadStudent(user) {
+
+        const studentRef =
+            doc(
+                db,
+                "students",
+                user.uid
+            );
+
+
+        const studentSnap =
+            await getDoc(studentRef);
+
+
+        if (!studentSnap.exists()) {
+
+            throw new Error(
+                "Student record was not found in Firestore."
+            );
+
+        }
+
+
+        currentStudent =
+            studentSnap.data();
+
+
+        // =================================================
+        // STUDENT ROLE CHECK
+        // =================================================
+
+        if (
+            currentStudent.role &&
+            currentStudent.role !== "student"
+        ) {
+
+            throw new Error(
+                "This account is not registered as a student."
+            );
+
+        }
+
+
+        // =================================================
+        // DISPLAY STUDENT INFORMATION
+        // =================================================
+
+        displayName.textContent =
+            currentStudent.name ||
+            "Student";
+
+
+        displayAdmissionNo.textContent =
+            currentStudent.admissionNo ||
+            "Not available";
+
+
+        displayClass.textContent =
+            currentStudent.class ||
+            "Not available";
+
+
+        displayStream.textContent =
+            currentStudent.stream ||
+            "Not available";
+
+
+        displaySection.textContent =
+            currentStudent.section ||
+            "Not available";
+
+
+        studentBox.classList.remove(
+            "loading"
         );
 
-        return;
     }
 
-    const stream =
-        currentStudent.stream.trim().toLowerCase();
 
-    if (stream === "science") {
-        classKey = "Class" + currentStudent.class + "Science";
-    }
-    else if (stream === "commerce") {
-        classKey = "Class" + currentStudent.class + "Commerce";
-    }
-    else if (
-        stream === "humanities" ||
-        stream === "humanity"
-    ) {
-        classKey = "Class" + currentStudent.class + "Humanities";
-    }
-    else {
-        alert("Invalid stream in your student profile.");
-        return;
-    }
+    // =====================================================
+    // LOAD ASSIGNED TEACHER
+    // =====================================================
 
-}
+    async function loadAssignedTeacher() {
 
-// Classes 1–10
-else {
+        const studentClass =
+            currentStudent.class;
 
-    classKey = "Class" + currentStudent.class;
 
-}
+        const studentStream =
+            currentStudent.stream;
 
-console.log("Teacher assignment document:", classKey);
+
+        classKey =
+            createClassTeacherKey(
+                studentClass,
+                studentStream
+            );
+
+
+        console.log(
+            "Student class:",
+            studentClass
+        );
+
+
+        console.log(
+            "Student stream:",
+            studentStream
+        );
+
+
         console.log(
             "Teacher assignment key:",
             classKey
         );
 
 
-  // ==================================
-// FIND CLASS TEACHER
-// ==================================
+        if (!classKey) {
 
-console.log("Student class:", currentStudent.class);
-console.log("Student stream:", currentStudent.stream);
-console.log("Teacher assignment key:", classKey);
+            throw new Error(
+                "Student class is missing."
+            );
 
-const teacherRef = doc(
-    db,
-    "classTeachers",
-    classKey
-);
-
-const teacherSnap = await getDoc(teacherRef);
-
-if (!teacherSnap.exists()) {
-
-    console.error(
-        "❌ Teacher assignment not found:",
-        "classTeachers/" + classKey
-    );
-
-    alert(
-        "No teacher is assigned for " +
-        currentStudent.class +
-        " " +
-        (currentStudent.stream || "") +
-        ".\n\nPlease contact your administrator."
-    );
-
-    return;
-}
-
-const teacherData = teacherSnap.data();
-
-console.log("✅ TEACHER FOUND:", teacherData);
-
-console.log(
-    "Teacher:",
-    teacherData.TeacherName || "Not provided"
-);
-
-console.log(
-    "Teacher Email:",
-    teacherData.TeacherEmail || "Not provided"
-);
-
-console.log(
-    "Teacher UID:",
-    teacherData.TeacherUid || "Not provided"
-);
-        // ==========================================
-// COMPRESS SCREENSHOT FOR FREE FIRESTORE STORAGE
-// ==========================================
-
-function compressScreenshot(file) {
-
-    return new Promise((resolve, reject) => {
-
-        if (!file) {
-            resolve("");
-            return;
         }
 
-        const reader = new FileReader();
 
-        reader.onload = function(event) {
+        // =================================================
+        // GET:
+        // classTeachers/Class11Science
+        // =================================================
 
-            const img = new Image();
+        const teacherRef =
+            doc(
+                db,
+                "classTeachers",
+                classKey
+            );
 
-            img.onload = function() {
 
-                const canvas = document.createElement("canvas");
+        const teacherSnap =
+            await getDoc(teacherRef);
 
-                const maxWidth = 1000;
-                const maxHeight = 1000;
 
-                let width = img.width;
-                let height = img.height;
+        if (!teacherSnap.exists()) {
 
-                if (width > maxWidth) {
+            console.error(
+                "Teacher assignment not found:",
+                "classTeachers/" + classKey
+            );
 
-                    height =
-                        height * (maxWidth / width);
 
-                    width = maxWidth;
+            throw new Error(
+                "No teacher is assigned for " +
+                studentClass +
+                " " +
+                (studentStream || "") +
+                ". Please contact your administrator."
+            );
+
+        }
+
+
+        teacherData =
+            teacherSnap.data();
+
+
+        console.log(
+            "Teacher assignment found:",
+            teacherData
+        );
+
+
+        // =================================================
+        // GET TEACHER VALUES
+        // =================================================
+
+        const teacherName =
+            teacherData.TeacherName ||
+            teacherData.teacherName ||
+            "";
+
+
+        const teacherEmail =
+            teacherData.TeacherEmail ||
+            teacherData.teacherEmail ||
+            "";
+
+
+        const teacherUID =
+            teacherData.TeacherUid ||
+            teacherData.teacherUID ||
+            teacherData.TeacherUID ||
+            "";
+
+
+        if (!teacherUID) {
+
+            throw new Error(
+                "Teacher assignment exists, but TeacherUid is missing in classTeachers/" +
+                classKey +
+                "."
+            );
+
+        }
+
+
+        console.log(
+            "Teacher Name:",
+            teacherName
+        );
+
+
+        console.log(
+            "Teacher Email:",
+            teacherEmail
+        );
+
+
+        console.log(
+            "Teacher UID:",
+            teacherUID
+        );
+
+
+        // =================================================
+        // DISPLAY TEACHER
+        // =================================================
+
+        assignedTeacher.textContent =
+            teacherName ||
+            teacherEmail ||
+            "Assigned teacher";
+
+
+        assignmentBox.classList.remove(
+            "loading"
+        );
+
+
+        pageReady = true;
+
+        submitBtn.disabled = false;
+
+    }
+
+
+    // =====================================================
+    // COMPRESS SCREENSHOT
+    // =====================================================
+
+    function compressScreenshot(file) {
+
+        return new Promise(
+            (resolve, reject) => {
+
+                if (!file) {
+
+                    resolve("");
+
+                    return;
 
                 }
 
-                if (height > maxHeight) {
 
-                    width =
-                        width * (maxHeight / height);
-
-                    height = maxHeight;
-
-                }
-
-                canvas.width = width;
-                canvas.height = height;
-
-                const ctx =
-                    canvas.getContext("2d");
-
-                ctx.drawImage(
-                    img,
-                    0,
-                    0,
-                    width,
-                    height
-                );
-
-                const compressedImage =
-                    canvas.toDataURL(
-                        "image/jpeg",
-                        0.6
-                    );
-
-                // Keep Firestore document safely below 1 MiB
-                if (compressedImage.length > 500000) {
+                if (
+                    !file.type.startsWith("image/")
+                ) {
 
                     reject(
                         new Error(
-                            "Screenshot is still too large. Please choose a smaller image."
+                            "Please select an image file."
                         )
                     );
 
                     return;
+
                 }
 
-                resolve(compressedImage);
 
-            };
+                const reader =
+                    new FileReader();
 
-            img.onerror = function() {
 
-                reject(
-                    new Error("Unable to read screenshot.")
+                reader.onload =
+                    function(event) {
+
+                        const img =
+                            new Image();
+
+
+                        img.onload =
+                            function() {
+
+                                const canvas =
+                                    document.createElement(
+                                        "canvas"
+                                    );
+
+
+                                const maxWidth =
+                                    1000;
+
+
+                                const maxHeight =
+                                    1000;
+
+
+                                let width =
+                                    img.width;
+
+
+                                let height =
+                                    img.height;
+
+
+                                // =====================================
+                                // RESIZE WIDTH
+                                // =====================================
+
+                                if (
+                                    width >
+                                    maxWidth
+                                ) {
+
+                                    height =
+                                        height *
+                                        (
+                                            maxWidth /
+                                            width
+                                        );
+
+                                    width =
+                                        maxWidth;
+
+                                }
+
+
+                                // =====================================
+                                // RESIZE HEIGHT
+                                // =====================================
+
+                                if (
+                                    height >
+                                    maxHeight
+                                ) {
+
+                                    width =
+                                        width *
+                                        (
+                                            maxHeight /
+                                            height
+                                        );
+
+                                    height =
+                                        maxHeight;
+
+                                }
+
+
+                                canvas.width =
+                                    Math.round(width);
+
+
+                                canvas.height =
+                                    Math.round(height);
+
+
+                                const ctx =
+                                    canvas.getContext(
+                                        "2d"
+                                    );
+
+
+                                ctx.drawImage(
+                                    img,
+                                    0,
+                                    0,
+                                    canvas.width,
+                                    canvas.height
+                                );
+
+
+                                const compressedImage =
+                                    canvas.toDataURL(
+                                        "image/jpeg",
+                                        0.6
+                                    );
+
+
+                                // =====================================
+                                // FIRESTORE SAFE SIZE CHECK
+                                // =====================================
+
+                                if (
+                                    compressedImage.length >
+                                    700000
+                                ) {
+
+                                    reject(
+                                        new Error(
+                                            "Screenshot is too large. Please choose a smaller image."
+                                        )
+                                    );
+
+                                    return;
+
+                                }
+
+
+                                resolve(
+                                    compressedImage
+                                );
+
+                            };
+
+
+                        img.onerror =
+                            function() {
+
+                                reject(
+                                    new Error(
+                                        "Unable to read screenshot."
+                                    )
+                                );
+
+                            };
+
+
+                        img.src =
+                            event.target.result;
+
+                    };
+
+
+                reader.onerror =
+                    function() {
+
+                        reject(
+                            new Error(
+                                "Unable to load screenshot."
+                            )
+                        );
+
+                    };
+
+
+                reader.readAsDataURL(file);
+
+            }
+        );
+
+    }
+
+
+    // =====================================================
+    // AUTHENTICATION
+    // =====================================================
+
+    onAuthStateChanged(
+        auth,
+        async (user) => {
+
+            clearStatus();
+
+
+            if (!user) {
+
+                window.location.href =
+                    "student-login.html";
+
+                return;
+
+            }
+
+
+            currentUser =
+                user;
+
+
+            try {
+
+                submitBtn.disabled =
+                    true;
+
+
+                // =============================================
+                // LOAD STUDENT
+                // =============================================
+
+                await loadStudent(
+                    user
                 );
 
-            };
 
-            img.src = event.target.result;
+                // =============================================
+                // LOAD TEACHER
+                // =============================================
 
-        };
+                await loadAssignedTeacher();
 
-        reader.onerror = function() {
 
-            reject(
-                new Error("Unable to load screenshot.")
-            );
+                console.log(
+                    "================================"
+                );
 
-        };
+                console.log(
+                    "CyberSafe report page ready."
+                );
 
-        reader.readAsDataURL(file);
+                console.log(
+                    "Student UID:",
+                    currentUser.uid
+                );
 
-    });
+                console.log(
+                    "Student:",
+                    currentStudent
+                );
 
-}
+                console.log(
+                    "Teacher:",
+                    teacherData
+                );
 
-        // ==================================
-        // SUBMIT REPORT
-        // ==================================
+                console.log(
+                    "Class Teacher Key:",
+                    classKey
+                );
 
-    await addDoc(
-    collection(db, "reports"),
-    {
-        studentUID: currentUser.uid,
+                console.log(
+                    "================================"
+                );
 
-        studentName:
-            currentStudent.name || "",
 
-        admissionNo:
-            currentStudent.admissionNo || "",
+            } catch (error) {
 
-        class:
-            currentStudent.class || "",
+                console.error(
+                    "Report page loading error:",
+                    error
+                );
 
-        stream:
-            currentStudent.stream || "",
 
-        mobile:
-            currentStudent.mobile || "",
+                pageReady = false;
 
-        email:
-            currentStudent.email || "",
+                submitBtn.disabled =
+                    true;
 
-        platform:
-            document
-                .getElementById("platform")
-                .value,
 
-        date:
-            document
-                .getElementById("date")
-                .value,
+                showStatus(
+                    error.message,
+                    "error"
+                );
 
-        description:
-            document
-                .getElementById("description")
-                .value
-                .trim(),
+            }
 
-        screenshotData:
-            screenshotData,
+        }
+    );
 
-        status:
-            "Pending",
 
-        // =====================================
-        // TEACHER ASSIGNMENT
-        // =====================================
+    // =====================================================
+    // SUBMIT REPORT
+    // =====================================================
 
-        assignedTeacherName:
-            teacherData.TeacherName || "",
+    reportForm.addEventListener(
+        "submit",
+        async (event) => {
 
-        assignedTeacherEmail:
-            teacherData.TeacherEmail || "",
+            event.preventDefault();
 
-        assignedTeacherUid:
-            teacherData.TeacherUid || "",
 
-        assignedClass:
-            classKey,
+            clearStatus();
 
-        // =====================================
-        // TEACHER DASHBOARD FILTER
-        // =====================================
 
-        teacherEmail:
-            teacherData.TeacherEmail || "",
+            // ===============================================
+            // CHECK AUTH
+            // ===============================================
 
-        teacherUID:
-            teacherData.TeacherUid || "",
+            if (!currentUser) {
 
-        classTeacherKey:
-            classKey,
+                showStatus(
+                    "Your login session has expired. Please login again.",
+                    "error"
+                );
 
-        // =====================================
-        // TIMESTAMP
-        // =====================================
+                return;
 
-        createdAt:
-            serverTimestamp()
-    }
-);
+            }
 
-alert(
-    "✅ Report submitted successfully!"
-);
 
-document
-    .getElementById("reportForm")
-    .reset();
+            // ===============================================
+            // CHECK STUDENT
+            // ===============================================
+
+            if (!currentStudent) {
+
+                showStatus(
+                    "Student information is not loaded.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            // ===============================================
+            // CHECK TEACHER
+            // ===============================================
+
+            if (
+                !teacherData ||
+                !classKey
+            ) {
+
+                showStatus(
+                    "Teacher assignment is not loaded. The report cannot be submitted.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const teacherName =
+                teacherData.TeacherName ||
+                teacherData.teacherName ||
+                "";
+
+
+            const teacherEmail =
+                teacherData.TeacherEmail ||
+                teacherData.teacherEmail ||
+                "";
+
+
+            const teacherUID =
+                teacherData.TeacherUid ||
+                teacherData.teacherUID ||
+                teacherData.TeacherUID ||
+                "";
+
+
+            if (!teacherUID) {
+
+                showStatus(
+                    "The assigned teacher does not have a Teacher UID.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            // ===============================================
+            // GET FORM VALUES
+            // ===============================================
+
+            const platform =
+                document.getElementById(
+                    "platform"
+                ).value;
+
+
+            const date =
+                document.getElementById(
+                    "date"
+                ).value;
+
+
+            const description =
+                document.getElementById(
+                    "description"
+                ).value.trim();
+
+
+            const screenshotFile =
+                document.getElementById(
+                    "screenshot"
+                ).files[0];
+
+
+            // ===============================================
+            // VALIDATION
+            // ===============================================
+
+            if (!platform) {
+
+                showStatus(
+                    "Please select a platform.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!date) {
+
+                showStatus(
+                    "Please select the incident date.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (!description) {
+
+                showStatus(
+                    "Please describe the incident.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            // ===============================================
+            // DISABLE BUTTON
+            // ===============================================
+
+            submitBtn.disabled =
+                true;
+
+
+            submitBtn.textContent =
+                "Submitting...";
+
+
+            try {
+
+                // ==========================================
+                // COMPRESS SCREENSHOT
+                // ==========================================
+
+                screenshotData =
+                    await compressScreenshot(
+                        screenshotFile
+                    );
+
+
+                // ==========================================
+                // CREATE REPORT
+                // ==========================================
+
+                const reportData = {
+
+                    // ======================================
+                    // STUDENT
+                    // ======================================
+
+                    studentUID:
+                        currentUser.uid,
+
+
+                    studentName:
+                        currentStudent.name ||
+                        "",
+
+
+                    admissionNo:
+                        currentStudent.admissionNo ||
+                        "",
+
+
+                    class:
+                        currentStudent.class ||
+                        "",
+
+
+                    stream:
+                        currentStudent.stream ||
+                        "",
+
+
+                    section:
+                        currentStudent.section ||
+                        "",
+
+
+                    mobile:
+                        currentStudent.mobile ||
+                        "",
+
+
+                    email:
+                        currentStudent.email ||
+                        currentUser.email ||
+                        "",
+
+
+                    // ======================================
+                    // INCIDENT
+                    // ======================================
+
+                    platform:
+                        platform,
+
+
+                    date:
+                        date,
+
+
+                    description:
+                        description,
+
+
+                    screenshotData:
+                        screenshotData,
+
+
+                    // ======================================
+                    // STATUS
+                    // ======================================
+
+                    status:
+                        "Pending",
+
+
+                    // ======================================
+                    // TEACHER ASSIGNMENT
+                    // ======================================
+
+                    assignedTeacherName:
+                        teacherName,
+
+
+                    assignedTeacherEmail:
+                        teacherEmail,
+
+
+                    assignedTeacherUid:
+                        teacherUID,
+
+
+                    assignedClass:
+                        classKey,
+
+
+                    // ======================================
+                    // TEACHER QUERY FIELDS
+                    // ======================================
+
+                    teacherEmail:
+                        teacherEmail,
+
+
+                    teacherUID:
+                        teacherUID,
+
+
+                    classTeacherKey:
+                        classKey,
+
+
+                    // ======================================
+                    // TIMESTAMP
+                    // ======================================
+
+                    createdAt:
+                        serverTimestamp()
+
+                };
+
+
+                console.log(
+                    "Submitting report:",
+                    reportData
+                );
+
+
+                // ==========================================
+                // WRITE TO FIRESTORE
+                // ==========================================
+
+                const reportRef =
+                    await addDoc(
+                        collection(
+                            db,
+                            "reports"
+                        ),
+                        reportData
+                    );
+
+
+                console.log(
+                    "Report created:",
+                    reportRef.id
+                );
+
+
+                // ==========================================
+                // SUCCESS
+                // ==========================================
+
+                showStatus(
+                    "✅ Report submitted successfully.",
+                    "success"
+                );
+
+
+                reportForm.reset();
+
+
+                screenshotData =
+                    "";
+
+
+                // ==========================================
+                // KEEP STUDENT INFORMATION
+                // ==========================================
+
+                displayName.textContent =
+                    currentStudent.name ||
+                    "Student";
+
+
+                displayAdmissionNo.textContent =
+                    currentStudent.admissionNo ||
+                    "Not available";
+
+
+                displayClass.textContent =
+                    currentStudent.class ||
+                    "Not available";
+
+
+                displayStream.textContent =
+                    currentStudent.stream ||
+                    "Not available";
+
+
+                displaySection.textContent =
+                    currentStudent.section ||
+                    "Not available";
+
+
+                submitBtn.textContent =
+                    "🔔 Submit Report";
+
+
+                submitBtn.disabled =
+                    !pageReady;
+
+
+            } catch (error) {
+
+                console.error(
+                    "Report submission error:",
+                    error
+                );
+
+
+                showStatus(
+                    "❌ Error submitting report: " +
+                    error.message,
+                    "error"
+                );
+
+
+                submitBtn.textContent =
+                    "🔔 Submit Report";
+
+
+                submitBtn.disabled =
+                    !pageReady;
+
+            }
+
+        }
+    );
 
 </script>
 
-
 </body>
-
 </html>
