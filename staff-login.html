@@ -1,162 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teacher Login | CyberSafe</title>
-
-<link rel="stylesheet" href="css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-<header class="header">
-<div class="nav-container">
-
-<a href="index.html" class="logo">
-<img src="images/logo.png" alt="CyberSafe">
-<span>CYBERSAFE</span>
-</a>
-
-<nav class="nav" id="navMenu">
-<a href="index.html">Home</a>
-<a href="report.html">Report</a>
-<a href="learn.html">Learn</a>
-<a href="safety.html">Safety Tips</a>
-<a href="resources.html">Resources</a>
-<a href="emergency.html">Emergency</a>
-<a href="login.html" class="login-btn">Student Login</a>
-</nav>
-
-<button class="menu-btn" id="menuBtn">☰</button>
-
-</div>
-</header>
-
-<!-- LOGIN SECTION -->
-
-<section class="teacher-login-hero">
-
-<div class="teacher-glow glow1"></div>
-<div class="teacher-glow glow2"></div>
-
-<div class="teacher-login-card">
-
-<div class="teacher-logo">
-<img src="images/logo.png" alt="CyberSafe">
-</div>
-
-<span class="teacher-badge">STAFF ACCESS</span>
-
-<h1>Teacher Portal</h1>
-
-<p>Secure access for teachers and administrators.</p>
-
-<form id="loginForm">
-
-<div class="input-group">
-<label>Email</label>
-<input type="email" id="email" placeholder="teacher@school.com" required>
-</div>
-
-<div class="input-group">
-<label>Password</label>
-<input type="password" id="password" placeholder="Enter your password" required>
-</div>
-
-<button type="submit" class="teacher-login-btn">
-🔐 Secure Login
-</button>
-
-</form>
-
-<p id="loginMessage" class="login-message"></p>
-
-<div class="teacher-footer-note">
-🛡 Protected by CyberSafe Authentication
-</div>
-
-</div>
-
-</section>
-
-<footer class="footer">
-
-<div class="footer-content">
-
-<div class="footer-brand">
-<img src="images/logo.png" alt="CyberSafe">
-<div>
-<h3>CYBERSAFE</h3>
-<p>Student Security Portal</p>
-</div>
-</div>
-
-<div class="footer-bottom">
-© 2026 CyberSafe | Student Security Portal
-</div>
-
-</div>
-
-</footer>
-
 <script type="module">
 import { auth, db } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const form=document.getElementById("loginForm");
-const message=document.getElementById("loginMessage");
+const msg=document.getElementById("loginMessage");
 
-form.addEventListener("submit",async(e)=>{
+form.addEventListener("submit", async (e)=>{
+  e.preventDefault();
 
-e.preventDefault();
+  msg.textContent="Signing in...";
 
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
 
-message.textContent="Signing in...";
+  try{
 
-try{
+    const userCred=await signInWithEmailAndPassword(auth,email,password);
+    const uid=userCred.user.uid;
 
-const userCredential=await signInWithEmailAndPassword(auth,email,password);
+    const snap=await getDoc(doc(db,"teachers",uid));
 
-const uid=userCredential.user.uid;
+    if(!snap.exists()){
+      msg.textContent="Teacher record not found.";
+      return;
+    }
 
-const userDoc=await getDoc(doc(db,"teachers",uid));
+    const role=snap.data().role;
 
-if(userDoc.exists()){
+    if(role==="teacher"){
+      window.location.href="teacher.html";
+    }else{
+      msg.textContent="Not a teacher account.";
+    }
 
-const role=userDoc.data().role;
-
-if(role==="admin"){
-window.location.href="admin.html";
-}else{
-window.location.href="teacher.html";
-}
-
-}else{
-
-message.textContent="Access denied.";
-await auth.signOut();
-
-}
-
-}catch(error){
-
-message.textContent="Invalid email or password.";
-
-}
-
+  }catch(err){
+    msg.textContent=err.message;
+  }
 });
 </script>
-
-<script>
-const menuBtn=document.getElementById("menuBtn");
-const navMenu=document.getElementById("navMenu");
-menuBtn.onclick=()=>navMenu.classList.toggle("show");
-</script>
-
-</body>
-</html>
