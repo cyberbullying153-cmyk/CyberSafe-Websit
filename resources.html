@@ -1,1 +1,153 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>resources.html</title><link rel="stylesheet" href="css/style.css"></head><body><header><h2>CYBERSAFE</h2><nav><a href="index.html">Home</a><a href="learn.html">Learn</a><a href="safety.html">Safety</a><a href="resources.html">Resources</a><a href="emergency.html">Emergency</a></nav></header><section class="hero"><h1>Student Resources</h1><p>Resources page placeholder.</p></section><footer>© 2026 CyberSafe</footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources | CyberSafe</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="header">
+<div class="nav-container">
+
+<a href="index.html" class="logo">
+<img src="images/logo.png" alt="CyberSafe Logo">
+<span>CYBERSAFE</span>
+</a>
+
+<nav class="nav" id="navMenu">
+<a href="index.html">Home</a>
+<a href="report.html">Report</a>
+<a href="learn.html">Learn</a>
+<a href="safety.html">Safety Tips</a>
+<a href="resources.html" class="active">Resources</a>
+<a href="emergency.html">Emergency</a>
+<a href="login.html" class="login-btn">Login</a>
+</nav>
+
+<button class="menu-btn" id="menuBtn">☰</button>
+
+</div>
+</header>
+
+<section class="page-header">
+<div class="eyebrow">Digital Learning</div>
+<h1>CyberSafe Resources</h1>
+<p>Explore posters, videos, quizzes and guides designed to help students, parents and teachers stay safe online.</p>
+</section>
+
+<section class="resources-page">
+
+<div class="resources-grid">
+
+<div class="resource-card">
+<div class="resource-icon">📥</div>
+<h3>Safety Posters</h3>
+<p>Download colorful cyber safety posters for classrooms and homes.</p>
+<a href="#" class="btn btn-primary">Download</a>
+</div>
+
+<div class="resource-card">
+<div class="resource-icon">🎥</div>
+<h3>Educational Videos</h3>
+<p>Watch short videos explaining cyberbullying and online safety.</p>
+<a href="#" class="btn btn-primary">Watch Now</a>
+</div>
+
+<div class="resource-card">
+<div class="resource-icon">📝</div>
+<h3>Cyber Quiz</h3>
+<p>Test your cyber safety knowledge with a fun interactive quiz.</p>
+<a href="#" class="btn btn-primary">Start Quiz</a>
+</div>
+
+<div class="resource-card">
+<div class="resource-icon">🏆</div>
+<h3>Certificate Challenge</h3>
+<p>Complete the CyberSafe Challenge and earn a digital certificate.</p>
+<a href="#" class="btn btn-primary">Earn Certificate</a>
+</div>
+
+<div class="resource-card">
+<div class="resource-icon">👨‍👩‍👧</div>
+<h3>Parents Corner</h3>
+<p>Helpful guidance for parents to protect children online.</p>
+<ul>
+<li>Recognize warning signs</li>
+<li>Encourage open conversations</li>
+<li>Monitor online activity safely</li>
+</ul>
+</div>
+
+<div class="resource-card">
+<div class="resource-icon">👨‍🏫</div>
+<h3>Teachers Corner</h3>
+<p>Resources for teachers to create a safer digital classroom.</p>
+<ul>
+<li>Identify cyberbullying</li>
+<li>Respond responsibly</li>
+<li>Promote digital citizenship</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+<section class="cta-section">
+
+<h2>Keep Learning. Keep Growing.</h2>
+
+<p>Every lesson you learn about online safety helps create a safer digital world for everyone.</p>
+
+<a href="learn.html" class="btn btn-primary">Explore Learning</a>
+
+</section>
+
+<footer class="footer">
+
+<div class="footer-content">
+
+<div class="footer-brand">
+
+<img src="images/logo.png" alt="CyberSafe">
+
+<div>
+<h3>CYBERSAFE</h3>
+<p>Student Security Portal</p>
+</div>
+
+</div>
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="report.html">Report</a>
+<a href="learn.html">Learn</a>
+<a href="safety.html">Safety Tips</a>
+<a href="resources.html">Resources</a>
+<a href="emergency.html">Emergency</a>
+</div>
+
+<div class="footer-bottom">
+© 2026 CyberSafe | Student Security Portal
+</div>
+
+</div>
+
+</footer>
+
+<script>
+const menuBtn=document.getElementById("menuBtn");
+const navMenu=document.getElementById("navMenu");
+
+menuBtn.addEventListener("click",()=>{
+navMenu.classList.toggle("show");
+});
+</script>
+
+</body>
+</html>
