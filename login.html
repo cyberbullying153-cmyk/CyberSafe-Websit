@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Login | CyberSafe</title>
+<title>CyberSafe | Login Portal</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,104 +11,42 @@
 
 <body>
 
-<header class="header">
-<div class="nav-container">
+<section class="portal-hero">
 
-<a href="index.html" class="logo">
-<img src="images/logo.png" alt="CyberSafe">
-<span>CYBERSAFE</span>
+<div class="portal-glow"></div>
+
+<div class="portal-box">
+
+<img src="images/logo.png" class="portal-logo" alt="CyberSafe">
+
+<h1>Choose Login</h1>
+<p>Select your secure access portal.</p>
+
+<div class="portal-grid">
+
+<a href="report.html" class="portal-card student">
+<div class="portal-icon">🎓</div>
+<h3>Student</h3>
+<p>Report incidents safely.</p>
 </a>
 
-<nav class="nav" id="navMenu">
-<a href="index.html">Home</a>
-<a href="report.html">Report</a>
-<a href="learn.html">Learn</a>
-<a href="safety.html">Safety Tips</a>
-<a href="resources.html">Resources</a>
-<a href="emergency.html">Emergency</a>
-<a href="login.html" class="active login-btn">Login</a>
-</nav>
-
-<button class="menu-btn" id="menuBtn">☰</button>
-
-</div>
-</header>
-
-<!-- LOGIN HERO -->
-
-<section class="login-hero">
-
-<div class="login-glow"></div>
-
-<div class="login-card-premium">
-
-<div class="login-logo">
-<img src="images/logo.png" alt="CyberSafe">
-</div>
-
-<h1>Welcome Back</h1>
-
-<p>Secure Student Access to CyberSafe Portal</p>
-
-<div class="login-buttons">
-
-<a href="report.html" class="student-btn">
-🎓 Student Access
-<span>Submit confidential reports safely</span>
+<a href="staff-login.html" class="portal-card teacher">
+<div class="portal-icon">👨‍🏫</div>
+<h3>Teacher</h3>
+<p>Teacher Dashboard</p>
 </a>
 
-<a href="staff-login.html" class="staff-btn">
-🛡 Teacher / Admin Login
-<span>Secure staff authentication</span>
+<a href="admin-login.html" class="portal-card admin">
+<div class="portal-icon">👑</div>
+<h3>Admin</h3>
+<p>Administrator Portal</p>
 </a>
 
-</div>
-
-<div class="security-note">
-🔒 Your privacy and security are protected.
 </div>
 
 </div>
 
 </section>
-
-<footer class="footer">
-
-<div class="footer-content">
-
-<div class="footer-brand">
-
-<img src="images/logo.png" alt="CyberSafe">
-
-<div>
-<h3>CYBERSAFE</h3>
-<p>Student Security Portal</p>
-</div>
-
-</div>
-
-<div class="footer-links">
-<a href="index.html">Home</a>
-<a href="report.html">Report</a>
-<a href="learn.html">Learn</a>
-<a href="resources.html">Resources</a>
-<a href="emergency.html">Emergency</a>
-</div>
-
-<div class="footer-bottom">
-© 2026 CyberSafe | Student Security Portal
-</div>
-
-</div>
-
-</footer>
-
-<script>
-const menuBtn=document.getElementById("menuBtn");
-const navMenu=document.getElementById("navMenu");
-
-menuBtn.onclick=()=>navMenu.classList.toggle("show");
-</script>
 
 </body>
 </html>
