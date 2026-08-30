@@ -1,41 +1,41 @@
 <script type="module">
 import { auth, db } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const form=document.getElementById("loginForm");
-const msg=document.getElementById("loginMessage");
+const form = document.getElementById("loginForm");
+const msg = document.getElementById("loginMessage");
 
-form.addEventListener("submit", async (e)=>{
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  msg.textContent="Signing in...";
+  msg.textContent = "Signing in...";
 
-  const email=document.getElementById("email").value.trim();
-  const password=document.getElementById("password").value;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-  try{
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
 
-    const userCred=await signInWithEmailAndPassword(auth,email,password);
-    const uid=userCred.user.uid;
+    // Check teacher by email instead of UID
+    const q = query(collection(db, "teachers"), where("email", "==", email));
+    const snap = await getDocs(q);
 
-    const snap=await getDoc(doc(db,"teachers",uid));
-
-    if(!snap.exists()){
-      msg.textContent="Teacher record not found.";
+    if (snap.empty) {
+      msg.textContent = "Teacher account not found.";
       return;
     }
 
-    const role=snap.data().role;
+    const role = snap.docs[0].data().role;
 
-    if(role==="teacher"){
-      window.location.href="teacher.html";
-    }else{
-      msg.textContent="Not a teacher account.";
+    if (role === "teacher") {
+      window.location.href = "teacher.html";
+    } else {
+      msg.textContent = "This is not a teacher account.";
     }
 
-  }catch(err){
-    msg.textContent=err.message;
+  } catch (err) {
+    msg.textContent = "Wrong email or password.";
   }
 });
 </script>
