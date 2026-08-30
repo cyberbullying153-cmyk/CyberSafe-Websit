@@ -112,12 +112,10 @@ menuBtn.addEventListener("click",()=>{
 import { auth } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-const form = document.getElementById("loginForm");
+const btn = document.getElementById("loginBtn");
 const msg = document.getElementById("loginMessage");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
+btn.onclick = async () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
 
@@ -125,11 +123,12 @@ form.addEventListener("submit", async (e) => {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    window.location.replace("teacher.html");
-  } catch (err) {
-    msg.textContent = err.code;
+    window.location.href = "teacher.html";
+  } catch (error) {
+    msg.textContent = error.code;
+    console.error(error);
   }
-});
+};
 </script>
 </body>
 </html>
