@@ -1,302 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Staff Login | CyberSafe</title>
+<title>Teacher Login | CyberSafe</title>
 
 <link rel="stylesheet" href="css/style.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header>
+<header class="header">
+<div class="nav-container">
 
-<nav>
+<a href="index.html" class="logo">
+<img src="images/logo.png" alt="CyberSafe">
+<span>CYBERSAFE</span>
+</a>
 
-<div class="logo">
-🛡 CyberSafe
-</div>
-
-<ul class="nav-links">
-
-<li><a href="index.html">Home</a></li>
-
-<li><a href="report.html">Report</a></li>
-
-<li><a href="learn.html">Learn</a></li>
-
-<li><a href="resources.html">Resources</a></li>
-
-</ul>
-
+<nav class="nav" id="navMenu">
+<a href="index.html">Home</a>
+<a href="report.html">Report</a>
+<a href="learn.html">Learn</a>
+<a href="safety.html">Safety Tips</a>
+<a href="resources.html">Resources</a>
+<a href="emergency.html">Emergency</a>
+<a href="login.html" class="login-btn">Student Login</a>
 </nav>
 
+<button class="menu-btn" id="menuBtn">☰</button>
+
+</div>
 </header>
 
-<section class="login-container">
+<!-- LOGIN SECTION -->
 
-<h1>👨‍🏫 Staff Login</h1>
+<section class="teacher-login-hero">
 
-<p>
-Only registered teachers and administrators can log in.
-</p>
+<div class="teacher-glow glow1"></div>
+<div class="teacher-glow glow2"></div>
 
-<form id="loginForm" class="login-form">
+<div class="teacher-login-card">
 
-<input
-type="email"
-id="email"
-placeholder="Email"
-required>
+<div class="teacher-logo">
+<img src="images/logo.png" alt="CyberSafe">
+</div>
 
-<input
-type="password"
-id="password"
-placeholder="Password"
-required>
+<span class="teacher-badge">STAFF ACCESS</span>
 
-<button type="submit" class="btn report-btn">
-Login
+<h1>Teacher Portal</h1>
+
+<p>Secure access for teachers and administrators.</p>
+
+<form id="loginForm">
+
+<div class="input-group">
+<label>Email</label>
+<input type="email" id="email" placeholder="teacher@school.com" required>
+</div>
+
+<div class="input-group">
+<label>Password</label>
+<input type="password" id="password" placeholder="Enter your password" required>
+</div>
+
+<button type="submit" class="teacher-login-btn">
+🔐 Secure Login
 </button>
 
 </form>
 
+<p id="loginMessage" class="login-message"></p>
+
+<div class="teacher-footer-note">
+🛡 Protected by CyberSafe Authentication
+</div>
+
+</div>
+
 </section>
 
+<footer class="footer">
+
+<div class="footer-content">
+
+<div class="footer-brand">
+<img src="images/logo.png" alt="CyberSafe">
+<div>
+<h3>CYBERSAFE</h3>
+<p>Student Security Portal</p>
+</div>
+</div>
+
+<div class="footer-bottom">
+© 2026 CyberSafe | Student Security Portal
+</div>
+
+</div>
+
+</footer>
+
 <script type="module">
+import { auth, db } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import { auth, db } from "./js/firebase.js";
+const form=document.getElementById("loginForm");
+const message=document.getElementById("loginMessage");
 
-import {
-    signInWithEmailAndPassword,
-    signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+form.addEventListener("submit",async(e)=>{
 
-import {
-    doc,
-    getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+e.preventDefault();
 
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
 
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+message.textContent="Signing in...";
 
-    e.preventDefault();
+try{
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+const userCredential=await signInWithEmailAndPassword(auth,email,password);
 
-    try {
+const uid=userCredential.user.uid;
 
-        // =====================================
-        // 1. FIREBASE AUTHENTICATION
-        // =====================================
+const userDoc=await getDoc(doc(db,"teachers",uid));
 
-        const userCredential =
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+if(userDoc.exists()){
 
-        const user = userCredential.user;
+const role=userDoc.data().role;
 
-        console.log("Authenticated UID:", user.uid);
-        console.log("Authenticated Email:", user.email);
-
-
-        // =====================================
-        // 2. CHECK TEACHERS COLLECTION
-        // Document ID MUST BE Firebase UID
-        // =====================================
-
-        const teacherRef =
-            doc(db, "teachers", user.uid);
-
-        const teacherSnap =
-            await getDoc(teacherRef);
-
-
-        if (!teacherSnap.exists()) {
-
-            await signOut(auth);
-
-            alert(
-                "❌ Access Denied.\n\n" +
-                "This account is not registered as a teacher or administrator."
-            );
-
-            return;
-        }
-
-
-        // =====================================
-        // 3. GET TEACHER DATA
-        // =====================================
-
-        const teacherData =
-            teacherSnap.data();
-
-        console.log("Teacher Data:", teacherData);
-
-
-        // =====================================
-        // 4. CHECK EMAIL
-        // =====================================
-
-       // =====================================
-// CHECK TEACHER EMAIL SAFELY
-// =====================================
-
-const teacherEmail =
-    (teacherData.email || "").trim().toLowerCase();
-
-const authEmail =
-    (user.email || "").trim().toLowerCase();
-
-
-if (teacherEmail && teacherEmail !== authEmail) {
-
-    await signOut(auth);
-
-    alert(
-        "❌ Access Denied.\n\n" +
-        "The teacher email in Firestore does not match " +
-        "the Firebase Authentication email."
-    );
-
-    return;
+if(role==="admin"){
+window.location.href="admin.html";
+}else{
+window.location.href="teacher.html";
 }
 
+}else{
 
-        // =====================================
-        // 5. CHECK ROLE
-        // =====================================
+message.textContent="Access denied.";
+await auth.signOut();
 
-        const role =
-            (teacherData.role || "teacher")
-            .toLowerCase();
+}
 
+}catch(error){
 
-        if (
-            role !== "teacher" &&
-            role !== "admin" &&
-            role !== "administrator"
-        ) {
+message.textContent="Invalid email or password.";
 
-            await signOut(auth);
-
-            alert(
-                "❌ Access Denied.\n\n" +
-                "Your account does not have staff permission."
-            );
-
-            return;
-        }
-
-
-        // =====================================
-        // 6. LOGIN SUCCESS
-        // =====================================
-
-        alert(
-            "✅ Staff Login Successful!\n\n" +
-            "Welcome " +
-            (teacherData.name || "Teacher")
-        );
-
-
-        // Admin → Admin Dashboard
-        if (
-            role === "admin" ||
-            role === "administrator"
-        ) {
-
-            window.location.href =
-                "admin.html";
-
-            return;
-        }
-
-
-        // Teacher → Teacher Dashboard
-        window.location.href =
-            "teacher.html";
-
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Staff Login Error:",
-            error
-        );
-
-
-        if (
-            error.code ===
-            "auth/invalid-credential"
-        ) {
-
-            alert(
-                "❌ Invalid email or password."
-            );
-
-        }
-
-        else if (
-            error.code ===
-            "auth/user-not-found"
-        ) {
-
-            alert(
-                "❌ No Firebase account exists with this email."
-            );
-
-        }
-
-        else if (
-            error.code ===
-            "auth/wrong-password"
-        ) {
-
-            alert(
-                "❌ Incorrect password."
-            );
-
-        }
-
-        else if (
-            error.code ===
-            "permission-denied"
-        ) {
-
-            alert(
-                "❌ Firestore permission denied.\n\n" +
-                "Please check the Firestore rules."
-            );
-
-        }
-
-        else {
-
-            alert(
-                "❌ " + error.message
-            );
-
-        }
-
-    }
+}
 
 });
+</script>
 
+<script>
+const menuBtn=document.getElementById("menuBtn");
+const navMenu=document.getElementById("navMenu");
+menuBtn.onclick=()=>navMenu.classList.toggle("show");
 </script>
 
 </body>
-
 </html>
