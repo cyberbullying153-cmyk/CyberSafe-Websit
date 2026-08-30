@@ -111,75 +111,27 @@ menuBtn.addEventListener("click",()=>{
 <!-- Firebase Login -->
 
 <script type="module">
-import { auth, db } from "./firebase.js";
+import { auth } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const form=document.getElementById("loginForm");
-const msg=document.getElementById("loginMessage");
+const form = document.getElementById("loginForm");
+const msg = document.getElementById("loginMessage");
 
-form.addEventListener("submit", async (e)=>{
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  msg.style.color="#fff";
-  msg.textContent="Signing in...";
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-  const email=document.getElementById("email").value.trim().toLowerCase();
-  const password=document.getElementById("password").value;
+  msg.textContent = "Signing in...";
 
-  try{
-
-    // Firebase Authentication
-    await signInWithEmailAndPassword(auth,email,password);
-
-    // Firestore check
-    const q=query(
-      collection(db,"teachers"),
-      where("email","==",email)
-    );
-
-    const snap=await getDocs(q);
-
-    if(snap.empty){
-      msg.style.color="#ffb4b4";
-      msg.textContent="Teacher record not found.";
-      return;
-    }
-
-    const data=snap.docs[0].data();
-    const role=(data.role || "").toLowerCase();
-
-    if(role==="teacher"){
-      window.location.replace("teacher.html");
-    }
-    else if(role==="admin"){
-      window.location.replace("admin.html");
-    }
-    else{
-      msg.style.color="#ffb4b4";
-      msg.textContent="Access denied.";
-    }
-
-  }catch(err){
-    console.error(err);
-    msg.style.color="#ffb4b4";
-
-    switch(err.code){
-      case "auth/user-not-found":
-        msg.textContent="Email not found.";
-        break;
-      case "auth/wrong-password":
-        msg.textContent="Wrong password.";
-        break;
-      case "auth/invalid-credential":
-        msg.textContent="Invalid email or password.";
-        break;
-      default:
-        msg.textContent="Login failed. Check your email and password.";
-    }
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.replace("teacher.html");
+  } catch (err) {
+    msg.textContent = err.code;
   }
 });
 </script>
-
 </body>
 </html>
