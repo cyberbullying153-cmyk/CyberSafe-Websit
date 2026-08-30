@@ -38,4 +38,56 @@ form.addEventListener("submit", async (e) => {
     msg.textContent = "Wrong email or password.";
   }
 });
+  <script type="module">
+import { auth, db } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+window.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
+  const msg = document.getElementById("loginMessage");
+
+  if (!form || !msg) {
+    console.error("loginForm or loginMessage not found.");
+    return;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    msg.textContent = "Signing in...";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+
+      const q = query(
+        collection(db, "teachers"),
+        where("email", "==", email)
+      );
+
+      const snap = await getDocs(q);
+
+      if (snap.empty) {
+        msg.textContent = "Teacher account not found.";
+        return;
+      }
+
+      const role = snap.docs[0].data().role;
+
+      if (role === "teacher") {
+        window.location.href = "teacher.html";
+      } else {
+        msg.textContent = "This is not a teacher account.";
+      }
+
+    } catch (err) {
+      console.error(err);
+      msg.textContent = "Wrong email or password.";
+    }
+  });
+});
+</script>
 </script>
