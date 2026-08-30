@@ -2246,3 +2246,137 @@ padding:35px 25px;
 font-size:30px;
 }
 }
+/* ===== PREMIUM STUDENT LOGIN ===== */
+
+.login-hero{
+min-height:calc(100vh - 82px);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:60px 20px;
+background:linear-gradient(135deg,#041022,#0b2d63,#0f3b82);
+position:relative;
+overflow:hidden;
+}
+
+.login-glow{
+position:absolute;
+width:500px;
+height:500px;
+background:#2563eb;
+filter:blur(140px);
+opacity:.28;
+top:-120px;
+right:-120px;
+}
+
+.login-card-premium{
+position:relative;
+z-index:2;
+width:min(460px,100%);
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(22px);
+border:1px solid rgba(255,255,255,.18);
+border-radius:30px;
+padding:42px;
+text-align:center;
+box-shadow:0 30px 70px rgba(0,0,0,.35);
+}
+
+.login-logo{
+width:90px;
+height:90px;
+margin:auto;
+margin-bottom:22px;
+border-radius:22px;
+background:rgba(255,255,255,.08);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.login-logo img{
+width:70px;
+filter:drop-shadow(0 0 18px rgba(37,99,235,.7));
+}
+
+.login-card-premium h1{
+font-size:40px;
+color:white;
+margin-bottom:10px;
+}
+
+.login-card-premium p{
+color:#dbeafe;
+margin-bottom:32px;
+}
+
+.login-buttons{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.student-btn,
+.staff-btn{
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+padding:18px 22px;
+border-radius:18px;
+font-weight:700;
+transition:.3s;
+color:white;
+}
+
+.student-btn{
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+}
+
+.staff-btn{
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
+border:1px solid rgba(255,255,255,.15);
+}
+
+.student-btn span,
+.staff-btn span{
+font-size:13px;
+font-weight:400;
+color:#dbeafe;
+margin-top:5px;
+}
+
+.student-btn:hover,
+.staff-btn:hover{
+transform:translateY(-4px);
+box-shadow:0 15px 35px rgba(37,99,235,.35);
+}
+
+.security-note{
+margin-top:28px;
+padding-top:18px;
+border-top:1px solid rgba(255,255,255,.12);
+color:#bfdbfe;
+font-size:14px;
+}
+
+@media(max-width:600px){
+
+.login-card-premium{
+padding:30px 22px;
+}
+
+.login-card-premium h1{
+font-size:32px;
+}
+
+.login-logo{
+width:75px;
+height:75px;
+}
+
+.login-logo img{
+width:55px;
+}
+
+}
