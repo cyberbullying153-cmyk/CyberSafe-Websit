@@ -34,8 +34,6 @@
   </div>
 </header>
 
-<!-- LOGIN SECTION -->
-
 <section class="teacher-login-hero">
 
   <div class="teacher-glow glow1"></div>
@@ -82,7 +80,6 @@
 </section>
 
 <footer class="footer">
-
   <div class="footer-content">
 
     <div class="footer-brand">
@@ -98,65 +95,88 @@
     </div>
 
   </div>
-
 </footer>
 
-<!-- MOBILE MENU -->
+<!-- Mobile Menu -->
 
 <script>
-const menuBtn = document.getElementById("menuBtn");
-const navMenu = document.getElementById("navMenu");
+const menuBtn=document.getElementById("menuBtn");
+const navMenu=document.getElementById("navMenu");
 
-menuBtn.addEventListener("click", () => {
+menuBtn.addEventListener("click",()=>{
   navMenu.classList.toggle("show");
 });
 </script>
 
-<!-- FIREBASE LOGIN -->
+<!-- Firebase Login -->
 
 <script type="module">
 import { auth, db } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const form = document.getElementById("loginForm");
-const msg = document.getElementById("loginMessage");
+const form=document.getElementById("loginForm");
+const msg=document.getElementById("loginMessage");
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  msg.textContent = "Signing in...";
+  msg.style.color="#fff";
+  msg.textContent="Signing in...";
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const email=document.getElementById("email").value.trim().toLowerCase();
+  const password=document.getElementById("password").value;
 
-  try {
+  try{
 
-    await signInWithEmailAndPassword(auth, email, password);
+    // Firebase Authentication
+    await signInWithEmailAndPassword(auth,email,password);
 
-    const q = query(
-      collection(db, "teachers"),
-      where("email", "==", email)
+    // Firestore check
+    const q=query(
+      collection(db,"teachers"),
+      where("email","==",email)
     );
 
-    const snap = await getDocs(q);
+    const snap=await getDocs(q);
 
-    if (snap.empty) {
-      msg.textContent = "Teacher account not found.";
+    if(snap.empty){
+      msg.style.color="#ffb4b4";
+      msg.textContent="Teacher record not found.";
       return;
     }
 
-    const role = snap.docs[0].data().role;
+    const data=snap.docs[0].data();
+    const role=(data.role || "").toLowerCase();
 
-    if (role === "teacher") {
-      window.location.href = "teacher.html";
-    } else {
-      msg.textContent = "This is not a teacher account.";
+    if(role==="teacher"){
+      window.location.replace("teacher.html");
+    }
+    else if(role==="admin"){
+      window.location.replace("admin.html");
+    }
+    else{
+      msg.style.color="#ffb4b4";
+      msg.textContent="Access denied.";
     }
 
-  } catch (err) {
+  }catch(err){
     console.error(err);
-    msg.textContent = "Wrong email or password.";
+    msg.style.color="#ffb4b4";
+
+    switch(err.code){
+      case "auth/user-not-found":
+        msg.textContent="Email not found.";
+        break;
+      case "auth/wrong-password":
+        msg.textContent="Wrong password.";
+        break;
+      case "auth/invalid-credential":
+        msg.textContent="Invalid email or password.";
+        break;
+      default:
+        msg.textContent="Login failed. Check your email and password.";
+    }
   }
 });
 </script>
