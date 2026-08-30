@@ -1,133 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Admin Login | CyberSafe</title>
+<title>CyberSafe | Admin Login</title>
 
 <link rel="stylesheet" href="css/style.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 
 <body>
 
+<section class="teacher-login-hero">
 
-<section class="login-container">
+<div class="teacher-glow glow1"></div>
+<div class="teacher-glow glow2"></div>
 
+<div class="teacher-login-card">
 
-<h1>🔐 Admin Login</h1>
+<div class="teacher-logo">
+<img src="images/logo.png" alt="CyberSafe">
+</div>
 
+<span class="teacher-badge">ADMIN ACCESS</span>
 
-<form id="adminLoginForm" class="login-form">
+<h1>Administrator Login</h1>
 
+<p>Only authorized administrators can access this portal.</p>
 
-<input
-type="email"
-id="email"
-placeholder="Admin Email"
-required>
+<form id="adminLoginForm">
 
+<div class="input-group">
+<label>Email</label>
+<input type="email" id="adminEmail" placeholder="admin@school.com" required>
+</div>
 
-<input
-type="password"
-id="password"
-placeholder="Password"
-required>
+<div class="input-group">
+<label>Password</label>
+<input type="password" id="adminPassword" placeholder="Enter password" required>
+</div>
 
-
-<button type="submit" class="btn">
-Login
+<button type="submit" class="teacher-login-btn">
+👑 Secure Admin Login
 </button>
-
 
 </form>
 
+<p id="adminMessage" class="login-message"></p>
 
-<p id="error" style="color:red;"></p>
-
+</div>
 
 </section>
 
-
-
 <script type="module">
+import { auth, db } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+const form=document.getElementById("adminLoginForm");
+const msg=document.getElementById("adminMessage");
 
-import { auth } from "./js/firebase.js";
-
-
-import {
-
-signInWithEmailAndPassword
-
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-
-
-const form = document.getElementById("adminLoginForm");
-
-
-
-form.addEventListener("submit", async function(e){
-
+form.addEventListener("submit",async(e)=>{
 
 e.preventDefault();
 
+msg.textContent="Signing in...";
 
+try{
 
-const email =
-document.getElementById("email").value;
+const email=document.getElementById("adminEmail").value.trim();
+const password=document.getElementById("adminPassword").value;
 
+const cred=await signInWithEmailAndPassword(auth,email,password);
 
+const userDoc=await getDoc(doc(db,"teachers",cred.user.uid));
 
-const password =
-document.getElementById("password").value;
+if(userDoc.exists() && userDoc.data().role==="admin"){
 
+window.location.href="admin.html";
 
+}else{
 
-
-try {
-
-
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-
-
-alert("✅ Admin Login Successful");
-
-
-window.location.href = "admin.html";
-
-
+msg.textContent="Admin access denied.";
+await auth.signOut();
 
 }
 
-catch(error){
+}catch{
 
-
-document.getElementById("error").innerHTML =
-"❌ Invalid email or password";
-
+msg.textContent="Invalid admin credentials.";
 
 }
-
-
 
 });
-
-
 </script>
 
-
 </body>
-
 </html>
