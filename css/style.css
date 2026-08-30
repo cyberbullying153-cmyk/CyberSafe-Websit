@@ -1580,3 +1580,39 @@ header img {
 /* =========================================================
    END OF CYBERSAFE CSS
    ========================================================= */
+.header-inner{
+display:flex;
+justify-content:space-between;
+align-items:center;
+width:min(1400px,94%);
+margin:auto;
+padding:14px 0;
+}
+
+@media(max-width:760px){
+
+.menu-toggle{
+display:block;
+}
+
+.nav-links{
+display:none;
+position:absolute;
+top:70px;
+left:4%;
+right:4%;
+background:#08142f;
+border-radius:14px;
+padding:15px;
+flex-direction:column;
+gap:12px;
+}
+
+.nav-links.show{
+display:flex;
+}
+
+.nav-links li{
+list-style:none;
+}
+}
