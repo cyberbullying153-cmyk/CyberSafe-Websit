@@ -1852,3 +1852,179 @@ list-style:none;
     justify-content:center;
 }
 }
+/* ===== PREMIUM RESOURCES PAGE ===== */
+
+.resource-hero{
+position:relative;
+overflow:hidden;
+background:linear-gradient(135deg,#06152f,#0f3b82);
+color:white;
+padding:90px 8%;
+border-radius:0 0 40px 40px;
+}
+
+.resource-glow{
+position:absolute;
+width:420px;
+height:420px;
+background:#2563eb;
+filter:blur(120px);
+opacity:.25;
+right:-120px;
+top:-120px;
+}
+
+.resource-content{
+position:relative;
+max-width:700px;
+z-index:2;
+}
+
+.resource-badge{
+display:inline-block;
+background:rgba(255,255,255,.12);
+border:1px solid rgba(255,255,255,.2);
+padding:8px 18px;
+border-radius:999px;
+font-size:13px;
+font-weight:700;
+margin-bottom:20px;
+backdrop-filter:blur(10px);
+}
+
+.resource-hero h1{
+font-size:60px;
+line-height:1.05;
+margin-bottom:18px;
+color:white;
+}
+
+.resource-hero p{
+font-size:18px;
+color:#dbeafe;
+margin-bottom:30px;
+}
+
+.resource-section{
+width:min(1200px,92%);
+margin:auto;
+padding:70px 0;
+}
+
+.premium-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:28px;
+}
+
+.premium-card{
+position:relative;
+overflow:hidden;
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.6);
+border-radius:24px;
+padding:30px;
+box-shadow:0 20px 50px rgba(15,23,42,.08);
+transition:.35s;
+}
+
+.premium-card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:4px;
+background:linear-gradient(90deg,#2563eb,#06b6d4);
+}
+
+.premium-card:hover{
+transform:translateY(-8px);
+box-shadow:0 30px 60px rgba(15,23,42,.15);
+}
+
+.premium-icon{
+width:70px;
+height:70px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:20px;
+background:linear-gradient(135deg,#2563eb,#06b6d4);
+font-size:34px;
+margin-bottom:20px;
+}
+
+.premium-card h3{
+color:#102a63;
+margin-bottom:10px;
+font-size:22px;
+}
+
+.premium-card p{
+color:#64748b;
+margin-bottom:18px;
+}
+
+.premium-card a{
+color:#2563eb;
+font-weight:700;
+}
+
+.cyber-banner{
+width:min(1200px,92%);
+margin:30px auto 70px;
+background:linear-gradient(135deg,#08142f,#123a82);
+border-radius:28px;
+padding:60px;
+color:white;
+position:relative;
+overflow:hidden;
+}
+
+.cyber-banner::after{
+content:"";
+position:absolute;
+width:250px;
+height:250px;
+background:#2563eb;
+filter:blur(100px);
+opacity:.25;
+right:-80px;
+bottom:-80px;
+}
+
+.cyber-text{
+position:relative;
+z-index:2;
+}
+
+.cyber-banner h2{
+font-size:42px;
+margin-bottom:15px;
+color:white;
+}
+
+.cyber-banner p{
+color:#dbeafe;
+margin-bottom:25px;
+}
+
+@media(max-width:900px){
+.premium-grid{
+grid-template-columns:1fr;
+}
+
+.resource-hero h1{
+font-size:42px;
+}
+
+.cyber-banner{
+padding:35px 25px;
+}
+
+.cyber-banner h2{
+font-size:32px;
+}
+}
