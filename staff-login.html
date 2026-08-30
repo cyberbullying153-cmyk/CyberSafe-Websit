@@ -51,23 +51,21 @@
 
     <p>Secure access for registered teachers only.</p>
 
-    <form id="loginForm">
+   <div class="input-group">
+  <label>Email</label>
+  <input type="email" id="email" placeholder="teacher@school.com" required>
+</div>
 
-      <div class="input-group">
-        <label>Email</label>
-        <input type="email" id="email" placeholder="teacher@school.com" required>
-      </div>
+<div class="input-group">
+  <label>Password</label>
+  <input type="password" id="password" placeholder="Enter password" required>
+</div>
 
-      <div class="input-group">
-        <label>Password</label>
-        <input type="password" id="password" placeholder="Enter password" required>
-      </div>
+<button id="loginBtn" type="button" class="teacher-login-btn">
+  🔐 Secure Login
+</button>
 
-      <button type="submit" class="teacher-login-btn">
-        🔐 Secure Login
-      </button>
-
-    </form>
+<p id="loginMessage" class="login-message"></p>
 
     <p id="loginMessage" class="login-message"></p>
 
