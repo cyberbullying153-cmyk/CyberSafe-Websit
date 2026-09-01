@@ -490,7 +490,71 @@ alert("Logout error: " + error.message);
 }
 
 }
+// ===== Section Navigation =====
 
+window.showSection = function(name){
+
+  // Hide all sections
+  document.getElementById("dashboardSection").style.display = "none";
+  document.getElementById("studentsSection").style.display = "none";
+
+  // Show selected section
+  if(name === "dashboard"){
+    document.getElementById("dashboardSection").style.display = "block";
+  }
+
+  if(name === "students"){
+    document.getElementById("studentsSection").style.display = "block";
+    loadStudents();
+  }
+
+};
+
+// ===== Student Loader =====
+
+function loadStudents(){
+
+  const container = document.getElementById("studentsContainer");
+
+  container.innerHTML = "";
+
+  const students = {};
+
+  allReports.forEach(report=>{
+
+    const key = report.admissionNo || report.studentName;
+
+    if(!students[key]){
+      students[key] = report;
+    }
+
+  });
+
+  Object.values(students).forEach(student=>{
+
+    container.innerHTML += `
+      <div class="report-card">
+
+        <h3>👨‍🎓 ${student.studentName}</h3>
+
+        <p><strong>Admission:</strong> ${student.admissionNo || "-"}</p>
+
+        <p><strong>Class:</strong> ${student.class || "-"}</p>
+
+        <p><strong>Mobile:</strong> ${student.mobile || "-"}</p>
+
+        <p><strong>Email:</strong> ${student.email || "-"}</p>
+
+        <p><strong>Reports:</strong> ${
+          allReports.filter(r=>r.admissionNo===student.admissionNo).length
+        }</p>
+
+      </div>
+    `;
+
+  });
+
+}
 </script>
 
 
