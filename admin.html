@@ -127,18 +127,58 @@ placeholder="Search student...">
 
 <!-- TEACHERS -->
 
+<!-- TEACHERS -->
+
 <section id="teachers" class="admin-section">
 
 <h1>👩‍🏫 Teacher Management</h1>
 
-<button class="login-btn" onclick="alert('Teacher management connected in next update.')">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;margin-bottom:20px;">
+
+<input
+id="teacherSearch"
+class="search-box"
+placeholder="Search teacher...">
+
+<button class="login-btn" onclick="openTeacherForm()">
 ➕ Add Teacher
 </button>
 
-<div id="teachersContainer" class="emergency-grid" style="margin-top:25px;"></div>
+</div>
+
+<div id="teachersContainer" class="emergency-grid"></div>
+
+<!-- Add Teacher Popup -->
+
+<div id="teacherPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);justify-content:center;align-items:center;z-index:9999;">
+
+<div style="background:#111827;padding:30px;border-radius:22px;width:min(420px,92%);">
+
+<h2 style="color:white;margin-bottom:20px;">Add Teacher</h2>
+
+<input id="tName" class="search-box" style="width:100%;margin:10px 0;" placeholder="Teacher Name">
+
+<input id="tEmail" class="search-box" style="width:100%;margin:10px 0;" placeholder="Teacher Email">
+
+<input id="tSubject" class="search-box" style="width:100%;margin:10px 0;" placeholder="Subject">
+
+<div style="display:flex;gap:12px;margin-top:18px;">
+
+<button class="login-btn" onclick="saveTeacher()">
+Save
+</button>
+
+<button class="resolve-btn" onclick="closeTeacherForm()">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
-
 <!-- ANALYTICS -->
 
 <section id="analytics" class="admin-section">
