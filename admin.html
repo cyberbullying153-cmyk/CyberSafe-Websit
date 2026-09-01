@@ -30,19 +30,21 @@
 
 <ul class="nav-links">
 
-    <li><a href="admin.html">Dashboard</a></li>
+<li><a href="#" class="active" onclick="showSection('dashboard')">Dashboard</a></li>
 
-    <li><a href="students.html">Students</a></li>
+<li><a href="#" onclick="showSection('students')">Students</a></li>
 
-    <li><a href="teacher.html">Teachers</a></li>
+<li><a href="#" onclick="showSection('teachers')">Teachers</a></li>
 
-    <li><a href="analytics.html">Analytics</a></li>
+<li><a href="#" onclick="showSection('analytics')">Analytics</a></li>
 
-    <li>
-        <button id="logoutBtn" onclick="logout()" class="login-btn">
-            Logout
-        </button>
-    </li>
+<li><a href="#" onclick="showSection('settings')">Settings</a></li>
+
+<li>
+<button id="logoutBtn" onclick="logout()" class="login-btn">
+Logout
+</button>
+</li>
 
 </ul>
 </nav>
@@ -51,7 +53,7 @@
 
 
 
-<section class="report-page">
+<section id="dashboardSection" class="report-page admin-section">
 
 
 <h1>👨‍💼 Admin Dashboard</h1>
@@ -112,10 +114,21 @@ Real-time CyberSafe Report Management
 
 
 </section>
+<section id="studentsSection" class="admin-section" style="display:none;">
 
+<h1>👨‍🎓 Student Management</h1>
 
+<p class="subtitle">Manage students who submitted reports.</p>
 
+<input
+id="studentSearch"
+type="text"
+placeholder="Search student..."
+style="width:320px;padding:12px 18px;border-radius:12px;border:none;background:#1f2937;color:white;margin:20px 0;">
 
+<div id="studentsContainer" class="emergency-grid"></div>
+
+</section>
 <footer>
 
 <p>
