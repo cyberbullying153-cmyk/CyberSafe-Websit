@@ -1,44 +1,47 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>CyberSafe | Admin Dashboard</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-.admin-section{display:none;padding:30px 0;}
-.admin-section.active{display:block;}
-.sidebar-btn{cursor:pointer;}
-.search-box{
-width:320px;
-padding:12px 18px;
-border-radius:12px;
-border:none;
-background:#1f2937;
-color:white;
-margin:20px 0;
-}
-.setting-card{
-background:#1e293b;
-padding:25px;
-border-radius:18px;
-margin:18px 0;
-color:white;
-}
-.chart-box{
-height:220px;
-border-radius:20px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:22px;
-font-weight:700;
-background:linear-gradient(135deg,#2563eb,#7c3aed);
-color:white;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:#0f172a;color:#fff}
+header{background:#111827;padding:18px 30px;position:sticky;top:0;z-index:100}
+nav{display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{width:42px;height:42px}
+.logo span{font-size:22px;font-weight:700}
+.nav-links{display:flex;gap:12px;list-style:none;flex-wrap:wrap}
+.nav-links a{text-decoration:none;color:#cbd5e1;padding:10px 15px;border-radius:12px;font-weight:600;transition:.25s}
+.nav-links a.active,.nav-links a:hover{background:#2563eb;color:#fff}
+.login-btn{background:#dc2626;color:#fff;border:none;padding:10px 18px;border-radius:12px;cursor:pointer;font-weight:700}
+.report-page{padding:35px}
+.subtitle{color:#94a3b8;margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:30px 0}
+.stat{background:#1e293b;padding:22px;border-radius:20px;text-align:center}
+.stat h2{font-size:40px}
+.admin-section{display:none;animation:fade .35s ease}
+.admin-section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.search-box{width:100%;max-width:320px;padding:12px 16px;border:none;border-radius:12px;background:#1f2937;color:#fff}
+.emergency-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:25px}
+.report-card{background:#1e293b;padding:20px;border-radius:18px}
+.report-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.status{padding:6px 12px;border-radius:20px;background:#f59e0b;color:#111;font-size:13px;font-weight:700}
+.resolve-btn{background:#22c55e;color:#fff;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;margin-top:12px}
+.setting-card{background:#1e293b;padding:25px;border-radius:18px;margin-top:18px}
+.chart-box{margin-top:25px;height:220px;border-radius:22px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2563eb,#7c3aed);font-size:24px;font-weight:700}
+#teacherPopup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);justify-content:center;align-items:center;z-index:9999}
+.popup-card{background:#111827;padding:28px;border-radius:22px;width:min(430px,92%)}
+.popup-card input{width:100%;margin:10px 0}
+.popup-actions{display:flex;gap:12px;margin-top:15px}
+footer{text-align:center;padding:30px;color:#94a3b8}
 </style>
 </head>
 
@@ -52,38 +55,23 @@ color:white;
 </div>
 
 <ul class="nav-links">
-
-  <li><a href="#" class="sidebar-btn active" onclick="showSection('dashboard',this);return false;">Dashboard</a></li>
-
-  <li><a href="#" class="sidebar-btn" onclick="showSection('students',this);return false;">Students</a></li>
-
-  <li><a href="#" class="sidebar-btn" onclick="showSection('teachers',this);return false;">Teachers</a></li>
-
-  <li><a href="#" class="sidebar-btn" onclick="showSection('analytics',this);return false;">Analytics</a></li>
-
-  <li><a href="#" class="sidebar-btn" onclick="showSection('settings',this);return false;">Settings</a></li>
-
-  <li>
-    <button class="login-btn" onclick="logout()">
-      Logout
-    </button>
-  </li>
-
+<li><a href="#" class="sidebar-btn active" onclick="showSection('dashboard',this,event)">Dashboard</a></li>
+<li><a href="#" class="sidebar-btn" onclick="showSection('students',this,event)">Students</a></li>
+<li><a href="#" class="sidebar-btn" onclick="showSection('teachers',this,event)">Teachers</a></li>
+<li><a href="#" class="sidebar-btn" onclick="showSection('analytics',this,event)">Analytics</a></li>
+<li><a href="#" class="sidebar-btn" onclick="showSection('settings',this,event)">Settings</a></li>
+<li><button class="login-btn" onclick="logout()">Logout</button></li>
 </ul>
+
 </nav>
 </header>
 
 <main class="report-page">
 
-<!-- DASHBOARD -->
-
 <section id="dashboard" class="admin-section active">
 
 <h1>👨‍💼 Admin Dashboard</h1>
-
-<p class="subtitle">
-Real-time CyberSafe Report Management
-</p>
+<p class="subtitle">Real-time CyberSafe Report Management</p>
 
 <div class="stats">
 
@@ -104,41 +92,29 @@ Real-time CyberSafe Report Management
 
 </div>
 
-<h2 style="margin-top:40px;">📋 Student Reports</h2>
+<h2>📋 Student Reports</h2>
 
 <div id="reportsContainer" class="emergency-grid"></div>
 
 </section>
 
-<!-- STUDENTS -->
-
 <section id="students" class="admin-section">
 
 <h1>👨‍🎓 Student Management</h1>
 
-<input
-id="studentSearch"
-class="search-box"
-placeholder="Search student...">
+<input id="studentSearch" class="search-box" placeholder="Search student">
 
 <div id="studentsContainer" class="emergency-grid"></div>
 
 </section>
 
-<!-- TEACHERS -->
-
-<!-- TEACHERS -->
-
 <section id="teachers" class="admin-section">
 
 <h1>👩‍🏫 Teacher Management</h1>
 
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;margin-bottom:20px;">
+<div style="display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;margin:20px 0">
 
-<input
-id="teacherSearch"
-class="search-box"
-placeholder="Search teacher...">
+<input id="teacherSearch" class="search-box" placeholder="Search teacher">
 
 <button class="login-btn" onclick="openTeacherForm()">
 ➕ Add Teacher
@@ -148,21 +124,19 @@ placeholder="Search teacher...">
 
 <div id="teachersContainer" class="emergency-grid"></div>
 
-<!-- Add Teacher Popup -->
+<div id="teacherPopup">
 
-<div id="teacherPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);justify-content:center;align-items:center;z-index:9999;">
+<div class="popup-card">
 
-<div style="background:#111827;padding:30px;border-radius:22px;width:min(420px,92%);">
+<h2>Add Teacher</h2>
 
-<h2 style="color:white;margin-bottom:20px;">Add Teacher</h2>
+<input id="tName" class="search-box" placeholder="Teacher Name">
 
-<input id="tName" class="search-box" style="width:100%;margin:10px 0;" placeholder="Teacher Name">
+<input id="tEmail" class="search-box" placeholder="Teacher Email">
 
-<input id="tEmail" class="search-box" style="width:100%;margin:10px 0;" placeholder="Teacher Email">
+<input id="tSubject" class="search-box" placeholder="Subject">
 
-<input id="tSubject" class="search-box" style="width:100%;margin:10px 0;" placeholder="Subject">
-
-<div style="display:flex;gap:12px;margin-top:18px;">
+<div class="popup-actions">
 
 <button class="login-btn" onclick="saveTeacher()">
 Save
@@ -179,7 +153,6 @@ Cancel
 </div>
 
 </section>
-<!-- ANALYTICS -->
 
 <section id="analytics" class="admin-section">
 
@@ -189,7 +162,7 @@ Cancel
 
 <div class="stat">
 <h2 id="anaTotal">0</h2>
-<p>Total Reports</p>
+<p>Total</p>
 </div>
 
 <div class="stat">
@@ -205,28 +178,29 @@ Cancel
 </div>
 
 <div class="chart-box">
-📈 Live Report Analytics
+📈 Live Analytics
 </div>
 
 </section>
-
-<!-- SETTINGS -->
 
 <section id="settings" class="admin-section">
 
 <h1>⚙ Settings</h1>
 
 <div class="setting-card">
+
 <h3>School Name</h3>
-<input value="CyberSafe Student Security Portal">
+
+<input class="search-box" value="CyberSafe Student Security Portal">
+
 </div>
 
 <div class="setting-card">
+
 <h3>Notifications</h3>
-<label>
-<input type="checkbox" checked>
- Enable Email Alerts
-</label>
+
+<label><input type="checkbox" checked> Enable Email Alerts</label>
+
 </div>
 
 </section>
@@ -234,109 +208,61 @@ Cancel
 </main>
 
 <footer>
-<p>© 2026 CyberSafe | Student Security Portal</p>
+© 2026 CyberSafe | Student Security Portal
 </footer>
+
+<script>
+function showSection(id,el,event){
+
+event.preventDefault();
+
+document.querySelectorAll(".admin-section").forEach(section=>{
+section.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".sidebar-btn").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+el.classList.add("active");
+
+if(id==="students"&&window.loadStudents)window.loadStudents();
+if(id==="analytics"&&window.updateAnalytics)window.updateAnalytics();
+
+}
+</script>
 
 <script type="module">
 
-import { db, auth } from "./js/firebase.js";
+import {db,auth} from "./js/firebase.js";
 
-import {
+import{
 collection,
 onSnapshot,
 doc,
 updateDoc,
 addDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
- // ===== Teacher Management =====
-
-window.openTeacherForm = function () {
-  document.getElementById("teacherPopup").style.display = "flex";
-};
-
-window.closeTeacherForm = function () {
-  document.getElementById("teacherPopup").style.display = "none";
-};
-
-window.saveTeacher = async function () {
-
-  const name = document.getElementById("tName").value.trim();
-  const email = document.getElementById("tEmail").value.trim();
-  const subject = document.getElementById("tSubject").value.trim();
-
-  if (!name || !email || !subject) {
-    alert("Please fill all fields.");
-    return;
-  }
-
-  try {
-    await addDoc(collection(db, "teachers"), {
-      name,
-      email,
-      subject,
-      role: "teacher"
-    });
-
-    alert("Teacher added successfully!");
-
-    document.getElementById("tName").value = "";
-    document.getElementById("tEmail").value = "";
-    document.getElementById("tSubject").value = "";
-
-    closeTeacherForm();
-
-  } catch (err) {
-    console.error(err);
-    alert("Error adding teacher.");
-  }
-
-};
-import {
+import{
 onAuthStateChanged,
 signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const adminUID="2Hcys70eIURXMoVVhdb9ONmKrE92";
 
 let allReports=[];
 
-window.showSection=function(id,el){
+onAuthStateChanged(auth,user=>{
 
-    document.querySelectorAll(".admin-section").forEach(section=>{
-        section.classList.remove("active");
-    });
-
-    const target=document.getElementById(id);
-    if(target){
-        target.classList.add("active");
-    }
-
-    document.querySelectorAll(".sidebar-btn").forEach(btn=>{
-        btn.classList.remove("active");
-    });
-
-    if(el){
-        el.classList.add("active");
-    }
-
-    if(id==="students") loadStudents();
-
-    if(id==="analytics") updateAnalytics();
-
-};
-onAuthStateChanged(auth,(user)=>{
-
-if(!user){
-window.location.href="admin-login.html";
-return;
-}
+if(!user)return location.href="admin-login.html";
 
 if(user.uid!==adminUID){
 
-alert("Admin access only");
-
-window.location.href="index.html";
+alert("Admin only");
+location.href="index.html";
 
 }
 
@@ -344,7 +270,7 @@ window.location.href="index.html";
 
 const reportsContainer=document.getElementById("reportsContainer");
 
-onSnapshot(collection(db,"reports"),(snapshot)=>{
+onSnapshot(collection(db,"reports"),snapshot=>{
 
 reportsContainer.innerHTML="";
 
@@ -360,9 +286,8 @@ allReports.push({id:report.id,...data});
 
 total++;
 
-if(data.status==="Pending") pending++;
-
-if(data.status==="Resolved") resolved++;
+if(data.status==="Pending")pending++;
+if(data.status==="Resolved")resolved++;
 
 reportsContainer.innerHTML+=`
 
@@ -370,53 +295,39 @@ reportsContainer.innerHTML+=`
 
 <div class="report-header">
 
-<h3>🚨 ${data.platform||"Report"}</h3>
+<h3>${data.platform||"Report"}</h3>
 
-<span class="status ${String(data.status||"Pending").toLowerCase()}">
-
-${data.status||"Pending"}
-
-</span>
+<span class="status">${data.status||"Pending"}</span>
 
 </div>
 
-<p><strong>Student:</strong> ${data.studentName||"Anonymous"}</p>
+<p><strong>${data.studentName||"Anonymous"}</strong></p>
 
-<p><strong>Admission:</strong> ${data.admissionNo||"-"}</p>
+<p>${data.class||"-"}</p>
 
-<p><strong>Class:</strong> ${data.class||"-"}</p>
-
-<p><strong>Mobile:</strong> ${data.mobile||"-"}</p>
-
-<p><strong>Email:</strong> ${data.email||"-"}</p>
-
-<p><strong>Date:</strong> ${data.date||"-"}</p>
+<p>${data.email||"-"}</p>
 
 <p>${data.description||""}</p>
 
 ${
 data.status!=="Resolved"
-?`<button class="resolve-btn" onclick="resolveReport('${report.id}')">✔ Resolve</button>`
+?`<button class="resolve-btn" onclick="resolveReport('${report.id}')">Resolve</button>`
 :""
 }
 
-</div>
-
-`;
+</div>`;
 
 });
 
-document.getElementById("totalReports").textContent=total;
-
-document.getElementById("pendingReports").textContent=pending;
-
-document.getElementById("resolvedReports").textContent=resolved;
+totalReports.textContent=total;
+pendingReports.textContent=pending;
+resolvedReports.textContent=resolved;
 
 updateAnalytics();
 
 });
 
-window.resolveReport=async(id)=>{
+window.resolveReport=async id=>{
 
 await updateDoc(doc(db,"reports",id),{
 
@@ -426,11 +337,11 @@ status:"Resolved"
 
 };
 
-function loadStudents(){
+window.loadStudents=()=>{
 
-const container=document.getElementById("studentsContainer");
+const box=document.getElementById("studentsContainer");
 
-container.innerHTML="";
+box.innerHTML="";
 
 const unique={};
 
@@ -438,51 +349,73 @@ allReports.forEach(r=>{
 
 const key=r.admissionNo||r.studentName;
 
-if(!unique[key]) unique[key]=r;
+if(!unique[key])unique[key]=r;
 
 });
 
-Object.values(unique).forEach(student=>{
+Object.values(unique).forEach(s=>{
 
-container.innerHTML+=`
+box.innerHTML+=`
 
 <div class="report-card">
 
-<h3>👨‍🎓 ${student.studentName}</h3>
+<h3>${s.studentName}</h3>
 
-<p><strong>Admission:</strong> ${student.admissionNo||"-"}</p>
+<p>${s.class||"-"}</p>
 
-<p><strong>Class:</strong> ${student.class||"-"}</p>
+<p>${s.email||"-"}</p>
 
-<p><strong>Mobile:</strong> ${student.mobile||"-"}</p>
-
-<p><strong>Email:</strong> ${student.email||"-"}</p>
-
-</div>
-
-`;
+</div>`;
 
 });
 
+};
+
+window.updateAnalytics=()=>{
+
+anaTotal.textContent=allReports.length;
+anaPending.textContent=allReports.filter(r=>r.status==="Pending").length;
+anaResolved.textContent=allReports.filter(r=>r.status==="Resolved").length;
+
+};
+
+window.openTeacherForm=()=>teacherPopup.style.display="flex";
+
+window.closeTeacherForm=()=>teacherPopup.style.display="none";
+
+window.saveTeacher=async()=>{
+
+const name=tName.value.trim();
+const email=tEmail.value.trim();
+const subject=tSubject.value.trim();
+
+if(!name||!email||!subject){
+
+alert("Fill all fields");
+return;
+
 }
 
-function updateAnalytics(){
+await addDoc(collection(db,"teachers"),{
 
-document.getElementById("anaTotal").textContent=allReports.length;
+name,email,subject,role:"teacher"
 
-document.getElementById("anaPending").textContent=
-allReports.filter(r=>r.status==="Pending").length;
+});
 
-document.getElementById("anaResolved").textContent=
-allReports.filter(r=>r.status==="Resolved").length;
+tName.value="";
+tEmail.value="";
+tSubject.value="";
 
-}
+closeTeacherForm();
+
+alert("Teacher added.");
+
+};
 
 window.logout=async()=>{
 
 await signOut(auth);
-
-window.location.href="admin-login.html";
+location.href="admin-login.html";
 
 };
 
@@ -490,3 +423,4 @@ window.location.href="admin-login.html";
 
 </body>
 </html>
+```
