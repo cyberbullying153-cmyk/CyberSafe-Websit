@@ -237,18 +237,28 @@ Cancel
 <p>© 2026 CyberSafe | Student Security Portal</p>
 </footer>
 <script>
+<script>
 function showPage(page, el){
 
-  alert(page + " page will open.");
+    // Hide all pages
+    document.querySelectorAll(".page").forEach(section=>{
+        section.style.display = "none";
+    });
 
-  document.querySelectorAll(".menu a").forEach(a=>{
-    a.classList.remove("active");
-  });
+    // Show selected page
+    const target = document.getElementById(page + "Page");
+    if(target){
+        target.style.display = "block";
+    }
 
-  if(el){
-    el.classList.add("active");
-  }
+    // Change active menu
+    document.querySelectorAll(".menu a").forEach(a=>{
+        a.classList.remove("active");
+    });
 
+    if(el){
+        el.classList.add("active");
+    }
 }
 </script>
 <script type="module">
