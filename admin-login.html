@@ -336,12 +336,12 @@ width:100%;
 </div>
 
 <div class="menu">
-<a class="active">🏠 Dashboard</a>
-<a>📄 Reports</a>
-<a>👨‍🎓 Students</a>
-<a>👩‍🏫 Teachers</a>
-<a>📊 Analytics</a>
-<a>⚙ Settings</a>
+<a class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</a>
+<a onclick="showPage('reports',this)">📄 Reports</a>
+<a onclick="showPage('students',this)">👨‍🎓 Students</a>
+<a onclick="showPage('teachers',this)">👩‍🏫 Teachers</a>
+<a onclick="showPage('analytics',this)">📊 Analytics</a>
+<a onclick="showPage('settings',this)">⚙ Settings</a>
 </div>
 
 <button class="logout" onclick="logout()">Logout</button>
