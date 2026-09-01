@@ -52,16 +52,22 @@ color:white;
 </div>
 
 <ul class="nav-links">
-<li><a href="#" class="sidebar-btn active" onclick="showPage('dashboard',this)">Dashboard</a></li>
-<li><a href="#" class="sidebar-btn" onclick="showPage('students',this)">Students</a></li>
-<li><a href="#" class="sidebar-btn" onclick="showPage('teachers',this)">Teachers</a></li>
-<li><a href="#" class="sidebar-btn" onclick="showPage('analytics',this)">Analytics</a></li>
-<li><a href="#" class="sidebar-btn" onclick="showPage('settings',this)">Settings</a></li>
-<li>
-<button class="login-btn" onclick="logout()">
-Logout
-</button>
-</li>
+
+  <li><a href="#" class="sidebar-btn active" onclick="showSection('dashboard',this);return false;">Dashboard</a></li>
+
+  <li><a href="#" class="sidebar-btn" onclick="showSection('students',this);return false;">Students</a></li>
+
+  <li><a href="#" class="sidebar-btn" onclick="showSection('teachers',this);return false;">Teachers</a></li>
+
+  <li><a href="#" class="sidebar-btn" onclick="showSection('analytics',this);return false;">Analytics</a></li>
+
+  <li><a href="#" class="sidebar-btn" onclick="showSection('settings',this);return false;">Settings</a></li>
+
+  <li>
+    <button class="login-btn" onclick="logout()">
+      Logout
+    </button>
+  </li>
 
 </ul>
 </nav>
@@ -230,30 +236,7 @@ Cancel
 <footer>
 <p>© 2026 CyberSafe | Student Security Portal</p>
 </footer>
-<script>
-function showPage(page, el){
 
-    // Hide all pages
-    document.querySelectorAll(".page").forEach(section=>{
-        section.style.display = "none";
-    });
-
-    // Show selected page
-    const target = document.getElementById(page + "Page");
-    if(target){
-        target.style.display = "block";
-    }
-
-    // Change active menu
-    document.querySelectorAll(".menu a").forEach(a=>{
-        a.classList.remove("active");
-    });
-
-    if(el){
-        el.classList.add("active");
-    }
-}
-</script>
 <script type="module">
 
 import { db, auth } from "./js/firebase.js";
@@ -318,19 +301,30 @@ const adminUID="2Hcys70eIURXMoVVhdb9ONmKrE92";
 
 let allReports=[];
 
-window.showSection=function(id){
+window.showSection=function(id,el){
 
-document.querySelectorAll(".admin-section")
-.forEach(s=>s.classList.remove("active"));
+    document.querySelectorAll(".admin-section").forEach(section=>{
+        section.classList.remove("active");
+    });
 
-document.getElementById(id).classList.add("active");
+    const target=document.getElementById(id);
+    if(target){
+        target.classList.add("active");
+    }
 
-if(id==="students") loadStudents();
+    document.querySelectorAll(".sidebar-btn").forEach(btn=>{
+        btn.classList.remove("active");
+    });
 
-if(id==="analytics") updateAnalytics();
+    if(el){
+        el.classList.add("active");
+    }
+
+    if(id==="students") loadStudents();
+
+    if(id==="analytics") updateAnalytics();
 
 };
-
 onAuthStateChanged(auth,(user)=>{
 
 if(!user){
