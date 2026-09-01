@@ -503,7 +503,28 @@ Analytics
 </div> <!-- ADD THIS: closes #dashboardPage -->
 
 </div>
+<script>
+function showPage(page, el){
 
+    // Hide all pages
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active-page");
+    });
+
+    // Show selected page
+    document.getElementById(page+"Page").classList.add("active-page");
+
+    // Update active menu
+    document.querySelectorAll(".menu a").forEach(a=>{
+        a.classList.remove("active");
+    });
+
+    if(el){
+        el.classList.add("active");
+    }
+
+}
+</script>
 <script type="module">
 
 import { auth } from "./js/firebase.js";
