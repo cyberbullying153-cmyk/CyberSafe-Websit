@@ -248,7 +248,50 @@ doc,
 updateDoc,
 addDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
- 
+
+ // ===== Teacher Management =====
+
+window.openTeacherForm = function () {
+  document.getElementById("teacherPopup").style.display = "flex";
+};
+
+window.closeTeacherForm = function () {
+  document.getElementById("teacherPopup").style.display = "none";
+};
+
+window.saveTeacher = async function () {
+
+  const name = document.getElementById("tName").value.trim();
+  const email = document.getElementById("tEmail").value.trim();
+  const subject = document.getElementById("tSubject").value.trim();
+
+  if (!name || !email || !subject) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "teachers"), {
+      name,
+      email,
+      subject,
+      role: "teacher"
+    });
+
+    alert("Teacher added successfully!");
+
+    document.getElementById("tName").value = "";
+    document.getElementById("tEmail").value = "";
+    document.getElementById("tSubject").value = "";
+
+    closeTeacherForm();
+
+  } catch (err) {
+    console.error(err);
+    alert("Error adding teacher.");
+  }
+
+};
 import {
 onAuthStateChanged,
 signOut
