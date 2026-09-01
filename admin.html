@@ -52,17 +52,11 @@ color:white;
 </div>
 
 <ul class="nav-links">
-
-<li><a class="sidebar-btn active" onclick="showSection('dashboard')">Dashboard</a></li>
-
-<li><a class="sidebar-btn" onclick="showSection('students')">Students</a></li>
-
-<li><a class="sidebar-btn" onclick="showSection('teachers')">Teachers</a></li>
-
-<li><a class="sidebar-btn" onclick="showSection('analytics')">Analytics</a></li>
-
-<li><a class="sidebar-btn" onclick="showSection('settings')">Settings</a></li>
-
+<li><a href="#" class="sidebar-btn active" onclick="showPage('dashboard',this)">Dashboard</a></li>
+<li><a href="#" class="sidebar-btn" onclick="showPage('students',this)">Students</a></li>
+<li><a href="#" class="sidebar-btn" onclick="showPage('teachers',this)">Teachers</a></li>
+<li><a href="#" class="sidebar-btn" onclick="showPage('analytics',this)">Analytics</a></li>
+<li><a href="#" class="sidebar-btn" onclick="showPage('settings',this)">Settings</a></li>
 <li>
 <button class="login-btn" onclick="logout()">
 Logout
