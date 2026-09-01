@@ -55,43 +55,47 @@
 <script type="module">
 import { auth, db } from "./js/firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const form=document.getElementById("adminLoginForm");
-const msg=document.getElementById("adminMessage");
+const form = document.getElementById("loginForm");
+const msg = document.getElementById("loginMessage");
 
-form.addEventListener("submit",async(e)=>{
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-e.preventDefault();
+    msg.textContent = "Signing in...";
 
-msg.textContent="Signing in...";
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-try{
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
 
-const email=document.getElementById("adminEmail").value.trim();
-const password=document.getElementById("adminPassword").value;
+        const q = query(
+            collection(db, "admins"),
+            where("email", "==", email)
+        );
 
-const cred=await signInWithEmailAndPassword(auth,email,password);
+        const snap = await getDocs(q);
 
-const userDoc=await getDoc(doc(db,"teachers",cred.user.uid));
+        if (snap.empty) {
+            msg.textContent = "Admin account not found.";
+            await auth.signOut();
+            return;
+        }
 
-if(userDoc.exists() && userDoc.data().role==="admin"){
+        const role = snap.docs[0].data().role;
 
-window.location.href="admin.html";
+        if (role === "admin") {
+            window.location.href = "admin.html";
+        } else {
+            msg.textContent = "Access denied.";
+        }
 
-}else{
-
-msg.textContent="Admin access denied.";
-await auth.signOut();
-
-}
-
-}catch{
-
-msg.textContent="Invalid admin credentials.";
-
-}
-
+    } catch (err) {
+        console.error(err);
+        msg.textContent = "Wrong email or password.";
+    }
 });
 </script>
 
