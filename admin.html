@@ -236,7 +236,21 @@ Cancel
 <footer>
 <p>© 2026 CyberSafe | Student Security Portal</p>
 </footer>
+<script>
+function showPage(page, el){
 
+  alert(page + " page will open.");
+
+  document.querySelectorAll(".menu a").forEach(a=>{
+    a.classList.remove("active");
+  });
+
+  if(el){
+    el.classList.add("active");
+  }
+
+}
+</script>
 <script type="module">
 
 import { db, auth } from "./js/firebase.js";
