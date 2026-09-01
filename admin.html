@@ -1,60 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Admin Dashboard | CyberSafe</title>
+<title>CyberSafe | Admin Dashboard</title>
 
 <link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<style>
+.admin-section{display:none;padding:30px 0;}
+.admin-section.active{display:block;}
+.sidebar-btn{cursor:pointer;}
+.search-box{
+width:320px;
+padding:12px 18px;
+border-radius:12px;
+border:none;
+background:#1f2937;
+color:white;
+margin:20px 0;
+}
+.setting-card{
+background:#1e293b;
+padding:25px;
+border-radius:18px;
+margin:18px 0;
+color:white;
+}
+.chart-box{
+height:220px;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:700;
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+color:white;
+}
+</style>
 </head>
-
 
 <body>
 
-
 <header>
-
 <nav>
-
 <div class="logo">
-    <img src="images/logo.png" alt="CyberSafe Logo">
-    <span>CYBERSAFE</span>
+<img src="images/logo.png" alt="CyberSafe">
+<span>CYBERSAFE</span>
 </div>
-
 
 <ul class="nav-links">
 
-<li><a href="#" class="active" onclick="showSection('dashboard')">Dashboard</a></li>
+<li><a class="sidebar-btn active" onclick="showSection('dashboard')">Dashboard</a></li>
 
-<li><a href="#" onclick="showSection('students')">Students</a></li>
+<li><a class="sidebar-btn" onclick="showSection('students')">Students</a></li>
 
-<li><a href="#" onclick="showSection('teachers')">Teachers</a></li>
+<li><a class="sidebar-btn" onclick="showSection('teachers')">Teachers</a></li>
 
-<li><a href="#" onclick="showSection('analytics')">Analytics</a></li>
+<li><a class="sidebar-btn" onclick="showSection('analytics')">Analytics</a></li>
 
-<li><a href="#" onclick="showSection('settings')">Settings</a></li>
+<li><a class="sidebar-btn" onclick="showSection('settings')">Settings</a></li>
 
 <li>
-<button id="logoutBtn" onclick="logout()" class="login-btn">
+<button class="login-btn" onclick="logout()">
 Logout
 </button>
 </li>
 
 </ul>
 </nav>
-
 </header>
 
+<main class="report-page">
 
+<!-- DASHBOARD -->
 
-<section id="dashboardSection" class="report-page admin-section">
-
+<section id="dashboard" class="admin-section active">
 
 <h1>👨‍💼 Admin Dashboard</h1>
 
@@ -62,402 +85,243 @@ Logout
 Real-time CyberSafe Report Management
 </p>
 
-
-
 <div class="stats">
 
-
 <div class="stat">
-
 <h2 id="totalReports">0</h2>
-
 <p>Total Reports</p>
-
 </div>
 
-
-
 <div class="stat">
-
 <h2 id="pendingReports">0</h2>
-
 <p>Pending Reports</p>
-
 </div>
-
-
 
 <div class="stat">
-
 <h2 id="resolvedReports">0</h2>
-
 <p>Resolved Reports</p>
+</div>
 
 </div>
 
+<h2 style="margin-top:40px;">📋 Student Reports</h2>
 
-</div>
-
-
-
-
-<h2 style="margin-top:50px;">
-📋 Student Reports
-</h2>
-
-
-
-<div id="reportsContainer" class="emergency-grid">
-
-</div>
-
-
+<div id="reportsContainer" class="emergency-grid"></div>
 
 </section>
-<section id="studentsSection" class="admin-section" style="display:none;">
+
+<!-- STUDENTS -->
+
+<section id="students" class="admin-section">
 
 <h1>👨‍🎓 Student Management</h1>
 
-<p class="subtitle">Manage students who submitted reports.</p>
-
 <input
 id="studentSearch"
-type="text"
-placeholder="Search student..."
-style="width:320px;padding:12px 18px;border-radius:12px;border:none;background:#1f2937;color:white;margin:20px 0;">
+class="search-box"
+placeholder="Search student...">
 
 <div id="studentsContainer" class="emergency-grid"></div>
 
 </section>
+
+<!-- TEACHERS -->
+
+<section id="teachers" class="admin-section">
+
+<h1>👩‍🏫 Teacher Management</h1>
+
+<button class="login-btn" onclick="alert('Teacher management connected in next update.')">
+➕ Add Teacher
+</button>
+
+<div id="teachersContainer" class="emergency-grid" style="margin-top:25px;"></div>
+
+</section>
+
+<!-- ANALYTICS -->
+
+<section id="analytics" class="admin-section">
+
+<h1>📊 Analytics</h1>
+
+<div class="stats">
+
+<div class="stat">
+<h2 id="anaTotal">0</h2>
+<p>Total Reports</p>
+</div>
+
+<div class="stat">
+<h2 id="anaPending">0</h2>
+<p>Pending</p>
+</div>
+
+<div class="stat">
+<h2 id="anaResolved">0</h2>
+<p>Resolved</p>
+</div>
+
+</div>
+
+<div class="chart-box">
+📈 Live Report Analytics
+</div>
+
+</section>
+
+<!-- SETTINGS -->
+
+<section id="settings" class="admin-section">
+
+<h1>⚙ Settings</h1>
+
+<div class="setting-card">
+<h3>School Name</h3>
+<input value="CyberSafe Student Security Portal">
+</div>
+
+<div class="setting-card">
+<h3>Notifications</h3>
+<label>
+<input type="checkbox" checked>
+ Enable Email Alerts
+</label>
+</div>
+
+</section>
+
+</main>
+
 <footer>
-
-<p>
-© 2026 CyberSafe | Student Security Portal
-</p>
-
+<p>© 2026 CyberSafe | Student Security Portal</p>
 </footer>
-
-
-
-
 
 <script type="module">
 
-
 import { db, auth } from "./js/firebase.js";
 
-
 import {
-
 collection,
-
 onSnapshot,
-
 doc,
-
 updateDoc
-
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
 import {
-
 onAuthStateChanged,
 signOut
-
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+const adminUID="2Hcys70eIURXMoVVhdb9ONmKrE92";
 
+let allReports=[];
 
-// Protect Admin Dashboard
+window.showSection=function(id){
 
-onAuthStateChanged(auth, (user)=>{
+document.querySelectorAll(".admin-section")
+.forEach(s=>s.classList.remove("active"));
 
+document.getElementById(id).classList.add("active");
 
-const adminUID = "2Hcys70eIURXMoVVhdb9ONmKrE92";
+if(id==="students") loadStudents();
 
+if(id==="analytics") updateAnalytics();
+
+};
+
+onAuthStateChanged(auth,(user)=>{
 
 if(!user){
-
-window.location.href = "admin-login.html";
-
+window.location.href="admin-login.html";
+return;
 }
 
+if(user.uid!==adminUID){
 
-else if(user.uid !==  adminUID){
+alert("Admin access only");
 
-
-alert("❌ Access denied. Admin only.");
-
-
-window.location.href = "index.html";
-
+window.location.href="index.html";
 
 }
-
 
 });
 
+const reportsContainer=document.getElementById("reportsContainer");
 
-
-
-
-
-const reportsContainer =
-document.getElementById("reportsContainer");
-
-
-
-const totalReports =
-document.getElementById("totalReports");
-
-
-const pendingReports =
-document.getElementById("pendingReports");
-
-
-const resolvedReports =
-document.getElementById("resolvedReports");
-let allReports = [];
 onSnapshot(collection(db,"reports"),(snapshot)=>{
-
 
 reportsContainer.innerHTML="";
 
+let total=0,pending=0,resolved=0;
 
-let total=0;
+allReports=[];
 
-let pending=0;
+snapshot.forEach(report=>{
 
-let resolved=0;
+const data=report.data();
 
-allReports = [];
-    
-snapshot.forEach((report)=>{
+allReports.push({id:report.id,...data});
 
-
-let data = report.data();
-allReports.push({
-    id: report.id,
-    ...data
-});
-
-// Count reports
 total++;
 
+if(data.status==="Pending") pending++;
 
-if(data.status==="Pending")
-{
-pending++;
-}
+if(data.status==="Resolved") resolved++;
 
-
-if(data.status==="Resolved")
-{
-resolved++;
-}
-
-
-// Hide resolved reports from the list
-if(data.status==="Resolved"){
-    return;
-}
-
-
-reportsContainer.innerHTML += `
+reportsContainer.innerHTML+=`
 
 <div class="report-card">
 
-    <div class="report-header">
+<div class="report-header">
 
-        <h3>🚨 ${data.platform || data.type || "Report"}</h3>
+<h3>🚨 ${data.platform||"Report"}</h3>
 
-        <span class="status ${String(data.status || "Pending").toLowerCase().replace(" ", "-")}">
-            ${data.status || "Pending"}
-        </span>
+<span class="status ${String(data.status||"Pending").toLowerCase()}">
 
-    </div>
+${data.status||"Pending"}
 
-    <p>
-        <strong>👤 Student Name:</strong>
-        ${data.studentName || data.name || "Anonymous"}
-    </p>
+</span>
 
-    <p>
-        <strong>🆔 Admission No:</strong>
-        ${data.admissionNo || "Not provided"}
-    </p>
+</div>
 
-    <p>
-        <strong>🏫 Class:</strong>
-        ${data.class || "Not provided"}
-    </p>
+<p><strong>Student:</strong> ${data.studentName||"Anonymous"}</p>
 
-    <p>
-        <strong>📚 Stream:</strong>
-        ${data.stream || "—"}
-    </p>
+<p><strong>Admission:</strong> ${data.admissionNo||"-"}</p>
 
-    <p>
-        <strong>🔤 Section:</strong>
-        ${data.section || "—"}
-    </p>
+<p><strong>Class:</strong> ${data.class||"-"}</p>
 
-    <p>
-        <strong>📱 Mobile:</strong>
-        ${data.mobile || "Not provided"}
-    </p>
+<p><strong>Mobile:</strong> ${data.mobile||"-"}</p>
 
-    <p>
-        <strong>📧 Student Email:</strong>
-        ${data.email || "Not provided"}
-    </p>
+<p><strong>Email:</strong> ${data.email||"-"}</p>
 
-    <p>
-        <strong>🌐 Platform:</strong>
-        ${data.platform || "Not provided"}
-    </p>
+<p><strong>Date:</strong> ${data.date||"-"}</p>
 
-    <p>
-        <strong>📅 Incident Date:</strong>
-        ${data.date || "Not provided"}
-    </p>
+<p>${data.description||""}</p>
 
-    <p>
-        <strong>👨‍🏫 Assigned Teacher:</strong>
-        ${data.assignedTeacher || "Not assigned"}
-    </p>
-
-    <p>
-        <strong>📧 Teacher Email:</strong>
-        ${data.teacherEmail || "Not assigned"}
-    </p>
-
-    <p>
-        <strong>📝 Description:</strong>
-    </p>
-
-    <p class="description">
-        ${data.description || "No description provided"}
-    </p>
-
-    ${
-        data.screenshotData
-        ?
-        `
-        <button
-            class="resolve-btn"
-            onclick="viewScreenshot('${report.id}')"
-        >
-            📷 View Screenshot
-        </button>
-        `
-        :
-        `
-        <p>
-            <strong>📷 Screenshot:</strong>
-            No screenshot attached
-        </p>
-        `
-    }
-
-    ${
-        data.status !== "Resolved"
-        ?
-        `
-        <button
-            class="resolve-btn"
-            onclick="resolveReport('${report.id}')"
-        >
-            ✔ Resolve
-        </button>
-        `
-        :
-        ""
-    }
+${
+data.status!=="Resolved"
+?`<button class="resolve-btn" onclick="resolveReport('${report.id}')">✔ Resolve</button>`
+:""
+}
 
 </div>
 
 `;
 
+});
 
+document.getElementById("totalReports").textContent=total;
+
+document.getElementById("pendingReports").textContent=pending;
+
+document.getElementById("resolvedReports").textContent=resolved;
+
+updateAnalytics();
 
 });
 
-
-
-totalReports.innerHTML=total;
-
-pendingReports.innerHTML=pending;
-
-resolvedReports.innerHTML=resolved;
-
-
-
-});
-window.viewScreenshot = function(id){
-
-    const report =
-        allReports.find(
-            item => item.id === id
-        );
-
-    if(
-        !report ||
-        !report.screenshotData
-    ){
-
-        alert("📷 No screenshot attached.");
-        return;
-
-    }
-
-    const win =
-        window.open("", "_blank");
-
-    win.document.write(`
-        <html>
-
-        <head>
-            <title>CyberSafe Evidence</title>
-
-            <style>
-                body{
-                    margin:0;
-                    padding:30px;
-                    text-align:center;
-                    font-family:Arial,sans-serif;
-                    background:#f4f8fc;
-                }
-
-                img{
-                    max-width:95%;
-                    max-height:85vh;
-                    border-radius:12px;
-                }
-            </style>
-
-        </head>
-
-        <body>
-
-            <h2>📷 CyberSafe Report Evidence</h2>
-
-            <img
-                src="${report.screenshotData}"
-                alt="Report screenshot"
-            >
-
-        </body>
-
-        </html>
-    `);
-
-    win.document.close();
-
-};
-
-window.resolveReport = async function(id){
+window.resolveReport=async(id)=>{
 
 await updateDoc(doc(db,"reports",id),{
 
@@ -465,101 +329,69 @@ status:"Resolved"
 
 });
 
-alert("Report updated");
-
-}
-
-
-
-window.logout = async function(){
-
-try{
-
-await signOut(auth);
-
-alert("✅ Logged out successfully");
-
-window.location.href="admin-login.html";
-
-}
-
-catch(error){
-
-alert("Logout error: " + error.message);
-
-}
-
-}
-// ===== Section Navigation =====
-
-window.showSection = function(name){
-
-  // Hide all sections
-  document.getElementById("dashboardSection").style.display = "none";
-  document.getElementById("studentsSection").style.display = "none";
-
-  // Show selected section
-  if(name === "dashboard"){
-    document.getElementById("dashboardSection").style.display = "block";
-  }
-
-  if(name === "students"){
-    document.getElementById("studentsSection").style.display = "block";
-    loadStudents();
-  }
-
 };
-
-// ===== Student Loader =====
 
 function loadStudents(){
 
-  const container = document.getElementById("studentsContainer");
+const container=document.getElementById("studentsContainer");
 
-  container.innerHTML = "";
+container.innerHTML="";
 
-  const students = {};
+const unique={};
 
-  allReports.forEach(report=>{
+allReports.forEach(r=>{
 
-    const key = report.admissionNo || report.studentName;
+const key=r.admissionNo||r.studentName;
 
-    if(!students[key]){
-      students[key] = report;
-    }
+if(!unique[key]) unique[key]=r;
 
-  });
+});
 
-  Object.values(students).forEach(student=>{
+Object.values(unique).forEach(student=>{
 
-    container.innerHTML += `
-      <div class="report-card">
+container.innerHTML+=`
 
-        <h3>👨‍🎓 ${student.studentName}</h3>
+<div class="report-card">
 
-        <p><strong>Admission:</strong> ${student.admissionNo || "-"}</p>
+<h3>👨‍🎓 ${student.studentName}</h3>
 
-        <p><strong>Class:</strong> ${student.class || "-"}</p>
+<p><strong>Admission:</strong> ${student.admissionNo||"-"}</p>
 
-        <p><strong>Mobile:</strong> ${student.mobile || "-"}</p>
+<p><strong>Class:</strong> ${student.class||"-"}</p>
 
-        <p><strong>Email:</strong> ${student.email || "-"}</p>
+<p><strong>Mobile:</strong> ${student.mobile||"-"}</p>
 
-        <p><strong>Reports:</strong> ${
-          allReports.filter(r=>r.admissionNo===student.admissionNo).length
-        }</p>
+<p><strong>Email:</strong> ${student.email||"-"}</p>
 
-      </div>
-    `;
+</div>
 
-  });
+`;
+
+});
 
 }
+
+function updateAnalytics(){
+
+document.getElementById("anaTotal").textContent=allReports.length;
+
+document.getElementById("anaPending").textContent=
+allReports.filter(r=>r.status==="Pending").length;
+
+document.getElementById("anaResolved").textContent=
+allReports.filter(r=>r.status==="Resolved").length;
+
+}
+
+window.logout=async()=>{
+
+await signOut(auth);
+
+window.location.href="admin-login.html";
+
+};
+
 </script>
 
-
-
-
 </body>
-
 </html>
