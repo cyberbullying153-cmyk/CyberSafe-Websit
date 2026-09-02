@@ -101,10 +101,21 @@ Waiting for reports...
 </section>
 
 <section id="students" class="admin-section">
-<h1>👨‍🎓 Students</h1>
-<div id="studentsContainer" class="report-grid"></div>
-</section>
 
+<h1>👨‍🎓 Student Management</h1>
+
+<button class="login-btn" onclick="window.location.href='student-registration.html'">
+  ➕ New Student Registration
+</button>
+
+<input
+id="studentSearch"
+class="search-box"
+placeholder="Search student...">
+
+<div id="studentsContainer" class="emergency-grid"></div>
+
+</section>
 <section id="teachers" class="admin-section">
 
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px">
