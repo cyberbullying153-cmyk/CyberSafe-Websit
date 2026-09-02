@@ -1,188 +1,246 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Student Registration | CyberSafe</title>
 
-<link rel="stylesheet" href="css/style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
 
 body{
-margin:0;
-font-family:Poppins,sans-serif;
-background:#eef4ff;
+min-height:100vh;
+background:linear-gradient(135deg,#0b1120,#1e3a8a,#111827);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
 }
 
 .container{
-max-width:700px;
-margin:50px auto;
-background:#fff;
+width:100%;
+max-width:720px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.12);
+border-radius:28px;
 padding:40px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.1);
+color:white;
+box-shadow:0 25px 50px rgba(0,0,0,.35);
+}
+
+.logo{
+display:flex;
+justify-content:center;
+margin-bottom:20px;
+}
+
+.logo img{
+width:80px;
+height:80px;
+border-radius:18px;
+box-shadow:0 0 25px rgba(37,99,235,.5);
 }
 
 h1{
 text-align:center;
-color:#1e3a8a;
+font-size:34px;
+margin-bottom:8px;
+}
+
+.subtitle{
+text-align:center;
+color:#cbd5e1;
 margin-bottom:30px;
 }
 
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+}
+
 .input-group{
-margin-bottom:18px;
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.input-group.full{
+grid-column:1/-1;
 }
 
 label{
-display:block;
 font-weight:600;
-margin-bottom:8px;
+font-size:14px;
 }
 
 input,
 select{
 width:100%;
 padding:14px;
-border:1px solid #ccc;
-border-radius:10px;
-font-size:16px;
-box-sizing:border-box;
+border:none;
+border-radius:12px;
+background:#1f2937;
+color:white;
+font-size:15px;
+outline:none;
+}
+
+input::placeholder{
+color:#94a3b8;
 }
 
 button{
 width:100%;
 padding:15px;
-background:#22c55e;
-color:white;
+margin-top:25px;
 border:none;
-border-radius:10px;
-font-size:18px;
+border-radius:14px;
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+color:white;
+font-size:17px;
+font-weight:700;
 cursor:pointer;
-margin-top:20px;
+transition:.3s;
 }
 
 button:hover{
-background:#16a34a;
+transform:translateY(-3px);
+box-shadow:0 12px 30px rgba(37,99,235,.35);
 }
 
 .login-link{
 text-align:center;
 margin-top:20px;
+color:#cbd5e1;
 }
 
 .login-link a{
+color:#60a5fa;
+font-weight:600;
 text-decoration:none;
-color:#2563eb;
+}
+
+#message{
+margin-top:15px;
+text-align:center;
 font-weight:600;
 }
 
+@media(max-width:700px){
+.grid{
+grid-template-columns:1fr;
+}
+}
 </style>
 
 </head>
-
 <body>
 
 <div class="container">
 
+<div class="logo">
+<img src="images/logo.png" alt="CyberSafe">
+</div>
+
 <h1>🎓 Student Registration</h1>
+<p class="subtitle">Create your CyberSafe Student Account</p>
 
 <form id="registerForm">
 
-<div class="input-group">
+<div class="grid">
+
+<div class="input-group full">
 <label>Full Name</label>
-<input type="text" id="name" required>
+<input type="text" id="name" placeholder="Enter full name" required>
 </div>
 
 <div class="input-group">
 <label>Admission Number</label>
-<input type="text" id="admission" required>
+<input type="text" id="admission" placeholder="Admission No." required>
 </div>
 
 <div class="input-group">
 <label>Class</label>
-
 <select id="studentClass" required>
-
-    <option value="">Select Class</option>
-
-    <option value="1">Class 1</option>
-    <option value="2">Class 2</option>
-    <option value="3">Class 3</option>
-    <option value="4">Class 4</option>
-    <option value="5">Class 5</option>
-    <option value="6">Class 6</option>
-    <option value="7">Class 7</option>
-    <option value="8">Class 8</option>
-    <option value="9">Class 9</option>
-    <option value="10">Class 10</option>
-    <option value="11">Class 11</option>
-    <option value="12">Class 12</option>
-
+<option value="">Select Class</option>
+<option value="1">Class 1</option>
+<option value="2">Class 2</option>
+<option value="3">Class 3</option>
+<option value="4">Class 4</option>
+<option value="5">Class 5</option>
+<option value="6">Class 6</option>
+<option value="7">Class 7</option>
+<option value="8">Class 8</option>
+<option value="9">Class 9</option>
+<option value="10">Class 10</option>
+<option value="11">Class 11</option>
+<option value="12">Class 12</option>
 </select>
-
 </div>
+
+<div class="input-group">
+<label>Section</label>
+<select id="section" required>
+<option value="">Select Section</option>
+<option>A</option>
+<option>B</option>
+<option>C</option>
+<option>D</option>
+</select>
+</div>
+
 <div class="input-group" id="streamGroup" style="display:none;">
-
-    <label>Stream</label>
-
-    <select id="stream">
-
-        <option value="">Select Stream</option>
-
-        <option value="Science">Science</option>
-
-        <option value="Commerce">Commerce</option>
-
-        <option value="Humanities">Humanities</option>
-
-    </select>
-
+<label>Stream</label>
+<select id="stream">
+<option value="">Select Stream</option>
+<option>Science</option>
+<option>Commerce</option>
+<option>Humanities</option>
+</select>
 </div>
 
 <div class="input-group">
 <label>Mobile Number</label>
-<input type="tel" id="mobile" placeholder="10-digit mobile number" required>
+<input type="tel" id="mobile" placeholder="9876543210" required>
 </div>
 
-
-<div class="input-group">
+<div class="input-group full">
 <label>Email Address</label>
-<input type="email" id="email" required>
+<input type="email" id="email" placeholder="student@gmail.com" required>
 </div>
 
 <div class="input-group">
 <label>Password</label>
-<input type="password" id="password" required>
+<input type="password" id="password" placeholder="Minimum 6 characters" required>
 </div>
 
 <div class="input-group">
 <label>Confirm Password</label>
-<input type="password" id="confirmPassword" required>
+<input type="password" id="confirmPassword" placeholder="Confirm password" required>
 </div>
 
-<button type="submit">
+</div>
 
-Register
+<button type="submit">🚀 Register Student</button>
 
-</button>
+<p id="message"></p>
 
 </form>
+
 <div class="login-link">
-
 Already registered?
-
-<a href="student-login.html">
-
-Login Here
-
-</a>
-
+<a href="student-login.html">Login Here</a>
 </div>
 
 </div>
@@ -192,217 +250,129 @@ Login Here
 import { auth, db } from "./js/firebase.js";
 
 import {
-    createUserWithEmailAndPassword,
-    sendEmailVerification,
-    signOut
+createUserWithEmailAndPassword,
+sendEmailVerification,
+signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-    doc,
-    setDoc
+doc,
+setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+const form=document.getElementById("registerForm");
+const msg=document.getElementById("message");
 
-const form = document.getElementById("registerForm");
-const studentClass = document.getElementById("studentClass");
-const streamGroup = document.getElementById("streamGroup");
-const stream = document.getElementById("stream");
+const studentClass=document.getElementById("studentClass");
+const streamGroup=document.getElementById("streamGroup");
+const stream=document.getElementById("stream");
 
-studentClass.addEventListener("change", () => {
+studentClass.addEventListener("change",()=>{
 
-    if (
-        studentClass.value === "11" ||
-        studentClass.value === "12"
-    ) {
+if(studentClass.value==="11"||studentClass.value==="12"){
 
-        streamGroup.style.display = "block";
-        stream.required = true;
+streamGroup.style.display="block";
+stream.required=true;
 
-    } else {
+}else{
 
-        streamGroup.style.display = "none";
-        stream.required = false;
-        stream.value = "";
+streamGroup.style.display="none";
+stream.required=false;
+stream.value="";
 
-    }
+}
 
 });
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit",async(e)=>{
 
-    e.preventDefault();
+e.preventDefault();
 
+const name=document.getElementById("name").value.trim();
+const admission=document.getElementById("admission").value.trim();
+const classValue=document.getElementById("studentClass").value;
+const section=document.getElementById("section").value;
+const streamValue=document.getElementById("stream").value;
+const mobile=document.getElementById("mobile").value.trim();
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+const confirm=document.getElementById("confirmPassword").value;
 
-    const name =
-        document.getElementById("name").value.trim();
+if(password!==confirm){
+alert("❌ Passwords do not match.");
+return;
+}
 
-    const admission =
-        document.getElementById("admission").value.trim();
+if(password.length<6){
+alert("❌ Password must be at least 6 characters.");
+return;
+}
 
-    const studentClass =
-        document.getElementById("studentClass").value;
-    
-    const studentStream =
-    document.getElementById("stream").value;
-   
-    const mobile =
-        document.getElementById("mobile").value.trim();
+if(!/^[6-9]\d{9}$/.test(mobile)){
+alert("❌ Enter a valid 10-digit Indian mobile number.");
+return;
+}
 
-    const email =
-        document.getElementById("email").value.trim();
+msg.textContent="Creating account...";
 
-    const password =
-        document.getElementById("password").value;
+try{
 
-    const confirm =
-        document.getElementById("confirmPassword").value;
+const userCredential=await createUserWithEmailAndPassword(auth,email,password);
+const user=userCredential.user;
 
+await sendEmailVerification(user);
 
-    // Check password
-    if (password !== confirm) {
+await setDoc(doc(db,"students",user.uid),{
 
-        alert("❌ Passwords do not match.");
+uid:user.uid,
+name:name,
+admissionNo:admission,
+class:classValue,
+section:section,
+stream:streamValue,
+mobile:mobile,
+email:email,
+role:"student",
+status:"Active",
+createdAt:Date.now()
 
-        return;
-    }
+});
 
+await signOut(auth);
 
-    // Check password length
-    if (password.length < 6) {
+alert(
+"🎉 Registration Successful!\n\n"+
+"Verification email sent to:\n"+email+
+"\n\nVerify your email before login."
+);
 
-        alert("❌ Password must contain at least 6 characters.");
+window.location.href="student-login.html";
 
-        return;
-    }
+}catch(error){
 
+console.error(error);
 
-    try {
+if(error.code==="auth/email-already-in-use"){
+alert("❌ Email already registered.");
+}
+else if(error.code==="auth/invalid-email"){
+alert("❌ Invalid email address.");
+}
+else if(error.code==="auth/weak-password"){
+alert("❌ Password is too weak.");
+}
+else{
+alert("❌ "+error.message);
+}
 
-        // Create Firebase Authentication account
-        const userCredential =
-            await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+msg.textContent="";
 
-
-        const user = userCredential.user;
-
-
-        // Send email verification
-        await sendEmailVerification(user);
-
-
-        // Save student information in Firestore
-        await setDoc(
-            doc(db, "students", user.uid),
-            {
-
-                uid: user.uid,
-
-                name: name,
-
-                admissionNo: admission,
-
-                class: studentClass,
-
-                stream: studentStream,
-                
-                mobile: mobile,
-
-                email: email,
-
-                role: "student",
-
-                status: "Active",
-
-                createdAt: new Date()
-
-            }
-        );
-
-
-        // Registration successful
-        alert(
-            "🎉 Registration Successful!\n\n" +
-            "A verification email has been sent to:\n" +
-            email +
-            "\n\n" +
-            "Please check your Inbox or Spam folder, " +
-            "verify your email, and then login."
-        );
-
-
-        // Sign out until email is verified
-        await signOut(auth);
-
-
-        // Go to student login
-        window.location.href =
-            "student-login.html";
-
-
-    } catch (error) {
-
-        console.error(
-            "Registration Error:",
-            error
-        );
-
-
-        if (
-            error.code ===
-            "auth/email-already-in-use"
-        ) {
-
-            alert(
-                "❌ This email is already registered.\n\n" +
-                "Please use another email or use Forgot Password."
-            );
-
-        }
-
-        else if (
-            error.code ===
-            "auth/invalid-email"
-        ) {
-
-            alert(
-                "❌ Please enter a valid email address."
-            );
-
-        }
-
-        else if (
-            error.code ===
-            "auth/weak-password"
-        ) {
-
-            alert(
-                "❌ Password is too weak.\n\n" +
-                "Use at least 6 characters."
-            );
-
-        }
-
-        else {
-
-            alert(
-                "❌ Registration failed.\n\n" +
-                error.code +
-                "\n\n" +
-                error.message
-            );
-
-        }
-
-    }
+}
 
 });
 
 </script>
 
 </body>
-
 </html>
+```
