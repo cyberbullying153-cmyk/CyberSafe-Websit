@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberSafe | Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#070d1f;--panel:rgba(18,29,55,.78);--panel2:#111d36;
+  --text:#f8fafc;--muted:#94a3b8;--purple:#7c3aed;--blue:#2563eb;
+  --cyan:#06b6d4;--pink:#ec4899;--green:#10b981;--orange:#f59e0b;
+  --border:rgba(148,163,184,.13)
+}
+body{font-family:Poppins,sans-serif;background:radial-gradient(circle at 70% 0%,#172554 0,#0b1228 35%,#070d1f 75%);color:var(--text);min-height:100vh;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;width:420px;height:420px;border-radius:50%;filter:blur(90px);opacity:.16;z-index:-1}
+body:before{background:#7c3aed;top:-180px;right:8%}
+body:after{background:#06b6d4;bottom:-220px;left:-120px}
+button,input{font:inherit}
+.sidebar{position:fixed;z-index:10;left:18px;top:18px;bottom:18px;width:255px;padding:22px 16px;background:rgba(15,24,46,.82);backdrop-filter:blur(22px);border:1px solid var(--border);border-radius:28px;box-shadow:0 25px 70px rgba(0,0,0,.35);display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:12px;padding:5px 10px 28px}
+.brand img{width:54px;height:54px;object-fit:cover;border-radius:15px;box-shadow:0 0 28px rgba(124,58,237,.35)}
+.brand h2{font-size:23px;letter-spacing:-.5px}.brand h2 span{color:#8b5cf6}
+.brand small{display:block;color:var(--muted);font-size:10px;margin-top:1px}
+.menu{display:flex;flex-direction:column;gap:7px;flex:1}
+.menu a{display:flex;align-items:center;gap:13px;padding:13px 15px;border-radius:15px;color:#b9c4d8;text-decoration:none;font-weight:600;font-size:14px;transition:.25s}
+.menu a .ico{width:25px;text-align:center;font-size:18px}
+.menu a:hover{background:rgba(124,58,237,.15);color:white;transform:translateX(3px)}
+.menu a.active{background:linear-gradient(135deg,#6335df,#7c3aed);color:white;box-shadow:0 10px 30px rgba(124,58,237,.3)}
+.sidebar-footer{border-top:1px solid var(--border);padding-top:16px}
+.secure{display:flex;gap:10px;align-items:center;color:#a7f3d0;font-size:11px;margin:0 8px 14px}
+.secure-dot{width:9px;height:9px;border-radius:50%;background:#10b981;box-shadow:0 0 12px #10b981}
+.logout{width:100%;border:0;border-radius:14px;padding:13px;background:linear-gradient(135deg,#ef4444,#db2777);color:#fff;font-weight:700;cursor:pointer;transition:.25s}
+.logout:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(236,72,153,.25)}
+.main{margin-left:292px;padding:30px 30px 50px;max-width:1600px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:30px}
+.title-row{display:flex;align-items:center;gap:15px}.crown{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:25px;background:linear-gradient(135deg,#4f46e5,#9333ea);box-shadow:0 0 30px rgba(124,58,237,.28)}
+h1{font-size:30px;letter-spacing:-1px}.subtitle{color:var(--muted);font-size:13px;margin-top:3px}
+.profile{display:flex;align-items:center;gap:13px}
+.search{width:330px;padding:13px 18px;border-radius:30px;border:1px solid var(--border);outline:0;background:rgba(30,41,59,.72);color:#fff}
+.search:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.12)}
+.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#60a5fa,#7c3aed);font-weight:800}
+.profile b{font-size:13px}.profile small{display:block;color:var(--muted);font-size:10px}
+.page{display:none;animation:fade .3s ease}.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.card{background:linear-gradient(145deg,rgba(20,34,65,.88),rgba(13,24,47,.76));border:1px solid var(--border);border-radius:22px;padding:20px;box-shadow:0 16px 45px rgba(0,0,0,.16)}
+.stat{position:relative;overflow:hidden}.stat:after{content:"";position:absolute;width:100px;height:100px;border-radius:50%;right:-45px;top:-45px;background:rgba(124,58,237,.13)}
+.stat-head{display:flex;align-items:center;justify-content:space-between;color:#b8c4d9;font-size:12px;font-weight:600}
+.stat-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:19px;background:rgba(124,58,237,.18)}
+.stat h2{font-size:31px;margin:10px 0 2px}.trend{font-size:11px;color:#34d399}.trend.warn{color:#fbbf24}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:18px}
+.chart-card{min-height:290px}.chart-top{display:flex;justify-content:space-between;align-items:center}.chart-title{font-size:16px;font-weight:700}.muted{color:var(--muted);font-size:11px}
+.chart{height:190px;display:flex;align-items:flex-end;gap:12px;padding:25px 8px 8px}
+.bar{flex:1;border-radius:9px 9px 3px 3px;background:linear-gradient(180deg,#8b5cf6,#2563eb);min-height:20px;box-shadow:0 0 20px rgba(99,102,241,.15);transition:.3s}.bar:hover{filter:brightness(1.25);transform:translateY(-3px)}
+.bar-labels{display:flex;gap:12px;padding:0 8px;color:#64748b;font-size:9px}.bar-labels span{flex:1;text-align:center}
+.activity h3{font-size:16px}.activity-item{display:flex;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid var(--border);font-size:11px;color:#cbd5e1}.activity-item:last-child{border:0}.activity-item span:last-child{color:#64748b}
+.table-card{overflow:hidden}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.section-head h2{font-size:18px}.section-head p{color:var(--muted);font-size:11px}
+.actions{display:flex;gap:9px}.btn{border:0;border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:700;color:#fff;background:#1e3158}.btn.primary{background:linear-gradient(135deg,#6366f1,#8b5cf6)}.btn:hover{filter:brightness(1.12)}
+.student-tools{display:flex;gap:10px;margin-bottom:12px}.student-tools .search{width:100%}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:14px 10px;border-bottom:1px solid var(--border);font-size:11px}th{color:#71809a;font-size:10px;text-transform:uppercase;letter-spacing:.5px}td{color:#dbe4f3}tbody tr:hover{background:rgba(255,255,255,.025)}
+.status{padding:5px 9px;border-radius:20px;font-size:9px;font-weight:700}.pending{background:rgba(245,158,11,.15);color:#fbbf24}.resolved{background:rgba(16,185,129,.15);color:#34d399}.review{background:rgba(59,130,246,.15);color:#60a5fa}
+.action-btn{border:0;background:#142746;color:#bcd0f2;padding:7px 9px;border-radius:9px;cursor:pointer}.action-btn:hover{background:#243b69}
+.student-list,.report-list,.teacher-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.person-card{padding:18px;border:1px solid var(--border);border-radius:18px;background:rgba(20,34,65,.65)}.person-card h3{font-size:15px}.person-card p{font-size:11px;color:#94a3b8;margin-top:5px}
+.report-card{padding:18px;border:1px solid var(--border);border-radius:18px;background:rgba(20,34,65,.65)}.report-card h3{font-size:14px}.report-card p{font-size:11px;color:#b9c5d8;margin:6px 0}.resolve{margin-top:10px;border:0;padding:8px 12px;border-radius:9px;background:#10b981;color:white;font-weight:700;cursor:pointer}
+.settings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.setting{padding:20px}.setting label{display:block;color:#cbd5e1;font-size:12px;margin:14px 0 6px}.input{width:100%;padding:12px;border:1px solid var(--border);border-radius:11px;background:#0d1830;color:white;outline:0}
+.empty{padding:35px;text-align:center;color:#64748b}
+@media(max-width:1100px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.profile .search{width:240px}}
+@media(max-width:780px){.sidebar{position:relative;left:10px;right:10px;top:10px;bottom:auto;width:auto;margin-bottom:20px}.menu{flex-direction:row;overflow:auto}.menu a{white-space:nowrap}.sidebar-footer{display:none}.main{margin-left:0;padding:20px 14px}.topbar{align-items:flex-start;flex-direction:column}.profile{width:100%}.profile .search{width:100%}.stats{grid-template-columns:1fr}.settings-grid{grid-template-columns:1fr}table{min-width:650px}.table-card{overflow-x:auto}}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="brand">
+    <img src="images/logo.png" alt="CyberSafe">
+    <div><h2>Cyber<span>Safe</span></h2><small>STUDENT SECURITY PORTAL</small></div>
+  </div>
+
+  <nav class="menu">
+    <a href="#" class="active" onclick="showPage('dashboard',this,event)"><span class="ico">🏠</span>Dashboard</a>
+    <a href="#" onclick="showPage('reports',this,event)"><span class="ico">📄</span>Reports</a>
+    <a href="#" onclick="showPage('students',this,event)"><span class="ico">👨‍🎓</span>Students</a>
+    <a href="#" onclick="showPage('teachers',this,event)"><span class="ico">👩‍🏫</span>Teachers</a>
+    <a href="#" onclick="showPage('analytics',this,event)"><span class="ico">📊</span>Analytics</a>
+    <a href="#" onclick="showPage('settings',this,event)"><span class="ico">⚙️</span>Settings</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="secure"><span class="secure-dot"></span> Admin session secured</div>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="title-row">
+      <div class="crown">👑</div>
+      <div><h1>Admin Dashboard</h1><div class="subtitle">CyberSafe · Student Security Management Center</div></div>
+    </div>
+    <div class="profile">
+      <input id="globalSearch" class="search" placeholder="Search students, reports, or anything...">
+      <div class="avatar">A</div>
+      <div><b>Admin</b><small>Super Admin · <span style="color:#34d399">● Online</span></small></div>
+    </div>
+  </header>
+
+  <section id="dashboard" class="page active">
+    <div class="stats">
+      <div class="card stat"><div class="stat-head"><span>Total Students</span><span class="stat-icon">👥</span></div><h2 id="studentCount">0</h2><span class="trend">↑ Live database</span></div>
+      <div class="card stat"><div class="stat-head"><span>Total Teachers</span><span class="stat-icon">🎓</span></div><h2 id="teacherCount">0</h2><span class="trend">↑ Registered staff</span></div>
+      <div class="card stat"><div class="stat-head"><span>Reports Filed</span><span class="stat-icon">🚩</span></div><h2 id="totalReports">0</h2><span class="trend warn">● Needs monitoring</span></div>
+      <div class="card stat"><div class="stat-head"><span>Resolved Cases</span><span class="stat-icon">🛡️</span></div><h2 id="resolvedReports">0</h2><span class="trend">✓ Successfully resolved</span></div>
+    </div>
+
+    <div class="grid">
+      <div class="card chart-card">
+        <div class="chart-top"><div><div class="chart-title">Report Overview</div><div class="muted">Current reports by status</div></div><span class="status review">LIVE</span></div>
+        <div class="chart" id="chartBars">
+          <div class="bar" style="height:45%"></div><div class="bar" style="height:65%"></div><div class="bar" style="height:40%"></div><div class="bar" style="height:78%"></div><div class="bar" style="height:55%"></div><div class="bar" style="height:88%"></div><div class="bar" style="height:68%"></div>
+        </div>
+        <div class="bar-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+      </div>
+      <div class="card activity"><h3>⚡ Recent Activity</h3>
+        <div class="activity-item"><span>New cyberbullying report</span><span>2m</span></div>
+        <div class="activity-item"><span>Student database updated</span><span>10m</span></div>
+        <div class="activity-item"><span>Report status changed</span><span>35m</span></div>
+        <div class="activity-item"><span>Admin session active</span><span>1h</span></div>
+        <div class="activity-item"><span>Security system online</span><span>Now</span></div>
+      </div>
+    </div>
+
+    <div class="card table-card">
+      <div class="section-head"><div><h2>Latest Student Reports</h2><p>Live reports from your Firebase database</p></div><div class="actions"><button class="btn" onclick="showPage('reports',document.querySelectorAll('.menu a')[1],event)">View All</button></div></div>
+      <table><thead><tr><th>Student</th><th>Class</th><th>Platform</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody id="latestReports"><tr><td colspan="5" class="empty">Waiting for reports...</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <section id="reports" class="page">
+    <div class="card"><div class="section-head"><div><h2>📄 Reports Management</h2><p>Review and resolve CyberSafe reports</p></div></div>
+      <div id="reportsContainer" class="report-list"><div class="empty">Loading reports...</div></div>
+    </div>
+  </section>
+
+  <section id="students" class="page">
+    <div class="card"><div class="section-head"><div><h2>👨‍🎓 Student Management</h2><p>Registered students from your reports database</p></div><button class="btn primary" onclick="location.href='student-registration.html'">＋ New Student</button></div>
+      <div class="student-tools"><input id="studentSearch" class="search" placeholder="Search students..."></div>
+      <div id="studentsContainer" class="student-list"></div>
+    </div>
+  </section>
+
+  <section id="teachers" class="page">
+    <div class="card"><div class="section-head"><div><h2>👩‍🏫 Teacher Management</h2><p>Manage trusted school staff</p></div><button class="btn primary" onclick="openTeacherForm()">＋ Add Teacher</button></div>
+      <div id="teachersContainer" class="teacher-list"></div>
+    </div>
+  </section>
+
+  <section id="analytics" class="page">
+    <div class="stats">
+      <div class="card stat"><div class="stat-head"><span>Total Reports</span><span class="stat-icon">📄</span></div><h2 id="aTotal">0</h2></div>
+      <div class="card stat"><div class="stat-head"><span>Pending</span><span class="stat-icon">⏳</span></div><h2 id="aPending">0</h2></div>
+      <div class="card stat"><div class="stat-head"><span>Resolved</span><span class="stat-icon">✅</span></div><h2 id="aResolved">0</h2></div>
+      <div class="card stat"><div class="stat-head"><span>Resolution Rate</span><span class="stat-icon">📈</span></div><h2 id="aRate">0%</h2></div>
+    </div>
+    <div class="card"><h2>📊 CyberSafe Analytics</h2><p class="muted" style="margin-top:6px">A live overview based on the reports currently stored in Firebase.</p></div>
+  </section>
+
+  <section id="settings" class="page">
+    <div class="settings-grid">
+      <div class="card setting"><h2>⚙️ Portal Settings</h2><label>Portal Name</label><input class="input" value="CyberSafe Student Security Portal"><label>Admin Display Name</label><input class="input" value="Super Admin"><button class="btn primary" style="margin-top:15px" onclick="alert('Settings saved on this page.')">Save Settings</button></div>
+      <div class="card setting"><h2>🔐 Security</h2><p class="muted" style="margin-top:8px">Only the authorized Firebase Admin UID can access this dashboard.</p><div style="margin-top:18px;padding:14px;border-radius:12px;background:rgba(16,185,129,.08);color:#6ee7b7;font-size:12px">● Admin authentication enabled</div></div>
+    </div>
+  </section>
+</main>
+
+<div id="teacherPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:30;align-items:center;justify-content:center;padding:20px">
+  <div class="card" style="width:min(430px,100%)"><h2>👩‍🏫 Add Teacher</h2><input id="tName" class="input" style="margin-top:16px" placeholder="Teacher Name"><input id="tEmail" class="input" style="margin-top:10px" placeholder="Teacher Email"><input id="tSubject" class="input" style="margin-top:10px" placeholder="Subject"><div style="display:flex;gap:10px;margin-top:15px"><button class="btn primary" style="flex:1" onclick="saveTeacher()">Save Teacher</button><button class="btn" style="flex:1" onclick="closeTeacherForm()">Cancel</button></div></div>
+</div>
+
+<script>
+function showPage(id,el,event){
+  if(event) event.preventDefault();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target=document.getElementById(id); if(target) target.classList.add('active');
+  document.querySelectorAll('.menu a').forEach(a=>a.classList.remove('active'));
+  if(el && el.classList.contains('menu')){} else if(el) el.classList.add('active');
+  if(id==='students' && window.loadStudents) window.loadStudents();
+  if(id==='teachers' && window.loadTeachers) window.loadTeachers();
+}
+function openTeacherForm(){document.getElementById('teacherPopup').style.display='flex'}
+function closeTeacherForm(){document.getElementById('teacherPopup').style.display='none'}
+</script>
+
+<script type="module">
+import {db,auth} from "./js/firebase.js";
+import {collection,onSnapshot,doc,updateDoc,addDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const adminUID="2Hcys70eIURXMoVVhdb9ONmKrE92";
+let allReports=[];
+let allStudents=[];
+
+onAuthStateChanged(auth,user=>{
+  if(!user){location.href="admin-login.html";return}
+  if(user.uid!==adminUID){alert("Admin only");location.href="index.html"}
+});
+
+const reportsContainer=document.getElementById("reportsContainer");
+const latestReports=document.getElementById("latestReports");
+
+onSnapshot(collection(db,"reports"),snap=>{
+  let total=0,pending=0,resolved=0;
+  allReports=[];
+  reportsContainer.innerHTML="";
+  latestReports.innerHTML="";
+  snap.forEach(report=>{
+    const d=report.data();
+    const item={id:report.id,...d}; allReports.push(item); total++;
+    if(d.status==="Pending" || !d.status) pending++;
+    if(d.status==="Resolved") resolved++;
+    const status=d.status||"Pending";
+    reportsContainer.innerHTML+=`
+      <div class="report-card">
+        <h3>🚩 ${d.platform||"CyberSafe Report"}</h3>
+        <p><b>Student:</b> ${d.studentName||"Anonymous"}</p>
+        <p><b>Class:</b> ${d.class||"-"} · <b>Email:</b> ${d.email||"-"}</p>
+        <p>${d.description||"No description provided."}</p>
+        <span class="status ${status==="Resolved"?"resolved":status==="Review"?"review":"pending"}">${status}</span>
+        ${status!=="Resolved"?`<button class="resolve" onclick="resolveReport('${report.id}')">✓ Resolve Case</button>`:""}
+      </div>`;
+  });
+  const recent=allReports.slice(-5).reverse();
+  if(!recent.length) latestReports.innerHTML='<tr><td colspan="5" class="empty">No reports yet.</td></tr>';
+  recent.forEach((d,i)=>{
+    const status=d.status||"Pending";
+    latestReports.innerHTML+=`<tr><td><b>${d.studentName||"Anonymous"}</b></td><td>${d.class||"-"}</td><td>${d.platform||"-"}</td><td><span class="status ${status==="Resolved"?"resolved":status==="Review"?"review":"pending"}">${status}</span></td><td><button class="action-btn" onclick="showPage('reports',document.querySelectorAll('.menu a')[1],event)">👁 View</button></td></tr>`;
+  });
+  document.getElementById("totalReports").textContent=total;
+  document.getElementById("pendingReports").textContent=pending;
+  document.getElementById("resolvedReports").textContent=resolved;
+  document.getElementById("aTotal").textContent=total;
+  document.getElementById("aPending").textContent=pending;
+  document.getElementById("aResolved").textContent=resolved;
+  document.getElementById("aRate").textContent=total?Math.round(resolved/total*100)+"%":"0%";
+  window.loadStudents();
+});
+
+window.resolveReport=async id=>{try{await updateDoc(doc(db,"reports",id),{status:"Resolved"})}catch(e){alert("Could not update report.")}};
+
+window.loadStudents=()=>{
+  const box=document.getElementById("studentsContainer"); box.innerHTML="";
+  const unique={};
+  allReports.forEach(r=>{const key=r.admissionNo||r.studentName||r.email;if(!unique[key])unique[key]=r});
+  const arr=Object.values(unique); allStudents=arr;
+  document.getElementById("studentCount").textContent=arr.length;
+  if(!arr.length){box.innerHTML='<div class="empty">No students found yet.</div>';return}
+  arr.forEach(s=>box.innerHTML+=`<div class="person-card"><div style="display:flex;align-items:center;gap:10px"><div class="avatar">${(s.studentName||"S")[0].toUpperCase()}</div><div><h3>${s.studentName||"Unknown"}</h3><p>Class ${s.class||"-"}</p></div></div><p style="margin-top:12px">✉ ${s.email||"No email"}</p></div>`);
+};
+
+document.getElementById("studentSearch").addEventListener("input",e=>{
+  const q=e.target.value.toLowerCase();
+  document.querySelectorAll("#studentsContainer .person-card").forEach(c=>c.style.display=c.innerText.toLowerCase().includes(q)?"block":"none");
+});
+
+window.loadTeachers=()=>{
+  onSnapshot(collection(db,"teachers"),snap=>{
+    const box=document.getElementById("teachersContainer");box.innerHTML="";
+    let count=0;
+    snap.forEach(t=>{const d=t.data();count++;box.innerHTML+=`<div class="person-card"><h3>👩‍🏫 ${d.name||"Teacher"}</h3><p>✉ ${d.email||"-"}</p><p>📚 ${d.subject||"-"}</p></div>`});
+    document.getElementById("teacherCount").textContent=count;
+  });
+};
+window.loadTeachers();
+
+window.saveTeacher=async()=>{
+  const name=tName.value.trim(),email=tEmail.value.trim(),subject=tSubject.value.trim();
+  if(!name||!email||!subject){alert("Please fill all fields.");return}
+  try{await addDoc(collection(db,"teachers"),{name,email,subject,role:"teacher"});tName.value="";tEmail.value="";tSubject.value="";closeTeacherForm();alert("Teacher added successfully!")}
+  catch(e){alert("Could not add teacher. Check Firebase permissions.")}
+};
+
+document.getElementById("globalSearch").addEventListener("input",e=>{
+  const q=e.target.value.toLowerCase();
+  if(!q)return;
+  const match=allReports.find(r=>(r.studentName||"").toLowerCase().includes(q)||(r.platform||"").toLowerCase().includes(q)||(r.description||"").toLowerCase().includes(q));
+  if(match){showPage("reports",document.querySelectorAll(".menu a")[1]);}
+});
+
+window.logout=async()=>{await signOut(auth);location.href="admin-login.html"};
+</script>
+</body>
+</html>
